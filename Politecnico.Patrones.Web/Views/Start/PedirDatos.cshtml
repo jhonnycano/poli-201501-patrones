@@ -1,0 +1,26 @@
+﻿@model Politecnico.Patrones.Web.Models.InsumoDistribucion
+
+@{
+    ViewBag.Title = "Ingresar datos";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Ingresar datos</h2>
+<span class="titulo1">@Model.Algoritmo</span>
+
+@using (Html.BeginForm("MostrarDatos", "Start"))
+{
+    @Html.Hidden("algoritmo", Model.Algoritmo)
+    <table>
+        <tr>
+            <td>Cantidad de curules a asignar</td>
+            <td>@Html.TextBox("curulesDisponibles", Model.CurulesDisponibles)</td>
+        </tr>
+        <tr>
+            <td>Resultados de votación</td>
+            <td>@Html.TextArea("resultadosVotacion", Model.ResultadosVotacion, new Dictionary<string, object> {{"class", "txtResultados"}})</td>
+        </tr>
+    </table>
+    <input type="submit" value="Enviar" />
+    @Html.ActionLink("Regresar", "Index")
+}

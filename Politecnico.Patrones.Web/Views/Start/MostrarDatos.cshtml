@@ -1,0 +1,28 @@
+﻿@model Politecnico.Patrones.Web.Models.InsumoDistribucion
+
+@{
+    ViewBag.Title = "Mostrar datos";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Mostrar datos</h2>
+
+@if (Model.ResultadosCalculados != null) {
+    <table>
+        <caption><span>Algoritmo: </span>@Model.Algoritmo</caption>
+        <tr>
+            <th>Partido</th>
+            <th>Votos ganados</th>
+            <th>Curules</th>
+        </tr>
+        @foreach (var itm in Model.ResultadosCalculados) {
+            <tr>
+                <td>@itm.Nombre</td>
+                <td>@itm.VotosGanados</td>
+                <td>@itm.CurulesAsignadas</td>
+            </tr>
+        }
+    </table>
+}
+
+@Html.ActionLink("Regresar", "Index")

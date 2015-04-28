@@ -1,0 +1,22 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Inicio";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+    if (TempData["mensaje"] != null)
+    {
+        ViewBag.Mensaje = TempData["mensaje"].ToString();
+    }
+}
+
+<h2>Patrones de Diseño</h2>
+<span class="mensaje">@ViewBag.Mensaje</span>
+<span>Elija algoritmo de distribución</span>
+<ul>
+    <li>@Html.ActionLink("D'Hondt", "ElegirAlgoritmo", new {data = "dhondt"})</li>
+    <li>@Html.ActionLink("Saint Lagüe", "ElegirAlgoritmo", new {data = "saintlague"})</li>
+    <li>@Html.ActionLink("Resto Mayor - Hare", "ElegirAlgoritmo", new {data = "restomayor_hare"})</li>
+    <li>@Html.ActionLink("Resto Mayor - Droop", "ElegirAlgoritmo", new {data = "restomayor_droop"})</li>
+    <li>@Html.ActionLink("Resto Mayor - Imperiali", "ElegirAlgoritmo", new {data = "restomayor_imperiali"})</li>
+</ul>
