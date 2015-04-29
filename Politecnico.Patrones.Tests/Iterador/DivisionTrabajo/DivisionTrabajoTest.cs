@@ -1,16 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
+using Politecnico.Patrones.Iterador.DivisionTrabajo;
 
-namespace Tests.Iterador.DivisionTrabajo {
+namespace Tests.Iterador.DivisionTrabajo
+{
     [TestFixture]
-    public class DivisionTrabajoTest {
+    public class DivisionTrabajoTest
+    {
         [Test]
-        public void Simple() {
-            var estructura = UtilDivisionTrabajo.CrearEstructura();
+        public void Simple()
+        {
+            IElemento estructura = UtilDivisionTrabajo.CrearEstructura();
+            IEnumerator<IElemento> it = estructura.GetEnumerator();
+            var sb = new StringBuilder();
+            while (it.MoveNext())
+            {
+                sb.AppendLine(it.Current.TraerResumen());
+            }
+            Console.WriteLine(sb.ToString());
         }
     }
 }

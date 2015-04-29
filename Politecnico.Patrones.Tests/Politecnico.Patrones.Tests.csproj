@@ -78,6 +78,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Recursos\Archivos\Proyecto2.txt" />
+    <Content Include="Recursos\Archivos\Proyecto1.txt" />
     <Content Include="Recursos\Archivos\VotacionEsquema3.txt" />
     <Content Include="Recursos\Archivos\VotacionEsquema2.txt" />
     <Content Include="Recursos\Archivos\VotacionEsquema1.txt" />
