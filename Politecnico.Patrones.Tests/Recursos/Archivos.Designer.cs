@@ -71,22 +71,44 @@ namespace Tests.Recursos {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///	Nombre:&quot;Proyecto con dos tareas&quot;,
-        ///	Tareas: {
-        ///		{
-        ///			Nombre: &quot;Tarea 1&quot;,
-        ///			Porcentaje: 10
-        ///		},
-        ///		{
-        ///			Nombre: &quot;Tarea 2&quot;,
-        ///			Porcentaje: 36
+        ///	nombre : &quot;Proyecto con dos tareas&quot;,
+        ///	tareas : [{
+        ///			nombre : &quot;Tarea 1&quot;,
+        ///			porcentaje : 10
+        ///		}, {
+        ///			nombre : &quot;Tarea 2&quot;,
+        ///			porcentaje : 36
+        ///		}, {
+        ///			nombre : &quot;Tarea con subtareas&quot;,
+        ///			tareas : [{
+        ///					nombre : &quot;Subtarea 1&quot;,
+        ///					porcentaje : 100
+        ///				}, {
+        ///					nombre : &quot;Subtarea 2&quot;,
+        ///					porcentaje : 76
+        ///				}
+        ///			]
         ///		}
-        ///	}
+        ///	]
         ///}.
         /// </summary>
         internal static string Proyecto2 {
             get {
                 return ResourceManager.GetString("Proyecto2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Proyecto con dos tareas: 44
+        ///	Tarea 1: 10
+        ///	Tarea 2: 36
+        ///	Tarea con subtareas: 88
+        ///		Subtarea 1: 100
+        ///		Subtarea 1: 76.
+        /// </summary>
+        internal static string ResumenEsperadoProyecto2 {
+            get {
+                return ResourceManager.GetString("ResumenEsperadoProyecto2", resourceCulture);
             }
         }
         

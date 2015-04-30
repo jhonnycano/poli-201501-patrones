@@ -19,7 +19,7 @@ namespace Tests.Iterador.DivisionTrabajo
             JToken token;
             if (obj.TryGetValue("porcentaje", out token))
             {
-                var porcentaje = token.Value<decimal>();
+                var porcentaje = token.Value<int>();
                 return new Tarea {Nombre = nombre, PorcentajeCompletado = porcentaje};
             }
             if (obj.TryGetValue("tareas", out token))

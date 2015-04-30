@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Politecnico.Patrones.Iterador.DivisionTrabajo
 {
     public class GrupoTarea : IElemento
     {
         public string Nombre { get; set; }
-        public decimal PorcentajeCompletado
+        public int PorcentajeCompletado
         {
             get { return TraerPorcentajeCompletado(); }
             set { throw new ApplicationException("No usar setter en grupo"); }
@@ -17,35 +18,38 @@ namespace Politecnico.Patrones.Iterador.DivisionTrabajo
         {
             Elementos = new List<IElemento>();
         }
-
-        public IEnumerator<IElemento> GetEnumerator()
+        public void Agregar(IElemento elemento)
         {
-            yield return this;
-            foreach (IElemento elemento in Elementos)
-            {
-                yield return elemento;
-            }
+            Elementos.Add(elemento);
+        }
+        public void Quitar(IElemento elemento)
+        {
+            Elementos.Remove(elemento);
         }
         public string TraerResumen()
         {
-            /*
-            var en = GetEnumerator();
-            while (en.MoveNext())
+            var sb = new StringBuilder();
+            var iterador = new DivisionTrabajoIterador(this);
+            while (iterador.MoveNext())
             {
-                
+                sb.AppendLine(iterador.Indentacion + iterador.Current.TraerResumen());
             }
-             * */
-            return "Grupo=>" + Nombre + ": " + TraerPorcentajeCompletado();
+
+            return sb.ToString();
         }
-        public decimal TraerPorcentajeCompletado()
+        public int TraerPorcentajeCompletado()
         {
-            decimal acum = 0m;
-            var totalElementos = Elementos.Count;
+            int acum = 0;
+            int totalElementos = Elementos.Count;
             foreach (IElemento elemento in Elementos)
             {
-                acum += (elemento.TraerPorcentajeCompletado() / totalElementos);
+                acum += (elemento.TraerPorcentajeCompletado()/totalElementos);
             }
             return acum;
+        }
+        public IEnumerator<IElemento> GetEnumerator()
+        {
+            return new DivisionTrabajoIterador(this);
         }
     }
 }

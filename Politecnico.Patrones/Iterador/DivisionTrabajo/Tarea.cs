@@ -4,19 +4,26 @@ namespace Politecnico.Patrones.Iterador.DivisionTrabajo
 {
     public class Tarea : IElemento
     {
-        public decimal PorcentajeCompletado { get; set; }
         public string Nombre { get; set; }
-        public IEnumerator<IElemento> GetEnumerator()
+        public int PorcentajeCompletado { get; set; }
+
+        public void Agregar(IElemento elemento)
         {
-            yield return this;
+        }
+        public void Quitar(IElemento elemento)
+        {
         }
         public string TraerResumen()
         {
             return Nombre + ": " + TraerPorcentajeCompletado();
         }
-        public decimal TraerPorcentajeCompletado()
+        public int TraerPorcentajeCompletado()
         {
             return PorcentajeCompletado;
+        }
+        public IEnumerator<IElemento> GetEnumerator()
+        {
+            yield return this;
         }
     }
 }

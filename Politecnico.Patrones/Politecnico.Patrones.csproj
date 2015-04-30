@@ -86,6 +86,7 @@
     <Compile Include="Fabrica\DistribucionCurules\IAlgoritmoDistribucionCurules.cs" />
     <Compile Include="Fabrica\DistribucionCurules\InfoPartido.cs" />
     <Compile Include="Inicio.cs" />
+    <Compile Include="Iterador\DivisionTrabajo\DivisionTrabajoIterador.cs" />
     <Compile Include="Iterador\DivisionTrabajo\GrupoTarea.cs" />
     <Compile Include="Iterador\DivisionTrabajo\IElemento.cs" />
     <Compile Include="Iterador\DivisionTrabajo\Tarea.cs" />
