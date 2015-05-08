@@ -1,12 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones", "Politecnico.Patrones\Politecnico.Patrones.csproj", "{643F43A4-A28B-46C5-A8B7-BB1A56A804BF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Tests", "Politecnico.Patrones.Tests\Politecnico.Patrones.Tests.csproj", "{8C8D36B9-1E10-4F8A-9DC4-CB1C233E29CC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Web", "Politecnico.Patrones.Web\Politecnico.Patrones.Web.csproj", "{18087EF9-A7AC-417E-8549-C1DC511A04D8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Estrategia01", "Estrategia01\Politecnico.Patrones.Estrategia01\Politecnico.Patrones.Estrategia01.csproj", "{51896D12-ED32-4BFF-AB16-B66E49B0E923}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Estrategia01.Tests", "Estrategia01\Politecnico.Patrones.Estrategia01.Tests\Politecnico.Patrones.Estrategia01.Tests.csproj", "{42773BE1-6810-4A09-8733-56960B4373F8}"
@@ -21,18 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{643F43A4-A28B-46C5-A8B7-BB1A56A804BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{643F43A4-A28B-46C5-A8B7-BB1A56A804BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{643F43A4-A28B-46C5-A8B7-BB1A56A804BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{643F43A4-A28B-46C5-A8B7-BB1A56A804BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C8D36B9-1E10-4F8A-9DC4-CB1C233E29CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C8D36B9-1E10-4F8A-9DC4-CB1C233E29CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C8D36B9-1E10-4F8A-9DC4-CB1C233E29CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C8D36B9-1E10-4F8A-9DC4-CB1C233E29CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18087EF9-A7AC-417E-8549-C1DC511A04D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18087EF9-A7AC-417E-8549-C1DC511A04D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18087EF9-A7AC-417E-8549-C1DC511A04D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18087EF9-A7AC-417E-8549-C1DC511A04D8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{51896D12-ED32-4BFF-AB16-B66E49B0E923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{51896D12-ED32-4BFF-AB16-B66E49B0E923}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51896D12-ED32-4BFF-AB16-B66E49B0E923}.Release|Any CPU.ActiveCfg = Release|Any CPU

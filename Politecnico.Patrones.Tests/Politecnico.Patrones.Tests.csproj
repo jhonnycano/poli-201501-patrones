@@ -61,12 +61,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Politecnico.Patrones\Politecnico.Patrones.csproj">
-      <Project>{643f43a4-a28b-46c5-a8b7-bb1a56a804bf}</Project>
-      <Name>Politecnico.Patrones</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Recursos\Archivos.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Archivos.Designer.cs</LastGenOutput>

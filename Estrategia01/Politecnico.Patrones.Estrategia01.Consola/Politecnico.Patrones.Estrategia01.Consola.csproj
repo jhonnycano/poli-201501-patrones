@@ -52,7 +52,7 @@
       <Project>{51896d12-ed32-4bff-ab16-b66e49b0e923}</Project>
       <Name>Politecnico.Patrones.Estrategia01</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Politecnico.Comunes\Politecnico.Comunes.csproj">
+    <ProjectReference Include="..\..\Politecnico.Comunes\Politecnico.Comunes.csproj">
       <Project>{267a72ab-d01e-4530-8ac3-2e052ab02fbe}</Project>
       <Name>Politecnico.Comunes</Name>
     </ProjectReference>
