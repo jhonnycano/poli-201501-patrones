@@ -39,13 +39,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DecoradorAcentos.cs" />
+    <Compile Include="DecoradorFuenteHtml4.cs" />
+    <Compile Include="DecoradorBarraHorizontalDespues.cs" />
+    <Compile Include="DecoradorCursiva.cs" />
+    <Compile Include="DecoradorHtmlBase.cs" />
+    <Compile Include="DecoradorLetraChica.cs" />
+    <Compile Include="DecoradorNegrilla.cs" />
+    <Compile Include="DecoradorSpan.cs" />
+    <Compile Include="DecoradorSubIndice.cs" />
+    <Compile Include="DecoradorSubrayado.cs" />
+    <Compile Include="IDecoradorHtml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recursos\Archivos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Archivos.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Politecnico.Comunes\Politecnico.Comunes.csproj">
       <Project>{267a72ab-d01e-4530-8ac3-2e052ab02fbe}</Project>
       <Name>Politecnico.Comunes</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Recursos\Archivos\ReemplazosAcentos.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Recursos\Archivos.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Archivos.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

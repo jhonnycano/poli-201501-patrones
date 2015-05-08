@@ -1,9 +1,17 @@
-﻿namespace Politecnico.Patrones.Decorador.DecoradorHtml {
-    public class DecoradorSubrayado : DecoradorHtmlBase {
-        public DecoradorSubrayado() { }
-        public DecoradorSubrayado(IDecoradorHtml decorador) : base(decorador) { }
+﻿namespace Politecnico.Patrones.Decorador01
+{
+    public class DecoradorSubrayado : DecoradorHtmlBase
+    {
+        public DecoradorSubrayado()
+        {
+        }
 
-        protected override string DecorarInterno(string entrada) {
+        public DecoradorSubrayado(IDecoradorHtml decorador) : base(decorador)
+        {
+        }
+
+        protected override string DecorarInterno(string entrada)
+        {
             return "<u>" + entrada + "</u>";
         }
     }

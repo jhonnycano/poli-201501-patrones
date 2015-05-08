@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="Comando\ComandoFiestaTest.cs" />
     <Compile Include="Comando\ComandoSilencioTest.cs" />
-    <Compile Include="Decorador\DecoradorHtml\DecoradorHtmlTest.cs" />
     <Compile Include="Iterador\DivisionTrabajo\DivisionTrabajoTest.cs" />
     <Compile Include="Iterador\DivisionTrabajo\UtilDivisionTrabajo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

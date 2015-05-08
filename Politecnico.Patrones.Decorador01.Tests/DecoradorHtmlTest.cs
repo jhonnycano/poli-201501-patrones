@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
-using Politecnico.Patrones.Decorador.DecoradorHtml;
 
-namespace Tests.DecoradorHtml
+namespace Politecnico.Patrones.Decorador01.Tests
 {
     [TestFixture]
     internal class DecoradorHtmlTest
@@ -15,7 +14,7 @@ namespace Tests.DecoradorHtml
                     )
                 );
 
-            var result = cadena.Decorar("hola mundo");
+            string result = cadena.Decorar("hola mundo");
             Assert.AreEqual("<em><strong>hola mundo</strong></em><hr />", result);
         }
     }

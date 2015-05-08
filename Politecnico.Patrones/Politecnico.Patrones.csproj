@@ -69,15 +69,6 @@
     <Compile Include="Comando\Domotica\Perifericos\EquipoSonido.cs" />
     <Compile Include="Comando\Domotica\IComando.cs" />
     <Compile Include="Comando\Domotica\UtilDomotica.cs" />
-    <Compile Include="Decorador\DecoradorHtml\DecoradorBarraHorizontalDespues.cs" />
-    <Compile Include="Decorador\DecoradorHtml\DecoradorCursiva.cs" />
-    <Compile Include="Decorador\DecoradorHtml\DecoradorHtmlBase.cs" />
-    <Compile Include="Decorador\DecoradorHtml\DecoradorLetraChica.cs" />
-    <Compile Include="Decorador\DecoradorHtml\DecoradorNegrilla.cs" />
-    <Compile Include="Decorador\DecoradorHtml\DecoradorSpan.cs" />
-    <Compile Include="Decorador\DecoradorHtml\DecoradorSubIndice.cs" />
-    <Compile Include="Decorador\DecoradorHtml\DecoradorSubrayado.cs" />
-    <Compile Include="Decorador\DecoradorHtml\IDecoradorHtml.cs" />
     <Compile Include="Iterador\DivisionTrabajo\DivisionTrabajoIterador.cs" />
     <Compile Include="Iterador\DivisionTrabajo\GrupoTarea.cs" />
     <Compile Include="Iterador\DivisionTrabajo\IElemento.cs" />

@@ -63,10 +63,14 @@ namespace Politecnico.Patrones.Estrategia01.Distribuciones
         {
             switch (_metodo)
             {
-                case MetodoDistribucion.Hare: return totalVotos / curulesDisponibles;
-                case MetodoDistribucion.Droop: return 1 + (totalVotos / (curulesDisponibles + 1));
-                case MetodoDistribucion.Imperiali: return totalVotos / (curulesDisponibles + 2);
-                default: throw new ApplicationException("Metodo de cociente no conocido");
+                case MetodoDistribucion.Hare:
+                    return totalVotos/curulesDisponibles;
+                case MetodoDistribucion.Droop:
+                    return 1 + (totalVotos/(curulesDisponibles + 1));
+                case MetodoDistribucion.Imperiali:
+                    return totalVotos/(curulesDisponibles + 2);
+                default:
+                    throw new ApplicationException("Metodo de cociente no conocido");
             }
         }
     }
