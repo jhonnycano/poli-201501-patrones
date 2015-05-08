@@ -15,6 +15,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Estrat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Comunes", "Politecnico.Comunes\Politecnico.Comunes.csproj", "{267A72AB-D01E-4530-8AC3-2E052AB02FBE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Estrategia01", "Estrategia01", "{7A1EC5FE-430D-4F4D-BAAB-DAC5324D5AC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Decorador01", "Decorador01", "{71E2DD19-0702-40BE-AB81-C5E471E2BFB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Decorador01", "Politecnico.Patrones.Decorador01\Politecnico.Patrones.Decorador01.csproj", "{B471921F-3B1E-4E92-AC55-A408E827602B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Decorador01.Tests", "Politecnico.Patrones.Decorador01.Tests\Politecnico.Patrones.Decorador01.Tests.csproj", "{31B98F42-2BAE-462C-9AE2-55E595C63C86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Decorador01.Consola", "Politecnico.Patrones.Decorador01.Consola\Politecnico.Patrones.Decorador01.Consola.csproj", "{382DADFB-62B4-4F48-9F31-E611E47DED09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,8 +59,28 @@ Global
 		{267A72AB-D01E-4530-8AC3-2E052AB02FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{267A72AB-D01E-4530-8AC3-2E052AB02FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{267A72AB-D01E-4530-8AC3-2E052AB02FBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B471921F-3B1E-4E92-AC55-A408E827602B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B471921F-3B1E-4E92-AC55-A408E827602B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B471921F-3B1E-4E92-AC55-A408E827602B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B471921F-3B1E-4E92-AC55-A408E827602B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31B98F42-2BAE-462C-9AE2-55E595C63C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31B98F42-2BAE-462C-9AE2-55E595C63C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31B98F42-2BAE-462C-9AE2-55E595C63C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31B98F42-2BAE-462C-9AE2-55E595C63C86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{382DADFB-62B4-4F48-9F31-E611E47DED09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{382DADFB-62B4-4F48-9F31-E611E47DED09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{382DADFB-62B4-4F48-9F31-E611E47DED09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{382DADFB-62B4-4F48-9F31-E611E47DED09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{51896D12-ED32-4BFF-AB16-B66E49B0E923} = {7A1EC5FE-430D-4F4D-BAAB-DAC5324D5AC5}
+		{AAD5068E-F4B2-4523-878B-8F87CE9AEFFF} = {7A1EC5FE-430D-4F4D-BAAB-DAC5324D5AC5}
+		{42773BE1-6810-4A09-8733-56960B4373F8} = {7A1EC5FE-430D-4F4D-BAAB-DAC5324D5AC5}
+		{B471921F-3B1E-4E92-AC55-A408E827602B} = {71E2DD19-0702-40BE-AB81-C5E471E2BFB9}
+		{31B98F42-2BAE-462C-9AE2-55E595C63C86} = {71E2DD19-0702-40BE-AB81-C5E471E2BFB9}
+		{382DADFB-62B4-4F48-9F31-E611E47DED09} = {71E2DD19-0702-40BE-AB81-C5E471E2BFB9}
 	EndGlobalSection
 EndGlobal
