@@ -78,24 +78,18 @@
     <Compile Include="Decorador\DecoradorHtml\DecoradorSubIndice.cs" />
     <Compile Include="Decorador\DecoradorHtml\DecoradorSubrayado.cs" />
     <Compile Include="Decorador\DecoradorHtml\IDecoradorHtml.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\DistribucionRestoMayor.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\DistribucionSaintLagueModificado.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\DistribucionSaintLagueSimple.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\DistribucionHondt.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\FabricaDistribucion.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\IAlgoritmoDistribucionCurules.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\InfoPartido.cs" />
-    <Compile Include="Inicio.cs" />
     <Compile Include="Iterador\DivisionTrabajo\DivisionTrabajoIterador.cs" />
     <Compile Include="Iterador\DivisionTrabajo\GrupoTarea.cs" />
     <Compile Include="Iterador\DivisionTrabajo\IElemento.cs" />
     <Compile Include="Iterador\DivisionTrabajo\Tarea.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\UtilInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fabrica\DistribucionCurules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

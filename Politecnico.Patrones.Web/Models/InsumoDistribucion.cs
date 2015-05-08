@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Politecnico.Patrones.Fabrica.DistribucionCurules;
+using Politecnico.Patrones.Estrategia01;
 
 namespace Politecnico.Patrones.Web.Models
 {

@@ -48,11 +48,6 @@
     <Compile Include="Comando\ComandoFiestaTest.cs" />
     <Compile Include="Comando\ComandoSilencioTest.cs" />
     <Compile Include="Decorador\DecoradorHtml\DecoradorHtmlTest.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\DistribucionRestoMayorTest.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\DistribucionSaintLagueModificadoTest.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\DistribucionSaintLagueSimpleTest.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\DistribucionHondtTest.cs" />
-    <Compile Include="Fabrica\DistribucionCurules\UtilDistribucion.cs" />
     <Compile Include="Iterador\DivisionTrabajo\DivisionTrabajoTest.cs" />
     <Compile Include="Iterador\DivisionTrabajo\UtilDivisionTrabajo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,17 +70,17 @@
     <EmbeddedResource Include="Recursos\Archivos.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Archivos.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Recursos\Archivos\ResumenEsperadoProyecto2.txt" />
     <Content Include="Recursos\Archivos\Proyecto2.txt" />
     <Content Include="Recursos\Archivos\Proyecto1.txt" />
-    <Content Include="Recursos\Archivos\VotacionEsquema3.txt" />
-    <Content Include="Recursos\Archivos\VotacionEsquema2.txt" />
-    <Content Include="Recursos\Archivos\VotacionEsquema1.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Fabrica\DistribucionCurules\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

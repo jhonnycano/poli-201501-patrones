@@ -29,10 +29,10 @@ namespace Politecnico.Patrones.Iterador.DivisionTrabajo
         public string TraerResumen()
         {
             var sb = new StringBuilder();
-            var iterador = new DivisionTrabajoIterador(this);
+            var iterador = GetEnumerator();
             while (iterador.MoveNext())
             {
-                sb.AppendLine(iterador.Indentacion + iterador.Current.TraerResumen());
+                sb.AppendLine(iterador.Current.TraerResumen());
             }
 
             return sb.ToString();
@@ -49,7 +49,13 @@ namespace Politecnico.Patrones.Iterador.DivisionTrabajo
         }
         public IEnumerator<IElemento> GetEnumerator()
         {
-            return new DivisionTrabajoIterador(this);
+            yield return this;
+            foreach (IElemento elemento in Elementos)
+            {
+                var en = elemento.GetEnumerator();
+                while (en.MoveNext()) yield return en.Current;
+            }
+
         }
     }
 }

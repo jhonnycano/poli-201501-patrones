@@ -127,13 +127,4 @@
   <data name="ResumenEsperadoProyecto2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>archivos\resumenesperadoproyecto2.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="VotacionEsquema1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>archivos\votacionesquema1.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="VotacionEsquema2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>archivos\votacionesquema2.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="VotacionEsquema3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>archivos\votacionesquema3.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
 </root>

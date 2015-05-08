@@ -16,6 +16,9 @@
 					porcentaje : 76
 				}
 			]
+		}, {
+			nombre : "Tarea 3",
+			porcentaje : 40
 		}
 	]
 }

@@ -88,6 +88,9 @@ namespace Tests.Recursos {
         ///					porcentaje : 76
         ///				}
         ///			]
+        ///		}, {
+        ///			nombre : &quot;Tarea 3&quot;,
+        ///			porcentaje : 40
         ///		}
         ///	]
         ///}.
@@ -104,51 +107,12 @@ namespace Tests.Recursos {
         ///	Tarea 2: 36
         ///	Tarea con subtareas: 88
         ///		Subtarea 1: 100
-        ///		Subtarea 1: 76.
+        ///		Subtarea 1: 76
+        ///	Tarea 3: 40.
         /// </summary>
         internal static string ResumenEsperadoProyecto2 {
             get {
                 return ResourceManager.GetString("ResumenEsperadoProyecto2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to P1	100000
-        ///P2	80000
-        ///P3	30000
-        ///P4	20000.
-        /// </summary>
-        internal static string VotacionEsquema1 {
-            get {
-                return ResourceManager.GetString("VotacionEsquema1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to P1	340000
-        ///P2	280000
-        ///P3	160000
-        ///P4	60000
-        ///P5	15000.
-        /// </summary>
-        internal static string VotacionEsquema2 {
-            get {
-                return ResourceManager.GetString("VotacionEsquema2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to P1	391000
-        ///P2	311000
-        ///P3	184000
-        ///P4	73000
-        ///P5	27000
-        ///P6	12000
-        ///P7	2000.
-        /// </summary>
-        internal static string VotacionEsquema3 {
-            get {
-                return ResourceManager.GetString("VotacionEsquema3", resourceCulture);
             }
         }
     }

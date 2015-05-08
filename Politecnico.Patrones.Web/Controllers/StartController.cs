@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
-using Politecnico.Patrones.Fabrica.DistribucionCurules;
+using Politecnico.Patrones.Estrategia01;
+using Politecnico.Patrones.Estrategia01.Distribuciones;
 using Politecnico.Patrones.Web.Models;
 
 namespace Politecnico.Patrones.Web.Controllers

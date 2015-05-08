@@ -133,6 +133,10 @@
     <Content Include="Views\Start\MostrarDatos.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Estrategia01\Politecnico.Patrones.Estrategia01.csproj">
+      <Project>{51896d12-ed32-4bff-ab16-b66e49b0e923}</Project>
+      <Name>Politecnico.Patrones.Estrategia01</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Politecnico.Patrones\Politecnico.Patrones.csproj">
       <Project>{643f43a4-a28b-46c5-a8b7-bb1a56a804bf}</Project>
       <Name>Politecnico.Patrones</Name>
