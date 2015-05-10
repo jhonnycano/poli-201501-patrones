@@ -19,11 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Estrategia01", "Estrategia0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Decorador01", "Decorador01", "{71E2DD19-0702-40BE-AB81-C5E471E2BFB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Decorador01", "Politecnico.Patrones.Decorador01\Politecnico.Patrones.Decorador01.csproj", "{B471921F-3B1E-4E92-AC55-A408E827602B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Decorador01", "Decorador01\Politecnico.Patrones.Decorador01\Politecnico.Patrones.Decorador01.csproj", "{B471921F-3B1E-4E92-AC55-A408E827602B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Decorador01.Tests", "Politecnico.Patrones.Decorador01.Tests\Politecnico.Patrones.Decorador01.Tests.csproj", "{31B98F42-2BAE-462C-9AE2-55E595C63C86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Decorador01.Tests", "Decorador01\Politecnico.Patrones.Decorador01.Tests\Politecnico.Patrones.Decorador01.Tests.csproj", "{31B98F42-2BAE-462C-9AE2-55E595C63C86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Decorador01.Consola", "Politecnico.Patrones.Decorador01.Consola\Politecnico.Patrones.Decorador01.Consola.csproj", "{382DADFB-62B4-4F48-9F31-E611E47DED09}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.Decorador01.Consola", "Decorador01\Politecnico.Patrones.Decorador01.Consola\Politecnico.Patrones.Decorador01.Consola.csproj", "{382DADFB-62B4-4F48-9F31-E611E47DED09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
