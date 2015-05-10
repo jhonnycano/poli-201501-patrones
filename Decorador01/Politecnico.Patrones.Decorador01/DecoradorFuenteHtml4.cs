@@ -1,24 +1,22 @@
-﻿using System.Text;
+﻿#region
+using System.Text;
 
-namespace Politecnico.Patrones.Decorador01
-{
-    public class DecoradorFuenteHtml4 : DecoradorHtmlBase
-    {
+#endregion
+
+namespace Politecnico.Patrones.Decorador01 {
+    public class DecoradorFuenteHtml4 : DecoradorHtmlBase {
         private readonly Parametros _parametros;
 
-        public DecoradorFuenteHtml4(Parametros parametros)
-        {
+        public DecoradorFuenteHtml4(Parametros parametros) {
             _parametros = parametros;
         }
 
         public DecoradorFuenteHtml4(IDecoradorHtml decorador, Parametros parametros)
-            : base(decorador)
-        {
+            : base(decorador) {
             _parametros = parametros;
         }
 
-        protected override string DecorarInterno(string entrada)
-        {
+        protected override string DecorarInterno(string entrada) {
             const string plantillaPreproceso = "<font@@detalle>@@entrada</font>";
             var sb = new StringBuilder();
             if (_parametros.Color != null) sb.Append(" color='" + _parametros.Color + "'");
@@ -32,8 +30,7 @@ namespace Politecnico.Patrones.Decorador01
             return result;
         }
 
-        public class Parametros
-        {
+        public class Parametros {
             public string Color { get; set; }
             public string Tipo { get; set; }
             public string Tam { get; set; }

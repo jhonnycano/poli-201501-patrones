@@ -1,22 +1,16 @@
-﻿namespace Politecnico.Patrones.Decorador01
-{
-    public abstract class DecoradorHtmlBase : IDecoradorHtml
-    {
+﻿namespace Politecnico.Patrones.Decorador01 {
+    public abstract class DecoradorHtmlBase : IDecoradorHtml {
         private readonly IDecoradorHtml _decorador;
 
-        protected DecoradorHtmlBase(IDecoradorHtml decorador)
-        {
+        protected DecoradorHtmlBase(IDecoradorHtml decorador) {
             _decorador = decorador;
         }
 
-        protected DecoradorHtmlBase() : this(null)
-        {
+        protected DecoradorHtmlBase() : this(null) {
         }
 
-        public string Decorar(string entrada)
-        {
-            if (_decorador == null)
-            {
+        public string Decorar(string entrada) {
+            if (_decorador == null) {
                 return DecorarInterno(entrada);
             }
             return DecorarInterno(_decorador.Decorar(entrada));

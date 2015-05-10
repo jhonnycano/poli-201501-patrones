@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿#region
+using NUnit.Framework;
+
+#endregion
 
 namespace Politecnico.Patrones.Decorador01.Tests {
     [TestFixture]

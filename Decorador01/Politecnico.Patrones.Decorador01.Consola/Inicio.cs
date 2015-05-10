@@ -1,9 +1,10 @@
-﻿using System;
+﻿#region
+using System;
 
-namespace Politecnico.Patrones.Decorador01.Consola
-{
-    internal class Inicio
-    {
+#endregion
+
+namespace Politecnico.Patrones.Decorador01.Consola {
+    internal class Inicio {
         private static void Main() {
             Console.Write(@"Ingrese cadena: ");
             var entrada = Console.ReadLine();

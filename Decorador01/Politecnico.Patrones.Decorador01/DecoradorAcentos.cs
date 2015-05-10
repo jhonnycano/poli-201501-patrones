@@ -1,43 +1,38 @@
-﻿using System.Collections.Generic;
+﻿#region
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Politecnico.Patrones.Decorador01.Recursos;
 
-namespace Politecnico.Patrones.Decorador01
-{
-    public class DecoradorAcentos : DecoradorHtmlBase
-    {
+#endregion
+
+namespace Politecnico.Patrones.Decorador01 {
+    public class DecoradorAcentos : DecoradorHtmlBase {
         private static IDictionary<string, string> _reemplazos;
 
-        public DecoradorAcentos()
-        {
+        public DecoradorAcentos() {
         }
 
         public DecoradorAcentos(IDecoradorHtml decorador)
-            : base(decorador)
-        {
+            : base(decorador) {
         }
 
-        protected override string DecorarInterno(string entrada)
-        {
+        protected override string DecorarInterno(string entrada) {
             var reemplazos = CargarReemplazos();
             var sb = new StringBuilder(entrada);
 
-            foreach (var reemplazo in reemplazos)
-            {
+            foreach (var reemplazo in reemplazos) {
                 sb.Replace(reemplazo.Key, reemplazo.Value);
             }
             return sb.ToString();
         }
 
-        private IEnumerable<KeyValuePair<string, string>> CargarReemplazos()
-        {
+        private IEnumerable<KeyValuePair<string, string>> CargarReemplazos() {
             if (_reemplazos != null) return _reemplazos;
             _reemplazos = new Dictionary<string, string>();
-            using (var sr = new StringReader(Recursos.Archivos.ReemplazosAcentos))
-            {
+            using (var sr = new StringReader(Archivos.ReemplazosAcentos)) {
                 string linea;
-                while ((linea = sr.ReadLine()) != null)
-                {
+                while ((linea = sr.ReadLine()) != null) {
                     var arr = linea.Split('\t');
                     if (arr.Length != 2) continue;
 
