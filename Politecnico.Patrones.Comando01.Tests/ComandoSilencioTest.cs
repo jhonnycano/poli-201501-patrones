@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using Politecnico.Patrones.Comando.Domotica;
-using Politecnico.Patrones.Comando.Domotica.ComandosCompuestos;
+using Politecnico.Patrones.Comando01.ComandosCompuestos;
 
-namespace Tests.Comando
+namespace Politecnico.Patrones.Comando01.Tests
 {
     [TestFixture]
     class ComandoSilencioTest

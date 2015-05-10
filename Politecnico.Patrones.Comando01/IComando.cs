@@ -1,4 +1,4 @@
-﻿namespace Politecnico.Patrones.Comando.Domotica {
+﻿namespace Politecnico.Patrones.Comando01 {
     public interface IComando {
         void Ejecutar();
     }

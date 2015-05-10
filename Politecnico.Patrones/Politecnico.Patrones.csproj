@@ -51,24 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comando\Domotica\Casa.cs" />
-    <Compile Include="Comando\Domotica\ComandosCompuestos\ComandoSilencio.cs" />
-    <Compile Include="Comando\Domotica\ComandosSimples\ComandoApagarTelevisor.cs" />
-    <Compile Include="Comando\Domotica\ComandosSimples\ComandoEncenderTelevisor.cs" />
-    <Compile Include="Comando\Domotica\ComandosSimples\ComandoSintonizarCanalTelevisor.cs" />
-    <Compile Include="Comando\Domotica\Perifericos\Bombillo.cs" />
-    <Compile Include="Comando\Domotica\ComandosCompuestos\ComandoFiesta.cs" />
-    <Compile Include="Comando\Domotica\ComandosCompuestos\ComandoMultiple.cs" />
-    <Compile Include="Comando\Domotica\ComandosSimples\ComandoApagarEquipo.cs" />
-    <Compile Include="Comando\Domotica\ComandosSimples\ComandoApagarBombillo.cs" />
-    <Compile Include="Comando\Domotica\ComandosSimples\ComandoEjecutarCDEquipo.cs" />
-    <Compile Include="Comando\Domotica\ComandosSimples\ComandoEncenderEquipo.cs" />
-    <Compile Include="Comando\Domotica\ComandosSimples\ComandoEncenderBombillo.cs" />
-    <Compile Include="Comando\Domotica\ComandosSimples\ComandoSintonizarEmisoraEquipo.cs" />
-    <Compile Include="Comando\Domotica\Perifericos\Televisor.cs" />
-    <Compile Include="Comando\Domotica\Perifericos\EquipoSonido.cs" />
-    <Compile Include="Comando\Domotica\IComando.cs" />
-    <Compile Include="Comando\Domotica\UtilDomotica.cs" />
     <Compile Include="Iterador\DivisionTrabajo\DivisionTrabajoIterador.cs" />
     <Compile Include="Iterador\DivisionTrabajo\GrupoTarea.cs" />
     <Compile Include="Iterador\DivisionTrabajo\IElemento.cs" />
@@ -80,6 +62,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Comando\Domotica\" />
     <Folder Include="Fabrica\DistribucionCurules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

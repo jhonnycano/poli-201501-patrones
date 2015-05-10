@@ -1,8 +1,11 @@
-﻿using Politecnico.Patrones.Comando.Domotica.Perifericos;
+﻿#region
+using Politecnico.Patrones.Comando01.Perifericos;
 
-namespace Politecnico.Patrones.Comando.Domotica {
+#endregion
+
+namespace Politecnico.Patrones.Comando01 {
     /// <summary>
-    /// Por ahora son propiedades del objeto, más adelante podría pensarse en colecciones de objetos
+    ///     Por ahora son propiedades del objeto, más adelante podría pensarse en colecciones de objetos
     /// </summary>
     public class Casa {
         public Bombillo BombilloSala;

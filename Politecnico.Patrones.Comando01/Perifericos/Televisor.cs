@@ -1,6 +1,9 @@
-﻿using System;
+﻿#region
+using System;
 
-namespace Politecnico.Patrones.Comando.Domotica.Perifericos {
+#endregion
+
+namespace Politecnico.Patrones.Comando01.Perifericos {
     public class Televisor {
         private readonly string _nombre;
         public Televisor(string nombre) {

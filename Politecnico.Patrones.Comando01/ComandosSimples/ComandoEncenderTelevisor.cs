@@ -1,6 +1,9 @@
-﻿using Politecnico.Patrones.Comando.Domotica.Perifericos;
+﻿#region
+using Politecnico.Patrones.Comando01.Perifericos;
 
-namespace Politecnico.Patrones.Comando.Domotica.ComandosSimples {
+#endregion
+
+namespace Politecnico.Patrones.Comando01.ComandosSimples {
     public class ComandoEncenderTelevisor : IComando {
         private readonly Televisor _televisor;
         public ComandoEncenderTelevisor(Televisor televisor) {

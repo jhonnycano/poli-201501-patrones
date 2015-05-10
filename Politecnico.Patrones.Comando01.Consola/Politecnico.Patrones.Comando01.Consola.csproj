@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8C8D36B9-1E10-4F8A-9DC4-CB1C233E29CC}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{D6F9C71B-ABE8-410D-AD85-7B7503C8D2F7}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests</RootNamespace>
-    <AssemblyName>Tests</AssemblyName>
+    <RootNamespace>Politecnico.Patrones.Comando01.Consola</RootNamespace>
+    <AssemblyName>Politecnico.Patrones.Comando01.Consola</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,12 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,38 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Iterador\DivisionTrabajo\DivisionTrabajoTest.cs" />
-    <Compile Include="Iterador\DivisionTrabajo\UtilDivisionTrabajo.cs" />
+    <Compile Include="Inicio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Recursos\Archivos.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Archivos.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Recursos\Archivos.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Archivos.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Recursos\Archivos\ResumenEsperadoProyecto2.txt" />
-    <Content Include="Recursos\Archivos\Proyecto2.txt" />
-    <Content Include="Recursos\Archivos\Proyecto1.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Comando\" />
-    <Folder Include="Fabrica\DistribucionCurules\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Politecnico.Patrones\Politecnico.Patrones.csproj">
-      <Project>{643f43a4-a28b-46c5-a8b7-bb1a56a804bf}</Project>
-      <Name>Politecnico.Patrones</Name>
+    <ProjectReference Include="..\Politecnico.Patrones.Comando01\Politecnico.Patrones.Comando01.csproj">
+      <Project>{264bbb51-02a1-4a6b-8a57-c1b19764d691}</Project>
+      <Name>Politecnico.Patrones.Comando01</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

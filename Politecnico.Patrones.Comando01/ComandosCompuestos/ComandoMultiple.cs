@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿#region
+using System.Collections.Generic;
 
-namespace Politecnico.Patrones.Comando.Domotica.ComandosCompuestos {
+#endregion
+
+namespace Politecnico.Patrones.Comando01.ComandosCompuestos {
     public class ComandoMultiple : IComando {
         private readonly IList<IComando> _lista;
 

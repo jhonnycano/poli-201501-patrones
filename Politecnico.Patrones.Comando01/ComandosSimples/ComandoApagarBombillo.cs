@@ -1,6 +1,9 @@
-﻿using Politecnico.Patrones.Comando.Domotica.Perifericos;
+﻿#region
+using Politecnico.Patrones.Comando01.Perifericos;
 
-namespace Politecnico.Patrones.Comando.Domotica.ComandosSimples {
+#endregion
+
+namespace Politecnico.Patrones.Comando01.ComandosSimples {
     public class ComandoApagarBombillo : IComando {
         private readonly Bombillo _bombillo;
         public ComandoApagarBombillo(Bombillo bombillo) {

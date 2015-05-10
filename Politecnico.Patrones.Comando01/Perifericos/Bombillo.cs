@@ -1,6 +1,9 @@
-﻿using System;
+﻿#region
+using System;
 
-namespace Politecnico.Patrones.Comando.Domotica.Perifericos {
+#endregion
+
+namespace Politecnico.Patrones.Comando01.Perifericos {
     public class Bombillo {
         private readonly string _nombre;
         public Bombillo(string nombre) {

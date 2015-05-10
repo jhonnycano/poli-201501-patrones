@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
-using Politecnico.Patrones.Comando.Domotica.ComandosSimples;
+﻿#region
+using System.Collections.Generic;
+using Politecnico.Patrones.Comando01.ComandosSimples;
 
-namespace Politecnico.Patrones.Comando.Domotica {
+#endregion
+
+namespace Politecnico.Patrones.Comando01 {
     public static class UtilDomotica {
         public static IList<IComando> CrearComandosFiesta(Casa casa) {
             return new List<IComando>
