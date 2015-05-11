@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8C8D36B9-1E10-4F8A-9DC4-CB1C233E29CC}</ProjectGuid>
+    <ProjectGuid>{3EFD07C4-AF24-4681-B27E-4AEBC2AFB178}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests</RootNamespace>
-    <AssemblyName>Tests</AssemblyName>
+    <RootNamespace>Politecnico.Patrones.Comando01.Tests</RootNamespace>
+    <AssemblyName>Politecnico.Patrones.Comando01.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,11 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,33 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Iterador\DivisionTrabajo\DivisionTrabajoTest.cs" />
-    <Compile Include="Iterador\DivisionTrabajo\UtilDivisionTrabajo.cs" />
+    <Compile Include="CasaTest.cs" />
+    <Compile Include="ComandoFiestaTest.cs" />
+    <Compile Include="ComandoSilencioTest.cs" />
+    <Compile Include="PanelSimpleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Recursos\Archivos.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Archivos.resx</DependentUpon>
-    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Politecnico.Patrones.Comando01\Politecnico.Patrones.Comando01.csproj">
+      <Project>{264bbb51-02a1-4a6b-8a57-c1b19764d691}</Project>
+      <Name>Politecnico.Patrones.Comando01</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Recursos\Archivos.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Archivos.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Recursos\Archivos\ResumenEsperadoProyecto2.txt" />
-    <Content Include="Recursos\Archivos\Proyecto2.txt" />
-    <Content Include="Recursos\Archivos\Proyecto1.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Comando\" />
-    <Folder Include="Fabrica\DistribucionCurules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
