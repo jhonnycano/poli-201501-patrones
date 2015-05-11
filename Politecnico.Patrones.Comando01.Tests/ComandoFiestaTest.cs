@@ -1,11 +1,12 @@
-﻿using NUnit.Framework;
+﻿#region
+using NUnit.Framework;
 using Politecnico.Patrones.Comando01.ComandosCompuestos;
 
-namespace Politecnico.Patrones.Comando01.Tests
-{
+#endregion
+
+namespace Politecnico.Patrones.Comando01.Tests {
     [TestFixture]
-    class ComandoFiestaTest
-    {
+    internal class ComandoFiestaTest {
         [Test]
         public void Completo() {
             var casa = new Casa();

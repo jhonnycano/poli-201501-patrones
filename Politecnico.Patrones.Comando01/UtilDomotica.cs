@@ -9,21 +9,21 @@ namespace Politecnico.Patrones.Comando01 {
         public static IList<IComando> CrearComandosFiesta(Casa casa) {
             return new List<IComando>
                 {
-                    new ComandoEncenderBombillo(casa.BombilloSala),
-                    new ComandoEncenderBombillo(casa.BombilloCocina),
-                    new ComandoEncenderEquipo(casa.EquipoSonidoSala),
-                    new ComandoSintonizarEmisoraEquipo(casa.EquipoSonidoSala, "Blu Radio"),
-                    new ComandoEncenderTelevisor(casa.TelevisorSala),
-                    new ComandoSintonizarCanalTelevisor(casa.TelevisorSala, "AXN"),
+                    new ComandoEncenderBombillo(casa.Bombillos["sala"]),
+                    new ComandoEncenderBombillo(casa.Bombillos["cocina"]),
+                    new ComandoEncenderEquipo(casa.EquiposSonido["sala"]),
+                    new ComandoSintonizarEmisoraEquipo(casa.EquiposSonido["sala"], "Blu Radio"),
+                    new ComandoEncenderTelevisor(casa.Televisores["sala"]),
+                    new ComandoSintonizarCanalTelevisor(casa.Televisores["sala"], "AXN"),
                 };
         }
-        public static IList<IComando> CrearComandosHesicasta(Casa casa) {
+        public static IList<IComando> CrearComandosSilencio(Casa casa) {
             return new List<IComando>
                 {
-                    new ComandoApagarBombillo(casa.BombilloSala),
-                    new ComandoApagarBombillo(casa.BombilloCocina),
-                    new ComandoApagarEquipo(casa.EquipoSonidoSala),
-                    new ComandoApagarTelevisor(casa.TelevisorSala),
+                    new ComandoApagarBombillo(casa.Bombillos["sala"]),
+                    new ComandoApagarBombillo(casa.Bombillos["cocina"]),
+                    new ComandoApagarEquipo(casa.EquiposSonido["sala"]),
+                    new ComandoApagarTelevisor(casa.Televisores["sala"]),
                 };
         }
     }
