@@ -48,7 +48,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Politecnico.Comunes\Politecnico.Comunes.csproj">
+    <ProjectReference Include="..\..\Politecnico.Comunes\Politecnico.Comunes.csproj">
       <Project>{267a72ab-d01e-4530-8ac3-2e052ab02fbe}</Project>
       <Name>Politecnico.Comunes</Name>
     </ProjectReference>

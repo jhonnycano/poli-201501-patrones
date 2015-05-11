@@ -4,13 +4,13 @@ using Politecnico.Patrones.Comando01.Paneles;
 using Politecnico.Patrones.Comando01.Perifericos;
 
 namespace Politecnico.Patrones.Comando01 {
-    public class ConfiguradorPanelSimple {
+    public class ConfiguradorSimple {
         public enum AccionesEquipoSonido { EncenderYApagar, EmisoraYCD, }
         public enum AccionesTelevisor { EncenderYApagar, SintonizarCanales, }
 
-        private readonly PanelSimple _panel;
+        private readonly Panel _panel;
         private readonly Casa _casa;
-        public ConfiguradorPanelSimple(PanelSimple panel, Casa casa) {
+        public ConfiguradorSimple(Panel panel, Casa casa) {
             _panel = panel;
             _casa = casa;
         }
@@ -22,7 +22,7 @@ namespace Politecnico.Patrones.Comando01 {
             var bombillo = _casa.Bombillos[nombre];
             var comandoActivar = new ComandoEncenderBombillo(bombillo);
             var comandoInactivar = new ComandoApagarBombillo(bombillo);
-            _panel.RegistrarAccion(pos, comandoActivar, comandoInactivar);
+            _panel.RegistrarAccion(pos, "Bombillo " + nombre, comandoActivar, comandoInactivar);
         }
         public void RegistrarAccionesEquipoSonido(int pos, string nombre, AccionesEquipoSonido accion, params string[] args) {
             if (!_casa.EquiposSonido.ContainsKey(nombre)) {
@@ -38,7 +38,7 @@ namespace Politecnico.Patrones.Comando01 {
 
             IComando comandoActivar = tupla.Item1;
             IComando comandoInactivar = tupla.Item2;
-            _panel.RegistrarAccion(pos, comandoActivar, comandoInactivar);
+            _panel.RegistrarAccion(pos, "Eq Sonido " + nombre + ": " + tupla.Item3, comandoActivar, comandoInactivar);
         }
         public void RegistrarAccionesTelevisor(int pos, string nombre, AccionesTelevisor accion, params string[] args) {
             if (!_casa.Televisores.ContainsKey(nombre)) {
@@ -54,7 +54,7 @@ namespace Politecnico.Patrones.Comando01 {
 
             IComando comandoActivar = tupla.Item1;
             IComando comandoInactivar = tupla.Item2;
-            _panel.RegistrarAccion(pos, comandoActivar, comandoInactivar);
+            _panel.RegistrarAccion(pos, "Televisor " + nombre + ": " + tupla.Item3, comandoActivar, comandoInactivar);
         }
         public void RegistrarAccionesCortina(int pos, string nombre) {
             if (!_casa.Cortinas.ContainsKey(nombre)) {
@@ -64,39 +64,43 @@ namespace Politecnico.Patrones.Comando01 {
             var cortina = _casa.Cortinas[nombre];
             var comandoActivar = new ComandoAbrirCortina(cortina);
             var comandoInactivar = new ComandoCerrarCortina(cortina);
-            _panel.RegistrarAccion(pos, comandoActivar, comandoInactivar);
+            _panel.RegistrarAccion(pos, "Cortina " + nombre, comandoActivar, comandoInactivar);
         }
-        private static Tuple<IComando, IComando> TraerComandosEquipoSonido(AccionesEquipoSonido accion, EquipoSonido equipoSonido, params string[] args) {
+        private static Tuple<IComando, IComando, string> TraerComandosEquipoSonido(AccionesEquipoSonido accion, EquipoSonido equipoSonido, params string[] args) {
             switch (accion) {
                 case AccionesEquipoSonido.EncenderYApagar:
-                    return new Tuple<IComando, IComando>(
+                    return new Tuple<IComando, IComando, string>(
                         new ComandoEncenderEquipo(equipoSonido),
-                        new ComandoApagarEquipo(equipoSonido));
+                        new ComandoApagarEquipo(equipoSonido), 
+                        "prender-apagar");
                 case AccionesEquipoSonido.EmisoraYCD:
                     if (args.Length < 2) {
                         Console.WriteLine("Faltan parametros para configurar equipo de sonido");
                         return null;
                     }
-                    return new Tuple<IComando, IComando>(
+                    return new Tuple<IComando, IComando, string>(
                         new ComandoSintonizarEmisoraEquipo(equipoSonido, args[0]),
-                        new ComandoEjecutarCDEquipo(equipoSonido, args[1]));
+                        new ComandoEjecutarCDEquipo(equipoSonido, args[1]), 
+                        "emisora-cd");
             }
             return null;
         }
-        private Tuple<IComando, IComando> TraerComandosTelevisor(AccionesTelevisor accion, Televisor televisor, string[] args) {
+        private Tuple<IComando, IComando, string> TraerComandosTelevisor(AccionesTelevisor accion, Televisor televisor, string[] args) {
             switch (accion) {
                 case AccionesTelevisor.EncenderYApagar:
-                    return new Tuple<IComando, IComando>(
+                    return new Tuple<IComando, IComando, string>(
                         new ComandoEncenderTelevisor(televisor), 
-                        new ComandoApagarTelevisor(televisor));
+                        new ComandoApagarTelevisor(televisor), 
+                        "prender-apagar");
                 case AccionesTelevisor.SintonizarCanales:
                     if (args.Length < 2) {
                         Console.WriteLine("Faltan parametros para configurar televisor");
                         return null;
                     }
-                    return new Tuple<IComando, IComando>(
+                    return new Tuple<IComando, IComando, string>(
                         new ComandoSintonizarCanalTelevisor(televisor, args[0]), 
-                        new ComandoSintonizarCanalTelevisor(televisor, args[1]));
+                        new ComandoSintonizarCanalTelevisor(televisor, args[1]), 
+                        "sintonizar");
             }
             return null;
         }

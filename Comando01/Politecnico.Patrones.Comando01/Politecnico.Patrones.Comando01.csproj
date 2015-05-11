@@ -56,11 +56,12 @@
     <Compile Include="ComandosSimples\ComandoSintonizarCanalTelevisor.cs" />
     <Compile Include="ComandosSimples\ComandoSintonizarEmisoraEquipo.cs" />
     <Compile Include="ComandosSimples\ComandoAbrirCortina.cs" />
-    <Compile Include="ConfiguradorPanelSimple.cs" />
+    <Compile Include="ConfiguradorCompuesto.cs" />
+    <Compile Include="ConfiguradorSimple.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Perifericos\Cortina.cs" />
     <Compile Include="IComando.cs" />
-    <Compile Include="Paneles\PanelSimple.cs" />
+    <Compile Include="Paneles\Panel.cs" />
     <Compile Include="Perifericos\Bombillo.cs" />
     <Compile Include="Perifericos\EquipoSonido.cs" />
     <Compile Include="Perifericos\Televisor.cs" />
