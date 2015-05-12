@@ -132,12 +132,6 @@
   <ItemGroup>
     <Content Include="Views\Start\MostrarDatos.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Estrategia01\Politecnico.Patrones.Estrategia01\Politecnico.Patrones.Estrategia01.csproj">
-      <Project>{51896d12-ed32-4bff-ab16-b66e49b0e923}</Project>
-      <Name>Politecnico.Patrones.Estrategia01</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

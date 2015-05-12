@@ -45,8 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Iterador\DivisionTrabajo\DivisionTrabajoTest.cs" />
-    <Compile Include="Iterador\DivisionTrabajo\UtilDivisionTrabajo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recursos\Archivos.Designer.cs">
       <AutoGen>True</AutoGen>

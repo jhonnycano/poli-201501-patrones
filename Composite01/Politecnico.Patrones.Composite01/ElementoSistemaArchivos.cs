@@ -1,5 +1,4 @@
 ﻿#region
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -15,7 +14,7 @@ namespace Politecnico.Patrones.Composite01 {
             if (File.Exists(ruta)) {
                 return new Archivo(ruta);
             }
-            throw new ApplicationException("ruta no válida");
+            return null;
         }
         public string Ruta { get; internal set; }
         public abstract IList<ElementoSistemaArchivos> TraerElementos();

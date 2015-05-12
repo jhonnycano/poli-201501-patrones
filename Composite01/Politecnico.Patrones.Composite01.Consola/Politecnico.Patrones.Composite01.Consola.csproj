@@ -44,6 +44,16 @@
     <Compile Include="Inicio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Politecnico.Comunes\Politecnico.Comunes.csproj">
+      <Project>{267a72ab-d01e-4530-8ac3-2e052ab02fbe}</Project>
+      <Name>Politecnico.Comunes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Politecnico.Patrones.Composite01\Politecnico.Patrones.Composite01.csproj">
+      <Project>{e48a85fe-8fa8-4d35-9450-798157ba2f0b}</Project>
+      <Name>Politecnico.Patrones.Composite01</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
