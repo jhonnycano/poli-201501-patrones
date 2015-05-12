@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3EFD07C4-AF24-4681-B27E-4AEBC2AFB178}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{30C8DD9B-3E33-44CB-9FC9-C757F85711E9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Politecnico.Patrones.Comando01.Tests</RootNamespace>
-    <AssemblyName>Politecnico.Patrones.Comando01.Tests</AssemblyName>
+    <RootNamespace>Politecnico.Patrones.Decorador01.Consola</RootNamespace>
+    <AssemblyName>Politecnico.Patrones.Decorador01.Consola</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,10 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,20 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CasaTest.cs" />
-    <Compile Include="ComandoFiestaTest.cs" />
-    <Compile Include="ComandoSilencioTest.cs" />
-    <Compile Include="PanelSimpleTest.cs" />
+    <Compile Include="Inicio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Politecnico.Patrones.Comando01\Politecnico.Patrones.Comando01.csproj">
-      <Project>{264bbb51-02a1-4a6b-8a57-c1b19764d691}</Project>
-      <Name>Politecnico.Patrones.Comando01</Name>
+    <ProjectReference Include="..\..\Politecnico.Comunes\Politecnico.Comunes.csproj">
+      <Project>{267a72ab-d01e-4530-8ac3-2e052ab02fbe}</Project>
+      <Name>Politecnico.Comunes</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Politecnico.Patrones.Decorador02\Politecnico.Patrones.Decorador02.csproj">
+      <Project>{9f256427-c677-4f4a-8686-75b0856c829f}</Project>
+      <Name>Politecnico.Patrones.Decorador02</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
