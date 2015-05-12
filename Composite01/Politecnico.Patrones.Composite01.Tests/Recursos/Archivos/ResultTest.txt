@@ -1,0 +1,7 @@
+﻿Pruebas
+  Carpeta01
+  Carpeta02
+    documento.txt
+    ExtPOYCES1324567.pdf
+  ERROR MODULO CONTROL DE TRIAG1.docx
+  PaseDeAbordarAvianca.pdf
