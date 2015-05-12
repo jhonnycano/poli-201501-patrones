@@ -1,4 +1,4 @@
-﻿namespace Politecnico.Patrones.Decorador01 {
+﻿namespace Politecnico.Patrones.Decorador02 {
     public class DecoradorSpan : DecoradorHtmlBase {
         private readonly string _clase;
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Politecnico.Patrones.Decorador01.Recursos {
+namespace Politecnico.Patrones.Decorador02.Recursos {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace Politecnico.Patrones.Decorador01.Recursos {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Archivos {
+    public class Archivos {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace Politecnico.Patrones.Decorador01.Recursos {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Politecnico.Patrones.Decorador01.Recursos.Archivos", typeof(Archivos).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Politecnico.Patrones.Decorador02.Recursos.Archivos", typeof(Archivos).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,12 +51,58 @@ namespace Politecnico.Patrones.Decorador01.Recursos {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estructura del archivo de configuracion
+        ///=======================================
+        ///
+        ///Cada linea del archivo indica un decorador a agregar.
+        ///
+        ///ej: el archivo con el siguiente contenido:
+        ///
+        ///DecoradorCursiva
+        ///DecoradorNegrilla
+        ///
+        ///utilizaría los dos decoradores (cursiva, negrilla) para decorar las cadenas.
+        ///
+        ///
+        ///Hay decoradores que requieren parámetros de entrada, como por ejemplo
+        ///el decorador DecoradorFuenteHtml4. Para este tipo de decoradores, 
+        ///los parametros de entrada se deben suministrar a continuación del [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string AyudaArchivo {
+            get {
+                return ResourceManager.GetString("AyudaArchivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to                          Decorador Dinamico
+        ///
+        ///                   Ejercicio presentado por
+        ///                    Ing: Jhonny Dickson Cano
+        ///
+        ///
+        ///Para materia: Conceptos Avanzados en Diseño de Software
+        ///Profesor: Danilo Castro Tellez
+        ///
+        ///
+        ///Ejercicios disponibles también en
+        ///https://github.com/jhonnycano/politecnico.s1.patrones
+        ///
+        ///.
+        /// </summary>
+        public static string Inicio {
+            get {
+                return ResourceManager.GetString("Inicio", resourceCulture);
             }
         }
         
@@ -107,7 +153,7 @@ namespace Politecnico.Patrones.Decorador01.Recursos {
         ///Ü	&amp;Uuml;
         ///Ÿ	&amp;Y [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string ReemplazosAcentos {
+        public static string ReemplazosAcentos {
             get {
                 return ResourceManager.GetString("ReemplazosAcentos", resourceCulture);
             }

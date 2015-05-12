@@ -7,8 +7,8 @@
     <ProjectGuid>{08ED2554-68DC-4795-8293-E85B97257E51}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Politecnico.Patrones.Decorador01.Tests</RootNamespace>
-    <AssemblyName>Politecnico.Patrones.Decorador01.Tests</AssemblyName>
+    <RootNamespace>Politecnico.Patrones.Decorador02.Tests</RootNamespace>
+    <AssemblyName>Politecnico.Patrones.Decorador02.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -1,0 +1,23 @@
+﻿Estructura del archivo de configuracion
+=======================================
+
+Cada linea del archivo indica un decorador a agregar.
+
+ej: el archivo con el siguiente contenido:
+
+DecoradorCursiva
+DecoradorNegrilla
+
+utilizaría los dos decoradores (cursiva, negrilla) para decorar las cadenas.
+
+
+Hay decoradores que requieren parámetros de entrada, como por ejemplo
+el decorador DecoradorFuenteHtml4. Para este tipo de decoradores, 
+los parametros de entrada se deben suministrar a continuación del nombre
+del decorador y separados por un caracter pipeline (|). El formato
+para suministrar los parametros de entrada es Json.
+
+ej:
+
+DecoradorFuenteHtml4|{Color:'#decafe#', Tipo:'Arial', Tam:'16px'}
+

@@ -1,4 +1,4 @@
-﻿namespace Politecnico.Patrones.Decorador01 {
+﻿namespace Politecnico.Patrones.Decorador02 {
     public abstract class DecoradorHtmlBase : IDecoradorHtml {
         private readonly IDecoradorHtml _decorador;
 

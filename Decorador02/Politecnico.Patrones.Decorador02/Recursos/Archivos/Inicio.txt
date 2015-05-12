@@ -1,0 +1,13 @@
+﻿                         Decorador Dinamico
+
+                   Ejercicio presentado por
+                    Ing: Jhonny Dickson Cano
+
+
+Para materia: Conceptos Avanzados en Diseño de Software
+Profesor: Danilo Castro Tellez
+
+
+Ejercicios disponibles también en
+https://github.com/jhonnycano/politecnico.s1.patrones
+

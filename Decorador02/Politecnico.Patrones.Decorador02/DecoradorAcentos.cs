@@ -1,12 +1,13 @@
 ﻿#region
+
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Politecnico.Patrones.Decorador01.Recursos;
+using Politecnico.Patrones.Decorador02.Recursos;
 
 #endregion
 
-namespace Politecnico.Patrones.Decorador01 {
+namespace Politecnico.Patrones.Decorador02 {
     public class DecoradorAcentos : DecoradorHtmlBase {
         private static IDictionary<string, string> _reemplazos;
 
