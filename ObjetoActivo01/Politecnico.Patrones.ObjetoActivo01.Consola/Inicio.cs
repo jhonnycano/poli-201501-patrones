@@ -1,9 +1,6 @@
-﻿namespace Politecnico.Patrones.ObjetoActivo01.Consola
-{
-    class Inicio
-    {
-        static void Main(string[] args)
-        {
+﻿namespace Politecnico.Patrones.ObjetoActivo01.Consola {
+    internal class Inicio {
+        private static void Main(string[] args) {
         }
     }
 }
