@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -11,12 +11,16 @@ namespace Politecnico.Patrones.ObjetoActivo01 {
         private readonly string _ruta;
         private readonly Queue<LogInfo> _cola;
         private bool _salir;
+        private readonly Task _task;
         public Logger(string ruta) {
             _ruta = ruta;
             _cola = new Queue<LogInfo>();
             _salir = false;
+            /*
             var tarea = new ThreadStart(Target);
             tarea.BeginInvoke(Algo, null);
+             * */
+            _task = Task.Run(() => Target());
         }
         public void Log(LoggerTask.Tipo tipo, string msj) {
             lock (_cola) {
@@ -37,7 +41,6 @@ namespace Politecnico.Patrones.ObjetoActivo01 {
                         HacerLog(itm);
                     }
                 }
-                Thread.Sleep(500);
             }
         }
         private void Algo(IAsyncResult ar) {
@@ -51,6 +54,7 @@ namespace Politecnico.Patrones.ObjetoActivo01 {
 
         public void Dispose() {
             _salir = true;
+            _task.Wait();
         }
     }
 }

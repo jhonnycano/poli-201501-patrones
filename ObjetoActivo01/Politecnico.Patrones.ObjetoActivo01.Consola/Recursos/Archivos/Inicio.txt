@@ -1,0 +1,17 @@
+﻿                         Objeto Activo
+
+                   Ejercicio presentado por
+                    Ing: Jhonny Dickson Cano
+
+Para materia: Conceptos Avanzados en Diseño de Software
+Profesor: Danilo Castro Tellez
+
+
+Ejercicios disponibles también en
+https://github.com/jhonnycano/politecnico.s1.patrones
+
+El programa pide un número de trabajos a disparar de manera concurrente.
+Cada trabajo tendrá una cantidad aleatoria de iteraciones 
+y una duración (milisegundos) aleatoria.
+
+El log se almacena en la ruta del ejecutable una vez terminada la ejecución

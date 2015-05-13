@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace Politecnico.Patrones.ObjetoActivo01.Tests {
@@ -61,6 +63,24 @@ namespace Politecnico.Patrones.ObjetoActivo01.Tests {
                         "mensaje a las " + fch + " desde hilo " + i + "... tiempo= " + tiempo);
                 }).Invoke();
             }
+        }
+
+        [Test]
+        public void Logger_TrabajosPredefinidos() {
+            var trabajos = Util.GenerarTrabajos(3);
+            var log = new Logger(@"D:\AreaTrabajo\log.txt");
+            Action<Trabajo> miAccion = t => {
+                    for (int i = 0; i < t.Cantidad; i++) {
+                        log.Log(LoggerTask.Tipo.Informacion, string.Format("Trabajo {0} paso {1} inicia", t.Id, i));
+                        Thread.Sleep(t.Peso);
+                        log.Log(LoggerTask.Tipo.Informacion, string.Format("Trabajo {0} paso {1} termina", t.Id, i));
+                    }
+            };
+
+            var tareas = (from trabajo in trabajos select Task.Run(() => miAccion(trabajo))).ToArray();
+
+            // esperar finalización de tareas
+            Task.WaitAll(tareas);
         }
     }
 }

@@ -40,6 +40,21 @@ namespace Politecnico.Comunes {
             }
             return result;
         }
+        public static int LeerIntConDefault(int vrDefault, string titulo = "Ingrese valor :>", int min = 0, int max = int.MaxValue) {
+            int result;
+            while (true) {
+                Console.Write(titulo);
+                string linea = Console.ReadLine();
+                try {
+                    if (string.IsNullOrEmpty(linea)) return vrDefault;
+                    if (!int.TryParse(linea, out result)) continue;
+                    if (result < min || result > max) continue;
+                    break;
+                } catch {
+                }
+            }
+            return result;
+        }
         public static string LeerString(string titulo = "Ingrese valor :>") {
             Console.Write(titulo);
             string linea = Console.ReadLine();
