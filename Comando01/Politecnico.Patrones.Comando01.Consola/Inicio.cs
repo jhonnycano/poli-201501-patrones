@@ -33,10 +33,13 @@ namespace Politecnico.Patrones.Comando01.Consola {
             var configurador = new ConfiguradorSimple(panel, casa);
             configurador.RegistrarAccionesBombillo(0, "sala");
             configurador.RegistrarAccionesBombillo(1, "cocina");
-            configurador.RegistrarAccionesEquipoSonido(2, "sala", ConfiguradorSimple.AccionesEquipoSonido.EncenderYApagar);
-            configurador.RegistrarAccionesEquipoSonido(3, "sala", ConfiguradorSimple.AccionesEquipoSonido.EmisoraYCD, "La W", "Mozart");
+            configurador.RegistrarAccionesEquipoSonido(2, "sala",
+                ConfiguradorSimple.AccionesEquipoSonido.EncenderYApagar);
+            configurador.RegistrarAccionesEquipoSonido(3, "sala", ConfiguradorSimple.AccionesEquipoSonido.EmisoraYCD,
+                "La W", "Mozart");
             configurador.RegistrarAccionesTelevisor(4, "sala", ConfiguradorSimple.AccionesTelevisor.EncenderYApagar);
-            configurador.RegistrarAccionesTelevisor(5, "sala", ConfiguradorSimple.AccionesTelevisor.SintonizarCanales, "Caracol", "RCN");
+            configurador.RegistrarAccionesTelevisor(5, "sala", ConfiguradorSimple.AccionesTelevisor.SintonizarCanales,
+                "Caracol", "RCN");
             configurador.RegistrarAccionesCortina(6, "sala");
         }
         private static void ConfigurarPanelCompuesto(Panel panel, Casa casa) {

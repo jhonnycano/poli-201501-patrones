@@ -1,8 +1,8 @@
 ﻿#region
-
 using System;
 using System.IO;
 using Politecnico.Comunes;
+using Politecnico.Patrones.Decorador02.Recursos;
 
 #endregion
 
@@ -11,19 +11,22 @@ namespace Politecnico.Patrones.Decorador02.Consola {
         private static IDecoradorHtml _decorador;
         private static string _archivo;
 
-        enum OpcionesConsola { Salir, VerAyuda, ConfigurarDecorador, LeerCadenas, GenerarArchivo, }
+        private enum OpcionesConsola {
+            Salir,
+            VerAyuda,
+            ConfigurarDecorador,
+            LeerCadenas,
+            GenerarArchivo,
+        }
 
-        private static void Main()
-        {
+        private static void Main() {
             Console.Clear();
-            Console.WriteLine(Recursos.Archivos.Inicio);
+            Console.WriteLine(Archivos.Inicio);
 
-            while (true)
-            {
+            while (true) {
                 UtilConsola.MostrarOpciones<OpcionesConsola>();
                 var opcion = UtilConsola.LeerEnum<OpcionesConsola>();
-                switch (opcion)
-                {
+                switch (opcion) {
                     case OpcionesConsola.Salir:
                         return;
                     case OpcionesConsola.VerAyuda:
@@ -42,26 +45,21 @@ namespace Politecnico.Patrones.Decorador02.Consola {
             }
         }
 
-        private static void VerAyuda()
-        {
+        private static void VerAyuda() {
             Console.Clear();
-            Console.WriteLine(Recursos.Archivos.AyudaArchivo);
+            Console.WriteLine(Archivos.AyudaArchivo);
         }
 
-        private static void ConfigurarDecorador()
-        {
-            while (true)
-            {
+        private static void ConfigurarDecorador() {
+            while (true) {
                 Console.Write(@"Ingrese ruta del archivo ( ! para regresar ) : ");
                 _archivo = Console.ReadLine();
-                if (_archivo == "!")
-                {
+                if (_archivo == "!") {
                     _archivo = null;
                     return;
                 }
 
-                if (_archivo == null || !File.Exists(_archivo))
-                {
+                if (_archivo == null || !File.Exists(_archivo)) {
                     UtilConsola.Escribir("Archivo no existe", ConsoleColor.Red);
                     Console.ReadKey(true);
                     continue;
@@ -75,16 +73,13 @@ namespace Politecnico.Patrones.Decorador02.Consola {
             }
         }
 
-        private static void LeerCadena()
-        {
-            if (_decorador == null)
-            {
+        private static void LeerCadena() {
+            if (_decorador == null) {
                 UtilConsola.Escribir("Debe configurar primero el decorador", ConsoleColor.Red);
                 Console.ReadKey(true);
                 return;
             }
-            while (true)
-            {
+            while (true) {
                 var entrada = UtilConsola.LeerString("Ingrese cadena a decorar ( ! para regresar ) :>");
                 if (entrada == "!") break;
 
@@ -94,8 +89,7 @@ namespace Politecnico.Patrones.Decorador02.Consola {
             }
         }
 
-        private static void GenerarArchivo()
-        {
+        private static void GenerarArchivo() {
             const string contenido = @"DecoradorCursiva
 DecoradorNegrilla
 DecoradorFuenteHtml4|{Color:'#decafe#', Tipo:'Arial', Tam:'16px'}

@@ -57,7 +57,8 @@ namespace Politecnico.Patrones.ObjetoActivo01.Tests {
                     var fch = DateTime.Now.ToString("HH:mm:ss.fffff");
                     var tiempo = rnd.Next(100);
                     Thread.Sleep(tiempo);
-                    log.Log(LoggerTask.Tipo.Informacion, "mensaje a las " + fch + " desde hilo " + i + "... tiempo= " + tiempo);
+                    log.Log(LoggerTask.Tipo.Informacion,
+                        "mensaje a las " + fch + " desde hilo " + i + "... tiempo= " + tiempo);
                 }).Invoke();
             }
         }

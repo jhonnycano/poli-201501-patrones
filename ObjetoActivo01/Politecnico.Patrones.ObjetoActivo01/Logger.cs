@@ -1,21 +1,22 @@
-﻿using System;
+﻿#region
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
-namespace Politecnico.Patrones.ObjetoActivo01
-{
+#endregion
+
+namespace Politecnico.Patrones.ObjetoActivo01 {
     public class Logger : ILogger, IDisposable {
         private readonly string _ruta;
         private readonly Queue<LogInfo> _cola;
-        private readonly ThreadStart _tarea;
         private bool _salir;
         public Logger(string ruta) {
             _ruta = ruta;
             _cola = new Queue<LogInfo>();
             _salir = false;
-            _tarea = new ThreadStart(Target);
-            _tarea.BeginInvoke(Algo, null);
+            var tarea = new ThreadStart(Target);
+            tarea.BeginInvoke(Algo, null);
         }
         public void Log(LoggerTask.Tipo tipo, string msj) {
             lock (_cola) {
@@ -36,14 +37,12 @@ namespace Politecnico.Patrones.ObjetoActivo01
                         HacerLog(itm);
                     }
                 }
+                Thread.Sleep(500);
             }
         }
-        private void Algo(IAsyncResult ar)
-        {
-
+        private void Algo(IAsyncResult ar) {
         }
-        private void HacerLog(LogInfo info)
-        {
+        private void HacerLog(LogInfo info) {
             File.AppendAllText(_ruta,
                 info.Fecha.ToString("yyyy-MM-dd HH:mm:ss.fffff") + " " +
                 info.Tipo + "\t" + info.Mensaje +

@@ -2,20 +2,16 @@
 using System.Collections.Generic;
 using Politecnico.Comunes;
 
-namespace Politecnico.Patrones.Estrategia01.Consola
-{
-    internal class Inicio
-    {
-        private static void Main()
-        {
+namespace Politecnico.Patrones.Estrategia01.Consola {
+    internal class Inicio {
+        private static void Main() {
             UtilConsola.MostrarOpciones<FabricaDistribucion.AlgoritmoDistribucion>();
             var tipoAlgoritmo = UtilConsola.LeerEnum<FabricaDistribucion.AlgoritmoDistribucion>();
 
             int curules = UtilConsola.LeerInt("Cuantas curules disponibles (max:1000) ? ", 0, 1000);
 
             IList<InfoPartido> partidos = LeerPartidos();
-            if (partidos.Count == 0)
-            {
+            if (partidos.Count == 0) {
                 Console.WriteLine("Ingrese la lista");
                 return;
             }
@@ -28,11 +24,9 @@ namespace Politecnico.Patrones.Estrategia01.Consola
             UtilConsola.Pausa();
         }
 
-        private static IList<InfoPartido> LeerPartidos()
-        {
+        private static IList<InfoPartido> LeerPartidos() {
             IList<InfoPartido> result = new List<InfoPartido>();
-            while (true)
-            {
+            while (true) {
                 string partidoNombre = UtilConsola.LeerString("Nombre del partido a ingresar (vacio para salir) ");
                 if (String.IsNullOrEmpty(partidoNombre)) break;
 
@@ -43,12 +37,10 @@ namespace Politecnico.Patrones.Estrategia01.Consola
             return result;
         }
 
-        private static void MostrarResultado(IEnumerable<InfoPartido> partidos)
-        {
+        private static void MostrarResultado(IEnumerable<InfoPartido> partidos) {
             UtilConsola.Escribir("RESULTADOS", ConsoleColor.Green);
 
-            foreach (InfoPartido infoPartido in partidos)
-            {
+            foreach (InfoPartido infoPartido in partidos) {
                 UtilConsola.Escribir(infoPartido.Nombre, ConsoleColor.Yellow);
                 Console.WriteLine("\tCon votos={0,10} queda con curules={1,4}", infoPartido.VotosGanados,
                     infoPartido.CurulesAsignadas);

@@ -1,13 +1,10 @@
 ﻿using System;
 using Politecnico.Patrones.Estrategia01.Distribuciones;
 
-namespace Politecnico.Patrones.Estrategia01
-{
-    public class FabricaDistribucion
-    {
+namespace Politecnico.Patrones.Estrategia01 {
+    public class FabricaDistribucion {
         // ReSharper disable InconsistentNaming
-        public enum AlgoritmoDistribucion
-        {
+        public enum AlgoritmoDistribucion {
             DHondt,
             SaintLague,
             SaintLagueModificado,
@@ -18,10 +15,8 @@ namespace Politecnico.Patrones.Estrategia01
 
         // ReSharper restore InconsistentNaming
 
-        public IAlgoritmoDistribucionCurules TraerAlgoritmo(AlgoritmoDistribucion algoritmo)
-        {
-            switch (algoritmo)
-            {
+        public IAlgoritmoDistribucionCurules TraerAlgoritmo(AlgoritmoDistribucion algoritmo) {
+            switch (algoritmo) {
                 case AlgoritmoDistribucion.DHondt:
                     return new DistribucionHondt();
                 case AlgoritmoDistribucion.SaintLague:

@@ -27,7 +27,6 @@ namespace Politecnico.Patrones.Decorador01.Tests {
             var paramD2 = new DecoradorFuenteHtml4.Parametros {Color = "#bffbbf", Tam = "16px"};
             var d2 = new DecoradorFuenteHtml4(paramD2);
 
-
             var paramD3 = new DecoradorFuenteHtml4.Parametros {Color = "#bffbbf"};
             var d3 = new DecoradorFuenteHtml4(paramD3);
 

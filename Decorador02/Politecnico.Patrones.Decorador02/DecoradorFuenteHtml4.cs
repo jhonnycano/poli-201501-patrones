@@ -1,5 +1,4 @@
 ﻿#region
-
 using System.Text;
 using Newtonsoft.Json;
 
@@ -19,18 +18,15 @@ namespace Politecnico.Patrones.Decorador02 {
         }
 
         public DecoradorFuenteHtml4(IDecoradorHtml decorador, string parametros)
-            : base(decorador)
-        {
+            : base(decorador) {
             _parametros = CrearParametrosDesdeString(parametros);
         }
 
-        private Parametros CrearParametrosDesdeString(string parametros)
-        {
+        private Parametros CrearParametrosDesdeString(string parametros) {
             return JsonConvert.DeserializeObject<Parametros>(parametros);
         }
 
-        protected override string DecorarInterno(string entrada)
-        {
+        protected override string DecorarInterno(string entrada) {
             const string plantillaPreproceso = "<font@@detalle>@@entrada</font>";
             var sb = new StringBuilder();
             if (_parametros.Color != null) sb.Append(" color='" + _parametros.Color + "'");

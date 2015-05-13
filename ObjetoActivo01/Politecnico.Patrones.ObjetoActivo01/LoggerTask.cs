@@ -26,7 +26,7 @@ namespace Politecnico.Patrones.ObjetoActivo01 {
 
         internal async Task GrabarLog(LogInfo info) {
             await Task.Run(() => File.AppendAllText(_ruta,
-                info.Fecha.ToString("yyyy-MM-dd HH:mm:ss.fffff") + " " + 
+                info.Fecha.ToString("yyyy-MM-dd HH:mm:ss.fffff") + " " +
                 info.Tipo + "\t" + info.Mensaje +
                 Environment.NewLine));
         }

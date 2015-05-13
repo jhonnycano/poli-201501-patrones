@@ -2,31 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Politecnico.Patrones.Estrategia01.Distribuciones
-{
-    public enum MetodoDistribucion
-    {
+namespace Politecnico.Patrones.Estrategia01.Distribuciones {
+    public enum MetodoDistribucion {
         Hare,
         Droop,
         Imperiali
     }
 
-    public class DistribucionRestoMayor : IAlgoritmoDistribucionCurules
-    {
+    public class DistribucionRestoMayor : IAlgoritmoDistribucionCurules {
         private readonly MetodoDistribucion _metodo;
 
-        public DistribucionRestoMayor(MetodoDistribucion metodo)
-        {
+        public DistribucionRestoMayor(MetodoDistribucion metodo) {
             _metodo = metodo;
         }
 
-        public MetodoDistribucion Metodo
-        {
+        public MetodoDistribucion Metodo {
             get { return _metodo; }
         }
 
-        public void Calcular(IList<InfoPartido> partidos, int curulesDisponibles)
-        {
+        public void Calcular(IList<InfoPartido> partidos, int curulesDisponibles) {
             if (curulesDisponibles < 1)
                 throw new ArgumentException("No hay curules suficientes para realizar el cálculo");
 
@@ -36,8 +30,7 @@ namespace Politecnico.Patrones.Estrategia01.Distribuciones
 
             int curulesAsignadas = curulesDisponibles;
             // asignar curules por cociente
-            foreach (InfoPartido infoPartido in partidos)
-            {
+            foreach (InfoPartido infoPartido in partidos) {
                 int curulesAAsignar = infoPartido.VotosGanados/cociente;
                 infoPartido.CurulesAsignadas += curulesAAsignar;
                 curulesAsignadas -= curulesAAsignar;
@@ -51,18 +44,15 @@ namespace Politecnico.Patrones.Estrategia01.Distribuciones
                     .ToList();
 
             int ind = 0;
-            while (curulesAsignadas > 0)
-            {
+            while (curulesAsignadas > 0) {
                 listaResiduo[ind].Partido.CurulesAsignadas++;
                 ind++;
                 curulesAsignadas--;
             }
         }
 
-        private int CalcularCociente(int curulesDisponibles, int totalVotos)
-        {
-            switch (_metodo)
-            {
+        private int CalcularCociente(int curulesDisponibles, int totalVotos) {
+            switch (_metodo) {
                 case MetodoDistribucion.Hare:
                     return totalVotos/curulesDisponibles;
                 case MetodoDistribucion.Droop:

@@ -18,7 +18,8 @@ namespace Politecnico.Patrones.Comando01.Tests {
             var cortinaSala = c.RegistrarCortina("sala");
 
             var panel = new Panel(10);
-            panel.RegistrarAccion(0, "Bombillo", new ComandoEncenderBombillo(bombilloSala), new ComandoApagarBombillo(bombilloSala));
+            panel.RegistrarAccion(0, "Bombillo", new ComandoEncenderBombillo(bombilloSala),
+                new ComandoApagarBombillo(bombilloSala));
         }
     }
 }

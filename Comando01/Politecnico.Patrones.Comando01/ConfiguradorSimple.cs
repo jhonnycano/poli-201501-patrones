@@ -5,8 +5,15 @@ using Politecnico.Patrones.Comando01.Perifericos;
 
 namespace Politecnico.Patrones.Comando01 {
     public class ConfiguradorSimple {
-        public enum AccionesEquipoSonido { EncenderYApagar, EmisoraYCD, }
-        public enum AccionesTelevisor { EncenderYApagar, SintonizarCanales, }
+        public enum AccionesEquipoSonido {
+            EncenderYApagar,
+            EmisoraYCD,
+        }
+
+        public enum AccionesTelevisor {
+            EncenderYApagar,
+            SintonizarCanales,
+        }
 
         private readonly Panel _panel;
         private readonly Casa _casa;
@@ -24,7 +31,8 @@ namespace Politecnico.Patrones.Comando01 {
             var comandoInactivar = new ComandoApagarBombillo(bombillo);
             _panel.RegistrarAccion(pos, "Bombillo " + nombre, comandoActivar, comandoInactivar);
         }
-        public void RegistrarAccionesEquipoSonido(int pos, string nombre, AccionesEquipoSonido accion, params string[] args) {
+        public void RegistrarAccionesEquipoSonido(int pos, string nombre, AccionesEquipoSonido accion,
+            params string[] args) {
             if (!_casa.EquiposSonido.ContainsKey(nombre)) {
                 Console.WriteLine("equipo de sonido " + nombre + " no encontrado");
                 return;
@@ -66,12 +74,13 @@ namespace Politecnico.Patrones.Comando01 {
             var comandoInactivar = new ComandoCerrarCortina(cortina);
             _panel.RegistrarAccion(pos, "Cortina " + nombre, comandoActivar, comandoInactivar);
         }
-        private static Tuple<IComando, IComando, string> TraerComandosEquipoSonido(AccionesEquipoSonido accion, EquipoSonido equipoSonido, params string[] args) {
+        private static Tuple<IComando, IComando, string> TraerComandosEquipoSonido(AccionesEquipoSonido accion,
+            EquipoSonido equipoSonido, params string[] args) {
             switch (accion) {
                 case AccionesEquipoSonido.EncenderYApagar:
                     return new Tuple<IComando, IComando, string>(
                         new ComandoEncenderEquipo(equipoSonido),
-                        new ComandoApagarEquipo(equipoSonido), 
+                        new ComandoApagarEquipo(equipoSonido),
                         "prender-apagar");
                 case AccionesEquipoSonido.EmisoraYCD:
                     if (args.Length < 2) {
@@ -80,17 +89,18 @@ namespace Politecnico.Patrones.Comando01 {
                     }
                     return new Tuple<IComando, IComando, string>(
                         new ComandoSintonizarEmisoraEquipo(equipoSonido, args[0]),
-                        new ComandoEjecutarCDEquipo(equipoSonido, args[1]), 
+                        new ComandoEjecutarCDEquipo(equipoSonido, args[1]),
                         "emisora-cd");
             }
             return null;
         }
-        private Tuple<IComando, IComando, string> TraerComandosTelevisor(AccionesTelevisor accion, Televisor televisor, string[] args) {
+        private Tuple<IComando, IComando, string> TraerComandosTelevisor(AccionesTelevisor accion, Televisor televisor,
+            string[] args) {
             switch (accion) {
                 case AccionesTelevisor.EncenderYApagar:
                     return new Tuple<IComando, IComando, string>(
-                        new ComandoEncenderTelevisor(televisor), 
-                        new ComandoApagarTelevisor(televisor), 
+                        new ComandoEncenderTelevisor(televisor),
+                        new ComandoApagarTelevisor(televisor),
                         "prender-apagar");
                 case AccionesTelevisor.SintonizarCanales:
                     if (args.Length < 2) {
@@ -98,8 +108,8 @@ namespace Politecnico.Patrones.Comando01 {
                         return null;
                     }
                     return new Tuple<IComando, IComando, string>(
-                        new ComandoSintonizarCanalTelevisor(televisor, args[0]), 
-                        new ComandoSintonizarCanalTelevisor(televisor, args[1]), 
+                        new ComandoSintonizarCanalTelevisor(televisor, args[0]),
+                        new ComandoSintonizarCanalTelevisor(televisor, args[1]),
                         "sintonizar");
             }
             return null;

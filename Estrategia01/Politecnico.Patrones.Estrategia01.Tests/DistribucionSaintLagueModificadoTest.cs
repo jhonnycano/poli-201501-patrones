@@ -2,14 +2,11 @@
 using NUnit.Framework;
 using Politecnico.Patrones.Estrategia01.Distribuciones;
 
-namespace Politecnico.Patrones.Estrategia01.Tests
-{
+namespace Politecnico.Patrones.Estrategia01.Tests {
     [TestFixture]
-    public class DistribucionSaintLagueModificadoTest
-    {
+    public class DistribucionSaintLagueModificadoTest {
         [Test]
-        public void EsquemaVotacion1()
-        {
+        public void EsquemaVotacion1() {
             var algo = new DistribucionSaintLagueModificado();
             IList<InfoPartido> partidos = UtilDistribucion.TraerVotaciones(UtilDistribucion.EsquemaVotacion.Esquema1);
             algo.Calcular(partidos, 8);
@@ -21,8 +18,7 @@ namespace Politecnico.Patrones.Estrategia01.Tests
         }
 
         [Test]
-        public void EsquemaVotacion2()
-        {
+        public void EsquemaVotacion2() {
             var algo = new DistribucionSaintLagueModificado();
             IList<InfoPartido> partidos = UtilDistribucion.TraerVotaciones(UtilDistribucion.EsquemaVotacion.Esquema2);
             algo.Calcular(partidos, 7);

@@ -1,17 +1,13 @@
 ﻿#region
-
 using NUnit.Framework;
 
 #endregion
 
-namespace Politecnico.Patrones.Decorador02.Tests
-{
+namespace Politecnico.Patrones.Decorador02.Tests {
     [TestFixture]
-    public class DecoradorHtmlTest
-    {
+    public class DecoradorHtmlTest {
         [Test]
-        public void DecoradorAcentos()
-        {
+        public void DecoradorAcentos() {
             var decoradores = new DecoradorAcentos();
 
             string result = decoradores.Decorar("Mariú Ramírez CELEBRÓ mi cumpleaños");
@@ -19,19 +15,17 @@ namespace Politecnico.Patrones.Decorador02.Tests
         }
 
         [Test]
-        public void DecoradorFuente()
-        {
+        public void DecoradorFuente() {
             var paramD1 = new DecoradorFuenteHtml4.Parametros
-            {
-                Color = "#bffbbf",
-                Tam = "16px",
-                Tipo = "Arial"
-            };
+                {
+                    Color = "#bffbbf",
+                    Tam = "16px",
+                    Tipo = "Arial"
+                };
             var d1 = new DecoradorFuenteHtml4(paramD1);
 
             var paramD2 = new DecoradorFuenteHtml4.Parametros {Color = "#bffbbf", Tam = "16px"};
             var d2 = new DecoradorFuenteHtml4(paramD2);
-
 
             var paramD3 = new DecoradorFuenteHtml4.Parametros {Color = "#bffbbf"};
             var d3 = new DecoradorFuenteHtml4(paramD3);
@@ -47,8 +41,7 @@ namespace Politecnico.Patrones.Decorador02.Tests
         }
 
         [Test]
-        public void VariosDecoradores()
-        {
+        public void VariosDecoradores() {
             var decoradores = new DecoradorBarraHorizontalDespues(
                 new DecoradorCursiva(
                     new DecoradorNegrilla()
@@ -60,8 +53,7 @@ namespace Politecnico.Patrones.Decorador02.Tests
         }
 
         [Test]
-        public void CargarDecoradoresDinamicamente_Simple()
-        {
+        public void CargarDecoradoresDinamicamente_Simple() {
             const string origen = @"DecoradorCursiva";
             var cargador = new CargadorDecoradores();
             IDecoradorHtml decoradores = cargador.CargarDesdeCadena(origen);
@@ -70,8 +62,7 @@ namespace Politecnico.Patrones.Decorador02.Tests
         }
 
         [Test]
-        public void CargarDecoradoresDinamicamente_VariosSimples()
-        {
+        public void CargarDecoradoresDinamicamente_VariosSimples() {
             const string origen = @"DecoradorCursiva
 DecoradorNegrilla";
             var cargador = new CargadorDecoradores();
@@ -81,8 +72,7 @@ DecoradorNegrilla";
         }
 
         [Test]
-        public void CargarDecoradoresDinamicamente_Complejo()
-        {
+        public void CargarDecoradoresDinamicamente_Complejo() {
             const string origen = @"DecoradorFuenteHtml4|{ Color:'#decafe', Tipo: 'Times New Roman', Tam: '20px'}";
             var cargador = new CargadorDecoradores();
             IDecoradorHtml decoradores = cargador.CargarDesdeCadena(origen);
@@ -91,8 +81,7 @@ DecoradorNegrilla";
         }
 
         [Test]
-        public void CargarDecoradoresDinamicamente_VariosConComplejo()
-        {
+        public void CargarDecoradoresDinamicamente_VariosConComplejo() {
             const string origen = @"DecoradorAcentos
 DecoradorFuenteHtml4|{ Color:'#decafe', Tipo: 'Times New Roman', Tam: '20px'}";
             var cargador = new CargadorDecoradores();

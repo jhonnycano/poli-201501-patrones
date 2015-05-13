@@ -14,6 +14,7 @@ namespace Politecnico.Patrones.Comando01.ComandosCompuestos {
                 Accion = accion;
             }
         }
+
         public ComandoPanelSimple(Panel panel, IList<AccionPanelSimple> acciones) {
             _panel = panel;
             _acciones = acciones;
@@ -26,7 +27,6 @@ namespace Politecnico.Patrones.Comando01.ComandosCompuestos {
                     _panel.Inactivar(accion.Pos);
                 }
             }
-            
         }
     }
 }

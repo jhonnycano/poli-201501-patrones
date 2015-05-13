@@ -2,14 +2,11 @@
 using NUnit.Framework;
 using Politecnico.Patrones.Estrategia01.Distribuciones;
 
-namespace Politecnico.Patrones.Estrategia01.Tests
-{
+namespace Politecnico.Patrones.Estrategia01.Tests {
     [TestFixture]
-    public class DistribucionRestoMayorTest
-    {
+    public class DistribucionRestoMayorTest {
         [Test]
-        public void EsquemaVotacion1()
-        {
+        public void EsquemaVotacion1() {
             var algo = new DistribucionRestoMayor(MetodoDistribucion.Hare);
             IList<InfoPartido> partidos = UtilDistribucion.TraerVotaciones(UtilDistribucion.EsquemaVotacion.Esquema1);
             algo.Calcular(partidos, 8);
@@ -21,8 +18,7 @@ namespace Politecnico.Patrones.Estrategia01.Tests
         }
 
         [Test]
-        public void EsquemaVotacion2()
-        {
+        public void EsquemaVotacion2() {
             var algo = new DistribucionRestoMayor(MetodoDistribucion.Hare);
             IList<InfoPartido> partidos = UtilDistribucion.TraerVotaciones(UtilDistribucion.EsquemaVotacion.Esquema2);
             algo.Calcular(partidos, 7);
@@ -35,8 +31,7 @@ namespace Politecnico.Patrones.Estrategia01.Tests
         }
 
         [Test]
-        public void EsquemaVotacion3_Droop()
-        {
+        public void EsquemaVotacion3_Droop() {
             var algo = new DistribucionRestoMayor(MetodoDistribucion.Droop);
             IList<InfoPartido> partidos = UtilDistribucion.TraerVotaciones(UtilDistribucion.EsquemaVotacion.Esquema3);
             algo.Calcular(partidos, 21);
@@ -51,8 +46,7 @@ namespace Politecnico.Patrones.Estrategia01.Tests
         }
 
         [Test]
-        public void EsquemaVotacion3_Hare()
-        {
+        public void EsquemaVotacion3_Hare() {
             var algo = new DistribucionRestoMayor(MetodoDistribucion.Hare);
             IList<InfoPartido> partidos = UtilDistribucion.TraerVotaciones(UtilDistribucion.EsquemaVotacion.Esquema3);
             algo.Calcular(partidos, 21);
@@ -67,8 +61,7 @@ namespace Politecnico.Patrones.Estrategia01.Tests
         }
 
         [Test]
-        public void EsquemaVotacion3_Imperiali()
-        {
+        public void EsquemaVotacion3_Imperiali() {
             var algo = new DistribucionRestoMayor(MetodoDistribucion.Imperiali);
             IList<InfoPartido> partidos = UtilDistribucion.TraerVotaciones(UtilDistribucion.EsquemaVotacion.Esquema3);
             algo.Calcular(partidos, 21);

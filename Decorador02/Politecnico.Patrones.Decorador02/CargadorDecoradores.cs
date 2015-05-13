@@ -1,18 +1,13 @@
 ﻿using System;
 using System.IO;
 
-namespace Politecnico.Patrones.Decorador02
-{
-    public class CargadorDecoradores
-    {
-        public IDecoradorHtml CargarDesdeCadena(string origen)
-        {
+namespace Politecnico.Patrones.Decorador02 {
+    public class CargadorDecoradores {
+        public IDecoradorHtml CargarDesdeCadena(string origen) {
             IDecoradorHtml result = new DecoradorVacio();
-            using (var sr = new StringReader(origen))
-            {
+            using (var sr = new StringReader(origen)) {
                 string def;
-                while ((def = sr.ReadLine()) != null)
-                {
+                while ((def = sr.ReadLine()) != null) {
                     IDecoradorHtml decorador = TraerDecoradorDesdeCadena(def, result);
                     result = decorador;
                 }
@@ -20,14 +15,12 @@ namespace Politecnico.Patrones.Decorador02
             return result;
         }
 
-        private IDecoradorHtml TraerDecoradorDesdeCadena(string definicion, IDecoradorHtml decoradorActual)
-        {
+        private IDecoradorHtml TraerDecoradorDesdeCadena(string definicion, IDecoradorHtml decoradorActual) {
             string[] arr = definicion.Split('|');
             if (arr.Length < 1) return decoradorActual;
 
             string tipoNombre = "Politecnico.Patrones.Decorador02." + arr[0];
-            try
-            {
+            try {
                 Type tipo = Type.GetType(tipoNombre);
                 if (tipo == null) return decoradorActual;
 
@@ -35,9 +28,7 @@ namespace Politecnico.Patrones.Decorador02
                     ? (IDecoradorHtml) Activator.CreateInstance(tipo, decoradorActual, arr[1])
                     : (IDecoradorHtml) Activator.CreateInstance(tipo, decoradorActual);
                 return result;
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
                 return decoradorActual;
             }
         }
