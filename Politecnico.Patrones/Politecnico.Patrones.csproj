@@ -51,20 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Iterador\DivisionTrabajo\DivisionTrabajoIterador.cs" />
-    <Compile Include="Iterador\DivisionTrabajo\GrupoTarea.cs" />
-    <Compile Include="Iterador\DivisionTrabajo\IElemento.cs" />
-    <Compile Include="Iterador\DivisionTrabajo\Tarea.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Comando\Domotica\" />
-    <Folder Include="Fabrica\DistribucionCurules\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,7 +1,0 @@
-﻿Proyecto con dos tareas: 44
-	Tarea 1: 10
-	Tarea 2: 36
-	Tarea con subtareas: 88
-		Subtarea 1: 100
-		Subtarea 1: 76
-	Tarea 3: 40
