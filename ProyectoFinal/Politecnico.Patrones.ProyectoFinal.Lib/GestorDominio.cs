@@ -1,5 +1,4 @@
-﻿using System;
-using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
+﻿using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
@@ -9,8 +8,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             _gestorPersistencia = gestorPersistencia;
         }
         public EditarCancionSalida EditarCancion(EditarCancionEntrada entrada) {
+            var salida = new EditarCancionSalida();
             Cancion cancion;
-            if (entrada.CancionId == 0) {
+            if (entrada.CancionId <= 0) {
                 cancion = new Cancion
                     {
                         Id = entrada.CancionId,
@@ -20,46 +20,124 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                     };
             } else {
                 cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
+                if (cancion == null) {
+                    return SalidaBase.Fallo(salida, "Canción con id " + entrada.CancionId + "no encontrada");
+                }
             }
-            if (cancion.Votable <= 0) {
-                // crear votable
-            }
+            CrearVotable(cancion);
             _gestorPersistencia.Guardar(cancion);
-            var salida = new EditarCancionSalida(SalidaBase.Resultados.Exito);
-            return salida;
+
+            return SalidaBase.Exito(salida);
         }
         public EditarInterpreteSalida EditarInterprete(EditarInterpreteEntrada entrada) {
+            var salida = new EditarInterpreteSalida();
             var interprete = new Interprete
                 {
                     Id = entrada.InterpreteId,
                     Nombre = entrada.Nombre,
                 };
             _gestorPersistencia.Guardar(interprete);
-            var salida = new EditarInterpreteSalida(SalidaBase.Resultados.Exito);
-            return salida;
+
+            return SalidaBase.Exito(salida);
         }
         public EditarAlbumSalida EditarAlbum(EditarAlbumEntrada entrada) {
-            var album = new Album
-                {
-                    Id = entrada.AlbumId,
-                    Nombre = entrada.Nombre,
-                    InterpreteId = entrada.InterpreteId,
-                };
+            var salida = new EditarAlbumSalida();
+            Album album;
+            if (entrada.AlbumId <= 0) {
+                album = new Album
+                    {
+                        Id = entrada.AlbumId,
+                        Nombre = entrada.Nombre,
+                        InterpreteId = entrada.InterpreteId,
+                    };
+            } else {
+                album = _gestorPersistencia.TraerAlbum(entrada.AlbumId);
+                if (album == null) {
+                    return SalidaBase.Fallo(salida, "Album con id " + entrada.AlbumId + "no encontrado");
+                }
+            }
+            CrearVotable(album);
             _gestorPersistencia.Guardar(album);
-            var salida = new EditarAlbumSalida(SalidaBase.Resultados.Exito);
-            return salida;
+
+            return SalidaBase.Exito(salida);
         }
         public AsociarCancionYAlbumSalida AsociarCancionYAlbum(AsociarCancionYAlbumEntrada entrada) {
-            throw new NotImplementedException();
+            var salida = new AsociarCancionYAlbumSalida();
+            var cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
+            if (cancion == null) {
+                return SalidaBase.Fallo(salida, "Canción con id " + entrada.CancionId + "no encontrada");
+            }
+
+            if (entrada.Accion == AsociarCancionYAlbumEntrada.Acciones.Asociar) {
+                var album = _gestorPersistencia.TraerAlbum(entrada.AlbumId);
+                if (album == null) {
+                    return SalidaBase.Fallo(salida, "Album con id " + entrada.AlbumId + "no encontrado");
+                }
+
+                cancion.AlbumId = album.Id;
+            } else if (entrada.Accion == AsociarCancionYAlbumEntrada.Acciones.Desasociar) {
+                cancion.AlbumId = null;
+            }
+
+            _gestorPersistencia.Guardar(cancion);
+
+            return SalidaBase.Exito(salida);
         }
         public RegistrarVotoCancionSalida RegistrarVotoCancion(RegistrarVotoCancionEntrada entrada) {
-            throw new NotImplementedException();
+            var salida = new RegistrarVotoCancionSalida();
+            var cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
+            if (cancion == null) {
+                return SalidaBase.Fallo(salida, "Canción con id " + entrada.CancionId + "no encontrada");
+            }
+            var usuario = _gestorPersistencia.TraerCancion(entrada.UsuarioId);
+            if (usuario == null) {
+                return SalidaBase.Fallo(salida, "Usuario con id " + entrada.UsuarioId + "no encontrado");
+            }
+
+            var voto = _gestorPersistencia.TraerVotableUsuario(cancion.VotableId, entrada.UsuarioId);
+            if (voto != null) {
+                return SalidaBase.Fallo(salida, "Voto ya registrado");
+            }
+
+            voto = new VotableUsuario {UsuarioId = entrada.UsuarioId, VotableId = cancion.VotableId};
+            _gestorPersistencia.Guardar(voto);
+
+            return SalidaBase.Exito(salida);
         }
         public RegistrarVotoAlbumSalida RegistrarVotoAlbum(RegistrarVotoAlbumEntrada entrada) {
-            throw new NotImplementedException();
+            var salida = new RegistrarVotoAlbumSalida();
+            var cancion = _gestorPersistencia.TraerCancion(entrada.AlbumId);
+            if (cancion == null) {
+                return SalidaBase.Fallo(salida, "Canción con id " + entrada.AlbumId + "no encontrada");
+            }
+            var usuario = _gestorPersistencia.TraerCancion(entrada.UsuarioId);
+            if (usuario == null) {
+                return SalidaBase.Fallo(salida, "Usuario con id " + entrada.UsuarioId + "no encontrado");
+            }
+
+            var voto = _gestorPersistencia.TraerVotableUsuario(cancion.VotableId, entrada.UsuarioId);
+            if (voto != null) {
+                return SalidaBase.Fallo(salida, "Voto ya registrado");
+            }
+
+            voto = new VotableUsuario {UsuarioId = entrada.UsuarioId, VotableId = cancion.VotableId};
+            _gestorPersistencia.Guardar(voto);
+
+            return SalidaBase.Exito(salida);
         }
         public GenerarReporteSalida GenerarReporte(GenerarReporteEntrada entrada) {
-            throw new NotImplementedException();
+            var salida = new GenerarReporteSalida();
+            return SalidaBase.Fallo(salida, "No implementado");
         }
+
+        private void CrearVotable(IElementoVotable elementoVotable) {
+            if (elementoVotable.VotableId > 0) return;
+
+            // crear votable
+            var votable = new Votable();
+            _gestorPersistencia.Guardar(votable);
+            elementoVotable.VotableId = votable.Id;
+        }
+
     }
 }

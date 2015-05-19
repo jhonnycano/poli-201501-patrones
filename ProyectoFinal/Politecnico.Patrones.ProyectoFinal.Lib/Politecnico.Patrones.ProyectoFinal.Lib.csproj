@@ -45,9 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidades\VotableUsuario.cs" />
     <Compile Include="Entidades\Votable.cs" />
     <Compile Include="GestorDominio.cs" />
     <Compile Include="GestorPersistenciaEF.cs" />
+    <Compile Include="IElementoVotable.cs" />
     <Compile Include="IGestorPersistencia.cs" />
     <Compile Include="VO\SalidaBase.cs" />
     <Compile Include="VO\EditarAlbumEntrada.cs" />

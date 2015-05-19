@@ -2,5 +2,7 @@
     public class AsociarCancionYAlbumSalida : SalidaBase {
         public AsociarCancionYAlbumSalida(Resultados resultado) : base(resultado) {
         }
+        public AsociarCancionYAlbumSalida() {
+        }
     }
 }

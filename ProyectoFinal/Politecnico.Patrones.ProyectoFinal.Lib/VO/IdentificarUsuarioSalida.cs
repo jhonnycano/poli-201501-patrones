@@ -2,5 +2,7 @@
     public class IdentificarUsuarioSalida : SalidaBase {
         public IdentificarUsuarioSalida(Resultados resultado) : base(resultado) {
         }
+        public IdentificarUsuarioSalida() {
+        }
     }
 }

@@ -2,5 +2,7 @@
     public class RegistrarUsuarioSalida : SalidaBase {
         public RegistrarUsuarioSalida(Resultados resultado) : base(resultado) {
         }
+        public RegistrarUsuarioSalida() {
+        }
     }
 }

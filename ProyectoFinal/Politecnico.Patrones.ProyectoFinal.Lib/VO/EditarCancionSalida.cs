@@ -2,5 +2,7 @@
     public class EditarCancionSalida : SalidaBase {
         public EditarCancionSalida(Resultados resultado) : base(resultado) {
         }
+        public EditarCancionSalida() {
+        }
     }
 }

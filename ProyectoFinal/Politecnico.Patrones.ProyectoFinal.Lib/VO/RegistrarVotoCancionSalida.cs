@@ -2,5 +2,7 @@
     public class RegistrarVotoCancionSalida : SalidaBase {
         public RegistrarVotoCancionSalida(Resultados resultado) : base(resultado) {
         }
+        public RegistrarVotoCancionSalida() {
+        }
     }
 }
