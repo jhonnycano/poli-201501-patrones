@@ -47,10 +47,21 @@
   <ItemGroup>
     <Compile Include="Entidades\VotableUsuario.cs" />
     <Compile Include="Entidades\Votable.cs" />
+    <Compile Include="GestorAutenticacion.cs" />
+    <Compile Include="GestorDependencias.cs" />
     <Compile Include="GestorDominio.cs" />
     <Compile Include="GestorPersistenciaEF.cs" />
     <Compile Include="IElementoVotable.cs" />
     <Compile Include="IGestorPersistencia.cs" />
+    <Compile Include="Migrations\201505192007580_Test.cs" />
+    <Compile Include="Migrations\201505192007580_Test.Designer.cs">
+      <DependentUpon>201505192007580_Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505192010321_CambioTabla.cs" />
+    <Compile Include="Migrations\201505192010321_CambioTabla.Designer.cs">
+      <DependentUpon>201505192010321_CambioTabla.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="VO\SalidaBase.cs" />
     <Compile Include="VO\EditarAlbumEntrada.cs" />
     <Compile Include="VO\EditarAlbumSalida.cs" />
@@ -83,6 +94,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201505192007580_Test.resx">
+      <DependentUpon>201505192007580_Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505192010321_CambioTabla.resx">
+      <DependentUpon>201505192010321_CambioTabla.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

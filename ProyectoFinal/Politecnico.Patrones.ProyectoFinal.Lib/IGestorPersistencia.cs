@@ -2,6 +2,9 @@
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
     public interface IGestorPersistencia {
+        Usuario TraerUsuario(string correo);
+        Usuario TraerUsuario(string correo, string clave);
+
         Cancion TraerCancion(int id);
         Interprete TraerInterprete(int id);
         Album TraerAlbum(int id);

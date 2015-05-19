@@ -15,29 +15,41 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public GestorPersistenciaEF() : base(@"principal") {
         }
 
+        public Usuario TraerUsuario(string correo) {
+            return (from c in DbSetUsuario
+                where c.Correo == correo
+                select c)
+                .FirstOrDefault();
+        }
+        public Usuario TraerUsuario(string correo, string clave) {
+            return (from c in DbSetUsuario
+                where c.Correo == correo && c.Clave == clave
+                select c)
+                .FirstOrDefault();
+        }
         public Cancion TraerCancion(int id) {
             return (from c in DbSetCancion
                 where c.Id == id
                 select c)
-                .First();
+                .FirstOrDefault();
         }
         public Interprete TraerInterprete(int id) {
             return (from i in DbSetInterprete
                 where i.Id == id
                 select i)
-                .First();
+                .FirstOrDefault();
         }
         public Album TraerAlbum(int id) {
             return (from a in DbSetAlbum
                 where a.Id == id
                 select a)
-                .First();
+                .FirstOrDefault();
         }
         public VotableUsuario TraerVotableUsuario(int votableId, int usuarioId) {
             return (from vu in DbSetVotableUsuario
                 where vu.VotableId == votableId && vu.UsuarioId == usuarioId
                 select vu)
-                .First();
+                .FirstOrDefault();
         }
         public void Guardar(Cancion cancion) {
             DbSetCancion.AddOrUpdate(cancion);
