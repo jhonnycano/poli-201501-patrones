@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F80E75F0-C8DD-436A-B117-C9C8D9AFCDF0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Politecnico.Patrones.ProyectoFinal.Lib</RootNamespace>
+    <AssemblyName>Politecnico.Patrones.ProyectoFinal.Lib</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entidades\Votable.cs" />
+    <Compile Include="GestorDominio.cs" />
+    <Compile Include="GestorPersistenciaEF.cs" />
+    <Compile Include="IGestorPersistencia.cs" />
+    <Compile Include="VO\SalidaBase.cs" />
+    <Compile Include="VO\EditarAlbumEntrada.cs" />
+    <Compile Include="VO\EditarAlbumSalida.cs" />
+    <Compile Include="Entidades\Album.cs" />
+    <Compile Include="Entidades\Cancion.cs" />
+    <Compile Include="Entidades\Interprete.cs" />
+    <Compile Include="Entidades\Usuario.cs" />
+    <Compile Include="VO\AsociarCancionYAlbumEntrada.cs" />
+    <Compile Include="VO\AsociarCancionYAlbumSalida.cs" />
+    <Compile Include="VO\EditarCancionEntrada.cs" />
+    <Compile Include="VO\EditarCancionSalida.cs" />
+    <Compile Include="VO\EditarInterpreteEntrada.cs" />
+    <Compile Include="VO\EditarInterpreteSalida.cs" />
+    <Compile Include="VO\GenerarReporteEntrada.cs" />
+    <Compile Include="VO\GenerarReporteSalida.cs" />
+    <Compile Include="IGestorDominio.cs" />
+    <Compile Include="VO\RegistrarVotoAlbumEntrada.cs" />
+    <Compile Include="VO\RegistrarVotoAlbumSalida.cs" />
+    <Compile Include="VO\RegistrarVotoCancionEntrada.cs" />
+    <Compile Include="VO\RegistrarVotoCancionSalida.cs" />
+    <Compile Include="VO\IdentificarUsuarioEntrada.cs" />
+    <Compile Include="VO\IdentificarUsuarioSalida.cs" />
+    <Compile Include="IGestorAutenticacion.cs" />
+    <Compile Include="VO\ModificarUsuarioEntrada.cs" />
+    <Compile Include="VO\ModificarUsuarioSalida.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VO\RegistrarUsuarioEntrada.cs" />
+    <Compile Include="VO\RegistrarUsuarioSalida.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
