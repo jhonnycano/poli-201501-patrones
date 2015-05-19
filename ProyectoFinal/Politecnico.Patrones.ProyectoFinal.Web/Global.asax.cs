@@ -20,5 +20,14 @@ namespace Politecnico.Patrones.ProyectoFinal.Web {
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+		protected void Application_PostAuthenticateRequest(object sender, EventArgs e) {
+			/*
+			if (!Request.IsAuthenticated) return;
+
+			var identity = new CustomIdentity(HttpContext.Current.User.Identity);
+			var principal = new CustomPrincipal(identity);
+			HttpContext.Current.User = principal;
+			*/
+		}
     }
 }
