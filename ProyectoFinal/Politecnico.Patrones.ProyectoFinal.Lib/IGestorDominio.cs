@@ -6,8 +6,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         EditarInterpreteSalida EditarInterprete(EditarInterpreteEntrada entrada);
         EditarAlbumSalida EditarAlbum(EditarAlbumEntrada entrada);
 
-        RelacionarInterpretesYCancionesSalida RelacionarInterpretesYCanciones(RelacionarInterpretesYCancionesEntrada entrada);
-        RelacionarInterpretesYAlbumesSalida RelacionarInterpretesYAlbumes(RelacionarInterpretesYAlbumesEntrada entrada);
+        RelacionarInterpretesACancionSalida RelacionarInterpretesACancion(RelacionarInterpretesACancionEntrada entrada);
+        RelacionarInterpretesAAlbumSalida RelacionarInterpretesAAlbum(RelacionarInterpretesAAlbumEntrada entrada);
 
         AsociarCancionYAlbumSalida AsociarCancionYAlbum(AsociarCancionYAlbumEntrada entrada);
 

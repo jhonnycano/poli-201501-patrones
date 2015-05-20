@@ -29,22 +29,34 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 select c)
                 .FirstOrDefault();
         }
-        public Cancion TraerCancion(int id) {
-            return (from c in DbSetCancion
-                where c.Id == id
-                select c)
-                .FirstOrDefault();
-        }
         public Interprete TraerInterprete(int id) {
             return (from i in DbSetInterprete
                 where i.Id == id
                 select i)
                 .FirstOrDefault();
         }
+        public Cancion TraerCancion(int id) {
+            return (from c in DbSetCancion
+                where c.Id == id
+                select c)
+                .FirstOrDefault();
+        }
+        public CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId) {
+            return (from c in DbSetCancionInterprete
+                where c.CancionId == cancionId && c.InterpreteId == interpreteId
+                select c)
+                .FirstOrDefault();
+        }
         public Album TraerAlbum(int id) {
             return (from a in DbSetAlbum
                 where a.Id == id
                 select a)
+                .FirstOrDefault();
+        }
+        public AlbumInterprete TraerAlbumInterprete(int albumId, int interpreteId) {
+            return (from c in DbSetAlbumInterprete
+                    where c.AlbumId == albumId && c.InterpreteId == interpreteId
+                    select c)
                 .FirstOrDefault();
         }
         public VotableUsuario TraerVotableUsuario(int votableId, int usuarioId) {
@@ -84,6 +96,15 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         }
         public void Guardar(Usuario usuario) {
             DbSetUsuario.AddOrUpdate(usuario);
+            SaveChanges();
+        }
+
+        public void Eliminar(CancionInterprete cancionInterprete) {
+            DbSetCancionInterprete.Remove(cancionInterprete);
+            SaveChanges();
+        }
+        public void Eliminar(AlbumInterprete albumInterprete) {
+            DbSetAlbumInterprete.Remove(albumInterprete);
             SaveChanges();
         }
     }

@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 
-namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests {
+namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Unitarios {
     [TestFixture]
     public class GestorPersistenciaEFTest {
         [SetUp]

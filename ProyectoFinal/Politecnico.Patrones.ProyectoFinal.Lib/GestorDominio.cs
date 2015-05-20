@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 
@@ -62,12 +63,52 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             return SalidaBase.Exito(salida);
         }
 
-        public RelacionarInterpretesYCancionesSalida RelacionarInterpretesYCanciones(RelacionarInterpretesYCancionesEntrada entrada) {
-            var salida = new RelacionarInterpretesYCancionesSalida();
-            return SalidaBase.Fallo(salida, "No implementado");
+        public RelacionarInterpretesACancionSalida RelacionarInterpretesACancion(RelacionarInterpretesACancionEntrada entrada) {
+            var salida = new RelacionarInterpretesACancionSalida();
+
+            var cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
+            if (cancion == null)
+                return SalidaBase.Fallo(salida, "Canción con id " + entrada.CancionId + "no encontrada");
+
+            var interpretes = TraerInterpretes(entrada.Interpretes);
+            if (interpretes.Any(i => i == null)) return SalidaBase.Fallo(salida, "Alguno de los intérpretes no existe");
+
+            if (entrada.Accion == RelacionarInterpretesACancionEntrada.Acciones.Agregar) {
+                var relaciones = interpretes.Select(i => _gestorPersistencia.TraerCancionInterprete(cancion.Id, i.Id));
+                foreach (var relacion in relaciones) {
+                    _gestorPersistencia.Guardar(relacion);
+                }
+            } else if (entrada.Accion == RelacionarInterpretesACancionEntrada.Acciones.Eliminar) {
+                var relaciones = interpretes.Select(i => _gestorPersistencia.TraerCancionInterprete(cancion.Id, i.Id));
+                foreach (var relacion in relaciones) {
+                    _gestorPersistencia.Eliminar(relacion);
+                }
+            }
+
+            return SalidaBase.Exito(salida);
         }
-        public RelacionarInterpretesYAlbumesSalida RelacionarInterpretesYAlbumes(RelacionarInterpretesYAlbumesEntrada entrada) {
-            var salida = new RelacionarInterpretesYAlbumesSalida();
+        public RelacionarInterpretesAAlbumSalida RelacionarInterpretesAAlbum(RelacionarInterpretesAAlbumEntrada entrada) {
+            var salida = new RelacionarInterpretesAAlbumSalida();
+
+            var album = _gestorPersistencia.TraerAlbum(entrada.AlbumId);
+            if (album == null)
+                return SalidaBase.Fallo(salida, "Album con id " + entrada.AlbumId + "no encontrado");
+
+            var interpretes = TraerInterpretes(entrada.Interpretes);
+            if (interpretes.Any(i => i == null)) return SalidaBase.Fallo(salida, "Alguno de los intérpretes no existe");
+
+            if (entrada.Accion == RelacionarInterpretesAAlbumEntrada.Acciones.Agregar) {
+                var relaciones = interpretes.Select(i => _gestorPersistencia.TraerAlbumInterprete(album.Id, i.Id));
+                foreach (var relacion in relaciones) {
+                    _gestorPersistencia.Guardar(relacion);
+                }
+            } else if (entrada.Accion == RelacionarInterpretesAAlbumEntrada.Acciones.Eliminar) {
+                var relaciones = interpretes.Select(i => _gestorPersistencia.TraerAlbumInterprete(album.Id, i.Id));
+                foreach (var relacion in relaciones) {
+                    _gestorPersistencia.Eliminar(relacion);
+                }
+            }
+
             return SalidaBase.Fallo(salida, "No implementado");
         }
         public AsociarCancionYAlbumSalida AsociarCancionYAlbum(AsociarCancionYAlbumEntrada entrada) {
