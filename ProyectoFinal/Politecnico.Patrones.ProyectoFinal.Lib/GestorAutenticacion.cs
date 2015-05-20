@@ -6,7 +6,8 @@ using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
     public class GestorAutenticacion : IGestorAutenticacion {
-        private const string Llave = "v+syPHmxRUcsdrOLB+BLJn2N71l6teWoYun5iR22P0wwEOoQtre2eZIFerY9isde4/E70W4uk4ws6HrCax8NCA==";
+        private const string Llave =
+            "v+syPHmxRUcsdrOLB+BLJn2N71l6teWoYun5iR22P0wwEOoQtre2eZIFerY9isde4/E70W4uk4ws6HrCax8NCA==";
         private readonly IGestorPersistencia _gestorPersistencia;
 
         public GestorAutenticacion(IGestorPersistencia gestorPersistencia) {

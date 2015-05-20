@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-namespace Politecnico.Patrones.ProyectoFinal.Web {
+namespace Politecnico.Patrones.ProyectoFinal.Web.App_Start {
     public class BundleConfig {
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles) {
@@ -20,7 +19,15 @@ namespace Politecnico.Patrones.ProyectoFinal.Web {
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/skel").Include(
+                        "~/Scripts/Skel/html5shiv.js", 
+                        "~/Scripts/Skel/skel.v0.4.9.js",
+                        "~/Scripts/Skel/skel-panels.js",
+                        "~/Scripts/Skel/init.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            
+            bundles.Add(new StyleBundle("~/Content/themes/stuffy").Include("~/Content/themes/stuffy/style.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

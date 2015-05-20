@@ -1,19 +1,12 @@
-namespace Politecnico.Patrones.ProyectoFinal.Lib.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Politecnico.Patrones.ProyectoFinal.Lib.GestorPersistenciaEF>
-    {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = false;
+namespace Politecnico.Patrones.ProyectoFinal.Lib.Migrations {
+    internal sealed class Configuration : DbMigrationsConfiguration<GestorPersistenciaEF> {
+        public Configuration() {
+            AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(Politecnico.Patrones.ProyectoFinal.Lib.GestorPersistenciaEF context)
-        {
+        protected override void Seed(GestorPersistenciaEF context) {
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

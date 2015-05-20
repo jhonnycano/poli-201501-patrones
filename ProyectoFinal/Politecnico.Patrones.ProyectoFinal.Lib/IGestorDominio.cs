@@ -5,9 +5,15 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         EditarCancionSalida EditarCancion(EditarCancionEntrada entrada);
         EditarInterpreteSalida EditarInterprete(EditarInterpreteEntrada entrada);
         EditarAlbumSalida EditarAlbum(EditarAlbumEntrada entrada);
+
+        RelacionarInterpretesYCancionesSalida RelacionarInterpretesYCanciones(RelacionarInterpretesYCancionesEntrada entrada);
+        RelacionarInterpretesYAlbumesSalida RelacionarInterpretesYAlbumes(RelacionarInterpretesYAlbumesEntrada entrada);
+
         AsociarCancionYAlbumSalida AsociarCancionYAlbum(AsociarCancionYAlbumEntrada entrada);
-        RegistrarVotoCancionSalida RegistrarVotoCancion(RegistrarVotoCancionEntrada entrada);
-        RegistrarVotoAlbumSalida RegistrarVotoAlbum(RegistrarVotoAlbumEntrada entrada);
+
+        RegistrarVotoCancionesSalida RegistrarVotoCanciones(RegistrarVotoCancionesEntrada entrada);
+        RegistrarVotoAlbumesSalida RegistrarVotoAlbumes(RegistrarVotoAlbumesEntrada entrada);
+
         GenerarReporteSalida GenerarReporte(GenerarReporteEntrada entrada);
     }
 }

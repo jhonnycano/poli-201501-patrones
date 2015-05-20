@@ -1,5 +1,5 @@
 ﻿namespace Politecnico.Patrones.ProyectoFinal.Lib.VO {
-    public class RegistrarVotoAlbumEntrada {
+    public class RegistrarVotoAlbumesEntrada {
         public int AlbumId { get; set; }
         public int UsuarioId { get; set; }
     }

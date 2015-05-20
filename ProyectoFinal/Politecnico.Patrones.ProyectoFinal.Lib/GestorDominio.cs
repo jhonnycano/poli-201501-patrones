@@ -1,4 +1,5 @@
-﻿using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
+﻿using System.Collections.Generic;
+using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
@@ -6,28 +7,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         private readonly IGestorPersistencia _gestorPersistencia;
         public GestorDominio(IGestorPersistencia gestorPersistencia) {
             _gestorPersistencia = gestorPersistencia;
-        }
-        public EditarCancionSalida EditarCancion(EditarCancionEntrada entrada) {
-            var salida = new EditarCancionSalida();
-            Cancion cancion;
-            if (entrada.CancionId <= 0) {
-                cancion = new Cancion
-                    {
-                        Id = entrada.CancionId,
-                        Nombre = entrada.Nombre,
-                        InterpreteId = entrada.InterpreteId,
-                        AlbumId = entrada.AlbumId
-                    };
-            } else {
-                cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
-                if (cancion == null) {
-                    return SalidaBase.Fallo(salida, "Canción con id " + entrada.CancionId + "no encontrada");
-                }
-            }
-            CrearVotable(cancion);
-            _gestorPersistencia.Guardar(cancion);
-
-            return SalidaBase.Exito(salida);
         }
         public EditarInterpreteSalida EditarInterprete(EditarInterpreteEntrada entrada) {
             var salida = new EditarInterpreteSalida();
@@ -48,7 +27,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                     {
                         Id = entrada.AlbumId,
                         Nombre = entrada.Nombre,
-                        InterpreteId = entrada.InterpreteId,
                     };
             } else {
                 album = _gestorPersistencia.TraerAlbum(entrada.AlbumId);
@@ -60,6 +38,37 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             _gestorPersistencia.Guardar(album);
 
             return SalidaBase.Exito(salida);
+        }
+        public EditarCancionSalida EditarCancion(EditarCancionEntrada entrada) {
+            var salida = new EditarCancionSalida();
+
+            Cancion cancion;
+            if (entrada.CancionId <= 0) {
+                cancion = new Cancion
+                    {
+                        Id = entrada.CancionId,
+                        Nombre = entrada.Nombre,
+                        AlbumId = entrada.AlbumId
+                    };
+            } else {
+                cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
+                if (cancion == null) {
+                    return SalidaBase.Fallo(salida, "Canción con id " + entrada.CancionId + "no encontrada");
+                }
+            }
+            CrearVotable(cancion);
+            _gestorPersistencia.Guardar(cancion);
+
+            return SalidaBase.Exito(salida);
+        }
+
+        public RelacionarInterpretesYCancionesSalida RelacionarInterpretesYCanciones(RelacionarInterpretesYCancionesEntrada entrada) {
+            var salida = new RelacionarInterpretesYCancionesSalida();
+            return SalidaBase.Fallo(salida, "No implementado");
+        }
+        public RelacionarInterpretesYAlbumesSalida RelacionarInterpretesYAlbumes(RelacionarInterpretesYAlbumesEntrada entrada) {
+            var salida = new RelacionarInterpretesYAlbumesSalida();
+            return SalidaBase.Fallo(salida, "No implementado");
         }
         public AsociarCancionYAlbumSalida AsociarCancionYAlbum(AsociarCancionYAlbumEntrada entrada) {
             var salida = new AsociarCancionYAlbumSalida();
@@ -83,8 +92,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
 
             return SalidaBase.Exito(salida);
         }
-        public RegistrarVotoCancionSalida RegistrarVotoCancion(RegistrarVotoCancionEntrada entrada) {
-            var salida = new RegistrarVotoCancionSalida();
+
+        public RegistrarVotoCancionesSalida RegistrarVotoCanciones(RegistrarVotoCancionesEntrada entrada) {
+            var salida = new RegistrarVotoCancionesSalida();
             var cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
             if (cancion == null) {
                 return SalidaBase.Fallo(salida, "Canción con id " + entrada.CancionId + "no encontrada");
@@ -104,8 +114,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
 
             return SalidaBase.Exito(salida);
         }
-        public RegistrarVotoAlbumSalida RegistrarVotoAlbum(RegistrarVotoAlbumEntrada entrada) {
-            var salida = new RegistrarVotoAlbumSalida();
+        public RegistrarVotoAlbumesSalida RegistrarVotoAlbumes(RegistrarVotoAlbumesEntrada entrada) {
+            var salida = new RegistrarVotoAlbumesSalida();
             var cancion = _gestorPersistencia.TraerCancion(entrada.AlbumId);
             if (cancion == null) {
                 return SalidaBase.Fallo(salida, "Canción con id " + entrada.AlbumId + "no encontrada");
@@ -138,6 +148,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             _gestorPersistencia.Guardar(votable);
             elementoVotable.VotableId = votable.Id;
         }
-
+        private IList<Interprete> TraerInterpretes(IEnumerable<int> interpretes) {
+            IList<Interprete> result = new List<Interprete>();
+            foreach (var interpreteId in interpretes) {
+                var interprete = _gestorPersistencia.TraerInterprete(interpreteId);
+                result.Add(interprete);
+            }
+            return result;
+        }
     }
 }

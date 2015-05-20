@@ -8,7 +8,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Entidades {
         public int Id { get; set; }
         public int VotableId { get; set; }
         public string Nombre { get; set; }
-        public int InterpreteId { get; set; }
         public int? AlbumId { get; set; }
     }
 }

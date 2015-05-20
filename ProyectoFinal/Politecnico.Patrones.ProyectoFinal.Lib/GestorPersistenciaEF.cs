@@ -6,8 +6,10 @@ using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
     public class GestorPersistenciaEF : DbContext, IGestorPersistencia {
         public DbSet<Interprete> DbSetInterprete { get; set; }
-        public DbSet<Cancion> DbSetCancion { get; set; }
         public DbSet<Album> DbSetAlbum { get; set; }
+        public DbSet<AlbumInterprete> DbSetAlbumInterprete { get; set; }
+        public DbSet<Cancion> DbSetCancion { get; set; }
+        public DbSet<CancionInterprete> DbSetCancionInterprete { get; set; }
         public DbSet<Votable> DbSetVotable { get; set; }
         public DbSet<VotableUsuario> DbSetVotableUsuario { get; set; }
         public DbSet<Usuario> DbSetUsuario { get; set; }
@@ -51,16 +53,25 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 select vu)
                 .FirstOrDefault();
         }
-        public void Guardar(Cancion cancion) {
-            DbSetCancion.AddOrUpdate(cancion);
-            SaveChanges();
-        }
+
         public void Guardar(Interprete interprete) {
             DbSetInterprete.AddOrUpdate(interprete);
             SaveChanges();
         }
         public void Guardar(Album album) {
             DbSetAlbum.AddOrUpdate(album);
+            SaveChanges();
+        }
+        public void Guardar(AlbumInterprete albumInterprete) {
+            DbSetAlbumInterprete.AddOrUpdate(albumInterprete);
+            SaveChanges();
+        }
+        public void Guardar(Cancion cancion) {
+            DbSetCancion.AddOrUpdate(cancion);
+            SaveChanges();
+        }
+        public void Guardar(CancionInterprete cancionInterprete) {
+            DbSetCancionInterprete.AddOrUpdate(cancionInterprete);
             SaveChanges();
         }
         public void Guardar(Votable votable) {
