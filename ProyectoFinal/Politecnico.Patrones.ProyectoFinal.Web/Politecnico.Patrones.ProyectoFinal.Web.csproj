@@ -157,6 +157,9 @@
     <Content Include="Content\images\pics02.jpg" />
     <Content Include="Views\Canciones\Index.cshtml" />
     <Content Include="Views\Albumes\Index.cshtml" />
+    <Content Include="Views\Albumes\Detalle.cshtml" />
+    <Content Include="Views\Albumes\Crear.cshtml" />
+    <Content Include="Views\Albumes\Editar.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Content\themes\stuffy\images\bg01.png" />
     <Content Include="Content\themes\stuffy\images\img01.jpg" />

@@ -1,17 +1,19 @@
-﻿@model Politecnico.Patrones.ProyectoFinal.Lib.Entidades.Interprete
+﻿@model Politecnico.Patrones.ProyectoFinal.Lib.Entidades.Album
 
 @{
-    ViewBag.Title = "Crear intérprete";
+    ViewBag.Title = "Editar album";
 }
 
-<h2>Crear intérprete</h2>
+<h2>Editar album</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Interprete</legend>
+        <legend>Album</legend>
+
+        @Html.HiddenFor(model => model.Id)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Nombre)
@@ -22,7 +24,7 @@
         </div>
 
         <p>
-            <input type="submit" value="Guardar" />
+            <input type="submit" value="Save" />
         </p>
     </fieldset>
 }

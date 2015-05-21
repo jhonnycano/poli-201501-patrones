@@ -42,6 +42,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 select c)
                 .FirstOrDefault();
         }
+        public IList<Cancion> TraerCanciones(int pagina) {
+            return _ctx.DbSetCancion
+                .OrderBy(i => i.Id)
+                .Skip(20 * pagina)
+                .Take(20)
+                .ToList();
+        }
         public CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId) {
             return (from c in _ctx.DbSetCancionInterprete
                 where c.CancionId == cancionId && c.InterpreteId == interpreteId
@@ -53,6 +60,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 where a.Id == id
                 select a)
                 .FirstOrDefault();
+        }
+        public IList<Album> TraerAlbumes(int pagina) {
+            return _ctx.DbSetAlbum
+                .OrderBy(i => i.Id)
+                .Skip(20*pagina)
+                .Take(20)
+                .ToList();
         }
         public AlbumInterprete TraerAlbumInterprete(int albumId, int interpreteId) {
             return (from c in _ctx.DbSetAlbumInterprete

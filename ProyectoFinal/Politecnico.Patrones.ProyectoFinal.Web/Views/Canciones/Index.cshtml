@@ -1,6 +1,32 @@
-﻿
+﻿@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Lib.Entidades.Cancion>
+
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Lista de canciones";
 }
 
-<h2>title</h2>
+<h2>Listado de canciones</h2>
+
+<p>
+    @Html.ActionLink("Crear canción", "Crear")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new {id = item.Id}) |
+                @Html.ActionLink("Ver detalle", "Detalle", new {id = item.Id}) |
+            </td>
+        </tr>
+    }
+
+</table>

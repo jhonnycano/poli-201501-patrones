@@ -1,17 +1,17 @@
-﻿@model Politecnico.Patrones.ProyectoFinal.Lib.Entidades.Interprete
+﻿@model Politecnico.Patrones.ProyectoFinal.Lib.Entidades.Cancion
 
 @{
-    ViewBag.Title = "Crear intérprete";
+    ViewBag.Title = "Crear canción";
 }
 
-<h2>Crear intérprete</h2>
+<h2>Crear canción</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Interprete</legend>
+        <legend>Cancion</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Nombre)

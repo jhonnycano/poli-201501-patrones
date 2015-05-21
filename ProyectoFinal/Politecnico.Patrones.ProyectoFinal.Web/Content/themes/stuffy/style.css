@@ -31,7 +31,7 @@ h1, h2, h3 {
 	margin: 0;
 	padding: 0;
 	letter-spacing: -2px;
-	text-transform: capitalize;
+	/*text-transform: capitalize;*/
 	font-weight: normal;
 	color: #2F6BCF;
 }

@@ -9,8 +9,10 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         Interprete TraerInterprete(int id);
         IList<Interprete> TraerInterpretes(int pagina);
         Cancion TraerCancion(int id);
+        IList<Cancion> TraerCanciones(int pagina);
         CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId);
         Album TraerAlbum(int id);
+        IList<Album> TraerAlbumes(int pagina);
         AlbumInterprete TraerAlbumInterprete(int albumId, int interpreteId);
 
         VotableUsuario TraerVotableUsuario(int votableId, int usuarioId);
