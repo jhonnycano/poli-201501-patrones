@@ -1,12 +1,11 @@
 ﻿@model Politecnico.Patrones.ProyectoFinal.Lib.Entidades.Interprete
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Detalle";
 }
 
-<h2>Delete</h2>
+<h2>Detalle</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <fieldset>
     <legend>Interprete</legend>
 
@@ -17,10 +16,7 @@
         @Html.DisplayFor(model => model.Nombre)
     </div>
 </fieldset>
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-}
+<p>
+    @Html.ActionLink("Edit", "Editar", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

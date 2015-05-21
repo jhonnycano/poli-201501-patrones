@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Linq;
+﻿using System;
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Lib;
 using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
@@ -7,20 +6,20 @@ using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
     public class InterpretesController : Controller {
-        private readonly GestorPersistenciaEF db = new GestorPersistenciaEF();
-
+        private readonly IGestorPersistencia _gestorPersistencia = Utiles.TraerGestorPersistencia();
         //
         // GET: /Interpretes/
 
-        public ActionResult Index() {
-            return View(db.DbSetInterprete.ToList());
+        public ActionResult Index(int pagina = 0) {
+            var lista = _gestorPersistencia.TraerInterpretes(pagina);
+            return View(lista);
         }
 
         //
-        // GET: /Interpretes/Details/5
+        // GET: /Interpretes/Detalle/5
 
-        public ActionResult Details(int id = 0) {
-            Interprete interprete = db.DbSetInterprete.Find(id);
+        public ActionResult Detalle(int id = 0) {
+            Interprete interprete = _gestorPersistencia.TraerInterprete(id);
             if (interprete == null) {
                 return HttpNotFound();
             }
@@ -28,21 +27,20 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         }
 
         //
-        // GET: /Interpretes/Create
+        // GET: /Interpretes/Crear
 
-        public ActionResult Create() {
+        public ActionResult Crear() {
             return View();
         }
 
         //
-        // POST: /Interpretes/Create
+        // POST: /Interpretes/Crear
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Interprete interprete) {
+        public ActionResult Crear(Interprete interprete) {
             if (ModelState.IsValid) {
-                db.DbSetInterprete.Add(interprete);
-                db.SaveChanges();
+                _gestorPersistencia.Guardar(interprete);
                 return RedirectToAction("Index");
             }
 
@@ -50,55 +48,57 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         }
 
         //
-        // GET: /Interpretes/Edit/5
+        // GET: /Interpretes/Editar/5
 
-        public ActionResult Edit(int id = 0) {
-            Interprete interprete = db.DbSetInterprete.Find(id);
-            if (interprete == null) {
-                return HttpNotFound();
-            }
+        public ActionResult Editar(int id = 0) {
+            Interprete interprete = _gestorPersistencia.TraerInterprete(id);
+            if (interprete == null) return HttpNotFound();
+
             return View(interprete);
         }
 
         //
-        // POST: /Interpretes/Edit/5
+        // POST: /Interpretes/Editar/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Interprete interprete) {
+        public ActionResult Editar(Interprete interprete) {
             if (ModelState.IsValid) {
-                db.Entry(interprete).State = EntityState.Modified;
-                db.SaveChanges();
+                _gestorPersistencia.Guardar(interprete);
                 return RedirectToAction("Index");
             }
             return View(interprete);
         }
 
         //
-        // GET: /Interpretes/Delete/5
+        // GET: /Interpretes/Borrar/5
 
-        public ActionResult Delete(int id = 0) {
-            Interprete interprete = db.DbSetInterprete.Find(id);
-            if (interprete == null) {
-                return HttpNotFound();
-            }
+        public ActionResult Borrar(int id = 0) {
+            throw new NotSupportedException("No permitido");
+
+            /*
+            Interprete interprete = _gestorPersistencia.TraerInterprete(id);
+            if (interprete == null) return HttpNotFound();
+
             return View(interprete);
+             * */
         }
 
         //
-        // POST: /Interpretes/Delete/5
+        // POST: /Interpretes/Borrar/5
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Borrar")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id) {
-            Interprete interprete = db.DbSetInterprete.Find(id);
-            db.DbSetInterprete.Remove(interprete);
-            db.SaveChanges();
+        public ActionResult BorrarConfirmado(int id) {
+            //Interprete interprete = _gestorPersistencia.TraerInterprete(id);
+            //db.DbSetInterprete.Remove(interprete);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing) {
-            db.Dispose();
+            var disposable = _gestorPersistencia as IDisposable;
+            if (disposable != null) disposable.Dispose();
             base.Dispose(disposing);
         }
     }

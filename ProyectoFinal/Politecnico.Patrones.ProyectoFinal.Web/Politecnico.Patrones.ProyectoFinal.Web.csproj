@@ -167,10 +167,10 @@
     <Content Include="Content\themes\stuffy\license.txt" />
     <Content Include="Content\themes\stuffy\style.css" />
     <Content Include="Views\Interpretes\Index.cshtml" />
-    <Content Include="Views\Interpretes\Details.cshtml" />
-    <Content Include="Views\Interpretes\Create.cshtml" />
-    <Content Include="Views\Interpretes\Edit.cshtml" />
-    <Content Include="Views\Interpretes\Delete.cshtml" />
+    <Content Include="Views\Interpretes\Detalle.cshtml" />
+    <Content Include="Views\Interpretes\Crear.cshtml" />
+    <Content Include="Views\Interpretes\Editar.cshtml" />
+    <Content Include="Views\Interpretes\Borrar.cshtml" />
     <None Include="Views\Shared\_LayoutSync.cshtml" />
     <Content Include="Scripts\Skel\skel-panels.js" />
     <Content Include="Scripts\Skel\html5shiv.js" />

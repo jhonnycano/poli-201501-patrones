@@ -1,4 +1,5 @@
-﻿using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
+﻿using System.Collections.Generic;
+using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
     public interface IGestorPersistencia {
@@ -6,6 +7,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         Usuario TraerUsuario(string correo, string clave);
 
         Interprete TraerInterprete(int id);
+        IList<Interprete> TraerInterpretes(int pagina);
         Cancion TraerCancion(int id);
         CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId);
         Album TraerAlbum(int id);

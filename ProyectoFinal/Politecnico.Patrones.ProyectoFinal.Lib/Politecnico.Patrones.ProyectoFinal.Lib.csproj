@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextoEF.cs" />
     <Compile Include="Entidades\AlbumInterprete.cs" />
     <Compile Include="Entidades\CancionInterprete.cs" />
     <Compile Include="Entidades\VotableUsuario.cs" />
