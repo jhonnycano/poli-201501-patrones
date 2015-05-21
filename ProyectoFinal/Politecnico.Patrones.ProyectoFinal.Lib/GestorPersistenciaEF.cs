@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
-    public class GestorPersistenciaEF : DbContext, IGestorPersistencia {
+    public class GestorPersistenciaEF : IGestorPersistencia {
         private readonly ContextoEF _ctx;
-        public GestorPersistenciaEF() : base(@"principal") {
+        public GestorPersistenciaEF() {
             _ctx = new ContextoEF();
         }
 
@@ -30,7 +29,11 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 .FirstOrDefault();
         }
         public IList<Interprete> TraerInterpretes(int pagina) {
-            return _ctx.DbSetInterprete.Skip(20 * pagina).Take(20).ToList();
+            return _ctx.DbSetInterprete
+                .OrderBy(i => i.Id)
+                .Skip(20*pagina)
+                .Take(20)
+                .ToList();
         }
         public Cancion TraerCancion(int id)
         {
@@ -66,44 +69,44 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
 
         public void Guardar(Interprete interprete) {
             _ctx.DbSetInterprete.AddOrUpdate(interprete);
-            SaveChanges();
+            _ctx.SaveChanges();
         }
         public void Guardar(Album album) {
             _ctx.DbSetAlbum.AddOrUpdate(album);
-            SaveChanges();
+            _ctx.SaveChanges();
         }
         public void Guardar(AlbumInterprete albumInterprete) {
             _ctx.DbSetAlbumInterprete.AddOrUpdate(albumInterprete);
-            SaveChanges();
+            _ctx.SaveChanges();
         }
         public void Guardar(Cancion cancion) {
             _ctx.DbSetCancion.AddOrUpdate(cancion);
-            SaveChanges();
+            _ctx.SaveChanges();
         }
         public void Guardar(CancionInterprete cancionInterprete) {
             _ctx.DbSetCancionInterprete.AddOrUpdate(cancionInterprete);
-            SaveChanges();
+            _ctx.SaveChanges();
         }
         public void Guardar(Votable votable) {
             _ctx.DbSetVotable.AddOrUpdate(votable);
-            SaveChanges();
+            _ctx.SaveChanges();
         }
         public void Guardar(VotableUsuario votableUsuario) {
             _ctx.DbSetVotableUsuario.AddOrUpdate(votableUsuario);
-            SaveChanges();
+            _ctx.SaveChanges();
         }
         public void Guardar(Usuario usuario) {
             _ctx.DbSetUsuario.AddOrUpdate(usuario);
-            SaveChanges();
+            _ctx.SaveChanges();
         }
 
         public void Eliminar(CancionInterprete cancionInterprete) {
             _ctx.DbSetCancionInterprete.Remove(cancionInterprete);
-            SaveChanges();
+            _ctx.SaveChanges();
         }
         public void Eliminar(AlbumInterprete albumInterprete) {
             _ctx.DbSetAlbumInterprete.Remove(albumInterprete);
-            SaveChanges();
+            _ctx.SaveChanges();
         }
     }
 }

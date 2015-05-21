@@ -1,12 +1,12 @@
 using System.Data.Entity.Migrations;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib.Migrations {
-    internal sealed class Configuration : DbMigrationsConfiguration<GestorPersistenciaEF> {
+    internal sealed class Configuration : DbMigrationsConfiguration<ContextoEF> {
         public Configuration() {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(GestorPersistenciaEF context) {
+        protected override void Seed(ContextoEF context) {
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
