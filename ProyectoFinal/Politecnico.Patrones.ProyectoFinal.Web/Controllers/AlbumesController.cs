@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Lib;
 using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Web.Models;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
@@ -55,7 +56,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             Album album = _gestorPersistencia.TraerAlbum(id);
             if (album == null) return HttpNotFound();
 
-            return View(album);
+            var model = new MVAlbumEditar {Album = album};
+            //var interpretes = _gestorPersistencia.TraerInterpretes(0, )
+            //ViewBag["interpretes"] = Utiles.GenerarItems()
+            
+
+            return View(model);
         }
 
         //

@@ -1,4 +1,4 @@
-﻿@model Politecnico.Patrones.ProyectoFinal.Lib.Entidades.Album
+﻿@model Politecnico.Patrones.ProyectoFinal.Web.Models.MVAlbumEditar
 
 @{
     ViewBag.Title = "Editar album";
@@ -13,18 +13,39 @@
     <fieldset>
         <legend>Album</legend>
 
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Album.Id)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Nombre)
+            @Html.LabelFor(model => model.Album.Nombre)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Nombre)
-            @Html.ValidationMessageFor(model => model.Nombre)
+            @Html.EditorFor(model => model.Album.Nombre)
+            @Html.ValidationMessageFor(model => model.Album.Nombre)
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Guardar" />
+        </p>
+    </fieldset>
+}
+
+@using (Html.BeginForm("AgregarInterprete")) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Album.Id)
+
+    <fieldset>
+        <legend>Intérprete</legend>
+        <div class="editor-label">
+            @Html.DropDownList("ListaInterpretes")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Album.Nombre)
+            @Html.ValidationMessageFor(model => model.Album.Nombre)
+        </div>
+
+        <p>
+            <input type="submit" value="Guardar" />
         </p>
     </fieldset>
 }

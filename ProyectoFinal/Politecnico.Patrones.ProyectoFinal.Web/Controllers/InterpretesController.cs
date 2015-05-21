@@ -11,7 +11,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         // GET: /Interpretes/
 
         public ActionResult Index(int pagina = 0) {
-            var lista = _gestorPersistencia.TraerInterpretes(pagina);
+            var lista = _gestorPersistencia.TraerInterpretes(pagina, TODO);
             return View(lista);
         }
 
