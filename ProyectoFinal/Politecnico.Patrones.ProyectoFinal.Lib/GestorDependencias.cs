@@ -10,5 +10,8 @@
         public IGestorDominio TraerGestorDominio() {
             return new GestorDominio(_gestorPersistencia);
         }
+        public IGestorPersistencia TraerGestorPersistencia() {
+            return _gestorPersistencia;
+        }
     }
 }

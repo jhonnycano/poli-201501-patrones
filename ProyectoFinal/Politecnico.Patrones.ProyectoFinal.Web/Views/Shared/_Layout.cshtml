@@ -1,7 +1,5 @@
 ﻿<!DOCTYPE html>
 
-
-
 <html>
     <head>
         <title>FlixNet Music :: @ViewBag.Title</title>
@@ -20,9 +18,11 @@
                   <div id="menu">
                       <ul>
                           <li class="current_page_item">@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+                      @if (User.Identity.IsAuthenticated) {
                           <li>@Html.ActionLink("Interpretes", "Index", "Interpretes")</li>
                           <li>@Html.ActionLink("Albumes", "Index", "Albumes")</li>
                           <li>@Html.ActionLink("Canciones", "Index", "Canciones")</li>
+                      }
                       </ul>
                   </div>
                   <!-- end #menu --> 
@@ -31,7 +31,10 @@
             <div id="header">
                 <div id="logo">
                     <h1><a href="#">FlixNet Music</a></h1>
-                    <p>Jhonny Dickson Cano</p>
+                    <p>por Jhonny Dickson Cano</p>
+                </div>
+                <div>
+                    @Html.Partial("_PanelUsuario")
                 </div>
             </div>
         </div>

@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
-using Politecnico.Patrones.ProyectoFinal.Lib;
 using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 using Politecnico.Patrones.ProyectoFinal.Web.Models;
 
@@ -10,11 +9,20 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         // GET: /Inicio/
 
         public ActionResult Index() {
-            var modelo = new MdIndex();
-
-
-            modelo.Autenticado = User.Identity.IsAuthenticated;
-            modelo.Usuario = User.Identity.Name;
+            var autenticado = User.Identity.IsAuthenticated;
+            string nombre = "anonimo";
+            string correo = "";
+            if (autenticado) {
+                var identityUsuario = User.APrincipalUsuario().IdentityUsuario;
+                nombre = identityUsuario.Nombre;
+                correo = identityUsuario.Correo;
+            }
+            var modelo = new MdIndex
+                {
+                    Autenticado = autenticado,
+                    UsuarioNombre = nombre,
+                    UsuarioCorreo = correo,
+                };
 
             return View(modelo);
         }
@@ -22,10 +30,15 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             return View();
         }
         [HttpPost]
-        public ActionResult Registrar(string correo, string clave, string claveRepetida)
-        {
-            var autenticador = TraerGestorAutenticacion();
-            var entrada = new RegistrarUsuarioEntrada {Correo = correo, Clave = clave, ClaveRepetida = claveRepetida};
+        public ActionResult Registrar(string nombre, string correo, string clave, string claveRepetida) {
+            var autenticador = Utiles.TraerGestorAutenticacion();
+            var entrada = new RegistrarUsuarioEntrada
+                {
+                    Nombre = nombre,
+                    Correo = correo,
+                    Clave = clave,
+                    ClaveRepetida = claveRepetida
+                };
             var result = autenticador.RegistrarUsuario(entrada);
             if (result.Resultado != SalidaBase.Resultados.Exito) {
                 ModelState.AddModelError("", result.Mensaje);
@@ -34,13 +47,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
 
             return RedirectToAction("IniciarSesion", new {correo});
         }
-        public ActionResult IniciarSesion()
-        {
+        public ActionResult IniciarSesion() {
             return View();
         }
         [HttpPost]
         public ActionResult IniciarSesion(string correo, string clave, string returnUrl) {
-            var autenticador = TraerGestorAutenticacion();
+            var autenticador = Utiles.TraerGestorAutenticacion();
             var entrada = new IdentificarUsuarioEntrada
                 {
                     Correo = correo,
@@ -53,20 +65,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             }
 
             FormsAuthentication.SetAuthCookie(correo, false);
+            Request.RequestContext.HttpContext.Items.Add("usuario", result.Usuario);
             if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                 && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Inicio");
-        }
-        private IGestorAutenticacion TraerGestorAutenticacion() {
-            var gd = HttpContext.Application["dependencias"] as GestorDependencias;
-            if (gd == null) {
-                gd = new GestorDependencias();
-                HttpContext.Application["dependencias"] = gd;
-            }
-            var autenticador = gd.TraerGestorAutenticacion();
-            return autenticador;
         }
         public ActionResult CerrarSesion() {
             FormsAuthentication.SignOut();

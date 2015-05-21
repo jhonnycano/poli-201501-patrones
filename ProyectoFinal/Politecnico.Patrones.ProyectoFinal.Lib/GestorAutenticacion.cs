@@ -26,7 +26,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 return SalidaBase.Fallo(salida, "Usuario con correo " + entrada.Correo + " ya está registrado");
 
             var claveHash = TraerHash(entrada.Clave);
-            usuario = new Usuario {Correo = entrada.Correo, Clave = claveHash};
+            usuario = new Usuario {Nombre = entrada.Nombre, Correo = entrada.Correo, Clave = claveHash};
             _gestorPersistencia.Guardar(usuario);
 
             return SalidaBase.Exito(salida);

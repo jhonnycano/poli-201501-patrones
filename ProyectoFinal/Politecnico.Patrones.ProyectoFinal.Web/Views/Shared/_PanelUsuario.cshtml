@@ -1,0 +1,15 @@
+﻿@using Politecnico.Patrones.ProyectoFinal.Web
+
+@if (@User.Identity.IsAuthenticated) {
+    <div>
+        Bienvenido @User.APrincipalUsuario().IdentityUsuario.Nombre
+    </div>
+    <ul>
+        <li>@Html.ActionLink("Cerrar sesion", "CerrarSesion", "Inicio")</li>
+    </ul>
+} else {
+    <ul>
+        <li>@Html.ActionLink("Iniciar sesion", "IniciarSesion", "Inicio")</li>
+        <li>@Html.ActionLink("Registrese", "Registrar", "Inicio")</li>
+    </ul>
+}

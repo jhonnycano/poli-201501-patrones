@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Web.App_Start;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web {
@@ -19,13 +20,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Web {
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 		protected void Application_PostAuthenticateRequest(object sender, EventArgs e) {
-			/*
 			if (!Request.IsAuthenticated) return;
 
-			var identity = new CustomIdentity(HttpContext.Current.User.Identity);
-			var principal = new CustomPrincipal(identity);
-			HttpContext.Current.User = principal;
-			*/
+		    var usuario = Request.RequestContext.HttpContext.Items["usuario"] as Usuario ??
+		                  Utiles.TraerGestorPersistencia().TraerUsuario(User.Identity.Name);
+		    var identity = new IdentityUsuario(Context.User.Identity, usuario);
+			var principal = new PrincipalUsuario(identity);
+			Context.User = principal;
 		}
     }
 }

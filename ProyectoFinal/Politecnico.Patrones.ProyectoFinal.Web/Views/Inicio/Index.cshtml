@@ -5,20 +5,3 @@
 }
 
 <h2>Inicio</h2>
-
-
-@if (Model.Autenticado) {
-    <div>
-        Bienvenido @Model.Usuario
-    </div>
-    <ul>
-        <li>@Html.ActionLink("Cerrar sesion", "CerrarSesion")</li>
-        <li>@Html.ActionLink("Accion privada", "Privado")</li>
-    </ul>
-    
-} else {
-    <ul>
-        <li>@Html.ActionLink("Iniciar sesion", "IniciarSesion")</li>
-        <li>@Html.ActionLink("Registrese", "Registrar")</li>
-    </ul>
-}

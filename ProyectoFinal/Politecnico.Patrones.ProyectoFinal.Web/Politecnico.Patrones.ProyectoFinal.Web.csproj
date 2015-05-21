@@ -126,6 +126,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Code\IdentityUsuario.cs" />
+    <Compile Include="Code\PrincipalUsuario.cs" />
+    <Compile Include="Code\SecurityExtensions.cs" />
+    <Compile Include="Code\Utiles.cs" />
     <Compile Include="Controllers\AlbumesController.cs" />
     <Compile Include="Controllers\CancionesController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
@@ -269,6 +273,7 @@
     <Content Include="Views\Inicio\IniciarSesion.cshtml" />
     <Content Include="Views\Inicio\Privado.cshtml" />
     <Content Include="Views\Inicio\Registrar.cshtml" />
+    <Content Include="Views\Shared\_PanelUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
