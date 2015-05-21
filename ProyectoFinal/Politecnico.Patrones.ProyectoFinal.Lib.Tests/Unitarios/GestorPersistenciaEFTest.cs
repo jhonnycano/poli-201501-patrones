@@ -18,7 +18,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Unitarios {
         [Test]
         public void TraerInterpretesBasico() {
             var g = new GestorPersistenciaEF();
-            var interpretes = g.TraerInterpretes(0);
+            var interpretes = g.TraerInterpretes(0, TODO);
 
             foreach (var interprete in interpretes) {
                 Console.WriteLine(interprete.Nombre);

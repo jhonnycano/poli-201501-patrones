@@ -7,7 +7,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         Usuario TraerUsuario(string correo, string clave);
 
         Interprete TraerInterprete(int id);
-        IList<Interprete> TraerInterpretes(int pagina);
+        IList<Interprete> TraerInterpretes(int pagina, string filtroNombre);
         Cancion TraerCancion(int id);
         IList<Cancion> TraerCanciones(int pagina);
         CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId);

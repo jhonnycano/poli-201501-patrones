@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
 using Politecnico.Patrones.ProyectoFinal.Lib.VO;
-using Politecnico.Patrones.ProyectoFinal.Web.Models;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     public class InicioController : Controller {
@@ -9,23 +8,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         // GET: /Inicio/
 
         public ActionResult Index() {
-            var autenticado = User.Identity.IsAuthenticated;
-            string nombre = "anonimo";
-            string correo = "";
-            if (autenticado) {
-                var identityUsuario = User.APrincipalUsuario().IdentityUsuario;
-                nombre = identityUsuario.Nombre;
-                correo = identityUsuario.Correo;
-            }
-            var modelo = new MdIndex
-                {
-                    Autenticado = autenticado,
-                    UsuarioNombre = nombre,
-                    UsuarioCorreo = correo,
-                };
-
-            return View(modelo);
+            return View();
         }
+
         public ActionResult Registrar() {
             return View();
         }

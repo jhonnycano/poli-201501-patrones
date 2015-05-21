@@ -28,7 +28,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 select i)
                 .FirstOrDefault();
         }
-        public IList<Interprete> TraerInterpretes(int pagina) {
+        public IList<Interprete> TraerInterpretes(int pagina, string filtroNombre) {
             return _ctx.DbSetInterprete
                 .OrderBy(i => i.Id)
                 .Skip(20*pagina)

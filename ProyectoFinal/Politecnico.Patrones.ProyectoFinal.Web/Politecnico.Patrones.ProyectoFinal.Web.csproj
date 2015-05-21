@@ -134,6 +134,7 @@
     <Compile Include="Controllers\CancionesController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\InterpretesController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Models\MdIndex.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -160,6 +161,10 @@
     <Content Include="Views\Albumes\Detalle.cshtml" />
     <Content Include="Views\Albumes\Crear.cshtml" />
     <Content Include="Views\Albumes\Editar.cshtml" />
+    <Content Include="Views\Canciones\Detalle.cshtml" />
+    <Content Include="Views\Canciones\Crear.cshtml" />
+    <Content Include="Views\Canciones\Editar.cshtml" />
+    <Content Include="Views\Reportes\Index.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Content\themes\stuffy\images\bg01.png" />
     <Content Include="Content\themes\stuffy\images\img01.jpg" />
