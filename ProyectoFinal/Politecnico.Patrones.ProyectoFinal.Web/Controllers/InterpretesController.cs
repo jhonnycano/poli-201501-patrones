@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Lib;
 using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Web.Models;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
@@ -10,9 +11,17 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         //
         // GET: /Interpretes/
 
-        public ActionResult Index(int pagina = 0) {
-            var lista = _gestorPersistencia.TraerInterpretes(pagina, TODO);
+        public ActionResult Index(MVInterpreteFiltroLista filtroLista) {
+            var lista = _gestorPersistencia.TraerInterpretes(filtroLista.Pagina, filtroLista.Nombre);
             return View(lista);
+        }
+
+        //
+        // GET: /Interpretes/Traer
+
+        public ActionResult Traer(MVInterpreteFiltroLista filtroLista) {
+            var lista = _gestorPersistencia.TraerInterpretes(filtroLista.Pagina, filtroLista.Nombre);
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
         //

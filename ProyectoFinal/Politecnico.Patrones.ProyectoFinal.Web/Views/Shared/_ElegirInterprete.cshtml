@@ -1,0 +1,28 @@
+﻿<script type="text/javascript">
+     $(function() {
+         $(".ac-interprete").autocomplete({
+             source: function (request, response) {
+                 $.ajax({
+                     url: '/Interpretes/Traer',
+                     data: 'nombre=' + request.term,
+                     success: function (data) {
+                         response(_.map(data, function(i) { return { id: i.Id, value: i.Nombre }; }));
+                     }
+                 });
+             },
+             minLength: 3,
+             select: function (event, ui) {
+                 $("input[name=interpreteElegidoId]").val(ui.item.id);
+                 $("#regArtistaElegidoNombre").text(ui.item.value);
+                 /*
+                log(ui.item ?
+                    "Selected: " + ui.item.value + " aka " + ui.item.id :
+                    "Nothing selected, input was " + this.value);
+                    */
+             }
+         });
+     });
+ </script>
+@Html.TextBox("interpreteBusqueda", "", new {Class = "ac-interprete"})
+@Html.Hidden("interpreteElegidoId")
+<span>Artista elegido: <span id="regArtistaElegidoNombre">Ninguno</span> </span>

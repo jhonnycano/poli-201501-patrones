@@ -30,30 +30,35 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         }
         public IList<Interprete> TraerInterpretes(int pagina, string filtroNombre) {
             return _ctx.DbSetInterprete
+                .Where(i => string.IsNullOrEmpty(filtroNombre) || i.Nombre.Contains(filtroNombre))
                 .OrderBy(i => i.Id)
                 .Skip(20*pagina)
                 .Take(20)
                 .ToList();
         }
-        public Cancion TraerCancion(int id)
-        {
+        public IList<Interprete> TraerInterpretesAlbum(int albumId) {
+            return (from i in _ctx.DbSetInterprete
+                join ai in _ctx.DbSetAlbumInterprete on i.Id equals ai.InterpreteId
+                select i).ToList();
+        }
+        public IList<Interprete> TraerInterpretesCancion(int cancionId) {
+            return (from i in _ctx.DbSetInterprete
+                join ai in _ctx.DbSetCancionInterprete on i.Id equals ai.InterpreteId
+                select i).ToList();
+        }
+        public Cancion TraerCancion(int id) {
             return (from c in _ctx.DbSetCancion
                 where c.Id == id
                 select c)
                 .FirstOrDefault();
         }
-        public IList<Cancion> TraerCanciones(int pagina) {
+        public IList<Cancion> TraerCanciones(int pagina, string filtroNombre) {
             return _ctx.DbSetCancion
-                .OrderBy(i => i.Id)
-                .Skip(20 * pagina)
+                .Where(c => string.IsNullOrEmpty(filtroNombre) || c.Nombre.Contains(filtroNombre))
+                .OrderBy(c => c.Id)
+                .Skip(20*pagina)
                 .Take(20)
                 .ToList();
-        }
-        public CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId) {
-            return (from c in _ctx.DbSetCancionInterprete
-                where c.CancionId == cancionId && c.InterpreteId == interpreteId
-                select c)
-                .FirstOrDefault();
         }
         public Album TraerAlbum(int id) {
             return (from a in _ctx.DbSetAlbum
@@ -61,18 +66,33 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 select a)
                 .FirstOrDefault();
         }
-        public IList<Album> TraerAlbumes(int pagina) {
+        public IList<Album> TraerAlbumes(int pagina, string filtroNombre) {
             return _ctx.DbSetAlbum
-                .OrderBy(i => i.Id)
+                .Where(a => string.IsNullOrEmpty(filtroNombre) || a.Nombre.Contains(filtroNombre))
+                .OrderBy(a => a.Id)
                 .Skip(20*pagina)
                 .Take(20)
                 .ToList();
         }
+        public CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId) {
+            return (from c in _ctx.DbSetCancionInterprete
+                where c.CancionId == cancionId && c.InterpreteId == interpreteId
+                select c)
+                .FirstOrDefault() ?? new CancionInterprete
+                    {
+                        CancionId = cancionId,
+                        InterpreteId = interpreteId
+                    };
+        }
         public AlbumInterprete TraerAlbumInterprete(int albumId, int interpreteId) {
             return (from c in _ctx.DbSetAlbumInterprete
-                    where c.AlbumId == albumId && c.InterpreteId == interpreteId
-                    select c)
-                .FirstOrDefault();
+                where c.AlbumId == albumId && c.InterpreteId == interpreteId
+                select c)
+                .FirstOrDefault() ?? new AlbumInterprete
+                    {
+                        AlbumId = albumId,
+                        InterpreteId = interpreteId
+                    };
         }
         public VotableUsuario TraerVotableUsuario(int votableId, int usuarioId) {
             return (from vu in _ctx.DbSetVotableUsuario

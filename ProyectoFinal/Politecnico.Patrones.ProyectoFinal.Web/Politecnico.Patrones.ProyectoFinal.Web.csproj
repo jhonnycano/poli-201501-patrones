@@ -134,6 +134,9 @@
     <Compile Include="Controllers\CancionesController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\InterpretesController.cs" />
+    <Compile Include="Models\MVListaInterpretes.cs" />
+    <Compile Include="Models\MVInterprete.cs" />
+    <Compile Include="Models\MVInterpreteFiltroLista.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,6 +159,10 @@
     <Content Include="Content\css\style.css" />
     <Content Include="Content\images\banner.jpg" />
     <Content Include="Content\images\pics02.jpg" />
+    <Content Include="Content\themes\stuffy\appstyles.css" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\lodash.js" />
+    <Content Include="Scripts\lodash.min.js" />
     <Content Include="Views\Canciones\Index.cshtml" />
     <Content Include="Views\Albumes\Index.cshtml" />
     <Content Include="Views\Albumes\Detalle.cshtml" />
@@ -165,6 +172,8 @@
     <Content Include="Views\Canciones\Crear.cshtml" />
     <Content Include="Views\Canciones\Editar.cshtml" />
     <Content Include="Views\Reportes\Index.cshtml" />
+    <Content Include="Views\Shared\_ElegirInterprete.cshtml" />
+    <Content Include="Views\Albumes\_Interpretes.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Content\themes\stuffy\images\bg01.png" />
     <Content Include="Content\themes\stuffy\images\img01.jpg" />

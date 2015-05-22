@@ -8,17 +8,22 @@
         <meta name="description" content="" />
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Archivo+Narrow:400,700" rel="stylesheet" type="text/css">
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/themes/base/css")
         @Styles.Render("~/Content/themes/stuffy")
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/lodash")
         @RenderSection("scripts", false)
+        <script type="text/javascript" src="@Url.Content("~/Scripts/app.js")"></script>
     </head>
     <body>
         <div id="menu-wrapper">
                   <div id="menu">
                       <ul>
                           <li class="current_page_item">@Html.ActionLink("Inicio", "Index", "Inicio")</li>
-                      @if (User.Identity.IsAuthenticated) {
+                      @if (User.Identity.IsAuthenticated)
+                      {
                           <li>@Html.ActionLink("Interpretes", "Index", "Interpretes")</li>
                           <li>@Html.ActionLink("Albumes", "Index", "Albumes")</li>
                           <li>@Html.ActionLink("Canciones", "Index", "Canciones")</li>

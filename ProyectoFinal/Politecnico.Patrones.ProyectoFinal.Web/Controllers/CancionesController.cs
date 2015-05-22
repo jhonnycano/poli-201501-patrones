@@ -10,9 +10,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         //
         // GET: /Canciones/
 
-        public ActionResult Index(int pagina = 0)
+        public ActionResult Index(int pagina = 0, string nombre = "")
         {
-            var lista = _gestorPersistencia.TraerCanciones(pagina);
+            var lista = _gestorPersistencia.TraerCanciones(pagina, nombre);
             return View(lista);
         }
 

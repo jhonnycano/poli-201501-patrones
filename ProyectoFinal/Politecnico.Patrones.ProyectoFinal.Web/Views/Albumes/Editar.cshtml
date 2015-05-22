@@ -1,4 +1,5 @@
-﻿@model Politecnico.Patrones.ProyectoFinal.Web.Models.MVAlbumEditar
+﻿@using Politecnico.Patrones.ProyectoFinal.Web.Models
+@model Politecnico.Patrones.ProyectoFinal.Web.Models.MVAlbumEditar
 
 @{
     ViewBag.Title = "Editar album";
@@ -6,6 +7,9 @@
 
 <h2>Editar album</h2>
 
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje)) {
+    <span class="advertencia">@ViewBag.Mensaje</span>
+}
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -13,14 +17,14 @@
     <fieldset>
         <legend>Album</legend>
 
-        @Html.HiddenFor(model => model.Album.Id)
+        @Html.HiddenFor(model => model.AlbumId)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Album.Nombre)
+            @Html.LabelFor(model => model.AlbumNombre)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Album.Nombre)
-            @Html.ValidationMessageFor(model => model.Album.Nombre)
+            @Html.EditorFor(model => model.AlbumNombre)
+            @Html.ValidationMessageFor(model => model.AlbumNombre)
         </div>
 
         <p>
@@ -29,26 +33,7 @@
     </fieldset>
 }
 
-@using (Html.BeginForm("AgregarInterprete")) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.Album.Id)
-
-    <fieldset>
-        <legend>Intérprete</legend>
-        <div class="editor-label">
-            @Html.DropDownList("ListaInterpretes")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Album.Nombre)
-            @Html.ValidationMessageFor(model => model.Album.Nombre)
-        </div>
-
-        <p>
-            <input type="submit" value="Guardar" />
-        </p>
-    </fieldset>
-}
+@Html.Partial("_Interpretes", new MVListaInterpretes{PadreId = Model.AlbumId, Editable = true, ListaInterpretes = Model.ListaInterpretes, Controlador = "Albumes", AccionAgregar = "AgregarInterprete"})
 
 <div>
     @Html.ActionLink("Volver al listado", "Index")

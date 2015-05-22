@@ -25,10 +25,10 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.App_Start {
                         "~/Scripts/Skel/skel-panels.js",
                         "~/Scripts/Skel/init.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/lodash").Include("~/Scripts/lodash.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
             
-            bundles.Add(new StyleBundle("~/Content/themes/stuffy").Include("~/Content/themes/stuffy/style.css"));
-
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",
@@ -42,6 +42,14 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.App_Start {
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+
+            // Themes
+            bundles.Add(new StyleBundle("~/Content/themes/stuffy").Include(
+                "~/Content/themes/stuffy/style.css", 
+                "~/Content/themes/stuffy/appstyles.css"
+                ));
+
         }
     }
 }

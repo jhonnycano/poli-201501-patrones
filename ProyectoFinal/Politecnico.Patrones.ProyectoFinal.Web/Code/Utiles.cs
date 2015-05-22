@@ -25,16 +25,19 @@ namespace Politecnico.Patrones.ProyectoFinal.Web {
             var gestorPersistencia = gd.TraerGestorPersistencia();
             return gestorPersistencia;
         }
+        public static IGestorDominio TraerGestorDominio() {
+            var gd = TraerGestorDependencias();
+            return gd.TraerGestorDominio();
+        }
 
-        public static IList<SelectListItem> GenerarItems<T>(IList<T> origen, Func<T, string> funcValor, Func<T, string> funcTexto) {
+        public static IList<SelectListItem> GenerarItems<T>(IList<T> origen, Func<T, string> funcValor,
+            Func<T, string> funcTexto) {
             var query = (from o in origen
                 let valor = funcValor(o)
                 let texto = funcTexto(o)
                 select new SelectListItem {Value = valor, Text = texto});
 
             return query.ToList();
-
-
         }
     }
 }

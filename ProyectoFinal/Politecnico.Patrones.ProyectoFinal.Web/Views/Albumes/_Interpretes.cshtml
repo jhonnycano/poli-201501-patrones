@@ -1,0 +1,36 @@
+﻿@model Politecnico.Patrones.ProyectoFinal.Web.Models.MVListaInterpretes
+
+<fieldset>
+    <legend>Intérpretes</legend>
+    <table>
+        @foreach (var item in Model.ListaInterpretes) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @if (Model.Editable) {
+                        foreach (var accion in Model.AccionesEditar) {
+                            Html.ActionLink(accion.Item1, accion.Item2, Model.Controlador, new {id = item.Id});
+                        }
+                    }@*
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+*@</td>
+            </tr>
+        }    
+    </table>
+
+        @if (Model.Editable) {
+        using (Html.BeginForm(@Model.AccionAgregar, @Model.Controlador)) {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.PadreId)
+            <fieldset>
+                <legend>Agregar</legend>
+                @Html.Partial("_ElegirInterprete")
+                <input type="submit" value="Agregar" />
+            </fieldset>
+        }
+    }
+</fieldset>

@@ -98,7 +98,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             if (interpretes.Any(i => i == null)) return SalidaBase.Fallo(salida, "Alguno de los intérpretes no existe");
 
             if (entrada.Accion == RelacionarInterpretesAAlbumEntrada.Acciones.Agregar) {
-                var relaciones = interpretes.Select(i => _gestorPersistencia.TraerAlbumInterprete(album.Id, i.Id));
+                var relaciones = interpretes.Select(i => _gestorPersistencia.TraerAlbumInterprete(album.Id, i.Id)).ToList();
                 foreach (var relacion in relaciones) {
                     _gestorPersistencia.Guardar(relacion);
                 }
@@ -109,7 +109,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 }
             }
 
-            return SalidaBase.Fallo(salida, "No implementado");
+            return SalidaBase.Fallo(salida, "fallo de pruebas");
         }
         public AsociarCancionYAlbumSalida AsociarCancionYAlbum(AsociarCancionYAlbumEntrada entrada) {
             var salida = new AsociarCancionYAlbumSalida();
