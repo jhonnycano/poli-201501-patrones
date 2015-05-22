@@ -3,6 +3,18 @@
 
 @{
     ViewBag.Title = "Editar album";
+    var listaInterpretes = new MVListaInterpretes
+        {
+            PadreId = Model.AlbumId,
+            ListaInterpretes = Model.ListaInterpretes,
+            Editable = true, 
+            Controlador = "Albumes", 
+            AccionAgregar = "AgregarInterprete",
+            AccionesEditar = new List<Tuple<string, string>>
+                {
+                    new Tuple<string, string>("Desasociar", "DesasociarInterprete")
+                }
+        };
 }
 
 <h2>Editar album</h2>
@@ -33,7 +45,8 @@
     </fieldset>
 }
 
-@Html.Partial("_Interpretes", new MVListaInterpretes{PadreId = Model.AlbumId, Editable = true, ListaInterpretes = Model.ListaInterpretes, Controlador = "Albumes", AccionAgregar = "AgregarInterprete"})
+
+@Html.Partial("_Interpretes", listaInterpretes)
 
 <div>
     @Html.ActionLink("Volver al listado", "Index")

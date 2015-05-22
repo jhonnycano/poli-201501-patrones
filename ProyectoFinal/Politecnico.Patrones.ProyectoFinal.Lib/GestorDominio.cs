@@ -109,7 +109,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 }
             }
 
-            return SalidaBase.Fallo(salida, "fallo de pruebas");
+            return SalidaBase.Exito(salida);
         }
         public AsociarCancionYAlbumSalida AsociarCancionYAlbum(AsociarCancionYAlbumEntrada entrada) {
             var salida = new AsociarCancionYAlbumSalida();

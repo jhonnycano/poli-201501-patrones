@@ -97,9 +97,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 TempData["mensaje"] = "error: "  + salida.Mensaje;
             }
             
-            //var album = _gestorPersistencia.TraerAlbum(padreId);
-            //var listaInterpretes = TraerListaInterpretes(album);
-            return RedirectToAction("Editar", "Albumes", padreId);
+            return RedirectToAction("Editar", "Albumes", new {id = padreId});
         }
 
         //
@@ -131,8 +129,20 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             if (disposable != null) disposable.Dispose();
             base.Dispose(disposing);
         }
-        public ActionResult DesasociarInterprete(string s) {
-            return Json(null);
+        public ActionResult DesasociarInterprete(int albumId, int interpreteId) {
+            var entrada= new RelacionarInterpretesAAlbumEntrada
+                {
+                    Accion = RelacionarInterpretesAAlbumEntrada.Acciones.Eliminar,
+                    AlbumId = albumId,
+                    Interpretes = new List<int> {interpreteId}
+                };
+            var salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
+            if (salida.Resultado != SalidaBase.Resultados.Exito) {
+                TempData["mensaje"] = "error: " + salida.Mensaje;               
+            }
+
+            return RedirectToAction("Editar", "Albumes", new {id = albumId});
+
         }
     }
 }
