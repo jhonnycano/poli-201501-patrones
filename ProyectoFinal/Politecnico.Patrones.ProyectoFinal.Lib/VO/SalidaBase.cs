@@ -24,5 +24,25 @@
             salida.Mensaje = mensaje;
             return salida;
         }
-    }
+        public static bool operator ==(SalidaBase salida, Resultados resultado) {
+            return salida != null && salida.Resultado == resultado;
+        }
+        public static bool operator !=(SalidaBase salida, Resultados resultado) {
+            return !(salida == resultado);
+        }
+         protected bool Equals(SalidaBase other) {
+            return Resultado == other.Resultado && string.Equals(Mensaje, other.Mensaje);
+        }
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((SalidaBase) obj);
+        }
+        public override int GetHashCode() {
+            unchecked {
+                return ((int) Resultado*397) ^ (Mensaje != null ? Mensaje.GetHashCode() : 0);
+            }
+        }
+   }
 }

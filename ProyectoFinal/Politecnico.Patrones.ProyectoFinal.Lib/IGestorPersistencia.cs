@@ -28,7 +28,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         void Guardar(VotableUsuario votableUsuario);
         void Guardar(Usuario usuario);
 
-        void Eliminar(CancionInterprete cancionInterprete);
-        void Eliminar(AlbumInterprete albumInterprete);
+        void EliminarCancionInterprete(int interprete, int cancion);
+        void EliminarAlbumInterprete(int interprete, int album);
     }
 }

@@ -35,6 +35,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                     return SalidaBase.Fallo(salida, "Album con id " + entrada.AlbumId + "no encontrado");
                 }
             }
+            salida.Album = album;
             CrearVotable(album);
             _gestorPersistencia.Guardar(album);
 
@@ -81,7 +82,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             } else if (entrada.Accion == RelacionarInterpretesACancionEntrada.Acciones.Eliminar) {
                 var relaciones = interpretes.Select(i => _gestorPersistencia.TraerCancionInterprete(cancion.Id, i.Id));
                 foreach (var relacion in relaciones) {
-                    _gestorPersistencia.Eliminar(relacion);
+                    _gestorPersistencia.EliminarCancionInterprete(relacion.InterpreteId, relacion.CancionId);
                 }
             }
 
@@ -105,7 +106,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             } else if (entrada.Accion == RelacionarInterpretesAAlbumEntrada.Acciones.Eliminar) {
                 var relaciones = interpretes.Select(i => _gestorPersistencia.TraerAlbumInterprete(album.Id, i.Id));
                 foreach (var relacion in relaciones) {
-                    _gestorPersistencia.Eliminar(relacion);
+                    _gestorPersistencia.EliminarAlbumInterprete(relacion.InterpreteId, relacion.AlbumId);
                 }
             }
 
@@ -197,5 +198,22 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             }
             return result;
         }
+              
+        public Album TraerAlbum(int id) {
+            return _gestorPersistencia.TraerAlbum(id);
+        }
+        public Interprete TraerInterprete(int id) {
+            return _gestorPersistencia.TraerInterprete(id);
+        }
+        public IList<Album> TraerAlbumes(int pagina, string nombre) {
+            return _gestorPersistencia.TraerAlbumes(pagina, nombre);
+        }
+        public IList<Interprete> TraerInterpretes(int pagina, string nombre) {
+            return _gestorPersistencia.TraerInterpretes(pagina, nombre);
+        }
+        public IList<Interprete> TraerInterpretesAlbum(int albumId) {
+            return _gestorPersistencia.TraerInterpretesAlbum(albumId);
+        }
+
     }
 }

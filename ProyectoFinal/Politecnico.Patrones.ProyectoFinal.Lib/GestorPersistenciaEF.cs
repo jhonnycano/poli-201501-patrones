@@ -39,12 +39,14 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public IList<Interprete> TraerInterpretesAlbum(int albumId) {
             return (from i in _ctx.DbSetInterprete
                 join ai in _ctx.DbSetAlbumInterprete on i.Id equals ai.InterpreteId
+                where ai.AlbumId == albumId
                 select i).ToList();
         }
         public IList<Interprete> TraerInterpretesCancion(int cancionId) {
             return (from i in _ctx.DbSetInterprete
                 join ai in _ctx.DbSetCancionInterprete on i.Id equals ai.InterpreteId
-                select i).ToList();
+                    where ai.CancionId == cancionId
+                    select i).ToList();
         }
         public Cancion TraerCancion(int id) {
             return (from c in _ctx.DbSetCancion
@@ -134,11 +136,17 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             _ctx.SaveChanges();
         }
 
-        public void Eliminar(CancionInterprete cancionInterprete) {
+        public void EliminarCancionInterprete(int interprete, int cancion) {
+            var cancionInterprete = TraerCancionInterprete(cancion, interprete);
+            if (cancionInterprete == null || cancionInterprete.Id <= 0) return;
+
             _ctx.DbSetCancionInterprete.Remove(cancionInterprete);
             _ctx.SaveChanges();
         }
-        public void Eliminar(AlbumInterprete albumInterprete) {
+        public void EliminarAlbumInterprete(int interprete, int album) {
+            var albumInterprete = TraerAlbumInterprete(album, interprete);
+            if (albumInterprete == null || albumInterprete.Id <= 0) return;
+
             _ctx.DbSetAlbumInterprete.Remove(albumInterprete);
             _ctx.SaveChanges();
         }

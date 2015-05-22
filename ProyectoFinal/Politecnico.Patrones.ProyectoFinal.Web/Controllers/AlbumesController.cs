@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.Linq;
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Lib;
@@ -10,63 +11,65 @@ using Politecnico.Patrones.ProyectoFinal.Web.Models;
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
     public class AlbumesController : Controller {
-        private readonly IGestorPersistencia _gestorPersistencia = Utiles.TraerGestorPersistencia();
         private readonly IGestorDominio _gestorDominio = Utiles.TraerGestorDominio();
 
         //
         // GET: /Albumes/
         public ActionResult Index(int pagina = 0, string nombre = "") {
-            var lista = _gestorPersistencia.TraerAlbumes(pagina, nombre);
+            var lista = _gestorDominio.TraerAlbumes(pagina, nombre);
+            if (TempData.ContainsKey("mensaje")) {
+                ViewBag.Mensaje = TempData["mensaje"];
+            }
             return View(lista);
         }
-
         //
         // GET: /Albumes/Detalle/5
         public ActionResult Detalle(int id = 0) {
-            Album album = _gestorPersistencia.TraerAlbum(id);
+            Album album = _gestorDominio.TraerAlbum(id);
             if (album == null) {
                 return HttpNotFound();
             }
             return View(album);
         }
-
         //
         // GET: /Albumes/Crear
         public ActionResult Crear() {
             return View();
         }
-
         //
         // POST: /Albumes/Crear
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Crear(Album album) {
             if (ModelState.IsValid) {
-                _gestorPersistencia.Guardar(album);
+                var entrada = new EditarAlbumEntrada {AlbumId = album.Id, Nombre = album.Nombre};
+                var salida = _gestorDominio.EditarAlbum(entrada);
+                if (salida != SalidaBase.Resultados.Exito) {
+                    TempData["mensaje"] = "error: " + salida.Mensaje;
+                }
                 return RedirectToAction("Index");
             }
 
             return View(album);
         }
-
         //
         // GET: /Albumes/Editar/5
         public ActionResult Editar(int id = 0) {
-            Album album = _gestorPersistencia.TraerAlbum(id);
+            Album album = _gestorDominio.TraerAlbum(id);
             if (album == null) return HttpNotFound();
             if (TempData.ContainsKey("mensaje")) {
                 ViewBag.Mensaje = TempData["mensaje"];
             }
 
             // cargar interpretes
-            var model = new MVAlbumEditar {AlbumId = album.Id, AlbumNombre = album.Nombre };
+            var model = new MVAlbumEditar {AlbumId = album.Id, AlbumNombre = album.Nombre};
             var listaInterpretes = TraerListaInterpretes(album);
             model.ListaInterpretes = listaInterpretes;
 
             return View(model);
         }
         private IEnumerable<MVInterprete> TraerListaInterpretes(Album album) {
-            var interpretes = _gestorPersistencia.TraerInterpretesAlbum(album.Id);
+            var interpretes = _gestorDominio.TraerInterpretesAlbum(album.Id);
             var listaInterpretes = from i in interpretes select new MVInterprete {Id = i.Id, Nombre = i.Nombre};
             return listaInterpretes;
         }
@@ -75,17 +78,22 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Editar(MVAlbumEditar albumEditar) {
-            if (ModelState.IsValid) {
-                var album = _gestorPersistencia.TraerAlbum(albumEditar.AlbumId);
-                album.Nombre = albumEditar.AlbumNombre;
-                _gestorPersistencia.Guardar(album);
-                return RedirectToAction("Index");
+            if (!ModelState.IsValid) return View(albumEditar);
+
+            var album = _gestorDominio.TraerAlbum(albumEditar.AlbumId);
+            album.Nombre = albumEditar.AlbumNombre;
+            var entrada = new EditarAlbumEntrada {AlbumId = albumEditar.AlbumId, Nombre = albumEditar.AlbumNombre};
+            var salida = _gestorDominio.EditarAlbum(entrada);
+            if (salida != SalidaBase.Resultados.Exito) {
+                TempData["mensaje"] = "error: " + salida.Mensaje;
+                return View(albumEditar);
             }
 
-            return View(albumEditar);
+            return RedirectToAction("Index");
         }
-
-        public ActionResult AgregarInterprete(int padreId, int interpreteElegidoId) {
+        //
+        // POST: /Albumes/AsociarInterprete
+        public ActionResult AsociarInterprete(int padreId, int interpreteElegidoId) {
             var entrada = new RelacionarInterpretesAAlbumEntrada
                 {
                     Accion = RelacionarInterpretesAAlbumEntrada.Acciones.Agregar,
@@ -94,12 +102,27 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 };
             var salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
             if (salida.Resultado != SalidaBase.Resultados.Exito) {
-                TempData["mensaje"] = "error: "  + salida.Mensaje;
+                TempData["mensaje"] = "error: " + salida.Mensaje;
             }
-            
+
             return RedirectToAction("Editar", "Albumes", new {id = padreId});
         }
+        //
+        // POST: /Albumes/DesasociarInterprete
+        public ActionResult DesasociarInterprete(int albumId, int interpreteId) {
+            var entrada = new RelacionarInterpretesAAlbumEntrada
+                {
+                    Accion = RelacionarInterpretesAAlbumEntrada.Acciones.Eliminar,
+                    AlbumId = albumId,
+                    Interpretes = new List<int> {interpreteId}
+                };
+            var salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
+            if (salida.Resultado != SalidaBase.Resultados.Exito) {
+                TempData["mensaje"] = "error: " + salida.Mensaje;
+            }
 
+            return RedirectToAction("Editar", "Albumes", new {id = albumId});
+        }
         //
         // GET: /Interpretes/Borrar/5
         public ActionResult Borrar(int id = 0) {
@@ -112,7 +135,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             return View(album);
              * */
         }
-
         //
         // POST: /Interpretes/Borrar/5
         [HttpPost, ActionName("Borrar")]
@@ -125,24 +147,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         }
 
         protected override void Dispose(bool disposing) {
-            var disposable = _gestorPersistencia as IDisposable;
+            var disposable = _gestorDominio as IDisposable;
             if (disposable != null) disposable.Dispose();
             base.Dispose(disposing);
-        }
-        public ActionResult DesasociarInterprete(int albumId, int interpreteId) {
-            var entrada= new RelacionarInterpretesAAlbumEntrada
-                {
-                    Accion = RelacionarInterpretesAAlbumEntrada.Acciones.Eliminar,
-                    AlbumId = albumId,
-                    Interpretes = new List<int> {interpreteId}
-                };
-            var salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
-            if (salida.Resultado != SalidaBase.Resultados.Exito) {
-                TempData["mensaje"] = "error: " + salida.Mensaje;               
-            }
-
-            return RedirectToAction("Editar", "Albumes", new {id = albumId});
-
         }
     }
 }

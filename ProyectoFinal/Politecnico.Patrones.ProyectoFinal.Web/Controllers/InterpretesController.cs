@@ -2,33 +2,34 @@
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Lib;
 using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 using Politecnico.Patrones.ProyectoFinal.Web.Models;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
     public class InterpretesController : Controller {
-        private readonly IGestorPersistencia _gestorPersistencia = Utiles.TraerGestorPersistencia();
+        private readonly IGestorDominio _gestorDominio = Utiles.TraerGestorDominio();
         //
         // GET: /Interpretes/
-
         public ActionResult Index(MVInterpreteFiltroLista filtroLista) {
-            var lista = _gestorPersistencia.TraerInterpretes(filtroLista.Pagina, filtroLista.Nombre);
+            var lista = _gestorDominio.TraerInterpretes(filtroLista.Pagina, filtroLista.Nombre);
+            if (TempData.ContainsKey("mensaje")) {
+                ViewBag.Mensaje = TempData["mensaje"];
+            }
             return View(lista);
         }
 
         //
         // GET: /Interpretes/Traer
-
         public ActionResult Traer(MVInterpreteFiltroLista filtroLista) {
-            var lista = _gestorPersistencia.TraerInterpretes(filtroLista.Pagina, filtroLista.Nombre);
+            var lista = _gestorDominio.TraerInterpretes(filtroLista.Pagina, filtroLista.Nombre);
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
         //
         // GET: /Interpretes/Detalle/5
-
         public ActionResult Detalle(int id = 0) {
-            Interprete interprete = _gestorPersistencia.TraerInterprete(id);
+            Interprete interprete = _gestorDominio.TraerInterprete(id);
             if (interprete == null) {
                 return HttpNotFound();
             }
@@ -37,19 +38,26 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
 
         //
         // GET: /Interpretes/Crear
-
         public ActionResult Crear() {
             return View();
         }
 
         //
         // POST: /Interpretes/Crear
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Crear(Interprete interprete) {
             if (ModelState.IsValid) {
-                _gestorPersistencia.Guardar(interprete);
+                var entrada = new EditarInterpreteEntrada
+                    {
+                        InterpreteId = interprete.Id,
+                        Nombre = interprete.Nombre
+                    };
+                var salida = _gestorDominio.EditarInterprete(entrada);
+                if (salida != SalidaBase.Resultados.Exito) {
+                    TempData["mensaje"] = "error: " + salida.Mensaje;
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -58,9 +66,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
 
         //
         // GET: /Interpretes/Editar/5
-
         public ActionResult Editar(int id = 0) {
-            Interprete interprete = _gestorPersistencia.TraerInterprete(id);
+            Interprete interprete = _gestorDominio.TraerInterprete(id);
             if (interprete == null) return HttpNotFound();
 
             return View(interprete);
@@ -68,20 +75,27 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
 
         //
         // POST: /Interpretes/Editar/5
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Interprete interprete) {
             if (ModelState.IsValid) {
-                _gestorPersistencia.Guardar(interprete);
-                return RedirectToAction("Index");
+                var entrada = new EditarInterpreteEntrada
+                {
+                    InterpreteId = interprete.Id,
+                    Nombre = interprete.Nombre
+                };
+                var salida = _gestorDominio.EditarInterprete(entrada);
+                if (salida != SalidaBase.Resultados.Exito) {
+                    TempData["mensaje"] = "error: " + salida.Mensaje;
+                }
+
+                return View("Index");
             }
             return View(interprete);
         }
 
         //
         // GET: /Interpretes/Borrar/5
-
         public ActionResult Borrar(int id = 0) {
             throw new NotSupportedException("No permitido");
 
@@ -95,7 +109,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
 
         //
         // POST: /Interpretes/Borrar/5
-
         [HttpPost, ActionName("Borrar")]
         [ValidateAntiForgeryToken]
         public ActionResult BorrarConfirmado(int id) {
@@ -106,7 +119,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         }
 
         protected override void Dispose(bool disposing) {
-            var disposable = _gestorPersistencia as IDisposable;
+            var disposable = _gestorDominio as IDisposable;
             if (disposable != null) disposable.Dispose();
             base.Dispose(disposing);
         }

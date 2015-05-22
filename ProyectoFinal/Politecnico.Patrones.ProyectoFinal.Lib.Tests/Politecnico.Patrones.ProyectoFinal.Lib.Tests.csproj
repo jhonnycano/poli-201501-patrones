@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aceptacion\GestorDominioTest.cs" />
+    <Compile Include="Unitarios\GestorDominioTest.cs" />
     <Compile Include="Unitarios\GestorPersistenciaEFTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,6 +66,9 @@
       <Project>{f80e75f0-c8dd-436a-b117-c9c8d9afcdf0}</Project>
       <Name>Politecnico.Patrones.ProyectoFinal.Lib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Aceptacion\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

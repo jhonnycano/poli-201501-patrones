@@ -24,5 +24,22 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Unitarios {
                 Console.WriteLine(interprete.Nombre);
             }
         }
+        [Test]
+        public void CrearAlbumBasico() {
+            var g = new GestorPersistenciaEF();
+            var album = new Album {Nombre = "Album pruebas"};
+            g.Guardar(album);
+
+            Assert.IsTrue(album.Id > 0);
+        }
+        [Test]
+        public void CrearVotableBasico() {
+            var g = new GestorPersistenciaEF();
+            var votable = new Votable();
+            g.Guardar(votable);
+
+            Assert.IsTrue(votable.Id > 0);
+        }
+
     }
 }

@@ -4,10 +4,10 @@ using NUnit.Framework;
 using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 
-namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
+namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Unitarios {
     [TestFixture]
     public class GestorDominioTest {
-        private IGestorDominio _gestorDominio;
+        private GestorDominio _gestorDominio;
         private IGestorPersistencia _gestorPersistencia;
         private Mock<IGestorPersistencia> _mockGestorPersistencia;
         [SetUp]
@@ -35,6 +35,26 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
             Assert.AreEqual(SalidaBase.Resultados.Exito, salida.Resultado);
             _mockGestorPersistencia.VerifyAll();
         }
+
+        [Test]
+        public void AgregarAlbumBasico() {
+            // Preparar
+            _mockGestorPersistencia.Setup(gp => gp.Guardar(It.IsAny<Album>())).Callback<Album>(v => v.Id = 1);
+            _mockGestorPersistencia.Setup(gp => gp.Guardar(It.IsAny<Votable>())).Callback<Votable>(v => v.Id = 1);
+
+            var entrada = new EditarAlbumEntrada
+            {
+                Nombre = "Album de pruebas",
+            };
+
+            // Invocar
+            var salida = _gestorDominio.EditarAlbum(entrada);
+
+            Assert.IsNotNull(salida.Album);
+            Assert.IsTrue(salida.Album.Id > 0);
+            Assert.IsTrue(salida.Album.VotableId > 0);
+        }
+
         [Test]
         public void RelacionarInterpretesYCanciones_SiRelacionesNuevas_Exito() {
             // Preparar
