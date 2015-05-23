@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Odbc;
 using System.Linq;
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Lib;
@@ -11,8 +10,11 @@ using Politecnico.Patrones.ProyectoFinal.Web.Models;
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
     public class AlbumesController : Controller {
-        private readonly IGestorDominio _gestorDominio = Utiles.TraerGestorDominio();
+        private readonly IGestorDominio _gestorDominio;
 
+        public AlbumesController(IGestorDominio gestorDominio) {
+            _gestorDominio = gestorDominio;
+        }
         //
         // GET: /Albumes/
         public ActionResult Index(int pagina = 0, string nombre = "") {
@@ -101,7 +103,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     Interpretes = new List<int> {interpreteElegidoId}
                 };
             var salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
-            if (salida.Resultado != SalidaBase.Resultados.Exito) {
+            if (salida != SalidaBase.Resultados.Exito) {
                 TempData["mensaje"] = "error: " + salida.Mensaje;
             }
 
@@ -117,7 +119,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     Interpretes = new List<int> {interpreteId}
                 };
             var salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
-            if (salida.Resultado != SalidaBase.Resultados.Exito) {
+            if (salida != SalidaBase.Resultados.Exito) {
                 TempData["mensaje"] = "error: " + salida.Mensaje;
             }
 

@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
+using Politecnico.Patrones.ProyectoFinal.Lib;
 using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     public class InicioController : Controller {
-        //
-        // GET: /Inicio/
-
+        private readonly IGestorAutenticacion _gestorAutenticacion;
+        public InicioController(IGestorAutenticacion gestorAutenticacion) {
+            _gestorAutenticacion = gestorAutenticacion;
+        }
         public ActionResult Index() {
             return View();
         }
-
         public ActionResult Registrar() {
             return View();
         }
         [HttpPost]
         public ActionResult Registrar(string nombre, string correo, string clave, string claveRepetida) {
-            var autenticador = Utiles.TraerGestorAutenticacion();
             var entrada = new RegistrarUsuarioEntrada
                 {
                     Nombre = nombre,
@@ -24,8 +24,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     Clave = clave,
                     ClaveRepetida = claveRepetida
                 };
-            var result = autenticador.RegistrarUsuario(entrada);
-            if (result.Resultado != SalidaBase.Resultados.Exito) {
+            var result = _gestorAutenticacion.RegistrarUsuario(entrada);
+            if (result != SalidaBase.Resultados.Exito) {
                 ModelState.AddModelError("", result.Mensaje);
                 return View();
             }
@@ -37,14 +37,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         }
         [HttpPost]
         public ActionResult IniciarSesion(string correo, string clave, string returnUrl) {
-            var autenticador = Utiles.TraerGestorAutenticacion();
             var entrada = new IdentificarUsuarioEntrada
                 {
                     Correo = correo,
                     Clave = clave
                 };
-            var result = autenticador.IdentificarUsuario(entrada);
-            if (result.Resultado != SalidaBase.Resultados.Exito) {
+            var result = _gestorAutenticacion.IdentificarUsuario(entrada);
+            if (result != SalidaBase.Resultados.Exito) {
                 ModelState.AddModelError("", result.Mensaje);
                 return View();
             }

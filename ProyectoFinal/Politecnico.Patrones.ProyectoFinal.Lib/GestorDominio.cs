@@ -4,7 +4,7 @@ using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
-    public class GestorDominio : IGestorDominio {
+    internal class GestorDominio : IGestorDominio {
         private readonly IGestorPersistencia _gestorPersistencia;
         public GestorDominio(IGestorPersistencia gestorPersistencia) {
             _gestorPersistencia = gestorPersistencia;
@@ -208,12 +208,17 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public IList<Album> TraerAlbumes(int pagina, string nombre) {
             return _gestorPersistencia.TraerAlbumes(pagina, nombre);
         }
+        public IList<Cancion> TraerCanciones(int pagina, string nombre) {
+            return _gestorPersistencia.TraerCanciones(pagina, nombre);
+        }
         public IList<Interprete> TraerInterpretes(int pagina, string nombre) {
             return _gestorPersistencia.TraerInterpretes(pagina, nombre);
         }
         public IList<Interprete> TraerInterpretesAlbum(int albumId) {
             return _gestorPersistencia.TraerInterpretesAlbum(albumId);
         }
-
+        public Cancion TraerCancion(int id) {
+            return _gestorPersistencia.TraerCancion(id);
+        }
     }
 }

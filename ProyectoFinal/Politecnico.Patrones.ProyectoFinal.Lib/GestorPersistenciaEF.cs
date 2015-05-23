@@ -4,7 +4,7 @@ using System.Linq;
 using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
-    public class GestorPersistenciaEF : IGestorPersistencia {
+    internal class GestorPersistenciaEF : IGestorPersistencia {
         private readonly ContextoEF _ctx;
         public GestorPersistenciaEF() {
             _ctx = new ContextoEF();

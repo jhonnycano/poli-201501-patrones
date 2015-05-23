@@ -5,7 +5,7 @@ using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
-    public class GestorAutenticacion : IGestorAutenticacion {
+    internal class GestorAutenticacion : IGestorAutenticacion {
         private const string Llave =
             "v+syPHmxRUcsdrOLB+BLJn2N71l6teWoYun5iR22P0wwEOoQtre2eZIFerY9isde4/E70W4uk4ws6HrCax8NCA==";
         private readonly IGestorPersistencia _gestorPersistencia;
@@ -45,6 +45,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public ModificarUsuarioSalida ModificarUsuario(ModificarUsuarioEntrada entrada) {
             var salida = new ModificarUsuarioSalida();
             return SalidaBase.Fallo(salida, "No implementado");
+        }
+        public Usuario TraerUsuario(string correo) {
+            return _gestorPersistencia.TraerUsuario(correo);
         }
 
         private string TraerHash(string entrada) {

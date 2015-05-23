@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Politecnico.Patrones.ProyectoFinal.Lib;
 using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Web.App_Start;
 
@@ -22,11 +23,19 @@ namespace Politecnico.Patrones.ProyectoFinal.Web {
 		protected void Application_PostAuthenticateRequest(object sender, EventArgs e) {
 			if (!Request.IsAuthenticated) return;
 
-		    var usuario = Request.RequestContext.HttpContext.Items["usuario"] as Usuario ??
-		                  Utiles.TraerGestorPersistencia().TraerUsuario(User.Identity.Name);
+		    var usuario = TraerUsuario();
 		    var identity = new IdentityUsuario(Context.User.Identity, usuario);
 			var principal = new PrincipalUsuario(identity);
 			Context.User = principal;
 		}
+        private Usuario TraerUsuario() {
+            var usuarioContexto = Request.RequestContext.HttpContext.Items["usuario"] as Usuario;
+            if (usuarioContexto != null) return usuarioContexto;
+
+            var gestorAutenticacion = (IGestorAutenticacion)DependencyResolver.Current.GetService(typeof(IGestorAutenticacion));
+            var usuario = gestorAutenticacion.TraerUsuario(User.Identity.Name);
+
+            return usuario;
+        }
     }
 }
