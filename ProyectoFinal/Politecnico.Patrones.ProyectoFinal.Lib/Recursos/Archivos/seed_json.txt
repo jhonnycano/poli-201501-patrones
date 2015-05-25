@@ -1,0 +1,20 @@
+﻿{
+	interpretes: [
+		{	id: 1, nombre: "Nicola di Bari" },
+		{	id: 2, nombre: "Metallica" },
+		{	id: 3, nombre: "Jhonny Cano" },
+		{	id: 4, nombre: "Debora Ramirez" },
+	], 
+	albumes: [
+		{	id: 1, nombre: "Con te Partiro", interpretes: [1] },
+		{	id: 2, nombre: "Nothing else matters", interpretes: [2] },
+		{	id: 3, nombre: "Por qué", interpretes: [3] },
+	], 
+	canciones: [
+		{	id: 1, nombre: "Con te Partiro", album: 1 },
+		{	id: 2, nombre: "Nothing else matters", album: 2 },
+		{	id: 3, nombre: "Por qué", album: 3 },
+		{	id: 3, nombre: "Con los brazos abiertos", album: 3 },
+		{	id: 3, nombre: "Deserving someone else", interpretes: [3, 4] },
+	]
+}

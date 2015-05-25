@@ -104,5 +104,29 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Recursos {
                 return ResourceManager.GetString("interprete_falta_nombre", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///	interpretes: [
+        ///		{	id: 1, nombre: &quot;Nicola di Bari&quot; },
+        ///		{	id: 2, nombre: &quot;Metallica&quot; },
+        ///		{	id: 3, nombre: &quot;Jhonny Cano&quot; },
+        ///		{	id: 4, nombre: &quot;Debora Ramirez&quot; },
+        ///	], 
+        ///	albumes: [
+        ///		{	id: 1, nombre: &quot;Con te Partiro&quot; interpretes: [1] },
+        ///		{	id: 2, nombre: &quot;Nothing else matters&quot; interpretes: [2] },
+        ///		{	id: 3, nombre: &quot;Por qué&quot; interpretes: [3] },
+        ///	], 
+        ///	canciones: [
+        ///		{	id: 1, nombre: &quot;Con te Partiro&quot;, album: 1 },
+        ///		{	id: 2, nombre: &quot;Nothing else matters&quot;, album: 2 },
+        ///		{	id: 3, nombre: &quot;Por  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string seed_json {
+            get {
+                return ResourceManager.GetString("seed_json", resourceCulture);
+            }
+        }
     }
 }

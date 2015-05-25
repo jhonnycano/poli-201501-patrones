@@ -19,6 +19,11 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Migrations {
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            if (System.Diagnostics.Debugger.IsAttached == false)
+                System.Diagnostics.Debugger.Launch(); 
+            
+            var imp = new ImportadorJson();
+            imp.Importar(context);
 
 
         }
