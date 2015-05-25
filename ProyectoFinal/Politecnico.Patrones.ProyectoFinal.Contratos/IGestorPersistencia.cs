@@ -19,8 +19,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
 
         VotableUsuario TraerVotableUsuario(int votableId, int usuarioId);
 
-        void Guardar(Interprete interprete);
-        void Guardar(Cancion cancion);
+        void Guardar(Interprete entidad);
+        void Guardar(Cancion entidad);
         void Guardar(CancionInterprete cancionInterprete);
         void Guardar(Album album);
         void Guardar(AlbumInterprete albumInterprete);

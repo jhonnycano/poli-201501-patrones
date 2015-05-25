@@ -104,8 +104,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 .FirstOrDefault();
         }
 
-        public void Guardar(Interprete interprete) {
-            _ctx.DbSetInterprete.AddOrUpdate(interprete);
+        public void Guardar(Interprete entidad) {
+            _ctx.DbSetInterprete.AddOrUpdate(entidad);
             _ctx.SaveChanges();
         }
         public void Guardar(Album album) {
@@ -116,8 +116,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             _ctx.DbSetAlbumInterprete.AddOrUpdate(albumInterprete);
             _ctx.SaveChanges();
         }
-        public void Guardar(Cancion cancion) {
-            _ctx.DbSetCancion.AddOrUpdate(cancion);
+        public void Guardar(Cancion entidad) {
+            _ctx.DbSetCancion.AddOrUpdate(entidad);
             _ctx.SaveChanges();
         }
         public void Guardar(CancionInterprete cancionInterprete) {

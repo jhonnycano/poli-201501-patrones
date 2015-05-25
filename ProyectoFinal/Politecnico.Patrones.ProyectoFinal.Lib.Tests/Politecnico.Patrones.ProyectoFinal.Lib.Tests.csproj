@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mocks\GestorPersistenciaDic.cs" />
     <Compile Include="Unitarios\GestorDominioTest.cs" />
     <Compile Include="Unitarios\GestorPersistenciaEFTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

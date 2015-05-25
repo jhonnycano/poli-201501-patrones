@@ -4,25 +4,27 @@ using NUnit.Framework;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
+using Politecnico.Patrones.ProyectoFinal.Lib.Tests.Mocks;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Unitarios {
     [TestFixture]
     public class GestorDominioTest {
         private GestorDominio _gestorDominio;
         private IGestorPersistencia _gestorPersistencia;
-        private Mock<IGestorPersistencia> _mockGestorPersistencia;
+        //private Mock<IGestorPersistencia> _mockGestorPersistencia;
+        
         [SetUp]
         public void Inicializar() {
-            _mockGestorPersistencia = new Mock<IGestorPersistencia>();
-            _gestorPersistencia = _mockGestorPersistencia.Object;
-
+            //_mockGestorPersistencia = new Mock<IGestorPersistencia>();
+            //_gestorPersistencia = _mockGestorPersistencia.Object;
+            _gestorPersistencia = new GestorPersistenciaDic();
             _gestorDominio = new GestorDominio(_gestorPersistencia);
         }
 
         [Test]
         public void AgregarCancion() {
             // Preparar
-            _mockGestorPersistencia.Setup(gp => gp.Guardar(It.IsAny<Cancion>()));
+            //_mockGestorPersistencia.Setup(gp => gp.Guardar(It.IsAny<Cancion>()));
 
             var entrada = new EditarCancionEntrada
                 {
@@ -34,19 +36,19 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Unitarios {
 
             // Revisar
             Assert.AreEqual(SalidaBase.Resultados.Exito, salida.Resultado);
-            _mockGestorPersistencia.VerifyAll();
+            //_mockGestorPersistencia.VerifyAll();
         }
 
         [Test]
         public void AgregarAlbumBasico() {
             // Preparar
-            _mockGestorPersistencia.Setup(gp => gp.Guardar(It.IsAny<Album>())).Callback<Album>(v => v.Id = 1);
-            _mockGestorPersistencia.Setup(gp => gp.Guardar(It.IsAny<Votable>())).Callback<Votable>(v => v.Id = 1);
+            //_mockGestorPersistencia.Setup(gp => gp.Guardar(It.IsAny<Album>())).Callback<Album>(v => v.Id = 1);
+            //_mockGestorPersistencia.Setup(gp => gp.Guardar(It.IsAny<Votable>())).Callback<Votable>(v => v.Id = 1);
 
             var entrada = new EditarAlbumEntrada
-            {
-                Nombre = "Album de pruebas",
-            };
+                {
+                    Nombre = "Album de pruebas",
+                };
 
             // Invocar
             var salida = _gestorDominio.EditarAlbum(entrada);
