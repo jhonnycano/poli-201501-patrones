@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
     public class ContextoEF : DbContext {

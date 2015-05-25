@@ -1,4 +1,6 @@
-﻿namespace Politecnico.Patrones.ProyectoFinal.Lib {
+﻿using Politecnico.Patrones.ProyectoFinal.Contratos;
+
+namespace Politecnico.Patrones.ProyectoFinal.Lib {
     internal class GestorDependencias {
         private readonly GestorPersistenciaEF _gestorPersistencia;
         public GestorDependencias() {

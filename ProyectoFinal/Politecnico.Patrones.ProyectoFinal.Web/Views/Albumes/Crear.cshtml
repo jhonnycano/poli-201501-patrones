@@ -1,4 +1,4 @@
-﻿@model Politecnico.Patrones.ProyectoFinal.Lib.Entidades.Album
+﻿@model Politecnico.Patrones.ProyectoFinal.Web.Models.MVAlbumEditar
 
 @{
     ViewBag.Title = "Crear álbum";
@@ -14,11 +14,11 @@
         <legend>Interprete</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Nombre)
+            @Html.LabelFor(model => model.AlbumNombre)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Nombre)
-            @Html.ValidationMessageFor(model => model.Nombre)
+            @Html.EditorFor(model => model.AlbumNombre)
+            @Html.ValidationMessageFor(model => model.AlbumNombre)
         </div>
 
         <p>

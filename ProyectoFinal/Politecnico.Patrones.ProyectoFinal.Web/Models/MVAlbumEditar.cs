@@ -8,6 +8,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Models
         public int AlbumId { get; set; }
         [DisplayName("Nombre del álbum")]
         public string AlbumNombre { get; set; }
-        public IEnumerable<MVInterprete> ListaInterpretes { get; set; }
+        public IList<MVInterprete> ListaInterpretes { get; set; }
     }
 }

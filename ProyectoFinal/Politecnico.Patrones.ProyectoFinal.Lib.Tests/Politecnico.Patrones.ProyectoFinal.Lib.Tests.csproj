@@ -62,14 +62,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Politecnico.Patrones.ProyectoFinal.Contratos\Politecnico.Patrones.ProyectoFinal.Contratos.csproj">
+      <Project>{5de2df57-0bb2-418f-b640-9fa03f8faef5}</Project>
+      <Name>Politecnico.Patrones.ProyectoFinal.Contratos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Politecnico.Patrones.ProyectoFinal.Lib\Politecnico.Patrones.ProyectoFinal.Lib.csproj">
       <Project>{f80e75f0-c8dd-436a-b117-c9c8d9afcdf0}</Project>
       <Name>Politecnico.Patrones.ProyectoFinal.Lib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Aceptacion\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

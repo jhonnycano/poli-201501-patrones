@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Unitarios {
     [TestFixture]

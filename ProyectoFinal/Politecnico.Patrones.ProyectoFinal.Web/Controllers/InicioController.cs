@@ -1,7 +1,8 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
+using Politecnico.Patrones.ProyectoFinal.Contratos;
+using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
 using Politecnico.Patrones.ProyectoFinal.Lib;
-using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     public class InicioController : Controller {

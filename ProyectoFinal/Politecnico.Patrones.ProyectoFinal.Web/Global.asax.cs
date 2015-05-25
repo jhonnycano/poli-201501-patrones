@@ -3,8 +3,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Politecnico.Patrones.ProyectoFinal.Contratos;
+using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Lib;
-using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Web.App_Start;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web {

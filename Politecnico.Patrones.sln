@@ -63,6 +63,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProyectoFinal", "ProyectoFi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.ProyectoFinal.Lib.Tests", "ProyectoFinal\Politecnico.Patrones.ProyectoFinal.Lib.Tests\Politecnico.Patrones.ProyectoFinal.Lib.Tests.csproj", "{59745348-4F5D-442E-B6CB-E09FED4EABCA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politecnico.Patrones.ProyectoFinal.Contratos", "ProyectoFinal\Politecnico.Patrones.ProyectoFinal.Contratos\Politecnico.Patrones.ProyectoFinal.Contratos.csproj", "{5DE2DF57-0BB2-418F-B640-9FA03F8FAEF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{59745348-4F5D-442E-B6CB-E09FED4EABCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59745348-4F5D-442E-B6CB-E09FED4EABCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59745348-4F5D-442E-B6CB-E09FED4EABCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DE2DF57-0BB2-418F-B640-9FA03F8FAEF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DE2DF57-0BB2-418F-B640-9FA03F8FAEF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DE2DF57-0BB2-418F-B640-9FA03F8FAEF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DE2DF57-0BB2-418F-B640-9FA03F8FAEF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -192,5 +198,6 @@ Global
 		{F80E75F0-C8DD-436A-B117-C9C8D9AFCDF0} = {B307625D-BE63-4935-AF21-D50C8D5C3ADF}
 		{17F8C9D5-69A0-41ED-A483-5DC02B82CB69} = {B307625D-BE63-4935-AF21-D50C8D5C3ADF}
 		{59745348-4F5D-442E-B6CB-E09FED4EABCA} = {B307625D-BE63-4935-AF21-D50C8D5C3ADF}
+		{5DE2DF57-0BB2-418F-B640-9FA03F8FAEF5} = {B307625D-BE63-4935-AF21-D50C8D5C3ADF}
 	EndGlobalSection
 EndGlobal

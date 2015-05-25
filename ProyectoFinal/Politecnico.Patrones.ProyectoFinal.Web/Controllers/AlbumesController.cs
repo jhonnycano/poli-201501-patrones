@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Politecnico.Patrones.ProyectoFinal.Lib;
-using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
-using Politecnico.Patrones.ProyectoFinal.Lib.VO;
+using Politecnico.Patrones.ProyectoFinal.Contratos;
+using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
 using Politecnico.Patrones.ProyectoFinal.Web.Models;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
@@ -42,9 +42,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         // POST: /Albumes/Crear
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Crear(Album album) {
+        public ActionResult Crear(MVAlbumEditar albumEditar) {
             if (ModelState.IsValid) {
-                var entrada = new EditarAlbumEntrada {AlbumId = album.Id, Nombre = album.Nombre};
+                var entrada = new EditarAlbumEntrada {AlbumId = albumEditar.AlbumId, Nombre = albumEditar.AlbumNombre};
                 var salida = _gestorDominio.EditarAlbum(entrada);
                 if (salida != SalidaBase.Resultados.Exito) {
                     TempData["mensaje"] = "error: " + salida.Mensaje;
@@ -52,7 +52,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 return RedirectToAction("Index");
             }
 
-            return View(album);
+            return View(albumEditar);
         }
         //
         // GET: /Albumes/Editar/5
@@ -70,9 +70,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
 
             return View(model);
         }
-        private IEnumerable<MVInterprete> TraerListaInterpretes(Album album) {
+        private IList<MVInterprete> TraerListaInterpretes(Album album) {
             var interpretes = _gestorDominio.TraerInterpretesAlbum(album.Id);
-            var listaInterpretes = from i in interpretes select new MVInterprete {Id = i.Id, Nombre = i.Nombre};
+            var listaInterpretes = (from i in interpretes select new MVInterprete {Id = i.Id, Nombre = i.Nombre}).ToList();
             return listaInterpretes;
         }
         //

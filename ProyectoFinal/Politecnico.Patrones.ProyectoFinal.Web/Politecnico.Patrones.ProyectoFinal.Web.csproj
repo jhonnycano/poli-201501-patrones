@@ -160,6 +160,11 @@
     </Compile>
     <Compile Include="Models\MVAlbumEditar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recursos\Cadenas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cadenas.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\font\fontawesome-webfont.svg" />
@@ -318,10 +323,20 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Politecnico.Patrones.ProyectoFinal.Contratos\Politecnico.Patrones.ProyectoFinal.Contratos.csproj">
+      <Project>{5de2df57-0bb2-418f-b640-9fa03f8faef5}</Project>
+      <Name>Politecnico.Patrones.ProyectoFinal.Contratos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Politecnico.Patrones.ProyectoFinal.Lib\Politecnico.Patrones.ProyectoFinal.Lib.csproj">
       <Project>{f80e75f0-c8dd-436a-b117-c9c8d9afcdf0}</Project>
       <Name>Politecnico.Patrones.ProyectoFinal.Lib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Recursos\Cadenas.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Cadenas.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

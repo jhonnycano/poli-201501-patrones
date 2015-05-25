@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Contratos;
+using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
     internal class GestorPersistenciaEF : IGestorPersistencia {

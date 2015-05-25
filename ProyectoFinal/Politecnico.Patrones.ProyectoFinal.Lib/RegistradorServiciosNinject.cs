@@ -1,4 +1,5 @@
 ﻿using Ninject;
+using Politecnico.Patrones.ProyectoFinal.Contratos;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
     public class RegistradorServiciosNinject {

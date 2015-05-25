@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
+using Politecnico.Patrones.ProyectoFinal.Contratos;
+using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
 using Politecnico.Patrones.ProyectoFinal.Lib;
-using Politecnico.Patrones.ProyectoFinal.Lib.Entidades;
-using Politecnico.Patrones.ProyectoFinal.Lib.VO;
 using Politecnico.Patrones.ProyectoFinal.Web.Models;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {

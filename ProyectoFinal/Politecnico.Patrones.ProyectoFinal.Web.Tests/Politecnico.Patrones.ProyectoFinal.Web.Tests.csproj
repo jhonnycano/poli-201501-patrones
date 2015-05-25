@@ -35,6 +35,14 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq, Version=4.2.1502.911, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -97,6 +105,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AlbumesControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +115,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Politecnico.Patrones.ProyectoFinal.Contratos\Politecnico.Patrones.ProyectoFinal.Contratos.csproj">
+      <Project>{5de2df57-0bb2-418f-b640-9fa03f8faef5}</Project>
+      <Name>Politecnico.Patrones.ProyectoFinal.Contratos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Politecnico.Patrones.ProyectoFinal.Web\Politecnico.Patrones.ProyectoFinal.Web.csproj">
       <Project>{17F8C9D5-69A0-41ED-A483-5DC02B82CB69}</Project>
       <Name>Politecnico.Patrones.ProyectoFinal.Web</Name>
