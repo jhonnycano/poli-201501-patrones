@@ -1,11 +1,6 @@
-﻿using System.Web.Mvc;
-using Moq;
+﻿using Moq;
 using NUnit.Framework;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
-using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
-using Politecnico.Patrones.ProyectoFinal.Web.Controllers;
-using Politecnico.Patrones.ProyectoFinal.Web.Models;
-using Politecnico.Patrones.ProyectoFinal.Web.Recursos;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Tests.Controllers {
     [TestFixture]

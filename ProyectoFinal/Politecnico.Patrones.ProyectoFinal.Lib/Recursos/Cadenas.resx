@@ -118,6 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="album_falta_interprete" xml:space="preserve">
-    <value>Hace falta el intérprete</value>
+    <value>Hace falta asociar el intérprete</value>
+  </data>
+  <data name="album_falta_nombre" xml:space="preserve">
+    <value>Hace falta el nombre del álbum</value>
+  </data>
+  <data name="album_interprete_no_encontrado" xml:space="preserve">
+    <value>Intérprete con id {0} no encontrado</value>
+  </data>
+  <data name="album_no_encontrado" xml:space="preserve">
+    <value>Album con id {0} no encontrado</value>
+  </data>
+  <data name="interprete_falta_nombre" xml:space="preserve">
+    <value>Falta el nombre del intérprete</value>
   </data>
 </root>

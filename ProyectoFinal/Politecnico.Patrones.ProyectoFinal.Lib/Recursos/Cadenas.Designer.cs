@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Politecnico.Patrones.ProyectoFinal.Web.Recursos {
+namespace Politecnico.Patrones.ProyectoFinal.Lib.Recursos {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Recursos {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Politecnico.Patrones.ProyectoFinal.Web.Recursos.Cadenas", typeof(Cadenas).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Politecnico.Patrones.ProyectoFinal.Lib.Recursos.Cadenas", typeof(Cadenas).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,47 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Recursos {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hace falta el intérprete.
+        ///   Looks up a localized string similar to Hace falta asociar el intérprete.
         /// </summary>
         public static string album_falta_interprete {
             get {
                 return ResourceManager.GetString("album_falta_interprete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hace falta el nombre del álbum.
+        /// </summary>
+        public static string album_falta_nombre {
+            get {
+                return ResourceManager.GetString("album_falta_nombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Intérprete con id {0} no encontrado.
+        /// </summary>
+        public static string album_interprete_no_encontrado {
+            get {
+                return ResourceManager.GetString("album_interprete_no_encontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Album con id {0} no encontrado.
+        /// </summary>
+        public static string album_no_encontrado {
+            get {
+                return ResourceManager.GetString("album_no_encontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Falta el nombre del intérprete.
+        /// </summary>
+        public static string interprete_falta_nombre {
+            get {
+                return ResourceManager.GetString("interprete_falta_nombre", resourceCulture);
             }
         }
     }
