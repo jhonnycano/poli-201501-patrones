@@ -13,7 +13,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 case TipoReporte.ListaCanciones:
                     return new ReporteListaCanciones(_gestorPersistencia);
                 case TipoReporte.ListaInterpretes:
-                    return new ReporteListaInterpretes(_gestorPersistencia);
+                    return new ReporteDetalleInterprete(_gestorPersistencia);
                 case TipoReporte.ListaAlbumes:
                     return new ReporteListaAlbumes(_gestorPersistencia);
                 case TipoReporte.ListaCancionesAlbum:

@@ -60,6 +60,8 @@
     <Compile Include="GestorPersistenciaEF.cs" />
     <Compile Include="ImportadorJson.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MV\MVCancion.cs" />
+    <Compile Include="MV\MVInterpreteDetallado.cs" />
     <Compile Include="MV\MVAlbum.cs" />
     <Compile Include="MV\MVAlbumLista.cs" />
     <Compile Include="MV\MVCancionLista.cs" />
@@ -81,7 +83,7 @@
     <Compile Include="Reportes\ReporteListaAlbumes.cs" />
     <Compile Include="Reportes\ReporteListaCanciones.cs" />
     <Compile Include="Reportes\ReporteListaCancionesAlbum.cs" />
-    <Compile Include="Reportes\ReporteListaInterpretes.cs" />
+    <Compile Include="Reportes\ReporteDetalleInterprete.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

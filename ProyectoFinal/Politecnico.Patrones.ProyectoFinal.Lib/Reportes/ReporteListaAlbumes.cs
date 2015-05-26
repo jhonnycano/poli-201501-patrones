@@ -20,7 +20,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
             return "";
         }
         public override IReporteConsulta Consultar() {
-            var resultConsulta = _gestorPersistencia.TraerConsulta<MVAlbumLista.Item>(Consultas.rpt_albumes, _parametros);
+            var resultConsulta = _gestorPersistencia.TraerConsulta<MVAlbum>(Consultas.rpt_albumes, _parametros);
             var lista = resultConsulta.ToList();
 
             foreach (var item in lista)
