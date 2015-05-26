@@ -4,7 +4,7 @@ using Politecnico.Patrones.ProyectoFinal.Lib.Recursos;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
     public abstract class ReporteBase : IReporte {
-        private readonly IGestorPersistencia _gestorPersistencia;
+        protected readonly IGestorPersistencia _gestorPersistencia;
         protected ReporteBase(IGestorPersistencia gestorPersistencia) {
             _gestorPersistencia = gestorPersistencia;
         }
@@ -15,9 +15,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
             return parametros == null ? Cadenas.rpt_val_no_parametros : "";
         }
         protected string ValidarFechas(IDictionary<string, object> parametros) {
-            return !parametros.ContainsKey("fch_inicio")
+            return !parametros.ContainsKey("FchInicio")
                 ? Cadenas.rpt_val_no_fch_inicio
-                : (!parametros.ContainsKey("fch_fin")
+                : (!parametros.ContainsKey("FchFin")
                     ? Cadenas.rpt_val_no_fch_fin
                     : "");
         }

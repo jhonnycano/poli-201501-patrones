@@ -465,12 +465,11 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
             Assert.AreEqual(string.Format(Cadenas.reporte_tipo_no_encontrado, 1000), salida.Mensaje);
         }
         [Test]
-        public void GenerarReporte_ListaCancionesSinParametros_Falla()
-        {
+        public void GenerarReporte_ListaCancionesSinParametros_Falla() {
             var entrada = new GenerarReporteEntrada
-            {
-                Tipo = TipoReporte.ListaCanciones,
-            };
+                {
+                    Tipo = TipoReporte.ListaCanciones,
+                };
 
             var salida = _gestorDominio.GenerarReporte(entrada);
 
@@ -479,13 +478,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
                 salida.Mensaje);
         }
         [Test]
-        public void GenerarReporte_ListaCancionesSinFechaInicio_Falla()
-        {
+        public void GenerarReporte_ListaCancionesSinFechaInicio_Falla() {
             var entrada = new GenerarReporteEntrada
-            {
-                Tipo = TipoReporte.ListaCanciones,
-                Parametros = new Dictionary<string, object>()
-            };
+                {
+                    Tipo = TipoReporte.ListaCanciones,
+                    Parametros = new Dictionary<string, object>()
+                };
 
             var salida = _gestorDominio.GenerarReporte(entrada);
 
@@ -500,7 +498,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
                     Tipo = TipoReporte.ListaCanciones,
                     Parametros = new Dictionary<string, object>
                         {
-                            {"fch_inicio", new DateTime(2015, 1, 1)}
+                            {"FchInicio", new DateTime(2015, 1, 1)}
                         }
                 };
 
@@ -517,14 +515,15 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
                     Tipo = TipoReporte.ListaCanciones,
                     Parametros = new Dictionary<string, object>
                         {
-                            {"fch_inicio", new DateTime(2015, 1, 1)},
-                            {"fch_fin", new DateTime(2016, 1, 1)}
+                            {"FchInicio", new DateTime(2015, 1, 1)},
+                            {"FchFin", new DateTime(2016, 1, 1)}
                         }
                 };
 
             var salida = _gestorDominio.GenerarReporte(entrada);
 
             Assert.IsTrue(salida == SalidaBase.Resultados.Exito);
+            Assert.IsNotNull(salida.Consulta);
             var consultaListaCanciones = salida.Consulta as MVCancionLista;
             Assert.IsNotNull(consultaListaCanciones);
             Assert.AreEqual("_ReporteListaCanciones", consultaListaCanciones.Vista);

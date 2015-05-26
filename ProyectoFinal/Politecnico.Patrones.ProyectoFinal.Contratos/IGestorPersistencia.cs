@@ -33,5 +33,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
         void EliminarCancionInterprete(int cancion);
         void EliminarAlbumInterprete(int interprete, int album);
         void EliminarVotableUsuario(int votable, int usuario);
+        IEnumerable<T> TraerConsulta<T>(string consulta, IDictionary<string, object> parametros);
     }
 }

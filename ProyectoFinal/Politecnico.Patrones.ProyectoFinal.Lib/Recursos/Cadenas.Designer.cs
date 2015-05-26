@@ -195,18 +195,31 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Recursos {
         ///		{	id: 4, nombre: &quot;Debora Ramirez&quot; },
         ///	], 
         ///	albumes: [
-        ///		{	id: 1, nombre: &quot;Con te Partiro&quot;, interpretes: [1] },
-        ///		{	id: 2, nombre: &quot;Nothing else matters&quot;, interpretes: [2] },
-        ///		{	id: 3, nombre: &quot;Por qué&quot;, interpretes: [3] },
+        ///		{	id: 1, nombre: &quot;Con te Partiro&quot;, añoLanzamiento: 1998, interpretes: [1] },
+        ///		{	id: 2, nombre: &quot;Nothing else matters&quot;, añoLanzamiento: 1987, interpretes: [2] },
+        ///		{	id: 3, nombre: &quot;Por qué&quot;, añoLanzamiento: 2014, interpretes: [3] },
         ///	], 
         ///	canciones: [
         ///		{	id: 1, nombre: &quot;Con te Partiro&quot;, album: 1 },
-        ///		{	id: 2, nombre: &quot;Nothing else matters&quot;, album: 2 },
-        ///		{	id: 3, nombre: &quot;P [rest of string was truncated]&quot;;.
+        ///		{	id: 2,  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string seed_json {
             get {
                 return ResourceManager.GetString("seed_json", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT c.Id, c.FchCreacion, c.Nombre, a.Nombre &apos;Album&apos;, COUNT(*) TotalVotos
+        ///FROM Cancion c
+        ///INNER JOIN Album a ON c.AlbumId = a.Id
+        ///INNER JOIN VotableUsuario vu ON vu.VotableId = c.VotableId
+        ///WHERE vu.FchCreacion BETWEEN @FchInicio AND @FchFin
+        ///GROUP BY c.Id, c.FchCreacion, c.Nombre, a.Nombre.
+        /// </summary>
+        public static string sql_rpt_canciones {
+            get {
+                return ResourceManager.GetString("sql_rpt_canciones", resourceCulture);
             }
         }
         

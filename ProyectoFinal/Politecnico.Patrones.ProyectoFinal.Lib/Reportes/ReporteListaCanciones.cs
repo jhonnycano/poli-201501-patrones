@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
+using Politecnico.Patrones.ProyectoFinal.Lib.MV;
+using Politecnico.Patrones.ProyectoFinal.Lib.Recursos;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
     internal class ReporteListaCanciones : ReporteBase {
-        public DateTime FchInicio { get; set; }
-        public DateTime FchFin { get; set; }
+        private IDictionary<string, object> _parametros;
         public ReporteListaCanciones(IGestorPersistencia gestorPersistencia)
             : base(gestorPersistencia)
         {
@@ -17,20 +18,20 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
             result = ValidarFechas(parametros);
             if (!string.IsNullOrEmpty(result)) return result;
 
-            FchInicio = (DateTime) parametros["fch_inicio"];
-            FchFin = (DateTime) parametros["fch_fin"];
-
+            _parametros = parametros;
             return "";
         }
         public override IReporteConsulta Consultar() {
-            //_gestorPersistencia.TraerCanciones(FchInicio, FchFin);
+            var resultConsulta = _gestorPersistencia.TraerConsulta<MVCancionLista.Item>(Cadenas.sql_rpt_canciones, _parametros);
+            var lista = resultConsulta.ToList();
 
-            var result = new ReporteConsulta
+            var result = new MVCancionLista
                 {
                     Vista = "_ReporteListaCanciones",
-                    Objeto = new Object()
+                    Objeto = lista
                 };
             return result;
         }
+
     }
 }

@@ -131,6 +131,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Mocks {
         public void EliminarVotableUsuario(int votable, int usuario) {
             throw new NotImplementedException();
         }
+        public IEnumerable<T> TraerConsulta<T>(string consulta, IDictionary<string, object> parametros) {
+            throw new NotImplementedException();
+        }
         private T BuscarEnDic<T>(IDictionary<int, T> dic, int id) {
             if (!dic.ContainsKey(id)) return default(T);
             return dic[id];

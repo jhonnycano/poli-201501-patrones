@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Migrations;
+using System.Data.SqlClient;
 using System.Linq;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
@@ -170,6 +171,10 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
 
             _ctx.DbSetVotableUsuario.Remove(votableUsuario);
             _ctx.SaveChanges();
+        }
+        public IEnumerable<T> TraerConsulta<T>(string consulta, IDictionary<string, object> parametros) {
+            object[] paramsInterno = (from p in parametros select new SqlParameter {ParameterName = p.Key, Value = p.Value}).ToArray();
+            return _ctx.Database.SqlQuery<T>(consulta, paramsInterno);
         }
     }
 }
