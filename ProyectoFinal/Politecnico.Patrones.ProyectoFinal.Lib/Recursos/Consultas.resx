@@ -117,53 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="album_falta_interprete" xml:space="preserve">
-    <value>Hace falta asociar el intérprete</value>
+  <data name="rpt_albumes" xml:space="preserve">
+    <value>SELECT a.Id, a.FchCreacion, a.Nombre, a.AñoLanzamiento
+	, COUNT(DISTINCT vu.Id) TotalVotos
+FROM Album a
+INNER JOIN VotableUsuario vu ON vu.VotableId = a.VotableId
+WHERE vu.FchCreacion BETWEEN @FchInicio AND @FchFin
+GROUP BY a.Id, a.FchCreacion, a.Nombre, a.AñoLanzamiento</value>
   </data>
-  <data name="album_falta_nombre" xml:space="preserve">
-    <value>Hace falta el nombre del álbum</value>
-  </data>
-  <data name="album_id_no_encontrado" xml:space="preserve">
-    <value>Album con id {0} no encontrado</value>
-  </data>
-  <data name="cancion_asociada_a_album" xml:space="preserve">
-    <value>La canción se encuentra asociada al album {0}</value>
-  </data>
-  <data name="cancion_falta_album_o_interprete" xml:space="preserve">
-    <value>Hace falta el álbum de la canción o el intérprete</value>
-  </data>
-  <data name="cancion_falta_nombre" xml:space="preserve">
-    <value>Hace falta el nombre de la canción</value>
-  </data>
-  <data name="cancion_id_no_encontrado" xml:space="preserve">
-    <value>Canción con id {0} no encontrada</value>
-  </data>
-  <data name="interprete_falta_nombre" xml:space="preserve">
-    <value>Hace falta el nombre del intérprete</value>
-  </data>
-  <data name="interprete_id_no_encontrado" xml:space="preserve">
-    <value>Intérprete con id {0} no encontrado</value>
-  </data>
-  <data name="reporte_error_parametros" xml:space="preserve">
-    <value>Error en los parámetros de entrada del reporte</value>
-  </data>
-  <data name="reporte_tipo_no_encontrado" xml:space="preserve">
-    <value>Tipo de reporte {0} no encontrado</value>
-  </data>
-  <data name="rpt_val_no_fch_fin" xml:space="preserve">
-    <value>Hace falta la fecha de fin</value>
-  </data>
-  <data name="rpt_val_no_fch_inicio" xml:space="preserve">
-    <value>Hace falta la fecha de inicio</value>
-  </data>
-  <data name="rpt_val_no_parametros" xml:space="preserve">
-    <value>No se encontraron los parámetros de entrada</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="seed_json" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>archivos\seed_json.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="usuario_id_no_encontrado" xml:space="preserve">
-    <value>Usuario con id {0} no encontrado</value>
+  <data name="rpt_canciones" xml:space="preserve">
+    <value>SELECT c.Id, c.FchCreacion, c.Nombre
+	, ISNULL(a.Nombre, 'No disponible') 'Album'
+	, COUNT(DISTINCT vu.Id) TotalVotos
+FROM Cancion c
+LEFT JOIN Album a ON c.AlbumId = a.Id
+INNER JOIN VotableUsuario vu ON vu.VotableId = c.VotableId
+WHERE vu.FchCreacion BETWEEN @FchInicio AND @FchFin
+GROUP BY c.Id, c.FchCreacion, c.AlbumId, c.Nombre, a.Nombre</value>
   </data>
 </root>

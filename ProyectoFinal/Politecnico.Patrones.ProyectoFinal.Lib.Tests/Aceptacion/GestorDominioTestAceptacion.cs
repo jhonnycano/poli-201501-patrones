@@ -529,5 +529,70 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
             Assert.AreEqual("_ReporteListaCanciones", consultaListaCanciones.Vista);
             Assert.IsNotNull(consultaListaCanciones.Objeto);
         }
+        [Test]
+        public void GenerarReporte_ListaAlbumesSinParametros_Falla() {
+            var entrada = new GenerarReporteEntrada
+                {
+                    Tipo = TipoReporte.ListaAlbumes,
+                };
+
+            var salida = _gestorDominio.GenerarReporte(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format("{0}\n{1}", Cadenas.reporte_error_parametros, Cadenas.rpt_val_no_parametros),
+                salida.Mensaje);
+        }
+        [Test]
+        public void GenerarReporte_ListaAlbumesSinFechaInicio_Falla() {
+            var entrada = new GenerarReporteEntrada
+                {
+                    Tipo = TipoReporte.ListaAlbumes,
+                    Parametros = new Dictionary<string, object>()
+                };
+
+            var salida = _gestorDominio.GenerarReporte(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format("{0}\n{1}", Cadenas.reporte_error_parametros, Cadenas.rpt_val_no_fch_inicio),
+                salida.Mensaje);
+        }
+        [Test]
+        public void GenerarReporte_ListaAlbumesSinFechaFin_Falla() {
+            var entrada = new GenerarReporteEntrada
+                {
+                    Tipo = TipoReporte.ListaAlbumes,
+                    Parametros = new Dictionary<string, object>
+                        {
+                            {"FchInicio", new DateTime(2015, 1, 1)}
+                        }
+                };
+
+            var salida = _gestorDominio.GenerarReporte(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format("{0}\n{1}", Cadenas.reporte_error_parametros, Cadenas.rpt_val_no_fch_fin),
+                salida.Mensaje);
+        }
+        [Test]
+        public void GenerarReporte_ListaAlbumesTodoNormal_Funciona() {
+            var entrada = new GenerarReporteEntrada
+            {
+                Tipo = TipoReporte.ListaAlbumes,
+                Parametros = new Dictionary<string, object>
+                        {
+                            {"FchInicio", new DateTime(2015, 1, 1)},
+                            {"FchFin", new DateTime(2016, 1, 1)}
+                        }
+            };
+
+            var salida = _gestorDominio.GenerarReporte(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Exito);
+            Assert.IsNotNull(salida.Consulta);
+            var consultaListaAlbumes = salida.Consulta as MVAlbumLista;
+            Assert.IsNotNull(consultaListaAlbumes);
+            Assert.AreEqual("_ReporteListaAlbumes", consultaListaAlbumes.Vista);
+            Assert.IsNotNull(consultaListaAlbumes.Objeto);
+        }
     }
 }

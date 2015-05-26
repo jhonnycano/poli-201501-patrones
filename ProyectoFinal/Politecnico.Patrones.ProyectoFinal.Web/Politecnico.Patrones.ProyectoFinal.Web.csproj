@@ -152,7 +152,6 @@
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\InterpretesController.cs" />
     <Compile Include="Models\MVListaInterpretes.cs" />
-    <Compile Include="Models\MVInterprete.cs" />
     <Compile Include="Models\MVInterpreteFiltroLista.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Global.asax.cs">

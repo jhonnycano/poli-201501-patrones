@@ -210,20 +210,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Recursos {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT c.Id, c.FchCreacion, c.Nombre, a.Nombre &apos;Album&apos;, COUNT(*) TotalVotos
-        ///FROM Cancion c
-        ///INNER JOIN Album a ON c.AlbumId = a.Id
-        ///INNER JOIN VotableUsuario vu ON vu.VotableId = c.VotableId
-        ///WHERE vu.FchCreacion BETWEEN @FchInicio AND @FchFin
-        ///GROUP BY c.Id, c.FchCreacion, c.Nombre, a.Nombre.
-        /// </summary>
-        public static string sql_rpt_canciones {
-            get {
-                return ResourceManager.GetString("sql_rpt_canciones", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Usuario con id {0} no encontrado.
         /// </summary>
         public static string usuario_id_no_encontrado {

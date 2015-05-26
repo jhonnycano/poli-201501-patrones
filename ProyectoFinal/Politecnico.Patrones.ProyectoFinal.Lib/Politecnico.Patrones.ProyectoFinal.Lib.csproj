@@ -60,11 +60,19 @@
     <Compile Include="GestorPersistenciaEF.cs" />
     <Compile Include="ImportadorJson.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MV\MVAlbum.cs" />
+    <Compile Include="MV\MVAlbumLista.cs" />
     <Compile Include="MV\MVCancionLista.cs" />
+    <Compile Include="MV\MVInterprete.cs" />
     <Compile Include="Recursos\Cadenas.Designer.cs">
       <DependentUpon>Cadenas.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Recursos\Consultas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Consultas.resx</DependentUpon>
     </Compile>
     <Compile Include="RegistradorServiciosNinject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +99,10 @@
     <EmbeddedResource Include="Recursos\Cadenas.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Cadenas.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recursos\Consultas.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Consultas.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

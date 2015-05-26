@@ -8,8 +8,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
     internal class ReporteListaCanciones : ReporteBase {
         private IDictionary<string, object> _parametros;
         public ReporteListaCanciones(IGestorPersistencia gestorPersistencia)
-            : base(gestorPersistencia)
-        {
+            : base(gestorPersistencia) {
         }
         public override string Validar(IDictionary<string, object> parametros) {
             var result = ValidarParametrosNoNull(parametros);
@@ -22,8 +21,17 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
             return "";
         }
         public override IReporteConsulta Consultar() {
-            var resultConsulta = _gestorPersistencia.TraerConsulta<MVCancionLista.Item>(Cadenas.sql_rpt_canciones, _parametros);
+            var resultConsulta = _gestorPersistencia.TraerConsulta<MVCancionLista.Item>(Consultas.rpt_canciones,
+                _parametros);
             var lista = resultConsulta.ToList();
+
+            foreach (var item in lista) {
+                var interpretesCancion = _gestorPersistencia.TraerInterpretesCancion(item.Id);
+                if (interpretesCancion != null) {
+                    item.Interpretes =
+                        interpretesCancion.Select(i => new MVInterprete {Id = i.Id, Nombre = i.Nombre}).ToList();
+                }
+            }
 
             var result = new MVCancionLista
                 {
@@ -32,6 +40,5 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
                 };
             return result;
         }
-
     }
 }

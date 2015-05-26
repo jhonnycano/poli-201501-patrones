@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Models
 {

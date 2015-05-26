@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Models {
     public class MVListaInterpretes {
