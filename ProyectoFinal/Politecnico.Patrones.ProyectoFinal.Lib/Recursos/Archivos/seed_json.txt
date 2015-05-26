@@ -16,5 +16,7 @@
 		{	id: 3, nombre: "Por qué", album: 3 },
 		{	id: 4, nombre: "Con los brazos abiertos", album: 3 },
 		{	id: 5, nombre: "Deserving someone else", interpretes: [3, 4] },
+		{	id: 6, nombre: "Mi vida entera", interpretes: [3, 4] },
+		{	id: 7, nombre: "Quiera Dios que nazcas", },
 	]
 }

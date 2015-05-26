@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
@@ -142,6 +143,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             if (cancionInterprete == null || cancionInterprete.Id <= 0) return;
 
             _ctx.DbSetCancionInterprete.Remove(cancionInterprete);
+            _ctx.SaveChanges();
+        }
+        public void EliminarCancionInterprete(int cancion) {
+            foreach (var itm in _ctx.Set<CancionInterprete>().Where(itm => itm.CancionId == cancion)) {
+                _ctx.Entry(itm).State = EntityState.Deleted;
+            }
             _ctx.SaveChanges();
         }
         public void EliminarAlbumInterprete(int interprete, int album) {

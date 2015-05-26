@@ -126,6 +126,9 @@
   <data name="album_id_no_encontrado" xml:space="preserve">
     <value>Album con id {0} no encontrado</value>
   </data>
+  <data name="cancion_asociada_a_album" xml:space="preserve">
+    <value>La canción se encuentra asociada al album {0}</value>
+  </data>
   <data name="cancion_falta_album_o_interprete" xml:space="preserve">
     <value>Hace falta el álbum de la canción o el intérprete</value>
   </data>

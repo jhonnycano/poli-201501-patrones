@@ -18,12 +18,21 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             if (string.IsNullOrEmpty(entrada.Nombre))
                 return SalidaBase.Fallo(salida, Cadenas.interprete_falta_nombre);
 
-            var interprete = new Interprete
-                {
-                    Id = entrada.InterpreteId,
-                    Nombre = entrada.Nombre,
-                };
+            Interprete interprete;
+            if (entrada.InterpreteId > 0) {
+                interprete = _gestorPersistencia.TraerInterprete(entrada.InterpreteId);
+                if (interprete == null) {
+                    return SalidaBase.Fallo(salida,
+                        string.Format(Cadenas.interprete_id_no_encontrado, entrada.InterpreteId));
+                }
+            } else {
+                interprete = new Interprete
+                    {
+                        Nombre = entrada.Nombre,
+                    };
+            }
             _gestorPersistencia.Guardar(interprete);
+            salida.Interprete = interprete;
 
             return SalidaBase.Exito(salida);
         }
@@ -34,17 +43,16 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 return SalidaBase.Fallo(salida, Cadenas.album_falta_nombre);
 
             Album album;
-            if (entrada.AlbumId <= 0) {
-                album = new Album
-                    {
-                        Id = entrada.AlbumId,
-                        Nombre = entrada.Nombre,
-                    };
-            } else {
+            if (entrada.AlbumId > 0) {
                 album = _gestorPersistencia.TraerAlbum(entrada.AlbumId);
                 if (album == null) {
-                    return SalidaBase.Fallo(salida, "Album con id " + entrada.AlbumId + "no encontrado");
+                    return SalidaBase.Fallo(salida, string.Format(Cadenas.album_id_no_encontrado, entrada.AlbumId));
                 }
+            } else {
+                album = new Album
+                    {
+                        Nombre = entrada.Nombre,
+                    };
             }
             salida.Album = album;
             CrearVotable(album);
@@ -64,18 +72,18 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             }
 
             Cancion cancion;
-            if (entrada.CancionId <= 0) {
+            if (entrada.CancionId > 0) {
+                cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
+                if (cancion == null)
+                    return SalidaBase.Fallo(salida, string.Format(Cadenas.cancion_id_no_encontrado, entrada.CancionId));
+                cancion.AlbumId = entrada.AlbumId;
+            } else {
                 cancion = new Cancion
                     {
                         Id = entrada.CancionId,
                         Nombre = entrada.Nombre,
                         AlbumId = entrada.AlbumId
                     };
-            } else {
-                cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
-                if (cancion == null)
-                    return SalidaBase.Fallo(salida, "Canción con id " + entrada.CancionId + "no encontrada");
-                cancion.AlbumId = entrada.AlbumId;
             }
             CrearVotable(cancion);
             _gestorPersistencia.Guardar(cancion);
@@ -89,6 +97,10 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             var cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
             if (cancion == null)
                 return SalidaBase.Fallo(salida, string.Format(Cadenas.cancion_id_no_encontrado, entrada.CancionId));
+
+            if (cancion.AlbumId != null) {
+                return SalidaBase.Fallo(salida, string.Format(Cadenas.cancion_asociada_a_album, cancion.AlbumId));
+            }
 
             if (entrada.Interpretes == null || entrada.Interpretes.Count == 0)
                 return SalidaBase.Fallo(salida, Cadenas.album_falta_interprete);
@@ -146,17 +158,16 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public AsociarCancionYAlbumSalida AsociarCancionYAlbum(AsociarCancionYAlbumEntrada entrada) {
             var salida = new AsociarCancionYAlbumSalida();
             var cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
-            if (cancion == null) {
-                return SalidaBase.Fallo(salida, "Canción con id " + entrada.CancionId + "no encontrada");
-            }
+            if (cancion == null)
+                return SalidaBase.Fallo(salida, string.Format(Cadenas.cancion_id_no_encontrado, entrada.CancionId));
 
             if (entrada.Accion == AsociarCancionYAlbumEntrada.Acciones.Asociar) {
                 var album = _gestorPersistencia.TraerAlbum(entrada.AlbumId);
-                if (album == null) {
-                    return SalidaBase.Fallo(salida, "Album con id " + entrada.AlbumId + "no encontrado");
-                }
+                if (album == null)
+                    return SalidaBase.Fallo(salida, string.Format(Cadenas.album_id_no_encontrado, entrada.AlbumId));
 
                 cancion.AlbumId = album.Id;
+                _gestorPersistencia.EliminarCancionInterprete(entrada.CancionId);
             } else if (entrada.Accion == AsociarCancionYAlbumEntrada.Acciones.Desasociar) {
                 cancion.AlbumId = null;
             }

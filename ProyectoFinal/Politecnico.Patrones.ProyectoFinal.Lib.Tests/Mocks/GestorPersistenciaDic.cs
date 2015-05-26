@@ -119,6 +119,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Mocks {
         public void EliminarCancionInterprete(int interprete, int cancion) {
             throw new NotImplementedException();
         }
+        public void EliminarCancionInterprete(int cancion) {
+            throw new NotImplementedException();
+        }
         public void EliminarAlbumInterprete(int interprete, int album) {
             throw new NotImplementedException();
         }

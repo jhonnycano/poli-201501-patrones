@@ -29,6 +29,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
         void Guardar(Usuario usuario);
 
         void EliminarCancionInterprete(int interprete, int cancion);
+        void EliminarCancionInterprete(int cancion);
         void EliminarAlbumInterprete(int interprete, int album);
     }
 }

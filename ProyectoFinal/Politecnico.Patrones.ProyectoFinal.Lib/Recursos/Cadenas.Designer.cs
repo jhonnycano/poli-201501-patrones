@@ -88,6 +88,15 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Recursos {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to La canción se encuentra asociada al album {0}.
+        /// </summary>
+        public static string cancion_asociada_a_album {
+            get {
+                return ResourceManager.GetString("cancion_asociada_a_album", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hace falta el álbum de la canción o el intérprete.
         /// </summary>
         public static string cancion_falta_album_o_interprete {
