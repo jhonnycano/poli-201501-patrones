@@ -55,6 +55,14 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public EditarCancionSalida EditarCancion(EditarCancionEntrada entrada) {
             var salida = new EditarCancionSalida();
 
+            if (string.IsNullOrEmpty(entrada.Nombre))
+                return SalidaBase.Fallo(salida, Cadenas.cancion_falta_nombre);
+            if (entrada.AlbumId != null) {
+                Album album = _gestorPersistencia.TraerAlbum(entrada.AlbumId.Value);
+                if (album == null)
+                    return SalidaBase.Fallo(salida, string.Format(Cadenas.album_id_no_encontrado, entrada.AlbumId));
+            }
+
             Cancion cancion;
             if (entrada.CancionId <= 0) {
                 cancion = new Cancion
@@ -65,9 +73,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                     };
             } else {
                 cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
-                if (cancion == null) {
+                if (cancion == null)
                     return SalidaBase.Fallo(salida, "Canción con id " + entrada.CancionId + "no encontrada");
-                }
+                cancion.AlbumId = entrada.AlbumId;
             }
             CrearVotable(cancion);
             _gestorPersistencia.Guardar(cancion);
@@ -80,10 +88,16 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
 
             var cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
             if (cancion == null)
-                return SalidaBase.Fallo(salida, "Canción con id " + entrada.CancionId + "no encontrada");
+                return SalidaBase.Fallo(salida, string.Format(Cadenas.cancion_id_no_encontrado, entrada.CancionId));
 
-            var interpretes = TraerInterpretes(entrada.Interpretes);
-            if (interpretes.Any(i => i == null)) return SalidaBase.Fallo(salida, "Alguno de los intérpretes no existe");
+            if (entrada.Interpretes == null || entrada.Interpretes.Count == 0)
+                return SalidaBase.Fallo(salida, Cadenas.album_falta_interprete);
+
+            int interpreteError = int.MinValue;
+            var interpretes = TraerInterpretes(entrada.Interpretes, (noEncontrado => interpreteError = noEncontrado));
+            if (interpreteError != int.MinValue) {
+                return SalidaBase.Fallo(salida, string.Format(Cadenas.interprete_id_no_encontrado, interpreteError));
+            }
 
             if (entrada.Accion == RelacionarInterpretesACancionEntrada.Acciones.Agregar) {
                 var relaciones = interpretes.Select(i => _gestorPersistencia.TraerCancionInterprete(cancion.Id, i.Id));
@@ -104,7 +118,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
 
             var album = _gestorPersistencia.TraerAlbum(entrada.AlbumId);
             if (album == null)
-                return SalidaBase.Fallo(salida, string.Format(Cadenas.album_no_encontrado, entrada.AlbumId));
+                return SalidaBase.Fallo(salida, string.Format(Cadenas.album_id_no_encontrado, entrada.AlbumId));
 
             if (entrada.Interpretes == null || entrada.Interpretes.Count == 0)
                 return SalidaBase.Fallo(salida, Cadenas.album_falta_interprete);
@@ -112,7 +126,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             int interpreteError = int.MinValue;
             var interpretes = TraerInterpretes(entrada.Interpretes, (noEncontrado => interpreteError = noEncontrado));
             if (interpreteError != int.MinValue) {
-                return SalidaBase.Fallo(salida, string.Format(Cadenas.album_interprete_no_encontrado, interpreteError));
+                return SalidaBase.Fallo(salida, string.Format(Cadenas.interprete_id_no_encontrado, interpreteError));
             }
 
             if (entrada.Accion == RelacionarInterpretesAAlbumEntrada.Acciones.Agregar) {

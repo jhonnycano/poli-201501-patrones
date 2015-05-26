@@ -40,7 +40,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 var id = token.Value<int>("id");
                 var nombre = token.Value<string>("nombre");
                 var arrInterpretes = token["interpretes"];
-                _ctx.DbSetAlbum.AddOrUpdate(new Album {Id = id, Nombre = nombre});
+                var votableId = _ctx.DbSetVotable.Select(v => v.Id).DefaultIfEmpty().Max();
+                _ctx.DbSetAlbum.AddOrUpdate(new Album {Id = id, Nombre = nombre, VotableId = ++votableId});
+                _ctx.DbSetVotable.Add(new Votable {Id = votableId});
                 foreach (var tokenInterprete in arrInterpretes) {
                     var interpreteId = tokenInterprete.Value<int>();
                     var ai =
@@ -48,8 +50,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                         new AlbumInterprete {AlbumId = id, InterpreteId = interpreteId};
                     _ctx.DbSetAlbumInterprete.AddOrUpdate(ai);
                 }
+                _ctx.SaveChanges();
             }
-            _ctx.SaveChanges();
         }
         private void ImportarCanciones(JObject obj) {
             var arr = obj["canciones"] as JArray;
@@ -60,7 +62,15 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 var nombre = token.Value<string>("nombre");
                 var album = token.Value<int?>("album");
                 var arrInterpretes = token["interpretes"];
-                _ctx.DbSetCancion.AddOrUpdate(new Cancion {Id = id, Nombre = nombre, AlbumId = album});
+                var votableId = _ctx.DbSetVotable.Select(v => v.Id).DefaultIfEmpty().Max();
+                _ctx.DbSetCancion.AddOrUpdate(new Cancion
+                    {
+                        Id = id,
+                        Nombre = nombre,
+                        AlbumId = album,
+                        VotableId = votableId
+                    });
+                _ctx.DbSetVotable.Add(new Votable {Id = votableId});
                 if (arrInterpretes != null) {
                     foreach (var tokenInterprete in arrInterpretes) {
                         var interpreteId = tokenInterprete.Value<int>();
@@ -69,12 +79,14 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                                 x => x.CancionId == id && x.InterpreteId == interpreteId) ??
                             new CancionInterprete {CancionId = id, InterpreteId = interpreteId};
                         _ctx.DbSetCancionInterprete.AddOrUpdate(ci);
-                    }                    
+                    }
                 }
+                _ctx.SaveChanges();
             }
-            _ctx.SaveChanges();
         }
         private void ImportarUsuarios(JObject obj) {
+            var arr = obj["usuarios"] as JArray;
+            if (arr == null) return;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Politecnico.Patrones.ProyectoFinal.Contratos.VO {
+﻿using System.Collections.Generic;
+
+namespace Politecnico.Patrones.ProyectoFinal.Contratos.VO {
     public class EditarCancionEntrada {
         public int CancionId { get; set; }
         public string Nombre { get; set; }

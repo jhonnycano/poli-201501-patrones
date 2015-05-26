@@ -123,14 +123,23 @@
   <data name="album_falta_nombre" xml:space="preserve">
     <value>Hace falta el nombre del álbum</value>
   </data>
-  <data name="album_interprete_no_encontrado" xml:space="preserve">
-    <value>Intérprete con id {0} no encontrado</value>
-  </data>
-  <data name="album_no_encontrado" xml:space="preserve">
+  <data name="album_id_no_encontrado" xml:space="preserve">
     <value>Album con id {0} no encontrado</value>
   </data>
+  <data name="cancion_falta_album_o_interprete" xml:space="preserve">
+    <value>Hace falta el álbum de la canción o el intérprete</value>
+  </data>
+  <data name="cancion_falta_nombre" xml:space="preserve">
+    <value>Hace falta el nombre de la canción</value>
+  </data>
+  <data name="cancion_id_no_encontrado" xml:space="preserve">
+    <value>Canción con id {0} no encontrada</value>
+  </data>
   <data name="interprete_falta_nombre" xml:space="preserve">
-    <value>Falta el nombre del intérprete</value>
+    <value>Hace falta el nombre del intérprete</value>
+  </data>
+  <data name="interprete_id_no_encontrado" xml:space="preserve">
+    <value>Intérprete con id {0} no encontrado</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="seed_json" type="System.Resources.ResXFileRef, System.Windows.Forms">
