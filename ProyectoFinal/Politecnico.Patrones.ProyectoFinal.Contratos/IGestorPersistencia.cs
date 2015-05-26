@@ -3,6 +3,7 @@ using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 
 namespace Politecnico.Patrones.ProyectoFinal.Contratos {
     public interface IGestorPersistencia {
+        Usuario TraerUsuario(int id);
         Usuario TraerUsuario(string correo);
         Usuario TraerUsuario(string correo, string clave);
 
@@ -31,5 +32,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
         void EliminarCancionInterprete(int interprete, int cancion);
         void EliminarCancionInterprete(int cancion);
         void EliminarAlbumInterprete(int interprete, int album);
+        void EliminarVotableUsuario(int votable, int usuario);
     }
 }

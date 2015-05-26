@@ -12,6 +12,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             _ctx = new ContextoEF();
         }
 
+        public Usuario TraerUsuario(int id) {
+            return (from c in _ctx.DbSetUsuario
+                where c.Id == id
+                select c)
+                .FirstOrDefault();
+        }
         public Usuario TraerUsuario(string correo) {
             return (from c in _ctx.DbSetUsuario
                 where c.Correo == correo
@@ -156,6 +162,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             if (albumInterprete == null || albumInterprete.Id <= 0) return;
 
             _ctx.DbSetAlbumInterprete.Remove(albumInterprete);
+            _ctx.SaveChanges();
+        }
+        public void EliminarVotableUsuario(int votable, int usuario) {
+            var votableUsuario = TraerVotableUsuario(votable, usuario);
+            if (votableUsuario == null || votableUsuario.Id <= 0) return;
+
+            _ctx.DbSetVotableUsuario.Remove(votableUsuario);
             _ctx.SaveChanges();
         }
     }

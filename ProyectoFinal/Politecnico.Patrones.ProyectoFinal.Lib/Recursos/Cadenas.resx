@@ -144,8 +144,26 @@
   <data name="interprete_id_no_encontrado" xml:space="preserve">
     <value>Intérprete con id {0} no encontrado</value>
   </data>
+  <data name="reporte_error_parametros" xml:space="preserve">
+    <value>Error en los parámetros de entrada del reporte</value>
+  </data>
+  <data name="reporte_tipo_no_encontrado" xml:space="preserve">
+    <value>Tipo de reporte {0} no encontrado</value>
+  </data>
+  <data name="rpt_val_no_fch_fin" xml:space="preserve">
+    <value>Hace falta la fecha de fin</value>
+  </data>
+  <data name="rpt_val_no_fch_inicio" xml:space="preserve">
+    <value>Hace falta la fecha de inicio</value>
+  </data>
+  <data name="rpt_val_no_parametros" xml:space="preserve">
+    <value>No se encontraron los parámetros de entrada</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="seed_json" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>archivos\seed_json.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="usuario_id_no_encontrado" xml:space="preserve">
+    <value>Usuario con id {0} no encontrado</value>
   </data>
 </root>

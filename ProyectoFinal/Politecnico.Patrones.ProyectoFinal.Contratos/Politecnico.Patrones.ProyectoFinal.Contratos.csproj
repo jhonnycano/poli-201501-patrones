@@ -60,6 +60,8 @@
     <Compile Include="IGestorAutenticacion.cs" />
     <Compile Include="IGestorDominio.cs" />
     <Compile Include="IGestorPersistencia.cs" />
+    <Compile Include="IReporte.cs" />
+    <Compile Include="IReporteConsulta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VO\AsociarCancionYAlbumEntrada.cs" />
     <Compile Include="VO\AsociarCancionYAlbumSalida.cs" />

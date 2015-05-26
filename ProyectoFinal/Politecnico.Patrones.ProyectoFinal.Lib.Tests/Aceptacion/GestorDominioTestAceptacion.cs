@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
 using Politecnico.Patrones.ProyectoFinal.Lib.Recursos;
@@ -10,7 +9,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
     [TestFixture]
     public class GestorDominioTestAceptacion {
         private GestorDominio _gestorDominio;
-        private IGestorPersistencia _gestorPersistencia;
+        private GestorPersistenciaEF _gestorPersistencia;
 
         [SetUp]
         public void Inicializar() {
@@ -357,6 +356,98 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
             Assert.IsTrue(salida == SalidaBase.Resultados.Exito);
             Assert.IsTrue(_gestorPersistencia.TraerCancion(7).AlbumId == 3);
             Assert.IsTrue(_gestorPersistencia.TraerInterpretesCancion(7).Count == 0);
+        }
+
+        [Test]
+        public void RegistrarVotoAlbumes_AlbumNoExiste_Falla() {
+            var entrada = new RegistrarVotoAlbumesEntrada
+                {
+                    UsuarioId = 1,
+                    Albumes = new List<int> {10000000},
+                    Accion = RegistrarVotoAlbumesEntrada.Acciones.Asociar,
+                };
+            var salida = _gestorDominio.RegistrarVotoAlbumes(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format(Cadenas.album_id_no_encontrado, 10000000), salida.Mensaje);
+        }
+        [Test]
+        public void RegistrarVotoAlbumes_UsuarioNoExiste_Falla() {
+            var entrada = new RegistrarVotoAlbumesEntrada
+                {
+                    UsuarioId = 10000000,
+                    Albumes = new List<int> {1},
+                    Accion = RegistrarVotoAlbumesEntrada.Acciones.Asociar,
+                };
+            var salida = _gestorDominio.RegistrarVotoAlbumes(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format(Cadenas.usuario_id_no_encontrado, 10000000), salida.Mensaje);
+        }
+        [Test]
+        public void RegistrarVotoAlbumes_TodoNormal_Funciona() {
+            var entrada = new RegistrarVotoAlbumesEntrada
+                {
+                    UsuarioId = 1,
+                    Albumes = new List<int> {1},
+                    Accion = RegistrarVotoAlbumesEntrada.Acciones.Asociar,
+                };
+            var salida = _gestorDominio.RegistrarVotoAlbumes(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Exito);
+            var album = _gestorPersistencia.TraerAlbum(1);
+            VotableUsuario vu = _gestorPersistencia.TraerVotableUsuario(album.VotableId, 1);
+            Assert.IsNotNull(vu);
+            Assert.IsTrue(vu.UsuarioId == 1);
+            Assert.IsTrue(vu.VotableId == album.VotableId);
+
+            _gestorPersistencia.EliminarVotableUsuario(album.VotableId, 1);
+        }
+
+        [Test]
+        public void RegistrarVotoCanciones_AlbumNoExiste_Falla() {
+            var entrada = new RegistrarVotoCancionesEntrada
+                {
+                    UsuarioId = 1,
+                    Canciones = new List<int> {10000000},
+                    Accion = RegistrarVotoCancionesEntrada.Acciones.Asociar,
+                };
+            var salida = _gestorDominio.RegistrarVotoCanciones(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format(Cadenas.cancion_id_no_encontrado, 10000000), salida.Mensaje);
+        }
+        [Test]
+        public void RegistrarVotoCanciones_UsuarioNoExiste_Falla() {
+            var entrada = new RegistrarVotoCancionesEntrada
+                {
+                    UsuarioId = 10000000,
+                    Canciones = new List<int> {1},
+                    Accion = RegistrarVotoCancionesEntrada.Acciones.Asociar,
+                };
+            var salida = _gestorDominio.RegistrarVotoCanciones(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format(Cadenas.usuario_id_no_encontrado, 10000000), salida.Mensaje);
+        }
+        [Test]
+        public void RegistrarVotoCanciones_TodoNormal_Funciona() {
+            var entrada = new RegistrarVotoCancionesEntrada
+                {
+                    UsuarioId = 1,
+                    Canciones = new List<int> {1},
+                    Accion = RegistrarVotoCancionesEntrada.Acciones.Asociar,
+                };
+            var salida = _gestorDominio.RegistrarVotoCanciones(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Exito);
+            var cancion = _gestorPersistencia.TraerCancion(1);
+            VotableUsuario vu = _gestorPersistencia.TraerVotableUsuario(cancion.VotableId, 1);
+            Assert.IsNotNull(vu);
+            Assert.IsTrue(vu.UsuarioId == 1);
+            Assert.IsTrue(vu.VotableId == cancion.VotableId);
+
+            _gestorPersistencia.EliminarVotableUsuario(cancion.VotableId, 1);
         }
     }
 }

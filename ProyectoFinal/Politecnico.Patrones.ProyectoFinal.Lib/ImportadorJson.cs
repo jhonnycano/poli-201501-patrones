@@ -87,6 +87,16 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         private void ImportarUsuarios(JObject obj) {
             var arr = obj["usuarios"] as JArray;
             if (arr == null) return;
+
+            foreach (var token in arr) {
+                var id = token.Value<int>("id");
+                var nombre = token.Value<string>("nombre");
+                var correo = token.Value<string>("correo");
+                var clave = token.Value<string>("clave");
+                _ctx.DbSetUsuario.AddOrUpdate(new Usuario {Id = id, Nombre = nombre, Correo = correo, Clave = clave});
+            }
+            _ctx.SaveChanges();
+
         }
     }
 }

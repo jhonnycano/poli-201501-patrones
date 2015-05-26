@@ -38,6 +38,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Mocks {
             _dicAlbumInterprete = listaAlbumInterprete.ToDictionary(i => i.Id, i => i);
         }
 
+        public Usuario TraerUsuario(int id) {
+            throw new NotImplementedException();
+        }
         public Usuario TraerUsuario(string correo) {
             throw new NotImplementedException();
         }
@@ -123,6 +126,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Mocks {
             throw new NotImplementedException();
         }
         public void EliminarAlbumInterprete(int interprete, int album) {
+            throw new NotImplementedException();
+        }
+        public void EliminarVotableUsuario(int votable, int usuario) {
             throw new NotImplementedException();
         }
         private T BuscarEnDic<T>(IDictionary<int, T> dic, int id) {

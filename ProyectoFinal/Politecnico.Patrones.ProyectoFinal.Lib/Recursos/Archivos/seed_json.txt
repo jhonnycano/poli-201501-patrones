@@ -18,5 +18,10 @@
 		{	id: 5, nombre: "Deserving someone else", interpretes: [3, 4] },
 		{	id: 6, nombre: "Mi vida entera", interpretes: [3, 4] },
 		{	id: 7, nombre: "Quiera Dios que nazcas", },
+	],
+	usuarios: [
+		{	id: 1, nombre: "Jhonny D. Cano", correo: "jhonnycano@hotmail.com", clave: "m6mh6C9PPn9cBkRc1YeX8g==" },
+		{	id: 2, nombre: "Maria E. Ramirez", correo: "mariueud@hotmail.com", clave: "PfLsxQ2BrAL3T7+Yh3waaA==" },
+		{	id: 2, nombre: "Juan Sebastian Cano", correo: "sebascano97@hotmail.com", clave: "YSFh1XdeU/6QEpoCI+fkdQ==" },
 	]
 }
