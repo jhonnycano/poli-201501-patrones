@@ -216,7 +216,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public GenerarReporteSalida GenerarReporte(GenerarReporteEntrada entrada) {
             var salida = new GenerarReporteSalida();
 
-            var fabrica = new FabricaReportes();
+            var fabrica = new FabricaReportes(_gestorPersistencia);
             var reporte = fabrica.TraerReporte(entrada.Tipo);
             if (reporte == null)
                 return SalidaBase.Fallo(salida, string.Format(Cadenas.reporte_tipo_no_encontrado, entrada.Tipo));

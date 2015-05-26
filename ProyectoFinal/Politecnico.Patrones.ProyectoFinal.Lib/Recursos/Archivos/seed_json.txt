@@ -6,9 +6,9 @@
 		{	id: 4, nombre: "Debora Ramirez" },
 	], 
 	albumes: [
-		{	id: 1, nombre: "Con te Partiro", interpretes: [1] },
-		{	id: 2, nombre: "Nothing else matters", interpretes: [2] },
-		{	id: 3, nombre: "Por qué", interpretes: [3] },
+		{	id: 1, nombre: "Con te Partiro", añoLanzamiento: 1998, interpretes: [1] },
+		{	id: 2, nombre: "Nothing else matters", añoLanzamiento: 1987, interpretes: [2] },
+		{	id: 3, nombre: "Por qué", añoLanzamiento: 2014, interpretes: [3] },
 	], 
 	canciones: [
 		{	id: 1, nombre: "Con te Partiro", album: 1 },

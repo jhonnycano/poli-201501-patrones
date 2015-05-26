@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
+using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 using Politecnico.Patrones.ProyectoFinal.Lib.Recursos;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
@@ -448,6 +450,85 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
             Assert.IsTrue(vu.VotableId == cancion.VotableId);
 
             _gestorPersistencia.EliminarVotableUsuario(cancion.VotableId, 1);
+        }
+
+        [Test]
+        public void GenerarReporte_TipoDesconocido_Falla() {
+            var entrada = new GenerarReporteEntrada
+                {
+                    Tipo = (TipoReporte) 1000,
+                };
+
+            var salida = _gestorDominio.GenerarReporte(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format(Cadenas.reporte_tipo_no_encontrado, 1000), salida.Mensaje);
+        }
+        [Test]
+        public void GenerarReporte_ListaCancionesSinParametros_Falla()
+        {
+            var entrada = new GenerarReporteEntrada
+            {
+                Tipo = TipoReporte.ListaCanciones,
+            };
+
+            var salida = _gestorDominio.GenerarReporte(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format("{0}\n{1}", Cadenas.reporte_error_parametros, Cadenas.rpt_val_no_parametros),
+                salida.Mensaje);
+        }
+        [Test]
+        public void GenerarReporte_ListaCancionesSinFechaInicio_Falla()
+        {
+            var entrada = new GenerarReporteEntrada
+            {
+                Tipo = TipoReporte.ListaCanciones,
+                Parametros = new Dictionary<string, object>()
+            };
+
+            var salida = _gestorDominio.GenerarReporte(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format("{0}\n{1}", Cadenas.reporte_error_parametros, Cadenas.rpt_val_no_fch_inicio),
+                salida.Mensaje);
+        }
+        [Test]
+        public void GenerarReporte_ListaCancionesSinFechaFin_Falla() {
+            var entrada = new GenerarReporteEntrada
+                {
+                    Tipo = TipoReporte.ListaCanciones,
+                    Parametros = new Dictionary<string, object>
+                        {
+                            {"fch_inicio", new DateTime(2015, 1, 1)}
+                        }
+                };
+
+            var salida = _gestorDominio.GenerarReporte(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format("{0}\n{1}", Cadenas.reporte_error_parametros, Cadenas.rpt_val_no_fch_fin),
+                salida.Mensaje);
+        }
+        [Test]
+        public void GenerarReporte_ListaCancionesTodoNormal_Funciona() {
+            var entrada = new GenerarReporteEntrada
+                {
+                    Tipo = TipoReporte.ListaCanciones,
+                    Parametros = new Dictionary<string, object>
+                        {
+                            {"fch_inicio", new DateTime(2015, 1, 1)},
+                            {"fch_fin", new DateTime(2016, 1, 1)}
+                        }
+                };
+
+            var salida = _gestorDominio.GenerarReporte(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Exito);
+            var consultaListaCanciones = salida.Consulta as MVCancionLista;
+            Assert.IsNotNull(consultaListaCanciones);
+            Assert.AreEqual("_ReporteListaCanciones", consultaListaCanciones.Vista);
+            Assert.IsNotNull(consultaListaCanciones.Objeto);
         }
     }
 }

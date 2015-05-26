@@ -4,16 +4,20 @@ using Politecnico.Patrones.ProyectoFinal.Lib.Reportes;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
     internal class FabricaReportes {
+        private readonly IGestorPersistencia _gestorPersistencia;
+        public FabricaReportes(IGestorPersistencia gestorPersistencia) {
+            _gestorPersistencia = gestorPersistencia;
+        }
         public IReporte TraerReporte(TipoReporte tipoReporte) {
             switch (tipoReporte) {
                 case TipoReporte.ListaCanciones:
-                    return new ReporteListaCanciones();
+                    return new ReporteListaCanciones(_gestorPersistencia);
                 case TipoReporte.ListaInterpretes:
-                    return new ReporteListaInterpretes();
+                    return new ReporteListaInterpretes(_gestorPersistencia);
                 case TipoReporte.ListaAlbumes:
-                    return new ReporteListaAlbumes();
+                    return new ReporteListaAlbumes(_gestorPersistencia);
                 case TipoReporte.ListaCancionesAlbum:
-                    return new ReporteListaCancionesAlbum();
+                    return new ReporteListaCancionesAlbum(_gestorPersistencia);
                 default:
                     return null;
             }
