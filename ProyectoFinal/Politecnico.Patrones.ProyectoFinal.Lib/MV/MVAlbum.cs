@@ -7,7 +7,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.MV {
         public DateTime FchCreacion { get; set; }
         public int Nombre { get; set; }
         public int AñoLanzamiento { get; set; }
-        public IList<MVInterprete> Interpretes { get; set; }
         public int TotalVotos { get; set; }
     }
 }

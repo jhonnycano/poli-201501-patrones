@@ -29,6 +29,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 interprete = new Interprete
                     {
                         Nombre = entrada.Nombre,
+                        FchCreacion = DateTime.Now,
                     };
             }
             _gestorPersistencia.Guardar(interprete);
@@ -267,7 +268,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             var voto = _gestorPersistencia.TraerVotableUsuario(votable, usuario);
             if (voto != null) return;
 
-            voto = new VotableUsuario {UsuarioId = usuario, VotableId = votable};
+            voto = new VotableUsuario {UsuarioId = usuario, VotableId = votable, FchCreacion = DateTime.Now};
             _gestorPersistencia.Guardar(voto);
         }
         private IList<Interprete> TraerInterpretes(IEnumerable<int> interpretes, Action<int> siNoEncuentra = null) {

@@ -12,10 +12,10 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             switch (tipoReporte) {
                 case TipoReporte.ListaCanciones:
                     return new ReporteListaCanciones(_gestorPersistencia);
-                case TipoReporte.ListaInterpretes:
-                    return new ReporteDetalleInterprete(_gestorPersistencia);
                 case TipoReporte.ListaAlbumes:
                     return new ReporteListaAlbumes(_gestorPersistencia);
+                case TipoReporte.InterpreteDetalle:
+                    return new ReporteDetalleInterprete(_gestorPersistencia);
                 case TipoReporte.ListaCancionesAlbum:
                     return new ReporteListaCancionesAlbum(_gestorPersistencia);
                 default:

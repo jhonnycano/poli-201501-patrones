@@ -1,10 +1,5 @@
-﻿using System.Collections.Generic;
-using Moq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
-using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
-using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
-using Politecnico.Patrones.ProyectoFinal.Lib.Tests.Mocks;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Unitarios {
     [TestFixture]

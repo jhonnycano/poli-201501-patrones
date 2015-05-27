@@ -156,6 +156,9 @@
   <data name="rpt_val_no_fch_inicio" xml:space="preserve">
     <value>Hace falta la fecha de inicio</value>
   </data>
+  <data name="rpt_val_no_interprete" xml:space="preserve">
+    <value>Hace falta el intérprete</value>
+  </data>
   <data name="rpt_val_no_parametros" xml:space="preserve">
     <value>No se encontraron los parámetros de entrada</value>
   </data>

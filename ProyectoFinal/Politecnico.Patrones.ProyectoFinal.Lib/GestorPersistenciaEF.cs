@@ -71,6 +71,16 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 .Take(20)
                 .ToList();
         }
+        public IList<Cancion> TraerCancionesInterprete(int interpreteId) {
+            return _ctx.DbSetCancion
+                .Where(c => _ctx.DbSetCancionInterprete.Any(ai => ai.InterpreteId == interpreteId && ai.CancionId == c.Id))
+                .ToList();
+        }
+        public IList<Cancion> TraerCancionesAlbum(int albumId) {
+            return _ctx.DbSetCancion
+                .Where(c => c.AlbumId == albumId)
+                .ToList();
+        }
         public Album TraerAlbum(int id) {
             return (from a in _ctx.DbSetAlbum
                 where a.Id == id
@@ -83,6 +93,11 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 .OrderBy(a => a.Id)
                 .Skip(20*pagina)
                 .Take(20)
+                .ToList();
+        }
+        public IList<Album> TraerAlbumesInterprete(int interpreteId) {
+            return _ctx.DbSetAlbum
+                .Where(a => _ctx.DbSetAlbumInterprete.Any(ai => ai.InterpreteId == interpreteId && ai.AlbumId == a.Id))
                 .ToList();
         }
         public CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId) {

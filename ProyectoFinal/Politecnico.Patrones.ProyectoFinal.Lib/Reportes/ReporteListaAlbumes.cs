@@ -20,23 +20,30 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
             return "";
         }
         public override IReporteConsulta Consultar() {
-            var resultConsulta = _gestorPersistencia.TraerConsulta<MVAlbum>(Consultas.rpt_albumes, _parametros);
+            var resultConsulta = _gestorPersistencia.TraerConsulta<MVAlbumDetallado>(Consultas.rpt_albumes, _parametros);
             var lista = resultConsulta.ToList();
 
-            foreach (var item in lista)
-            {
+            foreach (var item in lista) {
+                // interpretes de album
                 var interpretesAlbum = _gestorPersistencia.TraerInterpretesAlbum(item.Id);
-                if (interpretesAlbum != null)
-                {
-                    item.Interpretes = interpretesAlbum.Select(i => new MVInterprete { Id = i.Id, Nombre = i.Nombre }).ToList();
+                if (interpretesAlbum != null) {
+                    item.Interpretes =
+                        interpretesAlbum.Select(i => new MVInterprete {Id = i.Id, Nombre = i.Nombre}).ToList();
+                }
+                
+                // canciones de album
+                var cancionesAlbum = _gestorPersistencia.TraerCancionesAlbum(item.Id);
+                if (cancionesAlbum != null) {
+                    item.Canciones =
+                        cancionesAlbum.Select(i => new MVCancion {Id = i.Id, Nombre = i.Nombre}).ToList();
                 }
             }
 
             var result = new MVAlbumLista
-            {
-                Vista = "_ReporteListaCanciones",
-                Objeto = lista
-            };
+                {
+                    Vista = "_ReporteListaAlbumes",
+                    Objeto = lista
+                };
             return result;
         }
     }

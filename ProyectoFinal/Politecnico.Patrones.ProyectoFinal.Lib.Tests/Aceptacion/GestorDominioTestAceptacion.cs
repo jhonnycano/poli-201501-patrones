@@ -594,5 +594,18 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
             Assert.AreEqual("_ReporteListaAlbumes", consultaListaAlbumes.Vista);
             Assert.IsNotNull(consultaListaAlbumes.Objeto);
         }
+        [Test]
+        public void GenerarReporte_InterpreteDetalleSinParametros_Falla() {
+            var entrada = new GenerarReporteEntrada
+                {
+                    Tipo = TipoReporte.InterpreteDetalle,
+                };
+
+            var salida = _gestorDominio.GenerarReporte(entrada);
+
+            Assert.IsTrue(salida == SalidaBase.Resultados.Fallo);
+            Assert.AreEqual(string.Format("{0}\n{1}", Cadenas.reporte_error_parametros, Cadenas.rpt_val_no_interprete),
+                salida.Mensaje);
+        }
     }
 }

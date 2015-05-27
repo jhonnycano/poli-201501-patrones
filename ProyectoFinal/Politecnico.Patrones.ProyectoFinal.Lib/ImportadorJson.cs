@@ -79,7 +79,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                         FchCreacion = _fch,
                         Nombre = nombre,
                         AlbumId = album,
-                        VotableId = votableId
+                        VotableId = ++votableId
                     });
                 _ctx.DbSetVotable.Add(new Votable {Id = votableId});
                 if (arrInterpretes != null) {
