@@ -5,8 +5,8 @@ using NUnit.Framework;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
-using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 using Politecnico.Patrones.ProyectoFinal.Lib.Recursos;
+using Politecnico.Patrones.ProyectoFinal.Lib.Reportes;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
     [TestFixture]
@@ -590,7 +590,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
 
             Assert.IsTrue(salida == SalidaBase.Resultados.Exito);
             Assert.IsNotNull(salida.Consulta);
-            var consultaListaAlbumes = salida.Consulta as MVAlbumLista;
+            var consultaListaAlbumes = salida.Consulta as ReporteConsulta;
             Assert.IsNotNull(consultaListaAlbumes);
             Assert.AreEqual("_ReporteListaAlbumes", consultaListaAlbumes.Vista);
             Assert.IsNotNull(consultaListaAlbumes.Objeto);

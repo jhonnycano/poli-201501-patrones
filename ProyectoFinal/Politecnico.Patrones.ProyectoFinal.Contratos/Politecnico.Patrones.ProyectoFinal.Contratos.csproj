@@ -67,6 +67,7 @@
     <Compile Include="IReporteConsulta.cs" />
     <Compile Include="MV\MVAlbum.cs" />
     <Compile Include="MV\MVAlbumDetallado.cs" />
+    <Compile Include="MV\MVAlbumLista.cs" />
     <Compile Include="MV\MVCancion.cs" />
     <Compile Include="MV\MVCancionLista.cs" />
     <Compile Include="MV\MVInterprete.cs" />
