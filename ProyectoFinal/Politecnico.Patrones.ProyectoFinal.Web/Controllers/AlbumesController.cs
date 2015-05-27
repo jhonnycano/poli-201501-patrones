@@ -18,12 +18,18 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         }
         //
         // GET: /Albumes/
-        public ActionResult Index(int pagina = 0, string nombre = "") {
-            var lista = _gestorDominio.TraerAlbumes(pagina, nombre);
+        public ActionResult Index(int pagina = 0, string nombre = "", int? interprete = null) {
+            var lista = _gestorDominio.TraerAlbumes(pagina, nombre, interprete);
+            var listaDetalle = _gestorDominio.DetallarAlbumes(lista);
+
             if (TempData.ContainsKey("mensaje")) {
                 ViewBag.Mensaje = TempData["mensaje"];
             }
-            return View(lista);
+            return View(listaDetalle);
+        }
+        public ActionResult Traer(MVAlbumFiltroLista filtroLista) {
+            var lista = _gestorDominio.TraerAlbumes(filtroLista.Pagina, filtroLista.Nombre, filtroLista.Interprete);
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
         //
         // GET: /Albumes/Detalle/5
@@ -67,7 +73,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     AlbumId = editarAlbumSalida.Album.Id,
                     Interpretes = interpretes.Select(i => i.Id).ToList(),
                 };
-            var relacionarInterpretesAAlbumSalida = 
+            var relacionarInterpretesAAlbumSalida =
                 _gestorDominio.RelacionarInterpretesAAlbum(relacionarInterpretesAAlbumEntrada);
             if (relacionarInterpretesAAlbumSalida != SalidaBase.Resultados.Exito) {
                 TempData["mensaje"] = "error: " + relacionarInterpretesAAlbumSalida.Mensaje;
@@ -115,7 +121,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         }
         private IList<MVInterprete> TraerListaInterpretes(Album album) {
             var interpretes = _gestorDominio.TraerInterpretesAlbum(album.Id);
-            var listaInterpretes = (from i in interpretes select new MVInterprete {Id = i.Id, Nombre = i.Nombre}).ToList();
+            var listaInterpretes =
+                (from i in interpretes select new MVInterprete {Id = i.Id, Nombre = i.Nombre}).ToList();
             return listaInterpretes;
         }
         //

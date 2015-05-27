@@ -252,7 +252,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public Interprete TraerInterprete(int id) {
             return _gestorPersistencia.TraerInterprete(id);
         }
-        public IList<MVAlbum> TraerAlbumes(int pagina, string nombre) {
+        public IList<MVAlbum> TraerAlbumes(int pagina, string nombre, int? interprete) {
             return _gestorPersistencia.TraerAlbumes(pagina, nombre);
         }
         public IList<MVAlbum> TraerAlbumesInterprete(int interpreteId) {

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Contratos.Entidades.Cancion>
+﻿@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVCancion>
 
 @{
     ViewBag.Title = "Lista de canciones";
@@ -14,13 +14,28 @@
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Album)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalVotos)
+        </th>
     </tr>
 
     @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @if (item.Album != null) {
+                    @Html.ActionLink(item.Album, "Detalle", "Albumes")
+                } else {
+                    <span>Sin album</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalVotos)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Editar", new {id = item.Id}) |

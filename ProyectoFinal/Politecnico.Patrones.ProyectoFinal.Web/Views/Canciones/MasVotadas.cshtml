@@ -14,6 +14,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
+                @if (!string.IsNullOrEmpty(item.Album)) {
+                    <span class="album">@Html.DisplayFor(modelItem => item.Album)</span>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalVotos)

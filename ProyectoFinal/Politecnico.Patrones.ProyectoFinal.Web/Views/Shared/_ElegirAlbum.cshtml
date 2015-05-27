@@ -1,0 +1,23 @@
+﻿<script type="text/javascript">
+     $(function() {
+         $(".ac-album").autocomplete({
+             source: function (request, response) {
+                 $.ajax({
+                     url: '/Albumes/Traer',
+                     data: 'nombre=' + request.term,
+                     success: function (data) {
+                         response(_.map(data, function(i) { return { id: i.Id, value: i.Nombre }; }));
+                     }
+                 });
+             },
+             minLength: 3,
+             select: function (event, ui) {
+                 $("input[name=albumElegidoId]").val(ui.item.id);
+                 $("#regAlbumElegidoNombre").text(ui.item.value);
+             }
+         });
+     });
+ </script>
+@Html.TextBox("albumBusqueda", "", new {Class = "ac-album"})
+@Html.Hidden("albumElegidoId", 0)
+<span>Álbum elegido: <span id="regAlbumElegidoNombre">Ninguna</span> </span>

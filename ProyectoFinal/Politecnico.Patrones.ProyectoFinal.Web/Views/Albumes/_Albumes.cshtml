@@ -16,7 +16,7 @@
     @foreach (var item in Model) {
         <tr>
             <td colspan="2">
-                <span>@Html.DisplayFor(modelItem => item.Nombre)</span>
+                <span>@Html.ActionLink(item.Nombre, "Detalle", "Albumes", new {id=item.Id}, null)</span>
                 <span class="votos">Votos: @Html.DisplayFor(modelItem => item.TotalVotos)</span>                
             </td>
         </tr>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using MvcRazorToPdf;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
@@ -32,7 +33,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
 
         //
         // GET: /Interpretes/Detalle/5
-        public ActionResult Detalle(int id = 0) {
+        public ActionResult Detalle(int id = 0, bool pdf = false) {
             Interprete interprete = _gestorDominio.TraerInterprete(id);
             if (interprete == null) {
                 return HttpNotFound();
@@ -54,7 +55,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                         }
                 };
 
-            return View(modelo);
+            ViewBag.Pdf = pdf;
+            //return View(modelo);
+            return pdf ? new PdfActionResult(modelo) : (ActionResult) View(modelo);
         }
 
         //

@@ -4,15 +4,12 @@
     ViewBag.Title = "Crear canción";
 }
 
-<h2>Crear canción</h2>
-
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Cancion</legend>
-
+        <legend><span>Crear canción</span></legend>
         <div class="editor-label">
             @Html.LabelFor(model => model.Nombre)
         </div>
@@ -20,7 +17,14 @@
             @Html.EditorFor(model => model.Nombre)
             @Html.ValidationMessageFor(model => model.Nombre)
         </div>
-
+        <fieldset>
+            <legend>Album</legend>
+            @Html.Partial("_ElegirAlbum")
+            <input type="button" id ="btnAsociarAlbum" value="Asociar" />
+            <input type="button" id ="btnDesasociarAlbum" value="Desasociar" />
+            <div id="regAlbumActual" class="emphasis"></div>
+            @Html.HiddenFor(c => c.AlbumId)
+        </fieldset>
         <p>
             <input type="submit" value="Guardar" />
         </p>
@@ -33,4 +37,23 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function() {
+            $("#btnAsociarAlbum").on('click', function() {
+                var i = $("input[name=albumElegidoId]").val();
+                if (i <= 0) return;
+
+                var hidAlbum = $("input[name=AlbumId]");
+                var nombre = $("#regAlbumElegidoNombre").html();
+                hidAlbum.val(i);
+                $("#regAlbumActual").text(nombre);
+            });
+            $("#btnDesasociarAlbum").on('click', function() {
+                var hidAlbum = $("input[name=AlbumId]");
+                hidAlbum.val('');
+                $("#regAlbumActual").text('');
+            });
+        });
+    </script>
 }

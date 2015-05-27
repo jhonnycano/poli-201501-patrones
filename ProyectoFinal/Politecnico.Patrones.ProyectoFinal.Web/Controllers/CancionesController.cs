@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
@@ -48,7 +49,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Crear(Cancion cancion) {
             if (ModelState.IsValid) {
-                var entrada = new EditarCancionEntrada {CancionId = cancion.Id, Nombre = cancion.Nombre};
+                var entrada = new EditarCancionEntrada
+                    {
+                        CancionId = cancion.Id,
+                        Nombre = cancion.Nombre,
+                        AlbumId = cancion.AlbumId
+                    };
                 var salida = _gestorDominio.EditarCancion(entrada);
                 if (salida != SalidaBase.Resultados.Exito) {
                     TempData["mensaje"] = "error: " + salida.Mensaje;
@@ -100,12 +106,5 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             if (disposable != null) disposable.Dispose();
             base.Dispose(disposing);
         }
-    }
-
-    public class MVCancionFiltroLista {
-        public int Pagina { get; set; }
-        public string Nombre { get; set; }
-        public FiltroAlbum FiltroAlbum { get; set; }
-        public int? Album { get; set; }
     }
 }

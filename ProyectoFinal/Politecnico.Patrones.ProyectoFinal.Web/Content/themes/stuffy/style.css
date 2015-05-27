@@ -580,3 +580,22 @@ table.t1 tfoot th em {
     font-size: 1.1em;
     font-style: normal;
 }
+
+
+span.votos {
+    margin-left: 50px;
+}
+
+.emphasis {
+    font-size: 2.2em;
+    font-weight: 600;
+}
+.album:before {
+    content: '('
+}
+.album:after {
+    content: ')'
+}
+.album {
+    font-size: 0.8em;
+}

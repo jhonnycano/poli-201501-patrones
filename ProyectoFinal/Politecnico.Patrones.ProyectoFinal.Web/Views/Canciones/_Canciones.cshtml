@@ -19,7 +19,7 @@
     @foreach (var item in Model.Canciones) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
+                @Html.ActionLink(item.Nombre, "Detalle", "Canciones", new {id=item.Id}, null)
             </td>
             @if (Model.MostrarAlbum) {
                 <td>

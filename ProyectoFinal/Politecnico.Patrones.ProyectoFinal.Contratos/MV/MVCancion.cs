@@ -1,14 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 
 namespace Politecnico.Patrones.ProyectoFinal.Contratos.MV {
     public class MVCancion: ICancion {
         public MVCancion() {
         }
-        public MVCancion(ICancion cancion) {
+        public MVCancion(Cancion cancion) {
             Id = cancion.Id;
             Nombre = cancion.Nombre;
+            AlbumId = cancion.AlbumId;
+            VotableId = cancion.VotableId;
+        }
+        public MVCancion(MVCancion cancion) {
+            Id = cancion.Id;
+            Nombre = cancion.Nombre;
+            AlbumId = cancion.AlbumId;
             VotableId = cancion.VotableId;
         }
         public int Id { get; set; }
@@ -16,7 +24,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos.MV {
         public string Nombre { get; set; }
         public int VotableId { get; set; }
         public string Album { get; set; }
+        public int? AlbumId { get; set; }
         public IList<MVInterprete> Interpretes { get; set; }
+        [DisplayName("Votos")]
         public int TotalVotos { get; set; }
     }
 }
