@@ -1,4 +1,4 @@
-﻿@model Politecnico.Patrones.ProyectoFinal.Web.Models.MVAlbumEditar
+﻿@model Politecnico.Patrones.ProyectoFinal.Lib.MV.MVAlbumDetallado
 
 @{
     ViewBag.Title = "Crear álbum";
@@ -11,20 +11,43 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Interprete</legend>
+        <legend>Album</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.AlbumNombre)
+            @Html.LabelFor(model => model.Nombre)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.AlbumNombre)
-            @Html.ValidationMessageFor(model => model.AlbumNombre)
+            @Html.EditorFor(model => model.Nombre)
+            @Html.ValidationMessageFor(model => model.Nombre)
         </div>
-
-        <p>
-            <input type="submit" value="Guardar" />
-        </p>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AñoLanzamiento)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AñoLanzamiento)
+            @Html.ValidationMessageFor(model => model.AñoLanzamiento)
+        </div>
+        
+        @Html.Hidden("hidInterpretes")
+        @Html.Hidden("hidCanciones")
     </fieldset>
+    <fieldset>
+        <legend>Interpretes</legend>
+        @Html.Partial("_ElegirInterprete")
+        <input type="button" id="btnAgregarInterprete" value="Agregar" />
+        <ul id="ulInterpretes"></ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>Canciones</legend>
+        @Html.Partial("_ElegirCancion")
+        <input type="button" id="btnAgregarCancion" value="Agregar" />
+        <ul id="ulCanciones"></ul>
+    </fieldset>
+    <p>
+        <input type="submit" value="Guardar" />
+    </p>
 }
 
 <div>
@@ -33,4 +56,47 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function() {
+
+            function mostrarLista(origen, destino) {
+                $(destino).empty();
+                for (var ind in origen) {
+                    var itm = origen[ind];
+                    $('<li />', { html: itm.Nombre }).appendTo(destino);
+                }
+            }
+
+            $("#btnAgregarInterprete").on('click', function(ev) {
+                var i = $("input[name=interpreteElegidoId]").val();
+                var hidInterprete = $("input[name=hidInterpretes]");
+                var nombre = $("#regArtistaElegidoNombre").html();
+                var obj, txt = hidInterprete.val();
+
+                if (txt) obj = JSON.parse(txt);
+                else obj = [];
+                var tmp = _.where(obj, { Id: i });
+                if (tmp != null && tmp.length > 0) return;
+
+                obj.push({ Id: i, Nombre: nombre });
+                hidInterprete.val(JSON.stringify(obj));
+                mostrarLista(obj, "#ulInterpretes");
+            });
+            $("#btnAgregarCancion").on('click', function(ev) {
+                var i = $("input[name=cancionElegidaId]").val();
+                var hidCanciones = $("input[name=hidCanciones]");
+                var nombre = $("#regCancionElegidaNombre").html();
+                var obj, txt = hidCanciones.val();
+
+                if (txt) obj = JSON.parse(txt);
+                else obj = [];
+                var tmp = _.where(obj, { Id: i });
+                if (tmp != null && tmp.length > 0) return;
+
+                obj.push({ Id: i, Nombre: nombre });
+                hidCanciones.val(JSON.stringify(obj));
+                mostrarLista(obj, "#ulCanciones");
+            });
+        });
+    </script>
 }

@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
-using Politecnico.Patrones.ProyectoFinal.Lib;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
@@ -14,13 +13,17 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         }
         // GET: /Canciones/
         public ActionResult Index(int pagina = 0, string nombre = "") {
-            var lista = _gestorDominio.TraerCanciones(pagina, nombre);
+            var lista = _gestorDominio.TraerCanciones(pagina, nombre, FiltroAlbum.Todas, null);
             return View(lista);
         }
-
+        //
+        // GET: /Interpretes/Traer
+        public ActionResult Traer(MVCancionFiltroLista filtroLista) {
+            var lista = _gestorDominio.TraerCanciones(filtroLista.Pagina, filtroLista.Nombre, filtroLista.FiltroAlbum, filtroLista.Album);
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
         //
         // GET: /Canciones/Detalle/5
-
         public ActionResult Detalle(int id = 0) {
             Cancion cancion = _gestorDominio.TraerCancion(id);
             if (cancion == null) {
@@ -28,17 +31,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             }
             return View(cancion);
         }
-
         //
         // GET: /Canciones/Crear
-
         public ActionResult Crear() {
             return View();
         }
-
         //
         // POST: /Canciones/Crear
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Crear(Cancion cancion) {
@@ -53,20 +52,16 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
 
             return View(cancion);
         }
-
         //
         // GET: /Canciones/Editar/5
-
         public ActionResult Editar(int id = 0) {
             Cancion cancion = _gestorDominio.TraerCancion(id);
             if (cancion == null) return HttpNotFound();
 
             return View(cancion);
         }
-
         //
         // POST: /Canciones/Editar/5
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Cancion cancion) {
@@ -80,10 +75,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             }
             return View(cancion);
         }
-
         //
         // GET: /Canciones/Borrar/5
-
         public ActionResult Borrar(int id = 0) {
             throw new NotSupportedException("No permitido");
 
@@ -94,10 +87,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             return View(cancion);
              * */
         }
-
         //
         // POST: /Canciones/Borrar/5
-
         [HttpPost, ActionName("Borrar")]
         [ValidateAntiForgeryToken]
         public ActionResult BorrarConfirmado(int id) {
@@ -112,5 +103,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             if (disposable != null) disposable.Dispose();
             base.Dispose(disposing);
         }
+    }
+
+    public class MVCancionFiltroLista {
+        public int Pagina { get; set; }
+        public string Nombre { get; set; }
+        public FiltroAlbum FiltroAlbum { get; set; }
+        public int? Album { get; set; }
     }
 }

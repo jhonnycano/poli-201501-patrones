@@ -25,6 +25,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                     return SalidaBase.Fallo(salida,
                         string.Format(Cadenas.interprete_id_no_encontrado, entrada.InterpreteId));
                 }
+                
+                interprete.Nombre = entrada.Nombre;
             } else {
                 interprete = new Interprete
                     {
@@ -53,6 +55,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 album = new Album
                     {
                         Nombre = entrada.Nombre,
+                        FchCreacion = DateTime.Now,
+                        AñoLanzamiento = entrada.AñoLanzamiento,
                     };
             }
             salida.Album = album;
@@ -82,6 +86,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 cancion = new Cancion
                     {
                         Id = entrada.CancionId,
+                        FchCreacion = DateTime.Now,
                         Nombre = entrada.Nombre,
                         AlbumId = entrada.AlbumId
                     };
@@ -158,22 +163,28 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         }
         public AsociarCancionYAlbumSalida AsociarCancionYAlbum(AsociarCancionYAlbumEntrada entrada) {
             var salida = new AsociarCancionYAlbumSalida();
-            var cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
-            if (cancion == null)
-                return SalidaBase.Fallo(salida, string.Format(Cadenas.cancion_id_no_encontrado, entrada.CancionId));
+            int cancionError = int.MinValue;
+            var canciones = TraerCanciones(entrada.Canciones, (noEncontrado => cancionError = noEncontrado));
+            if (cancionError != int.MinValue) {
+                return SalidaBase.Fallo(salida, string.Format(Cadenas.cancion_id_no_encontrado, cancionError));
+            }
 
             if (entrada.Accion == AsociarCancionYAlbumEntrada.Acciones.Asociar) {
                 var album = _gestorPersistencia.TraerAlbum(entrada.AlbumId);
                 if (album == null)
                     return SalidaBase.Fallo(salida, string.Format(Cadenas.album_id_no_encontrado, entrada.AlbumId));
 
-                cancion.AlbumId = album.Id;
-                _gestorPersistencia.EliminarCancionInterprete(entrada.CancionId);
+                foreach (var cancion in canciones) {
+                    cancion.AlbumId = album.Id;
+                    _gestorPersistencia.EliminarCancionInterprete(cancion.Id);
+                    _gestorPersistencia.Guardar(cancion);
+                }
             } else if (entrada.Accion == AsociarCancionYAlbumEntrada.Acciones.Desasociar) {
-                cancion.AlbumId = null;
+                foreach (var cancion in canciones) {
+                    cancion.AlbumId = null;
+                    _gestorPersistencia.Guardar(cancion);
+                }
             }
-
-            _gestorPersistencia.Guardar(cancion);
 
             return SalidaBase.Exito(salida);
         }
@@ -243,8 +254,17 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public IList<Album> TraerAlbumes(int pagina, string nombre) {
             return _gestorPersistencia.TraerAlbumes(pagina, nombre);
         }
-        public IList<Cancion> TraerCanciones(int pagina, string nombre) {
-            return _gestorPersistencia.TraerCanciones(pagina, nombre);
+        public IList<Album> TraerAlbumesInterprete(int interpreteId) {
+            return _gestorPersistencia.TraerAlbumesInterprete(interpreteId);
+        }
+        public IList<Cancion> TraerCanciones(int pagina, string nombre, FiltroAlbum filtroAlbum, int? album) {
+            return _gestorPersistencia.TraerCanciones(pagina, nombre, filtroAlbum, album);
+        }
+        public IList<Cancion> TraerCancionesAlbum(int albumId) {
+            return _gestorPersistencia.TraerCancionesAlbum(albumId);
+        }
+        public IList<Cancion> TraerCancionesInterprete(int interpreteId) {
+            return _gestorPersistencia.TraerCancionesInterprete(interpreteId);
         }
         public IList<Interprete> TraerInterpretes(int pagina, string nombre) {
             return _gestorPersistencia.TraerInterpretes(pagina, nombre);

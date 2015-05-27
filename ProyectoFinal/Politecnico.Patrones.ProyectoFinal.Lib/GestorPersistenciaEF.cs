@@ -63,9 +63,14 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 select c)
                 .FirstOrDefault();
         }
-        public IList<Cancion> TraerCanciones(int pagina, string filtroNombre) {
+        public IList<Cancion> TraerCanciones(int pagina, string filtroNombre, FiltroAlbum filtroAlbum, int? album) {
             return _ctx.DbSetCancion
-                .Where(c => string.IsNullOrEmpty(filtroNombre) || c.Nombre.Contains(filtroNombre))
+                .Where(c => string.IsNullOrEmpty(filtroNombre) || c.Nombre.Contains(filtroNombre)
+                            && (filtroAlbum == FiltroAlbum.Todas ||
+                                (filtroAlbum == FiltroAlbum.SinAlbum && c.AlbumId == null) ||
+                                (filtroAlbum == FiltroAlbum.DelAlbum && c.AlbumId == album)
+                                )
+                )
                 .OrderBy(c => c.Id)
                 .Skip(20*pagina)
                 .Take(20)

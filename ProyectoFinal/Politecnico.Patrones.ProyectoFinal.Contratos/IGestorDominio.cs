@@ -3,6 +3,8 @@ using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
 
 namespace Politecnico.Patrones.ProyectoFinal.Contratos {
+    public enum FiltroAlbum { SinAlbum = 0, DelAlbum = 1, Todas = 2 }
+
     public interface IGestorDominio {
         EditarCancionSalida EditarCancion(EditarCancionEntrada entrada);
         EditarInterpreteSalida EditarInterprete(EditarInterpreteEntrada entrada);
@@ -23,7 +25,10 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
         Interprete TraerInterprete(int id);
 
         IList<Album> TraerAlbumes(int pagina, string nombre);
-        IList<Cancion> TraerCanciones(int pagina, string nombre);
+        IList<Album> TraerAlbumesInterprete(int interpreteId);
+        IList<Cancion> TraerCanciones(int pagina, string nombre, FiltroAlbum filtroAlbum, int? album);
+        IList<Cancion> TraerCancionesAlbum(int albumId);
+        IList<Cancion> TraerCancionesInterprete(int interpreteId);
         IList<Interprete> TraerInterpretes(int pagina, string nombre);
         IList<Interprete> TraerInterpretesAlbum(int albumId);
         Cancion TraerCancion(int id);

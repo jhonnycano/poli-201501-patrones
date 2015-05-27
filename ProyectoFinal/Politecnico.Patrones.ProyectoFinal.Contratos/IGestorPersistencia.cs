@@ -12,7 +12,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
         IList<Interprete> TraerInterpretesAlbum(int albumId);
         IList<Interprete> TraerInterpretesCancion(int cancionId);
         Cancion TraerCancion(int id);
-        IList<Cancion> TraerCanciones(int pagina, string filtroNombre);
+        IList<Cancion> TraerCanciones(int pagina, string filtroNombre, FiltroAlbum filtroAlbum, int? album);
         IList<Cancion> TraerCancionesInterprete(int interpreteId);
         IList<Cancion> TraerCancionesAlbum(int albumId);
         Album TraerAlbum(int id);

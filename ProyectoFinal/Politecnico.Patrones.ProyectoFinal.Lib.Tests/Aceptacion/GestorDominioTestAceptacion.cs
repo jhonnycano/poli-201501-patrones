@@ -305,8 +305,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
         public void AsociarCancionYAlbum_CancionNoExiste_Falla() {
             var entrada = new AsociarCancionYAlbumEntrada
                 {
-                    CancionId = 10000000,
                     AlbumId = 3,
+                    Canciones = new List<int> {10000000},
                     Accion = AsociarCancionYAlbumEntrada.Acciones.Asociar,
                 };
 
@@ -319,8 +319,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
         public void AsociarCancionYAlbum_AlbumNoExiste_Falla() {
             var entrada = new AsociarCancionYAlbumEntrada
                 {
-                    CancionId = 1,
                     AlbumId = 10000000,
+                    Canciones = new List<int> {1},
                     Accion = AsociarCancionYAlbumEntrada.Acciones.Asociar,
                 };
 
@@ -333,8 +333,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
         public void AsociarCancionYAlbum_CancionConInterpretes_QuedaSinInterpretes() {
             var entrada = new AsociarCancionYAlbumEntrada
                 {
-                    CancionId = 6,
-                    AlbumId = 3
+                    AlbumId = 3,
+                    Canciones = new List<int> {6},
                 };
 
             var salida = _gestorDominio.AsociarCancionYAlbum(entrada);
@@ -349,8 +349,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
         public void AsociarCancionYAlbum_CancionSinInterpretes_Funciona() {
             var entrada = new AsociarCancionYAlbumEntrada
                 {
-                    CancionId = 7,
-                    AlbumId = 3
+                    AlbumId = 3,
+                    Canciones = new List<int> {7},
                 };
 
             var salida = _gestorDominio.AsociarCancionYAlbum(entrada);

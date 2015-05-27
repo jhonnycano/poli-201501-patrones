@@ -1,12 +1,12 @@
 ﻿@using Politecnico.Patrones.ProyectoFinal.Web.Models
-@model Politecnico.Patrones.ProyectoFinal.Web.Models.MVAlbumEditar
+@model Politecnico.Patrones.ProyectoFinal.Lib.MV.MVAlbumDetallado
 
 @{
     ViewBag.Title = "Editar album";
     var listaInterpretes = new MVListaInterpretes
         {
-            PadreId = Model.AlbumId,
-            ListaInterpretes = Model.ListaInterpretes,
+            PadreId = Model.Id,
+            ListaInterpretes = Model.Interpretes,
             Editable = true, 
             Controlador = "Albumes", 
             AccionAgregar = "AsociarInterprete",
@@ -29,14 +29,14 @@
     <fieldset>
         <legend>Album</legend>
 
-        @Html.HiddenFor(model => model.AlbumId)
+        @Html.HiddenFor(model => model.Id)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.AlbumNombre)
+            @Html.LabelFor(model => model.Nombre)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.AlbumNombre)
-            @Html.ValidationMessageFor(model => model.AlbumNombre)
+            @Html.EditorFor(model => model.Nombre)
+            @Html.ValidationMessageFor(model => model.Nombre)
         </div>
 
         <p>

@@ -27,8 +27,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
                 // interpretes de album
                 var interpretesAlbum = _gestorPersistencia.TraerInterpretesAlbum(item.Id);
                 if (interpretesAlbum != null) {
-                    item.Interpretes =
-                        interpretesAlbum.Select(i => new MVInterprete {Id = i.Id, Nombre = i.Nombre}).ToList();
+                    //item.Interpretes = interpretesAlbum.Select(i => new MVInterprete {Id = i.Id, Nombre = i.Nombre}).ToList();
                 }
                 
                 // canciones de album

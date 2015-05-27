@@ -1,0 +1,23 @@
+﻿<script type="text/javascript">
+     $(function() {
+         $(".ac-cancion").autocomplete({
+             source: function (request, response) {
+                 $.ajax({
+                     url: '/Canciones/Traer',
+                     data: 'FiltroAlbum=0&nombre=' + request.term,
+                     success: function (data) {
+                         response(_.map(data, function(i) { return { id: i.Id, value: i.Nombre }; }));
+                     }
+                 });
+             },
+             minLength: 3,
+             select: function (event, ui) {
+                 $("input[name=cancionElegidaId]").val(ui.item.id);
+                 $("#regCancionElegidaNombre").text(ui.item.value);
+             }
+         });
+     });
+ </script>
+@Html.TextBox("cancionBusqueda", "", new {Class = "ac-cancion"})
+@Html.Hidden("cancionElegidaId", 0)
+<span>Canción elegida: <span id="regCancionElegidaNombre">Ninguna</span> </span>

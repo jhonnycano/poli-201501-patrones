@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
-using Politecnico.Patrones.ProyectoFinal.Lib;
+using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 using Politecnico.Patrones.ProyectoFinal.Web.Models;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
@@ -18,8 +19,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         }
         //
         // GET: /Interpretes/
-        public ActionResult Index(MVInterpreteFiltroLista filtroLista) {
-            var lista = _gestorDominio.TraerInterpretes(filtroLista.Pagina, filtroLista.Nombre);
+        public ActionResult Index(int pagina = 0, string nombre = "") {
+            var lista = _gestorDominio.TraerInterpretes(pagina, nombre);
             if (TempData.ContainsKey("mensaje")) {
                 ViewBag.Mensaje = TempData["mensaje"];
             }
@@ -40,7 +41,16 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             if (interprete == null) {
                 return HttpNotFound();
             }
-            return View(interprete);
+            var modelo = new MVInterpreteDetallado
+                {
+                    Id = interprete.Id,
+                    Nombre = interprete.Nombre,
+                    Albumes = _gestorDominio.TraerAlbumesInterprete(id).Select(a => new MVAlbumDetallado(a)).ToList(),
+                    CancionesSinAlbum =
+                        _gestorDominio.TraerCancionesInterprete(id).Select(c => new MVCancion(c)).ToList(),
+                };
+
+            return View(modelo);
         }
 
         //
@@ -96,7 +106,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     TempData["mensaje"] = "error: " + salida.Mensaje;
                 }
 
-                return View("Index");
+                return RedirectToAction("Index");
             }
             return View(interprete);
         }

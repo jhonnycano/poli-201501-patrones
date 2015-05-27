@@ -1,4 +1,5 @@
-﻿@model Politecnico.Patrones.ProyectoFinal.Contratos.Entidades.Interprete
+﻿@using Politecnico.Patrones.ProyectoFinal.Contratos
+@model Politecnico.Patrones.ProyectoFinal.Lib.MV.MVInterpreteDetallado
 
 @{
     ViewBag.Title = "Detalle de Intérprete";
@@ -15,11 +16,11 @@
         </tr>
         <tr>
             <td>Álbumes</td>
-            <td>@Html.Partial("~/Views/Albumes/_Albumes.cshtml", new {interprete = Model.Id})</td>
+            <td>@Html.Partial("~/Views/Albumes/_Albumes.cshtml", Model.Albumes)</td>
         </tr>
         <tr>
             <td>Canciones sueltas</td>
-            <td>@Html.Partial("~/Views/Canciones/_Canciones.cshtml")</td>
+            <td>@Html.Partial("~/Views/Canciones/_Canciones.cshtml", Model.CancionesSinAlbum)</td>
         </tr>
     </table>
 </fieldset>
