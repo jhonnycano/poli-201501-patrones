@@ -1,7 +1,6 @@
-﻿using System.ComponentModel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace Politecnico.Patrones.ProyectoFinal.Lib.MV {
+namespace Politecnico.Patrones.ProyectoFinal.Contratos.MV {
     public class MVInterprete {
         [JsonProperty]
         public int Id { get; set; }

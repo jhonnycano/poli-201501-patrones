@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
-using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 using Politecnico.Patrones.ProyectoFinal.Lib.Recursos;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
@@ -252,19 +252,22 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public Interprete TraerInterprete(int id) {
             return _gestorPersistencia.TraerInterprete(id);
         }
-        public IList<Album> TraerAlbumes(int pagina, string nombre) {
+        public IList<MVAlbum> TraerAlbumes(int pagina, string nombre) {
             return _gestorPersistencia.TraerAlbumes(pagina, nombre);
         }
-        public IList<Album> TraerAlbumesInterprete(int interpreteId) {
+        public IList<MVAlbum> TraerAlbumesInterprete(int interpreteId) {
             return _gestorPersistencia.TraerAlbumesInterprete(interpreteId);
         }
-        public IList<Cancion> TraerCanciones(int pagina, string nombre, FiltroAlbum filtroAlbum, int? album) {
+        public IList<MVAlbumDetallado> DetallarAlbumes(IList<MVAlbum> albumes) {
+            return _gestorPersistencia.DetallarAlbumes(albumes);
+        }
+        public IList<MVCancion> TraerCanciones(int pagina, string nombre, FiltroAlbum filtroAlbum, int? album) {
             return _gestorPersistencia.TraerCanciones(pagina, nombre, filtroAlbum, album);
         }
-        public IList<Cancion> TraerCancionesAlbum(int albumId) {
+        public IList<MVCancion> TraerCancionesAlbum(int albumId) {
             return _gestorPersistencia.TraerCancionesAlbum(albumId);
         }
-        public IList<Cancion> TraerCancionesInterprete(int interpreteId) {
+        public IList<MVCancion> TraerCancionesInterprete(int interpreteId) {
             return _gestorPersistencia.TraerCancionesInterprete(interpreteId);
         }
         public IList<MVCancion> TraerCancionesMasVotadas(int cantidad) {

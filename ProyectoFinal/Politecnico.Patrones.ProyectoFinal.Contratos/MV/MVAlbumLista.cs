@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 
 namespace Politecnico.Patrones.ProyectoFinal.Contratos.MV {
     public class MVAlbumLista {

@@ -5,8 +5,8 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
-using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]

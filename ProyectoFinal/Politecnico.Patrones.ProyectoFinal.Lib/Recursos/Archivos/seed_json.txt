@@ -71,5 +71,11 @@
 		{ cancion: 7, usuario: 10, },
 		{ cancion: 11, usuario: 10, },
 		{ cancion: 12, usuario: 10, },
+		{ album: 3, usuario: 2, },
+		{ album: 3, usuario: 4, },
+		{ album: 3, usuario: 6, },
+		{ album: 2, usuario: 2, },
+		{ album: 2, usuario: 3, },
+		{ album: 1, usuario: 10, },
 	]
 }

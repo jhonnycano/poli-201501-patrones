@@ -55,6 +55,7 @@
     <Compile Include="Entidades\AlbumInterprete.cs" />
     <Compile Include="Entidades\Cancion.cs" />
     <Compile Include="Entidades\CancionInterprete.cs" />
+    <Compile Include="Entidades\ICancion.cs" />
     <Compile Include="Entidades\Interprete.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Entidades\Votable.cs" />

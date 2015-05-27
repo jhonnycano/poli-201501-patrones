@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
-using Politecnico.Patrones.ProyectoFinal.Lib.MV;
+using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 
 namespace Politecnico.Patrones.ProyectoFinal.Contratos {
     public interface IGestorPersistencia {
@@ -12,14 +12,18 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
         IList<Interprete> TraerInterpretes(int pagina, string filtroNombre);
         IList<Interprete> TraerInterpretesAlbum(int albumId);
         IList<Interprete> TraerInterpretesCancion(int cancionId);
+
         Cancion TraerCancion(int id);
-        IList<Cancion> TraerCanciones(int pagina, string filtroNombre, FiltroAlbum filtroAlbum, int? album);
-        IList<Cancion> TraerCancionesInterprete(int interpreteId);
-        IList<Cancion> TraerCancionesAlbum(int albumId);
+        IList<MVCancion> TraerCanciones(int pagina, string filtroNombre, FiltroAlbum filtroAlbum, int? album);
+        IList<MVCancion> TraerCancionesInterprete(int interpreteId);
+        IList<MVCancion> TraerCancionesAlbum(int albumId);
         IList<MVCancion> TraerCancionesMasVotadas(int cantidad);
+
         Album TraerAlbum(int id);
-        IList<Album> TraerAlbumes(int pagina, string filtroNombre);
-        IList<Album> TraerAlbumesInterprete(int interpreteId);
+        IList<MVAlbum> TraerAlbumes(int pagina, string filtroNombre);
+        IList<MVAlbum> TraerAlbumesInterprete(int interpreteId);
+        IList<MVAlbumDetallado> DetallarAlbumes(IList<MVAlbum> albumes);
+
         CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId);
         AlbumInterprete TraerAlbumInterprete(int albumId, int interpreteId);
 

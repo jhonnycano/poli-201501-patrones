@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Politecnico.Patrones.ProyectoFinal.Contratos.Entidades {
     [Table("Cancion")]
-    public class Cancion : IElementoVotable {
+    public class Cancion : IElementoVotable, ICancion {
         [Key]
         public int Id { get; set; }
         public DateTime FchCreacion { get; set; }

@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
-using Politecnico.Patrones.ProyectoFinal.Lib.MV;
+using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
     internal class GestorPersistenciaEF : IGestorPersistencia {
@@ -55,8 +55,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public IList<Interprete> TraerInterpretesCancion(int cancionId) {
             return (from i in _ctx.DbSetInterprete
                 join ai in _ctx.DbSetCancionInterprete on i.Id equals ai.InterpreteId
-                    where ai.CancionId == cancionId
-                    select i).ToList();
+                where ai.CancionId == cancionId
+                select i).ToList();
         }
         public Cancion TraerCancion(int id) {
             return (from c in _ctx.DbSetCancion
@@ -64,8 +64,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 select c)
                 .FirstOrDefault();
         }
-        public IList<Cancion> TraerCanciones(int pagina, string filtroNombre, FiltroAlbum filtroAlbum, int? album) {
-            return _ctx.DbSetCancion
+        public IList<MVCancion> TraerCanciones(int pagina, string filtroNombre, FiltroAlbum filtroAlbum, int? album) {
+            var canciones = _ctx.DbSetCancion
                 .Where(c => string.IsNullOrEmpty(filtroNombre) || c.Nombre.Contains(filtroNombre)
                             && (filtroAlbum == FiltroAlbum.Todas ||
                                 (filtroAlbum == FiltroAlbum.SinAlbum && c.AlbumId == null) ||
@@ -74,25 +74,30 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 )
                 .OrderBy(c => c.Id)
                 .Skip(20*pagina)
-                .Take(20)
-                .ToList();
+                .Take(20);
+            var result = TraerVotosCanciones(canciones);
+            return result;
         }
-        public IList<Cancion> TraerCancionesInterprete(int interpreteId) {
-            return _ctx.DbSetCancion
-                .Where(c => _ctx.DbSetCancionInterprete.Any(ai => ai.InterpreteId == interpreteId && ai.CancionId == c.Id))
-                .ToList();
+        public IList<MVCancion> TraerCancionesInterprete(int interpreteId) {
+            var canciones = (from c in _ctx.DbSetCancion
+                where _ctx.DbSetCancionInterprete.Any(ai => ai.InterpreteId == interpreteId && ai.CancionId == c.Id)
+                select c);
+
+            var result = TraerVotosCanciones(canciones);
+            return result;
         }
-        public IList<Cancion> TraerCancionesAlbum(int albumId) {
-            return _ctx.DbSetCancion
-                .Where(c => c.AlbumId == albumId)
-                .ToList();
+        public IList<MVCancion> TraerCancionesAlbum(int albumId) {
+            var canciones = _ctx.DbSetCancion
+                .Where(c => c.AlbumId == albumId);
+            var result = TraerVotosCanciones(canciones);
+            return result;
         }
         public IList<MVCancion> TraerCancionesMasVotadas(int cantidad) {
             var q = from c in _ctx.DbSetCancion
                 join a in _ctx.DbSetAlbum on c.AlbumId equals a.Id into j
                 from a in j.DefaultIfEmpty()
                 join vu in _ctx.DbSetVotableUsuario on c.VotableId equals vu.VotableId
-                group new {c, vu} by new {c.Id, c.Nombre, Album = a == null ? "Sin album": a.Nombre}
+                group new {c, vu} by new {c.Id, c.Nombre, Album = a == null ? "Sin album" : a.Nombre}
                 into g
                 select new MVCancion
                     {
@@ -113,18 +118,39 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 select a)
                 .FirstOrDefault();
         }
-        public IList<Album> TraerAlbumes(int pagina, string filtroNombre) {
-            return _ctx.DbSetAlbum
+        public IList<MVAlbum> TraerAlbumes(int pagina, string filtroNombre) {
+            var albumes = _ctx.DbSetAlbum
                 .Where(a => string.IsNullOrEmpty(filtroNombre) || a.Nombre.Contains(filtroNombre))
                 .OrderBy(a => a.Id)
                 .Skip(20*pagina)
-                .Take(20)
-                .ToList();
+                .Take(20);
+            var result = TraerVotosAlbumes(albumes);
+            return result;
         }
-        public IList<Album> TraerAlbumesInterprete(int interpreteId) {
-            return _ctx.DbSetAlbum
-                .Where(a => _ctx.DbSetAlbumInterprete.Any(ai => ai.InterpreteId == interpreteId && ai.AlbumId == a.Id))
-                .ToList();
+        public IList<MVAlbum> TraerAlbumesInterprete(int interpreteId) {
+            var albumes = _ctx.DbSetAlbum
+                .Where(a => _ctx.DbSetAlbumInterprete.Any(ai => ai.InterpreteId == interpreteId && ai.AlbumId == a.Id));
+            var result = TraerVotosAlbumes(albumes);
+            return result;
+        }
+        public IList<MVAlbumDetallado> DetallarAlbumes(IList<MVAlbum> albumes) {
+            var interpretes = (from a in albumes
+                join ai in _ctx.DbSetAlbumInterprete on a.Id equals ai.AlbumId
+                join i in _ctx.DbSetInterprete on ai.InterpreteId equals i.Id
+                select new {Album = a, Interprete = new MVInterprete {Id = i.Id, Nombre = i.Nombre}}).ToList();
+            var canciones = (from a in albumes
+                join c in _ctx.DbSetCancion on a.Id equals c.AlbumId
+                select new {Album = a, Cancion = new MVCancion(c)}).ToList();
+            var result = (from a in albumes select new MVAlbumDetallado(a)).ToList();
+            foreach (var itm in result) {
+                MVAlbumDetallado albumDetallado = itm;
+                itm.Interpretes = (from i in interpretes where i.Album.Id == albumDetallado.Id select i.Interprete).ToList();
+                MVAlbumDetallado mvAlbumDetallado = itm;
+                itm.Canciones = (from c in canciones where c.Album.Id == mvAlbumDetallado.Id select c.Cancion).ToList();
+                itm.Canciones = TraerVotosCanciones(itm.Canciones);
+            }
+            
+            return result.ToList();
         }
         public CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId) {
             return (from c in _ctx.DbSetCancionInterprete
@@ -214,8 +240,32 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             _ctx.SaveChanges();
         }
         public IEnumerable<T> TraerConsulta<T>(string consulta, IDictionary<string, object> parametros) {
-            object[] paramsInterno = (from p in parametros select new SqlParameter {ParameterName = p.Key, Value = p.Value}).ToArray();
+            object[] paramsInterno =
+                (from p in parametros select new SqlParameter {ParameterName = p.Key, Value = p.Value}).ToArray();
             return _ctx.Database.SqlQuery<T>(consulta, paramsInterno);
+        }
+
+        private IList<MVCancion> TraerVotosCanciones(IEnumerable<ICancion> canciones) {
+            var grupo = canciones.Join(_ctx.DbSetVotableUsuario,
+                cancion => cancion.VotableId,
+                vu => vu.VotableId,
+                (cancion, usuario) => new {cancion, usuario});
+            var q = from g in grupo
+                group g by g.cancion
+                into r
+                select new MVCancion(r.Key) {TotalVotos = r.Count()};
+            return q.ToList();
+        }
+        private IList<MVAlbum> TraerVotosAlbumes(IEnumerable<Album> albumes) {
+            var grupo = albumes.Join(_ctx.DbSetVotableUsuario,
+                album => album.VotableId,
+                vu => vu.VotableId,
+                (album, usuario) => new {album, usuario});
+            var q = from g in grupo
+                group g by g.album
+                into r
+                select new MVAlbum(r.Key) {TotalVotos = r.Count()};
+            return q.ToList();
         }
     }
 }

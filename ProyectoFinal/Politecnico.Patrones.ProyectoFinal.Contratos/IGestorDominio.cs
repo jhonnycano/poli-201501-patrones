@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
-using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 
 namespace Politecnico.Patrones.ProyectoFinal.Contratos {
     public enum FiltroAlbum { SinAlbum = 0, DelAlbum = 1, Todas = 2 }
@@ -25,11 +25,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
         Album TraerAlbum(int id);
         Interprete TraerInterprete(int id);
 
-        IList<Album> TraerAlbumes(int pagina, string nombre);
-        IList<Album> TraerAlbumesInterprete(int interpreteId);
-        IList<Cancion> TraerCanciones(int pagina, string nombre, FiltroAlbum filtroAlbum, int? album);
-        IList<Cancion> TraerCancionesAlbum(int albumId);
-        IList<Cancion> TraerCancionesInterprete(int interpreteId);
+        IList<MVAlbum> TraerAlbumes(int pagina, string nombre);
+        IList<MVAlbum> TraerAlbumesInterprete(int interpreteId);
+        IList<MVAlbumDetallado> DetallarAlbumes(IList<MVAlbum> albumes);
+        IList<MVCancion> TraerCanciones(int pagina, string nombre, FiltroAlbum filtroAlbum, int? album);
+        IList<MVCancion> TraerCancionesAlbum(int albumId);
+        IList<MVCancion> TraerCancionesInterprete(int interpreteId);
         IList<MVCancion> TraerCancionesMasVotadas(int cantidad);
         IList<Interprete> TraerInterpretes(int pagina, string nombre);
         IList<Interprete> TraerInterpretesAlbum(int albumId);

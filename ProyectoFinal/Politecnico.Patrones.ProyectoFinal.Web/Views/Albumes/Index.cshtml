@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Contratos.Entidades.Album>
+﻿@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVAlbum>
 
 @{
     ViewBag.Title = "Lista de álbumes";
@@ -14,13 +14,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalVotos)
+        </th>
     </tr>
 
     @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td style="text-align:right">
+                @Html.DisplayFor(modelItem => item.TotalVotos)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Editar", new {id = item.Id}) |
