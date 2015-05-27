@@ -192,6 +192,7 @@
     <Content Include="Views\Albumes\_Albumes.cshtml" />
     <Content Include="Views\Canciones\_Canciones.cshtml" />
     <Content Include="Views\Shared\_ElegirCancion.cshtml" />
+    <Content Include="Views\Canciones\MasVotadas.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Content\themes\stuffy\images\bg01.png" />
     <Content Include="Content\themes\stuffy\images\img01.jpg" />

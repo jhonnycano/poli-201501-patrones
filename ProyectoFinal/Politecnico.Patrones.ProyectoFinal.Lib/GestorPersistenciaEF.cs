@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
     internal class GestorPersistenciaEF : IGestorPersistencia {
@@ -85,6 +86,25 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             return _ctx.DbSetCancion
                 .Where(c => c.AlbumId == albumId)
                 .ToList();
+        }
+        public IList<MVCancion> TraerCancionesMasVotadas(int cantidad) {
+            var q = from c in _ctx.DbSetCancion
+                join a in _ctx.DbSetAlbum on c.AlbumId equals a.Id
+                join vu in _ctx.DbSetVotableUsuario on c.VotableId equals vu.VotableId
+                group new {c, vu} by new {c.Id, c.Nombre, Album = a.Nombre}
+                into g
+                select new MVCancion
+                    {
+                        Id = g.Key.Id,
+                        Nombre = g.Key.Nombre,
+                        Album = g.Key.Album,
+                        TotalVotos = g.Count()
+                    };
+            var q2 = from i in q
+                orderby i.TotalVotos descending
+                select i;
+
+            return q2.Take(cantidad).ToList();
         }
         public Album TraerAlbum(int id) {
             return (from a in _ctx.DbSetAlbum

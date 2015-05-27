@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 
 namespace Politecnico.Patrones.ProyectoFinal.Contratos {
     public interface IGestorPersistencia {
@@ -15,6 +16,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
         IList<Cancion> TraerCanciones(int pagina, string filtroNombre, FiltroAlbum filtroAlbum, int? album);
         IList<Cancion> TraerCancionesInterprete(int interpreteId);
         IList<Cancion> TraerCancionesAlbum(int albumId);
+        IList<MVCancion> TraerCancionesMasVotadas(int cantidad);
         Album TraerAlbum(int id);
         IList<Album> TraerAlbumes(int pagina, string filtroNombre);
         IList<Album> TraerAlbumesInterprete(int interpreteId);

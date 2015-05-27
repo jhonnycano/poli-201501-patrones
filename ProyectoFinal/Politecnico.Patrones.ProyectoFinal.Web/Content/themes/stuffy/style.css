@@ -287,7 +287,7 @@ img {
 
 #content {
 	float: left;
-	width: 500px;
+	width: 740px;
 	padding-top: 30px;
 	padding-left: 20px;
 }
@@ -493,4 +493,90 @@ img {
 #banner img
 {
 	box-shadow: 0 0 0 10px rgba(0,0,0,0.03);
+}
+
+
+legend>span {
+	margin: 2px;
+	padding: 0;
+	letter-spacing: -2px;
+	/*text-transform: capitalize;*/
+	font-weight: normal;
+	color: #2F6BCF;
+    font-size: 2em;
+}
+
+table.t1 a,
+table.t1 a:link,
+table.t1 a:visited { border: none; }
+
+table.t1 {
+    width: 90%;
+    border-top: 1px solid #e5eff8;
+    border-right: 1px solid #e5eff8;
+    margin: 1em auto;
+    border-collapse: collapse;
+}
+
+table.t1 caption {
+    color: #9ba9b4;
+    font-size: .94em;
+    letter-spacing: .1em;
+    margin: 1em 0 0 0;
+    padding: 0;
+    caption-side: top;
+    text-align: center;
+}
+
+table.t1 tr.odd td { background: #f7fbff }
+
+table.t1 tr.odd .column1 { background: #f4f9fe; }
+
+table.t1 .column1 { background: #f9fcfe; }
+
+table.t1 td {
+    color: #678197;
+    border-bottom: 1px solid #e5eff8;
+    border-left: 1px solid #e5eff8;
+    padding: .3em 1em;
+    text-align: center;
+}
+table.t1 .etiq {
+    text-align: right;
+    color: #80A097;
+    font-weight: 800;
+}
+
+table.t1 th {
+    font-weight: normal;
+    color: #678197;
+    text-align: left;
+    border-bottom: 1px solid #e5eff8;
+    border-left: 1px solid #e5eff8;
+    padding: .3em 1em;
+}
+
+table.t1 thead th {
+    background: #f4f9fe;
+    text-align: center;
+    font: bold 1.2em/2em "Century Gothic", "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: #66a3d3
+}
+
+table.t1 tfoot th {
+    text-align: center;
+    background: #f4f9fe;
+}
+
+table.t1 tfoot th strong {
+    font: bold 1.2em "Century Gothic", "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin: .5em .5em .5em 0;
+    color: #66a3d3;
+}
+
+table.t1 tfoot th em {
+    color: #f03b58;
+    font-weight: bold;
+    font-size: 1.1em;
+    font-style: normal;
 }

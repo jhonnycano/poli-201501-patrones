@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
+using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
@@ -19,8 +21,14 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         //
         // GET: /Interpretes/Traer
         public ActionResult Traer(MVCancionFiltroLista filtroLista) {
-            var lista = _gestorDominio.TraerCanciones(filtroLista.Pagina, filtroLista.Nombre, filtroLista.FiltroAlbum, filtroLista.Album);
+            var lista = _gestorDominio.TraerCanciones(filtroLista.Pagina, filtroLista.Nombre, filtroLista.FiltroAlbum,
+                filtroLista.Album);
             return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult MasVotadas() {
+            var cancionesMasVotadas = _gestorDominio.TraerCancionesMasVotadas(5);
+            return PartialView(cancionesMasVotadas);
+
         }
         //
         // GET: /Canciones/Detalle/5

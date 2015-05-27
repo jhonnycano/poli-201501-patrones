@@ -1,25 +1,29 @@
-﻿@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Lib.MV.MVCancion>
+﻿@model Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVCancionLista
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nombre)
+            Nombre
         </th>
+        @if (Model.MostrarAlbum) {
+            <th>
+                Album
+            </th>
+        }
         <th>
-            @Html.DisplayNameFor(model => model.Album)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalVotos)
+            Total de votos
         </th>
     </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model.Items) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Album)
-            </td>
+            @if (Model.MostrarAlbum) {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Album)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.TotalVotos)
             </td>

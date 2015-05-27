@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
 using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 using Politecnico.Patrones.ProyectoFinal.Web.Models;
@@ -46,8 +47,11 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     Id = interprete.Id,
                     Nombre = interprete.Nombre,
                     Albumes = _gestorDominio.TraerAlbumesInterprete(id).Select(a => new MVAlbumDetallado(a)).ToList(),
-                    CancionesSinAlbum =
-                        _gestorDominio.TraerCancionesInterprete(id).Select(c => new MVCancion(c)).ToList(),
+                    CancionesSinAlbum = new MVCancionLista
+                        {
+                            MostrarAlbum = false,
+                            Canciones = _gestorDominio.TraerCancionesInterprete(id).Select(c => new MVCancion(c)).ToList()
+                        }
                 };
 
             return View(modelo);

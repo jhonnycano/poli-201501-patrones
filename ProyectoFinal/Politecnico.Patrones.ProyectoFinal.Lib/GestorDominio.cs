@@ -4,6 +4,7 @@ using System.Linq;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
+using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 using Politecnico.Patrones.ProyectoFinal.Lib.Recursos;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib {
@@ -265,6 +266,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         }
         public IList<Cancion> TraerCancionesInterprete(int interpreteId) {
             return _gestorPersistencia.TraerCancionesInterprete(interpreteId);
+        }
+        public IList<MVCancion> TraerCancionesMasVotadas(int cantidad) {
+            return _gestorPersistencia.TraerCancionesMasVotadas(cantidad);
         }
         public IList<Interprete> TraerInterpretes(int pagina, string nombre) {
             return _gestorPersistencia.TraerInterpretes(pagina, nombre);

@@ -38,6 +38,9 @@
       <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -62,6 +65,12 @@
     <Compile Include="IGestorPersistencia.cs" />
     <Compile Include="IReporte.cs" />
     <Compile Include="IReporteConsulta.cs" />
+    <Compile Include="MV\MVAlbum.cs" />
+    <Compile Include="MV\MVAlbumDetallado.cs" />
+    <Compile Include="MV\MVCancion.cs" />
+    <Compile Include="MV\MVCancionLista.cs" />
+    <Compile Include="MV\MVInterprete.cs" />
+    <Compile Include="MV\MVInterpreteDetallado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VO\AsociarCancionYAlbumEntrada.cs" />
     <Compile Include="VO\AsociarCancionYAlbumSalida.cs" />

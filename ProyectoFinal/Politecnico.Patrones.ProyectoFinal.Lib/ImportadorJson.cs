@@ -18,6 +18,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 ImportarAlbumes(obj);
                 ImportarCanciones(obj);
                 ImportarUsuarios(obj);
+                ImportarVotos(obj);
             } catch (Exception) {
                 return false;
             }
@@ -95,23 +96,61 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 _ctx.SaveChanges();
             }
         }
-        private void ImportarUsuarios(JObject obj) {
+        private void ImportarUsuarios(JObject obj)
+        {
             var arr = obj["usuarios"] as JArray;
             if (arr == null) return;
 
-            foreach (var token in arr) {
+            foreach (var token in arr)
+            {
                 var id = token.Value<int>("id");
                 var nombre = token.Value<string>("nombre");
                 var correo = token.Value<string>("correo");
                 var clave = token.Value<string>("clave");
                 _ctx.DbSetUsuario.AddOrUpdate(new Usuario
+                {
+                    Id = id,
+                    FchCreacion = _fch,
+                    Nombre = nombre,
+                    Correo = correo,
+                    Clave = clave
+                });
+            }
+            _ctx.SaveChanges();
+        }
+        private void ImportarVotos(JObject obj)
+        {
+            var arr = obj["votos"] as JArray;
+            if (arr == null) return;
+
+            foreach (var token in arr) {
+                var usuarioId = token.Value<int>("usuario");
+                var cancionId = token.Value<int?>("cancion");
+                var albumId = token.Value<int?>("album");
+
+                if (cancionId != null) {
+                    var cancion = _ctx.DbSetCancion.FirstOrDefault(c => c.Id == cancionId);
+                    if (cancion != null) {
+                        _ctx.DbSetVotableUsuario.Add(new VotableUsuario
+                            {
+                                UsuarioId = usuarioId,
+                                VotableId = cancion.VotableId,
+                                FchCreacion = _fch
+                            });
+                    }
+                } else if (albumId != null) {
+                    var album = _ctx.DbSetAlbum.FirstOrDefault(c => c.Id == albumId);
+                    if (album != null)
                     {
-                        Id = id,
-                        FchCreacion = _fch,
-                        Nombre = nombre,
-                        Correo = correo,
-                        Clave = clave
-                    });
+                        _ctx.DbSetVotableUsuario.Add(new VotableUsuario
+                        {
+                            UsuarioId = usuarioId,
+                            VotableId = album.VotableId,
+                            FchCreacion = _fch
+                        });
+                    }
+                    
+                }
             }
             _ctx.SaveChanges();
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
+using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 using Politecnico.Patrones.ProyectoFinal.Lib.Recursos;
 
@@ -32,10 +33,15 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
                 }
             }
 
-            var result = new MVCancionLista
+            var objeto = new MVCancionLista
+                {
+                    MostrarAlbum = true,
+                    Canciones = lista
+                };
+            var result = new ReporteConsulta
                 {
                     Vista = "_ReporteListaCanciones",
-                    Objeto = lista
+                    Objeto = objeto
                 };
             return result;
         }

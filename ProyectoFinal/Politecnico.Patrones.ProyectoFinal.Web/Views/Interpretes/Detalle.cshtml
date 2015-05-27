@@ -5,21 +5,19 @@
     ViewBag.Title = "Detalle de Intérprete";
 }
 
-<h2>Detalle de Intérprete</h2>
-
 <fieldset>
-    <legend></legend>
-    <table>
+    <legend><span>Detalle de Intérprete</span></legend>
+    <table class="t1">
         <tr>
-            <td>@Html.DisplayNameFor(model => model.Nombre)</td>
+            <td class="etiq">@Html.DisplayNameFor(model => model.Nombre)</td>
             <td>@Html.DisplayFor(model => model.Nombre)</td>
         </tr>
         <tr>
-            <td>Álbumes</td>
+            <td class="etiq">Álbumes</td>
             <td>@Html.Partial("~/Views/Albumes/_Albumes.cshtml", Model.Albumes)</td>
         </tr>
         <tr>
-            <td>Canciones sueltas</td>
+            <td class="etiq">Canciones sueltas</td>
             <td>@Html.Partial("~/Views/Canciones/_Canciones.cshtml", Model.CancionesSinAlbum)</td>
         </tr>
     </table>

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Lib.MV.MVCancion>
+
+<h2>Las más votadas</h2>
+
+<table class="t1">
+    <tr>
+        <th class="etiq">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th class="etiq">@Html.DisplayNameFor(model => model.TotalVotos)</th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalVotos)
+            </td>
+        </tr>
+    }
+</table>

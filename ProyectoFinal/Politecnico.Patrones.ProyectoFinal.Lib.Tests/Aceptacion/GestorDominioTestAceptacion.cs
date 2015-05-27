@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
+using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
 using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 using Politecnico.Patrones.ProyectoFinal.Lib.Recursos;
@@ -524,10 +525,10 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Tests.Aceptacion {
 
             Assert.IsTrue(salida == SalidaBase.Resultados.Exito);
             Assert.IsNotNull(salida.Consulta);
-            var consultaListaCanciones = salida.Consulta as MVCancionLista;
+            Assert.AreEqual("_ReporteListaCanciones", salida.Consulta.Vista);
+            Assert.IsNotNull(salida.Consulta.Objeto);
+            var consultaListaCanciones = salida.Consulta.Objeto as MVCancionLista;
             Assert.IsNotNull(consultaListaCanciones);
-            Assert.AreEqual("_ReporteListaCanciones", consultaListaCanciones.Vista);
-            Assert.IsNotNull(consultaListaCanciones.Objeto);
         }
         [Test]
         public void GenerarReporte_ListaAlbumesSinParametros_Falla() {
