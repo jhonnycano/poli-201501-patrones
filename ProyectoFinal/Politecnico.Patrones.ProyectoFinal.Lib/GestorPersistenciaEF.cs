@@ -89,9 +89,10 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         }
         public IList<MVCancion> TraerCancionesMasVotadas(int cantidad) {
             var q = from c in _ctx.DbSetCancion
-                join a in _ctx.DbSetAlbum on c.AlbumId equals a.Id
+                join a in _ctx.DbSetAlbum on c.AlbumId equals a.Id into j
+                from a in j.DefaultIfEmpty()
                 join vu in _ctx.DbSetVotableUsuario on c.VotableId equals vu.VotableId
-                group new {c, vu} by new {c.Id, c.Nombre, Album = a.Nombre}
+                group new {c, vu} by new {c.Id, c.Nombre, Album = a == null ? "Sin album": a.Nombre}
                 into g
                 select new MVCancion
                     {

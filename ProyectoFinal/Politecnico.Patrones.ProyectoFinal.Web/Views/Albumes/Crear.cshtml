@@ -69,6 +69,8 @@
 
             $("#btnAgregarInterprete").on('click', function(ev) {
                 var i = $("input[name=interpreteElegidoId]").val();
+                if (i <= 0) return;
+                
                 var hidInterprete = $("input[name=hidInterpretes]");
                 var nombre = $("#regArtistaElegidoNombre").html();
                 var obj, txt = hidInterprete.val();
@@ -84,6 +86,8 @@
             });
             $("#btnAgregarCancion").on('click', function(ev) {
                 var i = $("input[name=cancionElegidaId]").val();
+                if (i <= 0) return;
+
                 var hidCanciones = $("input[name=hidCanciones]");
                 var nombre = $("#regCancionElegidaNombre").html();
                 var obj, txt = hidCanciones.val();

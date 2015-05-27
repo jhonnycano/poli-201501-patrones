@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
-using Politecnico.Patrones.ProyectoFinal.Lib.MV;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
@@ -88,21 +86,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         public ActionResult Borrar(int id = 0) {
             throw new NotSupportedException("No permitido");
 
-            /*
-            Cancion cancion = _gestorPersistencia.TraerInterprete(id);
-            if (cancion == null) return HttpNotFound();
-
-            return View(cancion);
-             * */
         }
         //
         // POST: /Canciones/Borrar/5
         [HttpPost, ActionName("Borrar")]
         [ValidateAntiForgeryToken]
         public ActionResult BorrarConfirmado(int id) {
-            //Cancion cancion = _gestorPersistencia.TraerCancion(id);
-            //db.DbSetInterprete.Remove(cancion);
-            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 

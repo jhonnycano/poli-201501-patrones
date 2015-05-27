@@ -12,9 +12,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
     public class InterpretesController : Controller {
         private readonly IGestorDominio _gestorDominio;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller"/> class.
-        /// </summary>
         public InterpretesController(IGestorDominio gestorDominio) {
             _gestorDominio = gestorDominio;
         }

@@ -37,7 +37,11 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         //
         // GET: /Albumes/Crear
         public ActionResult Crear() {
-            return View(new MVAlbumDetallado {Interpretes = new List<MVInterprete>()});
+            return View(new MVAlbumDetallado
+                {
+                    AñoLanzamiento = 2015,
+                    Interpretes = new List<MVInterprete>()
+                });
         }
         //
         // POST: /Albumes/Crear
