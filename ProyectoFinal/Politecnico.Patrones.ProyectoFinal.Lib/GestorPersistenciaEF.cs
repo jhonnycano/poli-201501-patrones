@@ -102,24 +102,48 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             return result;
         }
         public IList<MVCancion> TraerCancionesMasVotadas(int cantidad) {
-            var q = from c in _ctx.DbSetCancion
+            var canciones = from c in _ctx.DbSetCancion
                 join a in _ctx.DbSetAlbum on c.AlbumId equals a.Id into j
                 from a in j.DefaultIfEmpty()
                 join vu in _ctx.DbSetVotableUsuario on c.VotableId equals vu.VotableId
-                group new {c, vu} by new {c.Id, c.Nombre, Album = a == null ? "Sin album" : a.Nombre}
+                group new {c, vu} by new
+                    {
+                        c.Id,
+                        c.Nombre,
+                        AlbumId = a == null ? (int?) null : a.Id,
+                        Album = a == null ? "Sin album" : a.Nombre
+                    }
                 into g
                 select new MVCancion
                     {
                         Id = g.Key.Id,
                         Nombre = g.Key.Nombre,
                         Album = g.Key.Album,
+                        AlbumId = g.Key.AlbumId,
                         TotalVotos = g.Count()
                     };
-            var q2 = from i in q
+
+            /*
+            var interpretes = from c in canciones
+                join ci in _ctx.DbSetCancionInterprete on c.Id equals ci.CancionId into j2
+                from ci in j2.DefaultIfEmpty()
+                join i in _ctx.DbSetInterprete on ci.InterpreteId equals i.Id
+                group new {c, i} by c
+                into x
+                select new
+                    {
+                        Cancion = x.Key,
+                        Interpretes = x.Aggregate("", (s, interprete) => s + (", " + interprete.i.Nombre),
+                            s => s.Length > 2 ? s.Remove(0, 2) : s)
+                    };
+            */
+            var masVotadas = from i in canciones
                 orderby i.TotalVotos descending
                 select i;
 
-            return q2.Take(cantidad).ToList();
+            IList<MVCancion> result = masVotadas.Take(cantidad).ToList();
+            result = TraerInterpretesCanciones(result);
+            return result;
         }
         public Album TraerAlbum(int id) {
             return (from a in _ctx.DbSetAlbum
@@ -270,6 +294,19 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             }
             return canciones;
         }
+        private IList<MVCancion> TraerInterpretesCanciones(IList<MVCancion> canciones) {
+            var grupo = (from c in canciones
+                join ci in _ctx.DbSetCancionInterprete on c.Id equals ci.CancionId
+                join i in _ctx.DbSetInterprete on ci.InterpreteId equals i.Id
+                select new {Cancion = c, Interprete = i}).ToList();
+
+            foreach (var itm in grupo) {
+                if (itm.Cancion.Interpretes == null) itm.Cancion.Interpretes = new List<MVInterprete>();
+                itm.Cancion.Interpretes.Add(new MVInterprete(itm.Interprete));
+
+            }
+            return canciones;
+        }
         private IList<MVCancion> TraerAlbumesCanciones(IList<MVCancion> canciones) {
             foreach (var cancion in canciones) {
                 var album = _ctx.DbSetAlbum.FirstOrDefault(a => a.Id == cancion.AlbumId);
@@ -290,5 +327,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 select new MVAlbum(r.Key) {TotalVotos = r.Count()};
             return q.ToList();
         }
+
     }
 }

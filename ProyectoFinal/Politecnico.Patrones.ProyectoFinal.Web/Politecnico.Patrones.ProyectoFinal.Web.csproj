@@ -207,6 +207,8 @@
     <Content Include="Views\Canciones\MasVotadas.cshtml" />
     <Content Include="Views\Shared\_ElegirAlbum.cshtml" />
     <Content Include="Views\Shared\_PdfLayout.cshtml" />
+    <Content Include="Views\Albumes\_AgregarCancion.cshtml" />
+    <Content Include="Views\Canciones\_Cancion.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Content\themes\stuffy\images\bg01.png" />
     <Content Include="Content\themes\stuffy\images\img01.jpg" />

@@ -38,7 +38,10 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             if (album == null) {
                 return HttpNotFound();
             }
-            return View(album);
+            var item = new MVAlbum(album);
+            var albumesDetallados = _gestorDominio.DetallarAlbumes(new List<MVAlbum> {item});
+
+            return View(albumesDetallados[0]);
         }
         //
         // GET: /Albumes/Crear

@@ -19,7 +19,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos.MV {
         [DisplayName("Año de lanzamiento")]
         [Range(typeof (int), "1900", "2100", ErrorMessage = "{0} debe estar entre {1} y {2}")]
         public int AñoLanzamiento { get; set; }
-        [DisplayName("Total de votos")]
+        [DisplayName("Votos")]
         public int TotalVotos { get; set; }
     }
 }

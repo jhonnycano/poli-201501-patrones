@@ -539,7 +539,7 @@ table.t1 td {
     border-bottom: 1px solid #e5eff8;
     border-left: 1px solid #e5eff8;
     padding: .3em 1em;
-    text-align: center;
+    /*text-align: center;*/
 }
 table.t1 .etiq {
     text-align: right;
@@ -578,7 +578,6 @@ table.t1 tfoot th em {
     color: #f03b58;
     font-weight: bold;
     font-size: 1.1em;
-    font-style: normal;
 }
 
 
@@ -598,4 +597,10 @@ span.votos {
 }
 .album {
     font-size: 0.8em;
+}
+
+ul .no-bullet {
+    list-style-type: none !important;
+    padding:0;
+    margin:0;
 }

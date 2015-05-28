@@ -1,5 +1,6 @@
-﻿@using Politecnico.Patrones.ProyectoFinal.Web.Models
-@model Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVAlbumDetallado
+﻿@using Politecnico.Patrones.ProyectoFinal.Contratos.MV
+@using Politecnico.Patrones.ProyectoFinal.Web.Models
+@model MVAlbumDetallado
 
 @{
     ViewBag.Title = "Editar album";
@@ -47,6 +48,17 @@
 
 
 @Html.Partial("_Interpretes", listaInterpretes)
+
+@{
+    var cancionLista = new MVCancionLista
+        {
+            Canciones = Model.Canciones,
+            MostrarAlbum = false,
+            MostrarCabecera = false,
+        };
+}
+@Html.Partial("~/Views/Canciones/_Canciones.cshtml", @cancionLista)
+@Html.Partial("_AgregarCancion", Model)
 
 <div>
     @Html.ActionLink("Volver al listado", "Index")

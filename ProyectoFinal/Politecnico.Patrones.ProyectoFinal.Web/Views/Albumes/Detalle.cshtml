@@ -1,20 +1,13 @@
-﻿@model Politecnico.Patrones.ProyectoFinal.Contratos.Entidades.Album
+﻿@using Politecnico.Patrones.ProyectoFinal.Contratos.MV
+@model MVAlbumDetallado
 
 @{
     ViewBag.Title = "Detalle de Album";
 }
 
-<h2>Detalle de Album</h2>
-
 <fieldset>
-    <legend>Álbum</legend>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Nombre)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nombre)
-    </div>
+    <legend><span>Detalle de Album</span></legend>
+    @Html.Partial("~/Views/Albumes/_Albumes.cshtml", new List<MVAlbumDetallado> {Model})
 </fieldset>
 <p>
     @Html.ActionLink("Editar", "Editar", new {id = Model.Id}) |

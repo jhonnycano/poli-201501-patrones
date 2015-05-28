@@ -1,0 +1,17 @@
+﻿@using Politecnico.Patrones.ProyectoFinal.Web
+@model Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVCancion
+@{
+    var interpretes = Utiles.ResumenInterpretes(Model.Interpretes);
+}
+
+<div>
+    @Html.ActionLink(Model.Nombre, "Detalle", "Canciones", new {id = Model.Id}, null) : @Html.DisplayFor(modelItem => Model.TotalVotos)
+</div>
+<div>
+    @if (!string.IsNullOrEmpty(interpretes)) {
+        <span class="interprete">@interpretes</span>
+    }
+    @if (Model.AlbumId != null) {
+        <span class="album">@Html.ActionLink(Model.Album, "Detalle", "Albumes", new {id = Model.AlbumId}, null)</span>
+    } 
+</div>

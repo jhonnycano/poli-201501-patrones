@@ -16,6 +16,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web {
             return query.ToList();
         }
         public static string ResumenInterpretes(IList<MVInterprete> interpretes) {
+            if (interpretes == null || interpretes.Count == 0) return null;
             return interpretes.Aggregate("", (s, interprete) => s + (", " + interprete.Nombre),
                 s => s.Length > 2 ? s.Remove(0, 2) : s);
         }

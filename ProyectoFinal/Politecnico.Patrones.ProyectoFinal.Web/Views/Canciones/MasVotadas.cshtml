@@ -3,23 +3,10 @@
 <h2>Las más votadas</h2>
 
 <table class="t1">
-    <tr>
-        <th class="etiq">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th class="etiq">@Html.DisplayNameFor(model => model.TotalVotos)</th>
-    </tr>
-
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-                @if (!string.IsNullOrEmpty(item.Album)) {
-                    <span class="album">@Html.DisplayFor(modelItem => item.Album)</span>
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalVotos)
+                @Html.Partial("_Cancion", item)
             </td>
         </tr>
     }
