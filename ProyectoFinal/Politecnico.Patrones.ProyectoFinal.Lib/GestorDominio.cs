@@ -164,11 +164,11 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         }
         public AsociarCancionYAlbumSalida AsociarCancionYAlbum(AsociarCancionYAlbumEntrada entrada) {
             var salida = new AsociarCancionYAlbumSalida();
+
             int cancionError = int.MinValue;
             var canciones = TraerCanciones(entrada.Canciones, (noEncontrado => cancionError = noEncontrado));
-            if (cancionError != int.MinValue) {
+            if (cancionError != int.MinValue)
                 return SalidaBase.Fallo(salida, string.Format(Cadenas.cancion_id_no_encontrado, cancionError));
-            }
 
             if (entrada.Accion == AsociarCancionYAlbumEntrada.Acciones.Asociar) {
                 var album = _gestorPersistencia.TraerAlbum(entrada.AlbumId);
@@ -185,6 +185,25 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                     cancion.AlbumId = null;
                     _gestorPersistencia.Guardar(cancion);
                 }
+            }
+
+            return SalidaBase.Exito(salida);
+        }
+        public CrearCancionesEnAlbumSalida CrearCancionesEnAlbum(CrearCancionesEnAlbumEntrada entrada) {
+            var salida = new CrearCancionesEnAlbumSalida();
+
+            if (entrada.Canciones.Any(string.IsNullOrEmpty))
+                return SalidaBase.Fallo(salida, Cadenas.album_cancion_sin_nombre);
+
+            var album = _gestorPersistencia.TraerAlbum(entrada.AlbumId);
+            if (album == null)
+                return SalidaBase.Fallo(salida, string.Format(Cadenas.album_id_no_encontrado, entrada.AlbumId));
+
+            var cancionesGuardar = from c in entrada.Canciones
+                select new Cancion {Nombre = c, AlbumId = album.Id, FchCreacion = DateTime.Now};
+            foreach (var cancion in cancionesGuardar) {
+                CrearVotable(cancion);
+                _gestorPersistencia.Guardar(cancion);
             }
 
             return SalidaBase.Exito(salida);

@@ -30,7 +30,6 @@
 		{	id: 1, nombre: "Jhonny D. Cano", correo: "jhonnycano@hotmail.com", clave: "m6mh6C9PPn9cBkRc1YeX8g==" },
 		{	id: 2, nombre: "Maria E. Ramirez", correo: "mariueud@hotmail.com", clave: "PfLsxQ2BrAL3T7+Yh3waaA==" },
 		{	id: 3, nombre: "Juan Sebastian Cano", correo: "sebascano97@hotmail.com", clave: "YSFh1XdeU/6QEpoCI+fkdQ==" },
-		{	id: 4, nombre: "Juan Sebastian Cano", correo: "sebascano97@hotmail.com", clave: "YSFh1XdeU/6QEpoCI+fkdQ==" },
 		{	id: 4, nombre: "Jhomar Alejandra Cano", correo: "jhomarcano07@gmail.com", clave: "YSFh1XdeU/6QEpoCI+fkdQ==" },
 		{	id: 5, nombre: "Natalia Valentina Cano", correo: "tata@leftware.net", clave: "YSFh1XdeU/6QEpoCI+fkdQ==" },
 		{	id: 6, nombre: "Luisa Juliana Cano", correo: "lulu@leftware.net", clave: "YSFh1XdeU/6QEpoCI+fkdQ==" },

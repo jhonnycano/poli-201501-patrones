@@ -86,11 +86,26 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             }
 
             var canciones = JsonConvert.DeserializeObject<List<MVCancion>>(form["hidCanciones"]);
+            // crear canciones nuevas
+            var crearCancionesEnAlbumEntrada = new CrearCancionesEnAlbumEntrada
+                {
+                    AlbumId = editarAlbumSalida.Album.Id,
+                    Canciones = canciones.Select(i => i.Nombre).ToList(),                    
+                };
+            var crearCancionesEnAlbumSalida = _gestorDominio.CrearCancionesEnAlbum(crearCancionesEnAlbumEntrada);
+                        if (crearCancionesEnAlbumSalida != SalidaBase.Resultados.Exito) {
+                TempData["mensaje"] = "error: " + crearCancionesEnAlbumSalida.Mensaje;
+                return RedirectToAction("Index");
+            }
+
+
+
+            // asociar canciones existentes
             var asociarCancionYAlbumEntrada = new AsociarCancionYAlbumEntrada
                 {
                     Accion = AsociarCancionYAlbumEntrada.Acciones.Asociar,
                     AlbumId = editarAlbumSalida.Album.Id,
-                    Canciones = canciones.Select(i => i.Id).ToList(),
+                    Canciones = canciones.Where(c => c.Id > 0).Select(c => c.Id).ToList(),
                 };
             var asociarCancionYAlbumEntradaSalida =
                 _gestorDominio.AsociarCancionYAlbum(asociarCancionYAlbumEntrada);

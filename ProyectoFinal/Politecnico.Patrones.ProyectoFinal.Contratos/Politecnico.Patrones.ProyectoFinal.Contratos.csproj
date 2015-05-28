@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VO\CrearCancionesEnAlbumEntrada.cs" />
+    <Compile Include="VO\CrearCancionesEnAlbumSalida.cs" />
     <Compile Include="Entidades\Album.cs" />
     <Compile Include="Entidades\AlbumInterprete.cs" />
     <Compile Include="Entidades\Cancion.cs" />

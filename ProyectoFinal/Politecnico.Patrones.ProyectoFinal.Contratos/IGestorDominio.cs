@@ -15,6 +15,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
         RelacionarInterpretesAAlbumSalida RelacionarInterpretesAAlbum(RelacionarInterpretesAAlbumEntrada entrada);
 
         AsociarCancionYAlbumSalida AsociarCancionYAlbum(AsociarCancionYAlbumEntrada entrada);
+        CrearCancionesEnAlbumSalida CrearCancionesEnAlbum(CrearCancionesEnAlbumEntrada entrada);
 
         RegistrarVotoCancionesSalida RegistrarVotoCanciones(RegistrarVotoCancionesEntrada entrada);
         RegistrarVotoAlbumesSalida RegistrarVotoAlbumes(RegistrarVotoAlbumesEntrada entrada);

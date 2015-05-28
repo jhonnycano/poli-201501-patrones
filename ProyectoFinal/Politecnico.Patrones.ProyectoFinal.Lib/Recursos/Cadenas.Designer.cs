@@ -61,6 +61,15 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Recursos {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Al menos una canción quedó sin nombre... por favor verifique.
+        /// </summary>
+        public static string album_cancion_sin_nombre {
+            get {
+                return ResourceManager.GetString("album_cancion_sin_nombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hace falta asociar el intérprete.
         /// </summary>
         public static string album_falta_interprete {
@@ -202,15 +211,15 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Recursos {
         ///		{	id: 2, nombre: &quot;Metallica&quot; },
         ///		{	id: 3, nombre: &quot;Jhonny Cano&quot; },
         ///		{	id: 4, nombre: &quot;Debora Ramirez&quot; },
-        ///	], 
+        ///	],
         ///	albumes: [
         ///		{	id: 1, nombre: &quot;Con te Partiro&quot;, añoLanzamiento: 1998, interpretes: [1] },
         ///		{	id: 2, nombre: &quot;Nothing else matters&quot;, añoLanzamiento: 1987, interpretes: [2] },
         ///		{	id: 3, nombre: &quot;Por qué&quot;, añoLanzamiento: 2014, interpretes: [3] },
-        ///	], 
+        ///	],
         ///	canciones: [
         ///		{	id: 1, nombre: &quot;Con te Partiro&quot;, album: 1 },
-        ///		{	id: 2,  [rest of string was truncated]&quot;;.
+        ///		{	id: 2, no [rest of string was truncated]&quot;;.
         /// </summary>
         public static string seed_json {
             get {

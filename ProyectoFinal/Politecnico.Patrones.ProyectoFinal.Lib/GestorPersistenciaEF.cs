@@ -125,23 +125,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                         Nombre = g.Key.Nombre,
                         Album = g.Key.Album,
                         AlbumId = g.Key.AlbumId,
-                        TotalVotos = g.Count()
+                        TotalVotos = g.Count(x => x.vu != null)
                     };
 
-            /*
-            var interpretes = from c in canciones
-                join ci in _ctx.DbSetCancionInterprete on c.Id equals ci.CancionId into j2
-                from ci in j2.DefaultIfEmpty()
-                join i in _ctx.DbSetInterprete on ci.InterpreteId equals i.Id
-                group new {c, i} by c
-                into x
-                select new
-                    {
-                        Cancion = x.Key,
-                        Interpretes = x.Aggregate("", (s, interprete) => s + (", " + interprete.i.Nombre),
-                            s => s.Length > 2 ? s.Remove(0, 2) : s)
-                    };
-            */
             var masVotadas = from i in canciones
                 orderby i.TotalVotos descending
                 select i;
@@ -285,19 +271,25 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         }
 
         private IList<MVCancion> TraerVotosCanciones(IList<MVCancion> canciones) {
-            var grupo = (from c in canciones
-                join vu in _ctx.DbSetVotableUsuario on c.VotableId equals vu.VotableId
-                group vu by vu.VotableId
-                into r
-                select new {r.Key, TotalVotos = r.Count()}).ToList();
-
-            foreach (var cancion in canciones) {
-                var votable = grupo.FirstOrDefault(g => cancion.VotableId == g.Key);
-                if (votable == null) continue;
-
-                cancion.TotalVotos = votable.TotalVotos;
-            }
-            return canciones;
+            var grupo = from a in canciones
+                join vu in _ctx.DbSetVotableUsuario on a.VotableId equals vu.VotableId into j1
+                from vu in j1.DefaultIfEmpty()
+                group new {a, vu} by new
+                    {
+                        a.Id,
+                        a.Nombre,
+                        a.FchCreacion,
+                    }
+                into g
+                select new MVCancion
+                    {
+                        Id = g.Key.Id,
+                        Nombre = g.Key.Nombre,
+                        FchCreacion = g.Key.FchCreacion,                        
+                        TotalVotos = g.Count(x => x.vu != null)
+                    };
+            var lista = grupo.ToList();
+            return lista;
         }
         private IList<MVCancion> TraerInterpretesCanciones(IList<MVCancion> canciones) {
             var grupo = (from c in canciones
@@ -322,16 +314,27 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             return canciones;
         }
         private IList<MVAlbum> TraerVotosAlbumes(IEnumerable<Album> albumes) {
-            var grupo = albumes.Join(_ctx.DbSetVotableUsuario,
-                album => album.VotableId,
-                vu => vu.VotableId,
-                (album, usuario) => new {album, usuario});
-            var q = from g in grupo
-                group g by g.album
-                into r
-                select new MVAlbum(r.Key) {TotalVotos = r.Count()};
-            return q.ToList();
+            var grupo = from a in albumes
+                join vu in _ctx.DbSetVotableUsuario on a.VotableId equals vu.VotableId into j1
+                from vu in j1.DefaultIfEmpty()
+                group new {a, vu} by new
+                    {
+                        a.Id,
+                        a.Nombre,
+                        a.AñoLanzamiento,
+                        a.FchCreacion,
+                    }
+                into g
+                select new MVAlbum
+                    {
+                        Id = g.Key.Id,
+                        Nombre = g.Key.Nombre,
+                        AñoLanzamiento = g.Key.AñoLanzamiento,
+                        FchCreacion = g.Key.FchCreacion,                        
+                        TotalVotos = g.Count(x => x.vu != null)
+                    };
+            var lista = grupo.ToList();
+            return lista;
         }
-
     }
 }
