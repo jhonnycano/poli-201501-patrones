@@ -203,7 +203,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 return SalidaBase.Fallo(salida, string.Format(Cadenas.usuario_id_no_encontrado, entrada.UsuarioId));
 
             foreach (var cancion in canciones) {
-                RegistrarVoto(cancion.VotableId, entrada.UsuarioId);
+                RegistrarVoto(cancion.VotableId, entrada.UsuarioId, entrada.Accion == RegistrarVotoCancionesEntrada.Acciones.Asociar);
             }
 
             return SalidaBase.Exito(salida);

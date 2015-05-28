@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Web.Mvc;
+using Newtonsoft.Json.Linq;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
@@ -86,6 +89,34 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 return RedirectToAction("Index");
             }
             return View(cancion);
+        }
+        //
+        // GET: /Canciones/Votar
+        public ActionResult Votar(string v, bool d = false) {
+            IList<int> canciones;
+            try {
+                var json = JArray.Parse(v);
+                canciones = new List<int>(json.Values<int>());
+            } catch (Exception) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Votos incorrectos");
+            }
+            var accion = d
+                ? RegistrarVotoCancionesEntrada.Acciones.Desasociar
+                : RegistrarVotoCancionesEntrada.Acciones.Asociar;
+
+            var entrada = new RegistrarVotoCancionesEntrada
+                {
+                    Accion = accion,
+                    UsuarioId = User.APrincipalUsuario().IdentityUsuario.Id,
+                    Canciones = canciones
+                };
+            var salida = _gestorDominio.RegistrarVotoCanciones(entrada);
+            if (salida != SalidaBase.Resultados.Exito) {
+                TempData["mensaje"] = "error: " + salida.Mensaje;
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
         }
         //
         // GET: /Canciones/Borrar/5

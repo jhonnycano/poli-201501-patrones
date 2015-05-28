@@ -9,11 +9,17 @@
 <p>
     @Html.ActionLink("Crear canción", "Crear")
 </p>
+@Html.Hidden("votos", "[]", new {id="hidVotos"})
+@Html.ActionLink("Votar", "Votar", "Canciones", null, new {id="btnVotar"})
+@Html.ActionLink("Quitar votos", "Votar", "Canciones", null, new {id="btnQuitarVotos"})
 <table>
     @foreach (var item in Model) {
         <tr>
             <td style="border-bottom: 1px seagreen solid">
                 @Html.Partial("_Cancion", item)
+            </td>
+            <td>
+                <input type="checkbox" class="chk-votar" data-objeto="@item.Id">
             </td>
             <td>
                 @Html.ActionLink("Editar", "Editar", new {id = item.Id}) |

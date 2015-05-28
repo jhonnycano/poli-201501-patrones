@@ -181,33 +181,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             return RedirectToAction("Editar", "Albumes", new {id = albumId});
         }
         //
-        // GET: /Interpretes/Borrar/5
-        public ActionResult Borrar(int id = 0) {
-            throw new NotSupportedException("No permitido");
-
-            /*
-            Album album = _gestorPersistencia.TraerAlbum(id);
-            if (album == null) return HttpNotFound();
-
-            return View(album);
-             * */
-        }
-        //
-        // POST: /Interpretes/Borrar/5
-        [HttpPost, ActionName("Borrar")]
-        [ValidateAntiForgeryToken]
-        public ActionResult BorrarConfirmado(int id) {
-            //Album album = _gestorPersistencia.TraerAlbum(id);
-            //db.DbSetInterprete.Remove(album);
-            //db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing) {
-            var disposable = _gestorDominio as IDisposable;
-            if (disposable != null) disposable.Dispose();
-            base.Dispose(disposing);
-        }
+        // GET: /Albumes/Votar
         public ActionResult Votar(string v, bool d = false) {
             IList<int> albumes;
             try {
@@ -234,6 +208,34 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
 
             return RedirectToAction("Index");
 
+        }
+        //
+        // GET: /Interpretes/Borrar/5
+        public ActionResult Borrar(int id = 0) {
+            throw new NotSupportedException("No permitido");
+
+            /*
+            Album album = _gestorPersistencia.TraerAlbum(id);
+            if (album == null) return HttpNotFound();
+
+            return View(album);
+             * */
+        }
+        //
+        // POST: /Interpretes/Borrar/5
+        [HttpPost, ActionName("Borrar")]
+        [ValidateAntiForgeryToken]
+        public ActionResult BorrarConfirmado(int id) {
+            //Album album = _gestorPersistencia.TraerAlbum(id);
+            //db.DbSetInterprete.Remove(album);
+            //db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing) {
+            var disposable = _gestorDominio as IDisposable;
+            if (disposable != null) disposable.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
