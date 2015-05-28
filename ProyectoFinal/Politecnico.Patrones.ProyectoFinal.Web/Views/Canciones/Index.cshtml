@@ -10,32 +10,10 @@
     @Html.ActionLink("Crear canción", "Crear")
 </p>
 <table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Album)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalVotos)
-        </th>
-    </tr>
-
     @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @if (item.Album != null) {
-                    @Html.ActionLink(item.Album, "Detalle", "Albumes")
-                } else {
-                    <span>Sin album</span>
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalVotos)
+            <td style="border-bottom: 1px seagreen solid">
+                @Html.Partial("_Cancion", item)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Editar", new {id = item.Id}) |

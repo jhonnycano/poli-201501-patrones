@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
@@ -205,6 +207,33 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             var disposable = _gestorDominio as IDisposable;
             if (disposable != null) disposable.Dispose();
             base.Dispose(disposing);
+        }
+        public ActionResult Votar(string v, bool d = false) {
+            IList<int> albumes;
+            try {
+                var json = JArray.Parse(v);
+                albumes = new List<int>(json.Values<int>());
+            } catch (Exception) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Votos incorrectos");
+            }
+            var accion = d
+                ? RegistrarVotoAlbumesEntrada.Acciones.Desasociar
+                : RegistrarVotoAlbumesEntrada.Acciones.Asociar;
+
+            var entrada = new RegistrarVotoAlbumesEntrada
+                {
+                    Accion = accion,
+                    UsuarioId = User.APrincipalUsuario().IdentityUsuario.Id,
+                    Albumes = albumes
+                };
+            var salida = _gestorDominio.RegistrarVotoAlbumes(entrada);
+            if (salida != SalidaBase.Resultados.Exito) {
+                TempData["mensaje"] = "error: " + salida.Mensaje;
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+
         }
     }
 }

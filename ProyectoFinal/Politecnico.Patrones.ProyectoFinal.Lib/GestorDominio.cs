@@ -221,7 +221,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 return SalidaBase.Fallo(salida, string.Format(Cadenas.usuario_id_no_encontrado, entrada.UsuarioId));
 
             foreach (var album in albumes) {
-                RegistrarVoto(album.VotableId, entrada.UsuarioId);
+                RegistrarVoto(album.VotableId, entrada.UsuarioId, entrada.Accion == RegistrarVotoAlbumesEntrada.Acciones.Asociar);
             }
 
             return SalidaBase.Exito(salida);
@@ -291,7 +291,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             _gestorPersistencia.Guardar(votable);
             elementoVotable.VotableId = votable.Id;
         }
-        private void RegistrarVoto(int votable, int usuario) {
+        private void RegistrarVoto(int votable, int usuario, bool asociar = true) {
+            if (!asociar) {
+                _gestorPersistencia.EliminarVotableUsuario(votable, usuario);
+                return;
+            }
+
             var voto = _gestorPersistencia.TraerVotableUsuario(votable, usuario);
             if (voto != null) return;
 

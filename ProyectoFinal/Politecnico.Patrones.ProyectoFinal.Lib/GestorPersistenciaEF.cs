@@ -79,6 +79,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             var lista = (from c in canciones select new MVCancion(c)).ToList();
             var result = TraerVotosCanciones(lista);
             result = TraerAlbumesCanciones(result);
+            result = TraerInterpretesCanciones(result);
             return result;
         }
         public IList<MVCancion> TraerCancionesInterprete(int interpreteId) {
@@ -89,6 +90,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
 
             var lista = (from c in canciones select new MVCancion(c)).ToList();
             var result = TraerVotosCanciones(lista);
+            result = TraerAlbumesCanciones(result);
+            result = TraerInterpretesCanciones(result);
             return result;
         }
         public IList<MVCancion> TraerCancionesAlbum(int albumId) {
@@ -99,6 +102,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
 
             var lista = (from c in canciones select new MVCancion(c)).ToList();
             var result = TraerVotosCanciones(lista);
+            result = TraerAlbumesCanciones(result);
+            result = TraerInterpretesCanciones(result);
             return result;
         }
         public IList<MVCancion> TraerCancionesMasVotadas(int cantidad) {
