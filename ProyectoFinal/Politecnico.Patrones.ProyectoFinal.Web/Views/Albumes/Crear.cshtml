@@ -29,8 +29,8 @@
             @Html.ValidationMessageFor(model => model.AñoLanzamiento)
         </div>
         
-        @Html.Hidden("hidInterpretes")
-        @Html.Hidden("hidCanciones")
+        @Html.Hidden("hidInterpretes", "[]")
+        @Html.Hidden("hidCanciones", "[]")
     </fieldset>
 
     <fieldset>
@@ -91,8 +91,15 @@
 
                 if (txt) obj = JSON.parse(txt);
                 else obj = [];
-                var tmp = _.where(obj, { Id: i });
-                if (tmp != null && tmp.length > 0) return;
+
+                if (id !== -1) {
+                    tmp = _.where(obj, { Id: id });
+                    if (tmp != null && tmp.length > 0) return;
+                } else {
+                    tmp = _.where(obj, { Nombre: nombre });
+                    if (tmp != null && tmp.length > 0) return;
+                }
+
 
                 obj.push({ Id: i, Nombre: nombre });
                 hidInterprete.val(JSON.stringify(obj));

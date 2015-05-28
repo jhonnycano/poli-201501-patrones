@@ -48,8 +48,8 @@
             @Html.ValidationMessageFor(model => model.AñoLanzamiento)
         </div>
 
-        @Html.Hidden("hidInterpretes")
-        @Html.Hidden("hidCanciones")
+        @Html.Hidden("hidInterpretes", "[]")
+        @Html.Hidden("hidCanciones", "[]")
     </fieldset>
 
     <fieldset>
@@ -92,3 +92,57 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+    <script type="text/javascript">
+        function agregarCancion(id, nombre) {
+            var hidCanciones = $("input[name=hidCanciones]");
+            var tmp, obj, txt = hidCanciones.val();
+
+            if (txt) obj = JSON.parse(txt);
+            else obj = [];
+
+            if (id !== -1) {
+                tmp = _.where(obj, { Id: id });
+                if (tmp != null && tmp.length > 0) return;
+            } else {
+                tmp = _.where(obj, { Nombre: nombre });
+                if (tmp != null && tmp.length > 0) return;
+            }
+
+            obj.push({ Id: id, Nombre: nombre });
+            hidCanciones.val(JSON.stringify(obj));
+            mostrarLista(obj, "#ulCanciones");
+        }
+
+        $(function() {
+            $("#btnAgregarInterprete").on('click', function() {
+                var i = $("input[name=interpreteElegidoId]").val();
+                if (i <= 0) return;
+
+                var hidInterprete = $("input[name=hidInterpretes]");
+                var nombre = $("#regArtistaElegidoNombre").html();
+                var obj, txt = hidInterprete.val();
+
+                if (txt) obj = JSON.parse(txt);
+                else obj = [];
+                var tmp = _.where(obj, { Id: i });
+                if (tmp != null && tmp.length > 0) return;
+
+                obj.push({ Id: i, Nombre: nombre });
+                hidInterprete.val(JSON.stringify(obj));
+                mostrarLista(obj, "#ulInterpretes");
+            });
+            $("#btnAgregarCancionNueva").on('click', function() {
+                var nombre = $("input#txtCancionNueva").val();
+                if (nombre <= 0) return;
+
+                agregarCancion(-1, nombre);
+            });
+            $("#btnAgregarCancionExistente").on('click', function() {
+                var i = $("input[name=cancionElegidaId]").val();
+                if (i <= 0) return;
+
+                var nombre = $("#regCancionElegidaNombre").html();
+                agregarCancion(i, nombre);
+            });
+        });
+    </script>
