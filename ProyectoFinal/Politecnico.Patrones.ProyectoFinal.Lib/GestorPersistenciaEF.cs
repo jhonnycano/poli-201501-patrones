@@ -158,6 +158,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             return result;
         }
         public IList<MVAlbumDetallado> DetallarAlbumes(IList<MVAlbum> albumes) {
+            albumes = TraerVotosAlbumes(albumes);
+            albumes.ToList().ForEach(a => {
+                var album = _ctx.DbSetAlbum.FirstOrDefault(al => a.Id == al.Id);
+                if (album != null) a.CargarDesde(album);
+            });
+
             var interpretes = (from a in albumes
                 join ai in _ctx.DbSetAlbumInterprete on a.Id equals ai.AlbumId
                 join i in _ctx.DbSetInterprete on ai.InterpreteId equals i.Id
@@ -165,8 +171,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             var canciones = (from a in albumes
                 join c in _ctx.DbSetCancion on a.Id equals c.AlbumId
                 select new {Album = a, Cancion = new MVCancion(c)}).ToList();
-            var result = (from a in albumes select new MVAlbumDetallado(a)).ToList();
-            foreach (var itm in result) {
+
+            var listaAlbumDetallado = (from a in albumes select new MVAlbumDetallado(a)).ToList();
+            foreach (var itm in listaAlbumDetallado) {
                 MVAlbumDetallado albumDetallado = itm;
                 itm.Interpretes =
                     (from i in interpretes where i.Album.Id == albumDetallado.Id select i.Interprete).ToList();
@@ -175,7 +182,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 itm.Canciones = TraerVotosCanciones(itm.Canciones);
             }
 
-            return result.ToList();
+            return listaAlbumDetallado.ToList();
         }
         public CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId) {
             return (from c in _ctx.DbSetCancionInterprete
@@ -270,7 +277,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             return _ctx.Database.SqlQuery<T>(consulta, paramsInterno);
         }
 
-        private IList<MVCancion> TraerVotosCanciones(IList<MVCancion> canciones) {
+        private IList<MVCancion> TraerVotosCanciones(IEnumerable<MVCancion> canciones) {
             var grupo = from a in canciones
                 join vu in _ctx.DbSetVotableUsuario on a.VotableId equals vu.VotableId into j1
                 from vu in j1.DefaultIfEmpty()
@@ -285,7 +292,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                     {
                         Id = g.Key.Id,
                         Nombre = g.Key.Nombre,
-                        FchCreacion = g.Key.FchCreacion,                        
+                        FchCreacion = g.Key.FchCreacion,
                         TotalVotos = g.Count(x => x.vu != null)
                     };
             var lista = grupo.ToList();
@@ -300,7 +307,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             foreach (var itm in grupo) {
                 if (itm.Cancion.Interpretes == null) itm.Cancion.Interpretes = new List<MVInterprete>();
                 itm.Cancion.Interpretes.Add(new MVInterprete(itm.Interprete));
-
             }
             return canciones;
         }
@@ -323,18 +329,42 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                         a.Nombre,
                         a.AñoLanzamiento,
                         a.FchCreacion,
+                        a.VotableId,
                     }
                 into g
                 select new MVAlbum
                     {
                         Id = g.Key.Id,
+                        VotableId = g.Key.VotableId,
                         Nombre = g.Key.Nombre,
                         AñoLanzamiento = g.Key.AñoLanzamiento,
-                        FchCreacion = g.Key.FchCreacion,                        
+                        FchCreacion = g.Key.FchCreacion,
                         TotalVotos = g.Count(x => x.vu != null)
                     };
             var lista = grupo.ToList();
             return lista;
+        }
+        private IList<MVAlbum> TraerVotosAlbumes(IList<MVAlbum> albumes) {
+            var grupo = (from a in albumes
+                join vu in _ctx.DbSetVotableUsuario on a.VotableId equals vu.VotableId into j1
+                from vu in j1.DefaultIfEmpty()
+                group new {a, vu} by new
+                    {
+                        a.Id,
+                        a.Nombre,
+                        a.AñoLanzamiento,
+                        a.FchCreacion,
+                    }
+                into g
+                select new MVAlbum
+                    {
+                        Id = g.Key.Id,
+                        TotalVotos = g.Count(x => x.vu != null)
+                    }).ToDictionary(itm => itm.Id);
+            albumes.ToList().ForEach(a => {
+                if (grupo.ContainsKey(a.Id)) a.TotalVotos = grupo[a.Id].TotalVotos;
+            });
+            return albumes;
         }
     }
 }

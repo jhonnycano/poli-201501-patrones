@@ -1,18 +1,8 @@
 ﻿@using Politecnico.Patrones.ProyectoFinal.Contratos.MV
+@using Politecnico.Patrones.ProyectoFinal.Web
 @model IEnumerable<MVAlbumDetallado>
 
-<table>
-    @*
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalVotos)
-        </th>
-        <th></th>
-    </tr>
-    *@
+<table class="t1">
     @foreach (var item in Model) {
         <tr>
             <td colspan="2">
@@ -21,7 +11,15 @@
             </td>
         </tr>
         <tr>
+            <td class="etiq">
+                Intérpretes
+            </td>
             <td>
+                @Utiles.ResumenInterpretes(item.Interpretes)
+            </td>
+        </tr>
+        <tr>
+            <td class="etiq">
                 Canciones
             </td>
             <td>

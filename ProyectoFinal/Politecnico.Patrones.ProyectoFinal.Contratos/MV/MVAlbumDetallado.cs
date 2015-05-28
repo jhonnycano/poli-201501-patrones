@@ -7,10 +7,14 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos.MV {
         }
         public MVAlbumDetallado(Album album) {
             Id = album.Id;
+            VotableId = album.VotableId;
             Nombre = album.Nombre;
+            AñoLanzamiento = album.AñoLanzamiento;
+            FchCreacion = album.FchCreacion;
         }
         public MVAlbumDetallado(MVAlbum album) {
             Id = album.Id;
+            VotableId = album.VotableId;
             Nombre = album.Nombre;
             AñoLanzamiento = album.AñoLanzamiento;
             FchCreacion = album.FchCreacion;
