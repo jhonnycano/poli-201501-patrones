@@ -21,8 +21,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         //
         // GET: /Albumes/
         public ActionResult Index(int pagina = 0, string nombre = "", int? interprete = null) {
-            var lista = _gestorDominio.TraerAlbumes(pagina, nombre, interprete);
-            var listaDetalle = _gestorDominio.DetallarAlbumes(lista);
+            IList<MVAlbum> lista = _gestorDominio.TraerAlbumes(pagina, nombre, interprete);
+            IList<MVAlbumDetallado> listaDetalle = _gestorDominio.DetallarAlbumes(lista);
 
             if (TempData.ContainsKey("mensaje")) {
                 ViewBag.Mensaje = TempData["mensaje"];
@@ -30,7 +30,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             return View(listaDetalle);
         }
         public ActionResult Traer(MVAlbumFiltroLista filtroLista) {
-            var lista = _gestorDominio.TraerAlbumes(filtroLista.Pagina, filtroLista.Nombre, filtroLista.Interprete);
+            IList<MVAlbum> lista = _gestorDominio.TraerAlbumes(filtroLista.Pagina, filtroLista.Nombre,
+                filtroLista.Interprete);
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
         //
@@ -41,7 +42,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 return HttpNotFound();
             }
             var item = new MVAlbum(album);
-            var albumesDetallados = _gestorDominio.DetallarAlbumes(new List<MVAlbum> {item});
+            IList<MVAlbumDetallado> albumesDetallados = _gestorDominio.DetallarAlbumes(new List<MVAlbum> {item});
 
             return View(albumesDetallados[0]);
         }
@@ -65,7 +66,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     Nombre = form["Nombre"],
                     AñoLanzamiento = Convert.ToInt32(form["AñoLanzamiento"]),
                 };
-            var editarAlbumSalida = _gestorDominio.EditarAlbum(editarAlbumEntrada);
+            EditarAlbumSalida editarAlbumSalida = _gestorDominio.EditarAlbum(editarAlbumEntrada);
             if (editarAlbumSalida != SalidaBase.Resultados.Exito) {
                 TempData["mensaje"] = "error: " + editarAlbumSalida.Mensaje;
                 return RedirectToAction("Index");
@@ -78,7 +79,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     AlbumId = editarAlbumSalida.Album.Id,
                     Interpretes = interpretes.Select(i => i.Id).ToList(),
                 };
-            var relacionarInterpretesAAlbumSalida =
+            RelacionarInterpretesAAlbumSalida relacionarInterpretesAAlbumSalida =
                 _gestorDominio.RelacionarInterpretesAAlbum(relacionarInterpretesAAlbumEntrada);
             if (relacionarInterpretesAAlbumSalida != SalidaBase.Resultados.Exito) {
                 TempData["mensaje"] = "error: " + relacionarInterpretesAAlbumSalida.Mensaje;
@@ -90,15 +91,14 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             var crearCancionesEnAlbumEntrada = new CrearCancionesEnAlbumEntrada
                 {
                     AlbumId = editarAlbumSalida.Album.Id,
-                    Canciones = canciones.Select(i => i.Nombre).ToList(),                    
+                    Canciones = canciones.Select(i => i.Nombre).ToList(),
                 };
-            var crearCancionesEnAlbumSalida = _gestorDominio.CrearCancionesEnAlbum(crearCancionesEnAlbumEntrada);
-                        if (crearCancionesEnAlbumSalida != SalidaBase.Resultados.Exito) {
+            CrearCancionesEnAlbumSalida crearCancionesEnAlbumSalida =
+                _gestorDominio.CrearCancionesEnAlbum(crearCancionesEnAlbumEntrada);
+            if (crearCancionesEnAlbumSalida != SalidaBase.Resultados.Exito) {
                 TempData["mensaje"] = "error: " + crearCancionesEnAlbumSalida.Mensaje;
                 return RedirectToAction("Index");
             }
-
-
 
             // asociar canciones existentes
             var asociarCancionYAlbumEntrada = new AsociarCancionYAlbumEntrada
@@ -107,7 +107,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     AlbumId = editarAlbumSalida.Album.Id,
                     Canciones = canciones.Where(c => c.Id > 0).Select(c => c.Id).ToList(),
                 };
-            var asociarCancionYAlbumEntradaSalida =
+            AsociarCancionYAlbumSalida asociarCancionYAlbumEntradaSalida =
                 _gestorDominio.AsociarCancionYAlbum(asociarCancionYAlbumEntrada);
             if (asociarCancionYAlbumEntradaSalida != SalidaBase.Resultados.Exito) {
                 TempData["mensaje"] = "error: " + asociarCancionYAlbumEntradaSalida.Mensaje;
@@ -126,24 +126,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             }
 
             // cargar interpretes
-            var model = new MVAlbumDetallado {Id = album.Id, Nombre = album.Nombre};
-            var listaInterpretes = TraerListaInterpretes(album);
+            var model = new MVAlbumDetallado(album);
+            IList<MVInterprete> listaInterpretes = TraerListaInterpretes(album);
             model.Interpretes = listaInterpretes;
-            var listaCanciones = TraerListaCanciones(album);
+            IList<MVCancion> listaCanciones = TraerListaCanciones(album);
             model.Canciones = listaCanciones;
 
             return View(model);
-        }
-        private IList<MVCancion> TraerListaCanciones(Album album) {
-            var canciones = _gestorDominio.TraerCancionesAlbum(album.Id);
-            var listaCanciones = (from i in canciones select new MVCancion {Id = i.Id, Nombre = i.Nombre}).ToList();
-            return listaCanciones;
-        }
-        private IList<MVInterprete> TraerListaInterpretes(Album album) {
-            var interpretes = _gestorDominio.TraerInterpretesAlbum(album.Id);
-            var listaInterpretes =
-                (from i in interpretes select new MVInterprete {Id = i.Id, Nombre = i.Nombre}).ToList();
-            return listaInterpretes;
         }
         //
         // POST: /Albumes/Editar/5
@@ -152,10 +141,10 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         public ActionResult Editar(MVAlbumDetallado albumDetallado) {
             if (!ModelState.IsValid) return View(albumDetallado);
 
-            var album = _gestorDominio.TraerAlbum(albumDetallado.Id);
+            Album album = _gestorDominio.TraerAlbum(albumDetallado.Id);
             album.Nombre = albumDetallado.Nombre;
             var entrada = new EditarAlbumEntrada {AlbumId = albumDetallado.Id, Nombre = albumDetallado.Nombre};
-            var salida = _gestorDominio.EditarAlbum(entrada);
+            EditarAlbumSalida salida = _gestorDominio.EditarAlbum(entrada);
             if (salida != SalidaBase.Resultados.Exito) {
                 TempData["mensaje"] = "error: " + salida.Mensaje;
                 return View(albumDetallado);
@@ -172,7 +161,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     AlbumId = padreId,
                     Interpretes = new List<int> {interpreteElegidoId}
                 };
-            var salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
+            RelacionarInterpretesAAlbumSalida salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
             if (salida != SalidaBase.Resultados.Exito) {
                 TempData["mensaje"] = "error: " + salida.Mensaje;
             }
@@ -188,7 +177,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     AlbumId = albumId,
                     Interpretes = new List<int> {interpreteId}
                 };
-            var salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
+            RelacionarInterpretesAAlbumSalida salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
             if (salida != SalidaBase.Resultados.Exito) {
                 TempData["mensaje"] = "error: " + salida.Mensaje;
             }
@@ -200,12 +189,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         public ActionResult Votar(string v, bool d = false) {
             IList<int> albumes;
             try {
-                var json = JArray.Parse(v);
+                JArray json = JArray.Parse(v);
                 albumes = new List<int>(json.Values<int>());
             } catch (Exception) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Votos incorrectos");
             }
-            var accion = d
+            RegistrarVotoAlbumesEntrada.Acciones accion = d
                 ? RegistrarVotoAlbumesEntrada.Acciones.Desasociar
                 : RegistrarVotoAlbumesEntrada.Acciones.Asociar;
 
@@ -215,14 +204,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     UsuarioId = User.APrincipalUsuario().IdentityUsuario.Id,
                     Albumes = albumes
                 };
-            var salida = _gestorDominio.RegistrarVotoAlbumes(entrada);
+            RegistrarVotoAlbumesSalida salida = _gestorDominio.RegistrarVotoAlbumes(entrada);
             if (salida != SalidaBase.Resultados.Exito) {
                 TempData["mensaje"] = "error: " + salida.Mensaje;
                 return RedirectToAction("Index");
             }
 
             return RedirectToAction("Index");
-
         }
         //
         // GET: /Interpretes/Borrar/5
@@ -251,6 +239,19 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             var disposable = _gestorDominio as IDisposable;
             if (disposable != null) disposable.Dispose();
             base.Dispose(disposing);
+        }
+
+        private IList<MVCancion> TraerListaCanciones(Album album) {
+            IList<MVCancion> canciones = _gestorDominio.TraerCancionesAlbum(album.Id);
+            List<MVCancion> listaCanciones =
+                (from i in canciones select new MVCancion {Id = i.Id, Nombre = i.Nombre}).ToList();
+            return listaCanciones;
+        }
+        private IList<MVInterprete> TraerListaInterpretes(Album album) {
+            IList<Interprete> interpretes = _gestorDominio.TraerInterpretesAlbum(album.Id);
+            List<MVInterprete> listaInterpretes =
+                (from i in interpretes select new MVInterprete {Id = i.Id, Nombre = i.Nombre}).ToList();
+            return listaInterpretes;
         }
     }
 }

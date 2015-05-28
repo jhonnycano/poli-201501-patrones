@@ -7,12 +7,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Models {
         public bool Editable { get; set; }
         public int PadreId { get; set; }
         public string Controlador { get; set; }
-        public string AccionAgregar { get; set; }
         public IList<Tuple<string, string>> AccionesEditar { get; set; }
         public IEnumerable<MVInterprete> ListaInterpretes { get; set; }
+        public bool EnviarTokenVerificacion { get; set; }
         public MVListaInterpretes()
         {
-           AccionesEditar = new List<Tuple<string, string>>();
+            AccionesEditar = new List<Tuple<string, string>>();
+            EnviarTokenVerificacion = true;
         }
     }
 }

@@ -9,8 +9,8 @@
             PadreId = Model.Id,
             ListaInterpretes = Model.Interpretes,
             Editable = true, 
+            EnviarTokenVerificacion = false,
             Controlador = "Albumes", 
-            AccionAgregar = "AsociarInterprete",
             AccionesEditar = new List<Tuple<string, string>>
                 {
                     new Tuple<string, string>("Desasociar", "DesasociarInterprete")
@@ -40,15 +40,20 @@
             @Html.ValidationMessageFor(model => model.Nombre)
         </div>
 
-        <p>
-            <input type="submit" value="Guardar" />
-        </p>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AñoLanzamiento)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AñoLanzamiento)
+            @Html.ValidationMessageFor(model => model.AñoLanzamiento)
+        </div>
+
+        @Html.Hidden("hidInterpretes")
+        @Html.Hidden("hidCanciones")
     </fieldset>
-}
 
-
-@Html.Partial("_Interpretes", listaInterpretes)
-
+    <fieldset>
+        <legend>Canciones</legend>
 @{
     var cancionLista = new MVCancionLista
         {
@@ -57,8 +62,28 @@
             MostrarCabecera = false,
         };
 }
-@Html.Partial("~/Views/Canciones/_Canciones.cshtml", @cancionLista)
-@Html.Partial("_AgregarCancion", Model)
+        @Html.Partial("~/Views/Canciones/_Canciones.cshtml", @cancionLista)
+        <h3>Agregue una nueva canción a este álbum</h3>
+        @Html.TextBox("cancionNueva", "", new {id = "txtCancionNueva"})
+        <input type="button" id="btnAgregarCancionNueva" value="Agregar" />
+        <h3>Ó elija una canción que no tenga álbum</h3>
+        @Html.Partial("_ElegirCancion")
+        <input type="button" id="btnAgregarCancionExistente" value="Agregar" />
+        <ul id="ulCanciones"></ul>
+    </fieldset>
+
+        <fieldset>
+        <legend>Interpretes</legend>
+        @Html.Partial("_Interpretes", listaInterpretes)
+        @Html.Partial("_ElegirInterprete")
+        <input type="button" id="btnAgregarInterprete" value="Agregar" />
+        <ul id="ulInterpretes"></ul>
+    </fieldset>
+    
+    <p>
+        <input type="submit" value="Guardar" />
+    </p>    
+}
 
 <div>
     @Html.ActionLink("Volver al listado", "Index")

@@ -1,36 +1,25 @@
-﻿@model Politecnico.Patrones.ProyectoFinal.Web.Models.MVListaInterpretes
+﻿@using Politecnico.Patrones.ProyectoFinal.Contratos.MV
+@model Politecnico.Patrones.ProyectoFinal.Web.Models.MVListaInterpretes
 
-<fieldset>
-    <legend>Intérpretes</legend>
-    <table>
-        @foreach (var item in Model.ListaInterpretes) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @if (Model.Editable) {
-                        foreach (var accion in Model.AccionesEditar) {
-                            <span>
-                                @Html.ActionLink(accion.Item1, accion.Item2, Model.Controlador, new {albumId = @Model.PadreId, interpreteId = item.Id}, null)
-                            </span>
-                        }
+<table>
+    @foreach (MVInterprete item in Model.ListaInterpretes) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @if (Model.Editable) {
+                    foreach (var accion in Model.AccionesEditar) {
+                        <span>
+                            @Html.ActionLink(accion.Item1, accion.Item2, Model.Controlador, new
+                                {
+                                    albumId = @Model.PadreId, 
+                                    interpreteId = item.Id
+                                }, null)
+                        </span>
                     }
-                </td>
-            </tr>
-        }    
-    </table>
-
-        @if (Model.Editable) {
-        using (Html.BeginForm(@Model.AccionAgregar, @Model.Controlador)) {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
-            @Html.HiddenFor(model => model.PadreId)
-            <fieldset>
-                <legend>Agregar</legend>
-                @Html.Partial("_ElegirInterprete")
-                <input type="submit" value="Agregar" />
-            </fieldset>
-        }
-    }
-</fieldset>
+                }
+            </td>
+        </tr>
+    }    
+</table>
