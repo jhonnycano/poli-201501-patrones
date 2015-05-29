@@ -169,6 +169,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Paginador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +326,7 @@
     <Content Include="Views\Inicio\Privado.cshtml" />
     <Content Include="Views\Inicio\Registrar.cshtml" />
     <Content Include="Views\Shared\_PanelUsuario.cshtml" />
+    <Content Include="Views\Shared\_Paginador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

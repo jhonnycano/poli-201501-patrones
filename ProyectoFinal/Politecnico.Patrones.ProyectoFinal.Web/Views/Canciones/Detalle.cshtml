@@ -1,20 +1,12 @@
-﻿@model Politecnico.Patrones.ProyectoFinal.Contratos.Entidades.Cancion
+﻿@model Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVCancion
 
 @{
     ViewBag.Title = "Detalle de canción";
 }
 
-<h2>Detalle de canción</h2>
-
 <fieldset>
-    <legend>Canción</legend>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Nombre)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nombre)
-    </div>
+    <legend><span>Canción</span></legend>
+    @Html.Partial("_Cancion", Model)
 </fieldset>
 <p>
     @Html.ActionLink("Editar", "Editar", new {id = Model.Id}) |

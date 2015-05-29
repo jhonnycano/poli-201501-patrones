@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVCancion>
+﻿@using Politecnico.Patrones.ProyectoFinal.Web.Models
+@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVCancion>
 
 @{
     ViewBag.Title = "Lista de canciones";
@@ -27,5 +28,6 @@
             </td>
         </tr>
     }
-
 </table>
+
+@Html.Partial("_Paginador", (Paginador) ViewBag.Paginador)

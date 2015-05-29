@@ -24,17 +24,18 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
 
         // metodos de consulta
         Album TraerAlbum(int id);
+        MVCancion TraerCancion(int id);
         Interprete TraerInterprete(int id);
 
         IList<MVAlbum> TraerAlbumes(int pagina, string nombre, int? interprete);
         IList<MVAlbum> TraerAlbumesInterprete(int interpreteId);
         IList<MVAlbumDetallado> DetallarAlbumes(IList<MVAlbum> albumes);
+        IList<MVCancion> DetallarCanciones(IList<MVCancion> canciones);
         IList<MVCancion> TraerCanciones(int pagina, string nombre, FiltroAlbum filtroAlbum, int? album);
         IList<MVCancion> TraerCancionesAlbum(int albumId);
         IList<MVCancion> TraerCancionesInterprete(int interpreteId);
         IList<MVCancion> TraerCancionesMasVotadas(int cantidad);
         IList<Interprete> TraerInterpretes(int pagina, string nombre);
         IList<Interprete> TraerInterpretesAlbum(int albumId);
-        Cancion TraerCancion(int id);
     }
 }

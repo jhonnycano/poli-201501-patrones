@@ -280,6 +280,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public IList<MVAlbumDetallado> DetallarAlbumes(IList<MVAlbum> albumes) {
             return _gestorPersistencia.DetallarAlbumes(albumes);
         }
+        public IList<MVCancion> DetallarCanciones(IList<MVCancion> canciones) {
+            return _gestorPersistencia.DetallarCanciones(canciones);
+        }
         public IList<MVCancion> TraerCanciones(int pagina, string nombre, FiltroAlbum filtroAlbum, int? album) {
             return _gestorPersistencia.TraerCanciones(pagina, nombre, filtroAlbum, album);
         }
@@ -298,8 +301,10 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
         public IList<Interprete> TraerInterpretesAlbum(int albumId) {
             return _gestorPersistencia.TraerInterpretesAlbum(albumId);
         }
-        public Cancion TraerCancion(int id) {
-            return _gestorPersistencia.TraerCancion(id);
+        public MVCancion TraerCancion(int id) {
+            var cancion = _gestorPersistencia.TraerCancion(id);
+            var lista = _gestorPersistencia.DetallarCanciones(new List<MVCancion> {new MVCancion(cancion)});
+            return lista.FirstOrDefault();
         }
         
         private void CrearVotable(IElementoVotable elementoVotable) {

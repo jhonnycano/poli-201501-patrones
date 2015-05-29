@@ -21,6 +21,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             if (TempData.ContainsKey("mensaje")) {
                 ViewBag.Mensaje = TempData["mensaje"];
             }
+
+            ViewBag.Paginador = Utiles.CrearPaginador("Interpretes", "Index", pagina, lista);
             return View(lista);
         }
 

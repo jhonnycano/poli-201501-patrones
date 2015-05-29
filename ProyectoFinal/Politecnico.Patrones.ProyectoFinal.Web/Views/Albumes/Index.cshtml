@@ -1,4 +1,5 @@
 ﻿@using Politecnico.Patrones.ProyectoFinal.Web
+@using Politecnico.Patrones.ProyectoFinal.Web.Models
 @model IEnumerable<Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVAlbumDetallado>
 
 @{
@@ -48,3 +49,6 @@
     }
 
 </table>
+
+
+@Html.Partial("_Paginador", (Paginador) ViewBag.Paginador)

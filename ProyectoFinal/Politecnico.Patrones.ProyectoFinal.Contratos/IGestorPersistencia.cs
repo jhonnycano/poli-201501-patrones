@@ -18,6 +18,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos {
         IList<MVCancion> TraerCancionesInterprete(int interpreteId);
         IList<MVCancion> TraerCancionesAlbum(int albumId);
         IList<MVCancion> TraerCancionesMasVotadas(int cantidad);
+        IList<MVCancion> DetallarCanciones(IList<MVCancion> canciones);
 
         Album TraerAlbum(int id);
         IList<MVAlbum> TraerAlbumes(int pagina, string filtroNombre);

@@ -1,0 +1,18 @@
+﻿@model Politecnico.Patrones.ProyectoFinal.Web.Models.Paginador
+
+@{
+    var rvdAnterior = new RouteValueDictionary {{"pagina", Model.PaginaAnterior }};
+    var rvdSiguiente = new RouteValueDictionary {{"pagina", Model.PaginaSiguiente }};
+    if (Model.Parametros != null) {
+        foreach (var itm in Model.Parametros) {
+            rvdAnterior.Add(itm.Key, itm.Value);
+            rvdSiguiente.Add(itm.Key, itm.Value);
+        }
+    }
+}
+@if (Model.PaginaAnteriorActiva) {
+    @Html.ActionLink("Anterior", Model.Accion, Model.Controlador, rvdAnterior, null)
+}
+@if (Model.PaginaSiguienteActiva) {
+    @Html.ActionLink("Siguiente", Model.Accion, Model.Controlador, rvdSiguiente, null)
+}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
+using Politecnico.Patrones.ProyectoFinal.Web.Models;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web {
     public static class Utiles {
@@ -20,6 +21,19 @@ namespace Politecnico.Patrones.ProyectoFinal.Web {
             return interpretes.Aggregate("", (s, interprete) => s + (", " + interprete.Nombre),
                 s => s.Length > 2 ? s.Remove(0, 2) : s);
         }
+        public static Paginador CrearPaginador<T>(string controlador, string accion, int pagina, IList<T> lista) {
+            var paginador = new Paginador
+                {
+                    Controlador = controlador,
+                    Accion = accion,
+                    PaginaSiguiente = pagina + 1,
+                    PaginaSiguienteActiva = lista.Count > 0,
+                    PaginaAnterior = pagina - 1,
+                    PaginaAnteriorActiva = pagina > 0
+                };
+            return paginador;
+        }
+
         /*
         public static string RenderViewToString(HttpContextBase mvcContext, string area, string controllerName,
             string viewName, object model) {

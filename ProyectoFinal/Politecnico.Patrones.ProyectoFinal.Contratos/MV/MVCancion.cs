@@ -9,12 +9,14 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos.MV {
         }
         public MVCancion(Cancion cancion) {
             Id = cancion.Id;
+            FchCreacion = cancion.FchCreacion;
             Nombre = cancion.Nombre;
             AlbumId = cancion.AlbumId;
             VotableId = cancion.VotableId;
         }
         public MVCancion(MVCancion cancion) {
             Id = cancion.Id;
+            FchCreacion = cancion.FchCreacion;
             Nombre = cancion.Nombre;
             AlbumId = cancion.AlbumId;
             VotableId = cancion.VotableId;

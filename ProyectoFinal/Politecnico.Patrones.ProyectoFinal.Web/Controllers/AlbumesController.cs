@@ -27,6 +27,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             if (TempData.ContainsKey("mensaje")) {
                 ViewBag.Mensaje = TempData["mensaje"];
             }
+
+            ViewBag.Paginador = Utiles.CrearPaginador("Albumes", "Index", pagina, lista);
             return View(listaDetalle);
         }
         public ActionResult Traer(MVAlbumFiltroLista filtroLista) {
@@ -211,12 +213,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing) {
-            var disposable = _gestorDominio as IDisposable;
-            if (disposable != null) disposable.Dispose();
-            base.Dispose(disposing);
-        }
-
         private IList<MVCancion> TraerListaCanciones(Album album) {
             IList<MVCancion> canciones = _gestorDominio.TraerCancionesAlbum(album.Id);
             List<MVCancion> listaCanciones =
@@ -268,6 +264,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
 
             TempData["mensaje"] = "error: " + salida.Mensaje;
             return false;
+        }
+
+        protected override void Dispose(bool disposing) {
+            var disposable = _gestorDominio as IDisposable;
+            if (disposable != null) disposable.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

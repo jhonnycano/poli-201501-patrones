@@ -18,6 +18,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         // GET: /Canciones/
         public ActionResult Index(int pagina = 0, string nombre = "") {
             var lista = _gestorDominio.TraerCanciones(pagina, nombre, FiltroAlbum.Todas, null);
+
+            ViewBag.Paginador = Utiles.CrearPaginador("Canciones", "Index", pagina, lista);
             return View(lista);
         }
         //
@@ -35,7 +37,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         //
         // GET: /Canciones/Detalle/5
         public ActionResult Detalle(int id = 0) {
-            Cancion cancion = _gestorDominio.TraerCancion(id);
+            var cancion = _gestorDominio.TraerCancion(id);
             if (cancion == null) {
                 return HttpNotFound();
             }
@@ -64,13 +66,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 }
                 return RedirectToAction("Index");
             }
-
-            return View(cancion);
+            
+            return RedirectToAction("Index");
         }
         //
         // GET: /Canciones/Editar/5
         public ActionResult Editar(int id = 0) {
-            Cancion cancion = _gestorDominio.TraerCancion(id);
+            var cancion = _gestorDominio.TraerCancion(id);
             if (cancion == null) return HttpNotFound();
 
             return View(cancion);
@@ -88,7 +90,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 }
                 return RedirectToAction("Index");
             }
-            return View(cancion);
+
+            return RedirectToAction("Index");
         }
         //
         // GET: /Canciones/Votar

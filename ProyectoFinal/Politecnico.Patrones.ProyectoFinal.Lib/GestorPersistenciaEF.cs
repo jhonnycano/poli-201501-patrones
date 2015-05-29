@@ -58,6 +58,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 where ai.CancionId == cancionId
                 select i).ToList();
         }
+
         public Cancion TraerCancion(int id) {
             return (from c in _ctx.DbSetCancion
                 where c.Id == id
@@ -101,9 +102,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 .ToList();
 
             var lista = (from c in canciones select new MVCancion(c)).ToList();
-            var result = TraerVotosCanciones(lista);
-            result = TraerAlbumesCanciones(result);
-            result = TraerInterpretesCanciones(result);
+            var result = DetallarCanciones(lista);
             return result;
         }
         public IList<MVCancion> TraerCancionesMasVotadas(int cantidad) {
@@ -136,6 +135,13 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             result = TraerInterpretesCanciones(result);
             return result;
         }
+        public IList<MVCancion> DetallarCanciones(IList<MVCancion> canciones) {
+            var result = TraerVotosCanciones(canciones);
+            result = TraerAlbumesCanciones(result);
+            result = TraerInterpretesCanciones(result);
+            return result;
+        }
+
         public Album TraerAlbum(int id) {
             return (from a in _ctx.DbSetAlbum
                 where a.Id == id
@@ -184,6 +190,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
 
             return listaAlbumDetallado.ToList();
         }
+
         public CancionInterprete TraerCancionInterprete(int cancionId, int interpreteId) {
             return (from c in _ctx.DbSetCancionInterprete
                 where c.CancionId == cancionId && c.InterpreteId == interpreteId
@@ -286,6 +293,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                         a.Id,
                         a.Nombre,
                         a.FchCreacion,
+                        a.AlbumId,
+                        a.VotableId,
                     }
                 into g
                 select new MVCancion
@@ -293,6 +302,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                         Id = g.Key.Id,
                         Nombre = g.Key.Nombre,
                         FchCreacion = g.Key.FchCreacion,
+                        AlbumId = g.Key.AlbumId,
+                        VotableId = g.Key.VotableId,
                         TotalVotos = g.Count(x => x.vu != null)
                     };
             var lista = grupo.ToList();

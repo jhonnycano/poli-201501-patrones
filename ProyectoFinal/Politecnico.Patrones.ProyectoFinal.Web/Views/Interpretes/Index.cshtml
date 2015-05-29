@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Contratos.Entidades.Interprete>
+﻿@using Politecnico.Patrones.ProyectoFinal.Web.Models
+@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Contratos.Entidades.Interprete>
 
 @{
     ViewBag.Title = "Listado de intérpretes";
@@ -32,3 +33,6 @@
     }
 
 </table>
+
+
+@Html.Partial("_Paginador", (Paginador) ViewBag.Paginador)
