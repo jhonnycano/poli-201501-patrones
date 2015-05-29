@@ -1,4 +1,17 @@
-﻿<script type="text/javascript">
+﻿@{
+    if (ViewData["ControlId"] == null)
+    {
+        ViewData["ControlId"] = "albumElegidoId";
+    }
+    var controlId = ViewData["ControlId"] as string;
+    if (ViewData["ControlNombre"] == null)
+    {
+        ViewData["ControlNombre"] = "regAlbumElegidoNombre";
+    }
+    var controlNombre = ViewData["ControlNombre"] as string;
+}
+
+<script type="text/javascript">
      $(function() {
          $(".ac-album").autocomplete({
              source: function (request, response) {
@@ -12,12 +25,12 @@
              },
              minLength: 3,
              select: function (event, ui) {
-                 $("input[name=albumElegidoId]").val(ui.item.id);
-                 $("#regAlbumElegidoNombre").text(ui.item.value);
+                 $("input[name=@controlId]").val(ui.item.id);
+                 $("#@controlNombre").text(ui.item.value);
              }
          });
      });
  </script>
 @Html.TextBox("albumBusqueda", "", new {Class = "ac-album"})
-@Html.Hidden("albumElegidoId", 0)
-<span>Álbum elegido: <span id="regAlbumElegidoNombre">Ninguna</span> </span>
+@Html.Hidden(controlId, 0)
+<span>Álbum elegido: <span id="@controlNombre">Ninguna</span> </span>

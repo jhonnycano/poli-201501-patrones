@@ -1,0 +1,8 @@
+﻿@using Politecnico.Patrones.ProyectoFinal.Contratos.MV
+@model MVAlbumDetallado
+
+@{
+    ViewBag.Title = "Canciones del álbum";
+}
+
+@Html.Partial("~/Views/Canciones/_Canciones.cshtml", new MVCancionLista{Canciones = Model.Canciones})

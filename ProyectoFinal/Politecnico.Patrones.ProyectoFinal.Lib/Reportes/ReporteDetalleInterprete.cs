@@ -6,7 +6,6 @@ using Politecnico.Patrones.ProyectoFinal.Lib.Recursos;
 
 namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
     internal class ReporteDetalleInterprete : ReporteBase {
-        private IDictionary<string, object> _parametros;
         private Interprete _interprete;
         public ReporteDetalleInterprete(IGestorPersistencia gestorPersistencia) : base(gestorPersistencia) {
         }
@@ -25,7 +24,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
             if (_interprete == null || _interprete.Id <= 0)
                 return string.Format(Cadenas.rpt_val_interprete_no_valido, interpreteEntrada);
 
-            _parametros = parametros;
             return "";
         }
         public override IReporteConsulta Consultar() {

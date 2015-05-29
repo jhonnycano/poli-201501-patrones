@@ -218,6 +218,8 @@
     <Content Include="Views\Reportes\_ReporteListaAlbumes.cshtml" />
     <Content Include="Views\Reportes\_InterpreteDetalle.cshtml" />
     <Content Include="Views\Reportes\_ReporteDetalleInterprete.cshtml" />
+    <Content Include="Views\Reportes\_ListaCancionesAlbum.cshtml" />
+    <Content Include="Views\Reportes\_ReporteListaCancionesAlbum.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Content\themes\stuffy\images\bg01.png" />
     <Content Include="Content\themes\stuffy\images\img01.jpg" />

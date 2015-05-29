@@ -169,11 +169,29 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Recursos {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El álbum con id {0} no es válido o no existe.
+        /// </summary>
+        public static string rpt_val_album_no_valido {
+            get {
+                return ResourceManager.GetString("rpt_val_album_no_valido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to El intérprete con id {0} no es válido o no existe.
         /// </summary>
         public static string rpt_val_interprete_no_valido {
             get {
                 return ResourceManager.GetString("rpt_val_interprete_no_valido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hace falta el álbum.
+        /// </summary>
+        public static string rpt_val_no_album {
+            get {
+                return ResourceManager.GetString("rpt_val_no_album", resourceCulture);
             }
         }
         
