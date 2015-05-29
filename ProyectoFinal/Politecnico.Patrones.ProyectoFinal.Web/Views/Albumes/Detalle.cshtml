@@ -7,7 +7,7 @@
 
 <fieldset>
     <legend><span>Detalle de Album</span></legend>
-    @Html.Partial("~/Views/Albumes/_Albumes.cshtml", new List<MVAlbumDetallado> {Model})
+    @Html.Partial("~/Views/Albumes/_Albumes.cshtml", new MVAlbumLista {Albumes = new List<MVAlbumDetallado> {Model}})
 </fieldset>
 <p>
     @Html.ActionLink("Editar", "Editar", new {id = Model.Id}) |
