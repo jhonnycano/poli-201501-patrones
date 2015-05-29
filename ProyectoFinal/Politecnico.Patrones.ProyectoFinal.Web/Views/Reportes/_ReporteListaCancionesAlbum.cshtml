@@ -1,8 +1,10 @@
 ﻿@using Politecnico.Patrones.ProyectoFinal.Contratos.MV
 @model MVAlbumDetallado
-
 @{
-    ViewBag.Title = "Canciones del álbum";
+    if ((1).Equals(ViewData["destino"])) {
+        Layout = "~/Views/Shared/_PdfLayout.cshtml";
+    }
 }
 
+@Html.Partial("_HabilitarPdf", ViewData)
 @Html.Partial("~/Views/Canciones/_Canciones.cshtml", new MVCancionLista{Canciones = Model.Canciones})

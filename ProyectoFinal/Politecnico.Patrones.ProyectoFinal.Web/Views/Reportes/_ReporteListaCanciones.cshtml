@@ -1,5 +1,10 @@
 ﻿@using Politecnico.Patrones.ProyectoFinal.Web
 @model Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVCancionLista
+@{
+    if ((1).Equals(ViewData["destino"])) {
+        Layout = "~/Views/Shared/_PdfLayout.cshtml";
+    }
+}
 
 <table>
     <tr>

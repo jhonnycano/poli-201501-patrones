@@ -64,6 +64,10 @@
       <HintPath>..\..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -170,6 +174,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Paginador.cs" />
+    <Compile Include="Models\ReporteDefinicion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +193,7 @@
     <Content Include="Content\images\banner.jpg" />
     <Content Include="Content\images\pics02.jpg" />
     <Content Include="Content\themes\stuffy\appstyles.css" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\datepicker-es.js" />
     <Content Include="Scripts\lodash.js" />
@@ -211,15 +217,17 @@
     <Content Include="Views\Shared\_PdfLayout.cshtml" />
     <Content Include="Views\Canciones\_Cancion.cshtml" />
     <Content Include="Views\Reportes\Reporte.cshtml" />
-    <Content Include="Views\Reportes\_ListaCanciones.cshtml" />
+    <Content Include="Views\Reportes\_ParamsListaCanciones.cshtml" />
     <Content Include="Views\Reportes\_RangoFecha.cshtml" />
     <Content Include="Views\Reportes\_ReporteListaCanciones.cshtml" />
-    <Content Include="Views\Reportes\_ListaAlbumes.cshtml" />
+    <Content Include="Views\Reportes\_ParamsListaAlbumes.cshtml" />
     <Content Include="Views\Reportes\_ReporteListaAlbumes.cshtml" />
-    <Content Include="Views\Reportes\_InterpreteDetalle.cshtml" />
+    <Content Include="Views\Reportes\_ParamsInterpreteDetalle.cshtml" />
     <Content Include="Views\Reportes\_ReporteDetalleInterprete.cshtml" />
-    <Content Include="Views\Reportes\_ListaCancionesAlbum.cshtml" />
+    <Content Include="Views\Reportes\_ParamsListaCancionesAlbum.cshtml" />
     <Content Include="Views\Reportes\_ReporteListaCancionesAlbum.cshtml" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Views\Reportes\_HabilitarPdf.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Content\themes\stuffy\images\bg01.png" />
     <Content Include="Content\themes\stuffy\images\img01.jpg" />

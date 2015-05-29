@@ -1,4 +1,9 @@
 ﻿@model Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVInterpreteDetallado
+@{
+    if ((1).Equals(ViewData["destino"])) {
+        Layout = "~/Views/Shared/_PdfLayout.cshtml";
+    }
+}
 
 <fieldset>
     <legend><span>Detalle de Intérprete</span></legend>

@@ -1,4 +1,4 @@
-﻿@using Politecnico.Patrones.ProyectoFinal.Contratos.VO
+﻿@model IEnumerable<Politecnico.Patrones.ProyectoFinal.Web.Models.ReporteDefinicion>
 @{
     ViewBag.Title = "Listado de reportes";
 }
@@ -9,8 +9,13 @@
 }
 
 <ul>
-    <li>@Html.ActionLink("Sencillos por rango de tiempo", "Reporte", new { Tipo = TipoReporte.ListaCanciones})</li>
-    <li>@Html.ActionLink("Álbumes por rango de tiempo", "Reporte", new { Tipo = TipoReporte.ListaAlbumes})</li>
-    <li>@Html.ActionLink("Detalle de intérprete", "Reporte", new { Tipo = TipoReporte.InterpreteDetalle})</li>
-    <li>@Html.ActionLink("Sencillos de un álbum", "Reporte", new { Tipo = TipoReporte.ListaCancionesAlbum})</li>
+@foreach (var item in Model) {
+    <li>
+        <span>@item.Etiqueta</span>
+        @Html.ActionLink("En linea", "Reporte", new {item.Tipo})
+        @if (item.PermitirPdf) {
+            @Html.ActionLink("PDF", "Reporte", new {item.Tipo, dest = 1 })
+        }
+    </li>
+}
 </ul>
