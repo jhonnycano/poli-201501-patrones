@@ -1,0 +1,19 @@
+﻿@model Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVInterpreteDetallado
+
+<fieldset>
+    <legend><span>Detalle de Intérprete</span></legend>
+    <table class="t1">
+        <tr>
+            <td class="etiq">@Html.DisplayNameFor(model => model.Nombre)</td>
+            <td>@Html.DisplayFor(model => model.Nombre)</td>
+        </tr>
+        <tr>
+            <td class="etiq">Álbumes</td>
+            <td>@Html.Partial("~/Views/Albumes/_Albumes.cshtml", Model.Albumes)</td>
+        </tr>
+        <tr>
+            <td class="etiq">Canciones sueltas</td>
+            <td>@Html.Partial("~/Views/Canciones/_Canciones.cshtml", Model.CancionesSinAlbum)</td>
+        </tr>
+    </table>
+</fieldset>

@@ -153,6 +153,9 @@
   <data name="reporte_tipo_no_encontrado" xml:space="preserve">
     <value>Tipo de reporte {0} no encontrado</value>
   </data>
+  <data name="rpt_val_interprete_no_valido" xml:space="preserve">
+    <value>El intérprete con id {0} no es válido o no existe</value>
+  </data>
   <data name="rpt_val_no_fch_fin" xml:space="preserve">
     <value>Hace falta la fecha de fin</value>
   </data>

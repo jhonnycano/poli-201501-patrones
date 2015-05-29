@@ -2,6 +2,6 @@
 
 namespace Politecnico.Patrones.ProyectoFinal.Contratos.MV {
     public class MVAlbumLista {
-        public List<MVAlbumDetallado> Albumes { get; set; }
+        public IList<MVAlbumDetallado> Albumes { get; set; }
     }
 }

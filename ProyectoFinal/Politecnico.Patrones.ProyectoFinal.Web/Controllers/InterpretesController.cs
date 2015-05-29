@@ -48,7 +48,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 {
                     Id = interprete.Id,
                     Nombre = interprete.Nombre,
-                    Albumes = albumesDetallados,
+                    Albumes = new MVAlbumLista {Albumes = albumesDetallados},
                     CancionesSinAlbum = new MVCancionLista
                         {
                             MostrarAlbum = false,

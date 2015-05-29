@@ -14,8 +14,9 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/bundles/lodash")
-        @RenderSection("scripts", false)
+        <script type="text/javascript" src="@Url.Content("~/Scripts/datepicker-es.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Scripts/app.js")"></script>
+        @RenderSection("scripts", false)
     </head>
     <body>
         <div id="menu-wrapper">

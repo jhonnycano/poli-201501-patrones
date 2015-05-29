@@ -189,6 +189,7 @@
     <Content Include="Content\images\pics02.jpg" />
     <Content Include="Content\themes\stuffy\appstyles.css" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\datepicker-es.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lodash.min.js" />
     <Content Include="Views\Canciones\Index.cshtml" />
@@ -209,6 +210,14 @@
     <Content Include="Views\Shared\_ElegirAlbum.cshtml" />
     <Content Include="Views\Shared\_PdfLayout.cshtml" />
     <Content Include="Views\Canciones\_Cancion.cshtml" />
+    <Content Include="Views\Reportes\Reporte.cshtml" />
+    <Content Include="Views\Reportes\_ListaCanciones.cshtml" />
+    <Content Include="Views\Reportes\_RangoFecha.cshtml" />
+    <Content Include="Views\Reportes\_ReporteListaCanciones.cshtml" />
+    <Content Include="Views\Reportes\_ListaAlbumes.cshtml" />
+    <Content Include="Views\Reportes\_ReporteListaAlbumes.cshtml" />
+    <Content Include="Views\Reportes\_InterpreteDetalle.cshtml" />
+    <Content Include="Views\Reportes\_ReporteDetalleInterprete.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Content\themes\stuffy\images\bg01.png" />
     <Content Include="Content\themes\stuffy\images\img01.jpg" />

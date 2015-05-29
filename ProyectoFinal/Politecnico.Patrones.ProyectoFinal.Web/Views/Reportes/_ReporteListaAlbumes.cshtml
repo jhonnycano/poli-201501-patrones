@@ -1,0 +1,43 @@
+﻿@using Politecnico.Patrones.ProyectoFinal.Web
+@model Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVAlbumLista
+
+<table>
+    <tr>
+        <th>
+            Fecha Creación
+        </th>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Album
+        </th>
+        <th>
+            Intérpretes
+        </th>
+        <th>
+            Votos
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in Model.Albumes) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FchCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AñoLanzamiento)
+        </td>
+        <td>
+            @Utiles.ResumenInterpretes(item.Interpretes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalVotos)
+        </td>
+    </tr>
+}
+
+</table>

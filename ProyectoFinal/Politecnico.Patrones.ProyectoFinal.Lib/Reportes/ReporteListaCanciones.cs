@@ -22,15 +22,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Reportes {
         }
         public override IReporteConsulta Consultar() {
             var resultConsulta = _gestorPersistencia.TraerConsulta<MVCancion>(Consultas.rpt_canciones, _parametros);
-            var lista = resultConsulta.ToList();
-
-            foreach (var item in lista) {
-                var interpretesCancion = _gestorPersistencia.TraerInterpretesCancion(item.Id);
-                if (interpretesCancion != null) {
-                    item.Interpretes =
-                        interpretesCancion.Select(i => new MVInterprete {Id = i.Id, Nombre = i.Nombre}).ToList();
-                }
-            }
+            IList<MVCancion> lista = resultConsulta.ToList();
+            lista = _gestorPersistencia.DetallarCanciones(lista);
 
             var objeto = new MVCancionLista
                 {

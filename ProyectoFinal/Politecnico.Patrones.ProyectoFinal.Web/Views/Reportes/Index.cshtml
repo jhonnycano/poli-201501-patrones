@@ -1,5 +1,16 @@
-﻿@{
+﻿@using Politecnico.Patrones.ProyectoFinal.Contratos.VO
+@{
     ViewBag.Title = "Listado de reportes";
 }
 
 <h2>Listado de reportes</h2>
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje)) {
+    <span class="advertencia">@ViewBag.Mensaje</span>
+}
+
+<ul>
+    <li>@Html.ActionLink("Sencillos por rango de tiempo", "Reporte", new { Tipo = TipoReporte.ListaCanciones})</li>
+    <li>@Html.ActionLink("Álbumes por rango de tiempo", "Reporte", new { Tipo = TipoReporte.ListaAlbumes})</li>
+    <li>@Html.ActionLink("Detalle de intérprete", "Reporte", new { Tipo = TipoReporte.InterpreteDetalle})</li>
+    <li>@Html.ActionLink("Sencillos de un álbum", "Reporte", new { Tipo = TipoReporte.ListaCancionesAlbum})</li>
+</ul>

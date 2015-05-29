@@ -1,0 +1,15 @@
+﻿@using Politecnico.Patrones.ProyectoFinal.Contratos.VO
+@{
+    ViewBag.Title = "Reportes";
+    var vistaParametros = ViewBag.ParametrosReporte as string;
+    var tipo = ViewBag.Tipo is TipoReporte ? (TipoReporte) ViewBag.Tipo : TipoReporte.ListaCanciones;
+}
+
+<h2>Reportes</h2>
+
+@using (Html.BeginForm("Traer", "Reportes", FormMethod.Post)) {
+    @Html.Hidden("tipo", tipo)
+    @Html.Partial(vistaParametros)
+
+    <input type="submit" value="Consultar" />
+}

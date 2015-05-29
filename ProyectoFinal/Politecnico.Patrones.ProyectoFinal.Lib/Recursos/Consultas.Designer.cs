@@ -61,12 +61,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Recursos {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT a.Id, a.FchCreacion, a.Nombre, a.AñoLanzamiento
+        ///   Looks up a localized string similar to SELECT a.Id, a.FchCreacion, a.Nombre, a.AñoLanzamiento, a.VotableId
         ///	, COUNT(DISTINCT vu.Id) TotalVotos
         ///FROM Album a
         ///INNER JOIN VotableUsuario vu ON vu.VotableId = a.VotableId
         ///WHERE vu.FchCreacion BETWEEN @FchInicio AND @FchFin
-        ///GROUP BY a.Id, a.FchCreacion, a.Nombre, a.AñoLanzamiento.
+        ///GROUP BY a.Id, a.FchCreacion, a.Nombre, a.AñoLanzamiento, a.VotableId.
         /// </summary>
         public static string rpt_albumes {
             get {
@@ -75,14 +75,14 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib.Recursos {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT c.Id, c.FchCreacion, c.Nombre
+        ///   Looks up a localized string similar to SELECT c.Id, c.FchCreacion, c.Nombre, c.AlbumId, c.VotableId
         ///	, ISNULL(a.Nombre, &apos;No disponible&apos;) &apos;Album&apos;
         ///	, COUNT(DISTINCT vu.Id) TotalVotos
         ///FROM Cancion c
         ///LEFT JOIN Album a ON c.AlbumId = a.Id
         ///INNER JOIN VotableUsuario vu ON vu.VotableId = c.VotableId
         ///WHERE vu.FchCreacion BETWEEN @FchInicio AND @FchFin
-        ///GROUP BY c.Id, c.FchCreacion, c.AlbumId, c.Nombre, a.Nombre.
+        ///GROUP BY c.Id, c.FchCreacion, c.Nombre, c.AlbumId, c.VotableId, a.Nombre.
         /// </summary>
         public static string rpt_canciones {
             get {

@@ -1,9 +1,9 @@
 ﻿@using Politecnico.Patrones.ProyectoFinal.Contratos.MV
 @using Politecnico.Patrones.ProyectoFinal.Web
-@model IEnumerable<MVAlbumDetallado>
+@model MVAlbumLista
 
 <table class="t1">
-    @foreach (var item in Model) {
+    @foreach (var item in Model.Albumes) {
         <tr>
             <td colspan="2">
                 <span>@Html.ActionLink(item.Nombre, "Detalle", "Albumes", new {id=item.Id}, null)</span>

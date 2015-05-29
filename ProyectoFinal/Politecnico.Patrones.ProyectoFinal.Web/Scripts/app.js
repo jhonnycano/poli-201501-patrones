@@ -1,4 +1,6 @@
-﻿function mostrarLista(origen, destino) {
+﻿$.datepicker.setDefaults($.datepicker.regional["es"]);
+
+function mostrarLista(origen, destino) {
     $(destino).empty();
     for (var ind in origen) {
         var itm = origen[ind];
@@ -13,6 +15,7 @@ function capturarVotos() {
 }
 
 $(function () {
+    $(".fch").datepicker({ "dateFormat": "yy-mm-dd" });
     $("input.chk-votar").on('click', function () {
         capturarVotos();
     });

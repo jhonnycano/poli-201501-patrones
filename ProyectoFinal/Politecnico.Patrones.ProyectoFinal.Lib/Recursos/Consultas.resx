@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rpt_albumes" xml:space="preserve">
-    <value>SELECT a.Id, a.FchCreacion, a.Nombre, a.AñoLanzamiento
+    <value>SELECT a.Id, a.FchCreacion, a.Nombre, a.AñoLanzamiento, a.VotableId
 	, COUNT(DISTINCT vu.Id) TotalVotos
 FROM Album a
 INNER JOIN VotableUsuario vu ON vu.VotableId = a.VotableId
 WHERE vu.FchCreacion BETWEEN @FchInicio AND @FchFin
-GROUP BY a.Id, a.FchCreacion, a.Nombre, a.AñoLanzamiento</value>
+GROUP BY a.Id, a.FchCreacion, a.Nombre, a.AñoLanzamiento, a.VotableId</value>
   </data>
   <data name="rpt_canciones" xml:space="preserve">
-    <value>SELECT c.Id, c.FchCreacion, c.Nombre
+    <value>SELECT c.Id, c.FchCreacion, c.Nombre, c.AlbumId, c.VotableId
 	, ISNULL(a.Nombre, 'No disponible') 'Album'
 	, COUNT(DISTINCT vu.Id) TotalVotos
 FROM Cancion c
 LEFT JOIN Album a ON c.AlbumId = a.Id
 INNER JOIN VotableUsuario vu ON vu.VotableId = c.VotableId
 WHERE vu.FchCreacion BETWEEN @FchInicio AND @FchFin
-GROUP BY c.Id, c.FchCreacion, c.AlbumId, c.Nombre, a.Nombre</value>
+GROUP BY c.Id, c.FchCreacion, c.Nombre, c.AlbumId, c.VotableId, a.Nombre</value>
   </data>
 </root>
