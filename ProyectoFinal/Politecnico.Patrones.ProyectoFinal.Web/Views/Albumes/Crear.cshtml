@@ -82,12 +82,12 @@
 
         $(function() {
             $("#btnAgregarInterprete").on('click', function() {
-                var i = $("input[name=interpreteElegidoId]").val();
-                if (i <= 0) return;
+                var id = $("input[name=interpreteElegidoId]").val();
+                if (id <= 0) return;
 
                 var hidInterprete = $("input[name=hidInterpretes]");
                 var nombre = $("#regArtistaElegidoNombre").html();
-                var obj, txt = hidInterprete.val();
+                var obj, tmp, txt = hidInterprete.val();
 
                 if (txt) obj = JSON.parse(txt);
                 else obj = [];
@@ -101,7 +101,7 @@
                 }
 
 
-                obj.push({ Id: i, Nombre: nombre });
+                obj.push({ Id: id, Nombre: nombre });
                 hidInterprete.val(JSON.stringify(obj));
                 mostrarLista(obj, "#ulInterpretes");
             });

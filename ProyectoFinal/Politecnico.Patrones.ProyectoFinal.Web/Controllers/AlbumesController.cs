@@ -9,10 +9,11 @@ using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
+using Politecnico.Patrones.ProyectoFinal.Web.Code;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
-    public class AlbumesController : Controller {
+    public class AlbumesController : FlixNetController {
         private readonly IGestorDominio _gestorDominio;
 
         public AlbumesController(IGestorDominio gestorDominio) {
@@ -24,10 +25,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             IList<MVAlbum> lista = _gestorDominio.TraerAlbumes(pagina, nombre, interprete);
             IList<MVAlbumDetallado> listaDetalle = _gestorDominio.DetallarAlbumes(lista);
 
-            if (TempData.ContainsKey("mensaje")) {
-                ViewBag.Mensaje = TempData["mensaje"];
-            }
-
+            EnviarMensajeAVista();
             ViewBag.Paginador = Utiles.CrearPaginador("Albumes", "Index", pagina, lista);
             return View(listaDetalle);
         }
@@ -116,7 +114,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
 
             EditarAlbumSalida editarAlbumSalida = _gestorDominio.EditarAlbum(editarAlbumEntrada);
             if (editarAlbumSalida != SalidaBase.Resultados.Exito) {
-                TempData["mensaje"] = "error: " + editarAlbumSalida.Mensaje;
+                PasarMensaje(editarAlbumSalida.Mensaje, "msj-error");
                 return RedirectToAction("Index");
             }
 
@@ -141,7 +139,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 };
             RelacionarInterpretesAAlbumSalida salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
             if (salida != SalidaBase.Resultados.Exito) {
-                TempData["mensaje"] = "error: " + salida.Mensaje;
+                PasarMensaje(salida.Mensaje, "msj-error");
             }
 
             return RedirectToAction("Editar", "Albumes", new {id = padreId});
@@ -157,7 +155,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 };
             RelacionarInterpretesAAlbumSalida salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
             if (salida != SalidaBase.Resultados.Exito) {
-                TempData["mensaje"] = "error: " + salida.Mensaje;
+                PasarMensaje(salida.Mensaje, "msj-error");
             }
 
             return RedirectToAction("Editar", "Albumes", new {id = albumId});
@@ -184,10 +182,12 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 };
             RegistrarVotoAlbumesSalida salida = _gestorDominio.RegistrarVotoAlbumes(entrada);
             if (salida != SalidaBase.Resultados.Exito) {
-                TempData["mensaje"] = "error: " + salida.Mensaje;
+                PasarMensaje(salida.Mensaje, "msj-error");
                 return RedirectToAction("Index");
             }
 
+            
+            PasarMensaje("Muchas gracias por votar", "msj-exito");
             return RedirectToAction("Index");
         }
         //
@@ -236,7 +236,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             var salida = _gestorDominio.RelacionarInterpretesAAlbum(entrada);
             if (salida == SalidaBase.Resultados.Exito) return true;
 
-            TempData["mensaje"] = "error: " + salida.Mensaje;
+            PasarMensaje(salida.Mensaje, "msj-error");
             return false;
         }
         private bool CrearCancionesNuevas(int album, IList<MVCancion> canciones, bool fallarSiVacio) {
@@ -249,7 +249,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             var salida = _gestorDominio.CrearCancionesEnAlbum(entrada);
             if (salida == SalidaBase.Resultados.Exito) return true;
 
-            TempData["mensaje"] = "error: " + salida.Mensaje;
+            PasarMensaje(salida.Mensaje, "msj-error");
             return false;
         }
         private bool AsociarCancionesExistentes(int album, IList<MVCancion> canciones) {
@@ -262,7 +262,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
             AsociarCancionYAlbumSalida salida = _gestorDominio.AsociarCancionYAlbum(entrada);
             if (salida == SalidaBase.Resultados.Exito) return true;
 
-            TempData["mensaje"] = "error: " + salida.Mensaje;
+
+            PasarMensaje(salida.Mensaje, "msj-error");
             return false;
         }
 

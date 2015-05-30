@@ -26,7 +26,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                     return SalidaBase.Fallo(salida,
                         string.Format(Cadenas.interprete_id_no_encontrado, entrada.InterpreteId));
                 }
-                
+
                 interprete.Nombre = entrada.Nombre;
             } else {
                 interprete = new Interprete
@@ -52,6 +52,9 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 if (album == null) {
                     return SalidaBase.Fallo(salida, string.Format(Cadenas.album_id_no_encontrado, entrada.AlbumId));
                 }
+
+                album.Nombre = entrada.Nombre;
+                album.AñoLanzamiento = entrada.AñoLanzamiento;
             } else {
                 album = new Album
                     {
@@ -83,6 +86,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 if (cancion == null)
                     return SalidaBase.Fallo(salida, string.Format(Cadenas.cancion_id_no_encontrado, entrada.CancionId));
                 cancion.AlbumId = entrada.AlbumId;
+                cancion.Nombre = entrada.Nombre;
             } else {
                 cancion = new Cancion
                     {
@@ -98,7 +102,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             return SalidaBase.Exito(salida);
         }
 
-        public RelacionarInterpretesACancionSalida RelacionarInterpretesACancion(RelacionarInterpretesACancionEntrada entrada) {
+        public RelacionarInterpretesACancionSalida RelacionarInterpretesACancion(
+            RelacionarInterpretesACancionEntrada entrada) {
             var salida = new RelacionarInterpretesACancionSalida();
 
             var cancion = _gestorPersistencia.TraerCancion(entrada.CancionId);
@@ -149,7 +154,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             }
 
             if (entrada.Accion == RelacionarInterpretesAAlbumEntrada.Acciones.Agregar) {
-                var relaciones = interpretes.Select(i => _gestorPersistencia.TraerAlbumInterprete(album.Id, i.Id)).ToList();
+                var relaciones =
+                    interpretes.Select(i => _gestorPersistencia.TraerAlbumInterprete(album.Id, i.Id)).ToList();
                 foreach (var relacion in relaciones) {
                     _gestorPersistencia.Guardar(relacion);
                 }
@@ -177,7 +183,6 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
 
                 foreach (var cancion in canciones) {
                     cancion.AlbumId = album.Id;
-                    _gestorPersistencia.EliminarCancionInterprete(cancion.Id);
                     _gestorPersistencia.Guardar(cancion);
                 }
             } else if (entrada.Accion == AsociarCancionYAlbumEntrada.Acciones.Desasociar) {
@@ -222,7 +227,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 return SalidaBase.Fallo(salida, string.Format(Cadenas.usuario_id_no_encontrado, entrada.UsuarioId));
 
             foreach (var cancion in canciones) {
-                RegistrarVoto(cancion.VotableId, entrada.UsuarioId, entrada.Accion == RegistrarVotoCancionesEntrada.Acciones.Asociar);
+                RegistrarVoto(cancion.VotableId, entrada.UsuarioId,
+                    entrada.Accion == RegistrarVotoCancionesEntrada.Acciones.Asociar);
             }
 
             return SalidaBase.Exito(salida);
@@ -240,7 +246,8 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
                 return SalidaBase.Fallo(salida, string.Format(Cadenas.usuario_id_no_encontrado, entrada.UsuarioId));
 
             foreach (var album in albumes) {
-                RegistrarVoto(album.VotableId, entrada.UsuarioId, entrada.Accion == RegistrarVotoAlbumesEntrada.Acciones.Asociar);
+                RegistrarVoto(album.VotableId, entrada.UsuarioId,
+                    entrada.Accion == RegistrarVotoAlbumesEntrada.Acciones.Asociar);
             }
 
             return SalidaBase.Exito(salida);
@@ -306,7 +313,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             var lista = _gestorPersistencia.DetallarCanciones(new List<MVCancion> {new MVCancion(cancion)});
             return lista.FirstOrDefault();
         }
-        
+
         private void CrearVotable(IElementoVotable elementoVotable) {
             if (elementoVotable.VotableId > 0) return;
 

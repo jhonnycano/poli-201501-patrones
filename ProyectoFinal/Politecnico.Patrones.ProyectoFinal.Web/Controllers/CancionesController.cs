@@ -7,10 +7,11 @@ using Politecnico.Patrones.ProyectoFinal.Contratos;
 using Politecnico.Patrones.ProyectoFinal.Contratos.Entidades;
 using Politecnico.Patrones.ProyectoFinal.Contratos.MV;
 using Politecnico.Patrones.ProyectoFinal.Contratos.VO;
+using Politecnico.Patrones.ProyectoFinal.Web.Code;
 
 namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
     [Authorize]
-    public class CancionesController : Controller {
+    public class CancionesController : FlixNetController {
         private readonly IGestorDominio _gestorDominio;
         public CancionesController(IGestorDominio gestorDominio) {
             _gestorDominio = gestorDominio;
@@ -18,7 +19,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
         // GET: /Canciones/
         public ActionResult Index(int pagina = 0, string nombre = "") {
             var lista = _gestorDominio.TraerCanciones(pagina, nombre, FiltroAlbum.Todas, null);
-
+            EnviarMensajeAVista();
             ViewBag.Paginador = Utiles.CrearPaginador("Canciones", "Index", pagina, lista);
             return View(lista);
         }
@@ -62,7 +63,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                     };
                 var salida = _gestorDominio.EditarCancion(entrada);
                 if (salida != SalidaBase.Resultados.Exito) {
-                    TempData["mensaje"] = "error: " + salida.Mensaje;
+                    PasarMensaje(salida.Mensaje, "msj-error");
                 }
                 return RedirectToAction("Index");
             }
@@ -86,7 +87,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 var entrada = new EditarCancionEntrada {CancionId = cancion.Id, Nombre = cancion.Nombre};
                 var salida = _gestorDominio.EditarCancion(entrada);
                 if (salida != SalidaBase.Resultados.Exito) {
-                    TempData["mensaje"] = "error: " + salida.Mensaje;
+                    PasarMensaje(salida.Mensaje, "msj-error");
                 }
                 return RedirectToAction("Index");
             }
@@ -115,10 +116,11 @@ namespace Politecnico.Patrones.ProyectoFinal.Web.Controllers {
                 };
             var salida = _gestorDominio.RegistrarVotoCanciones(entrada);
             if (salida != SalidaBase.Resultados.Exito) {
-                TempData["mensaje"] = "error: " + salida.Mensaje;
+                PasarMensaje(salida.Mensaje, "msj-error");
                 return RedirectToAction("Index");
             }
 
+            PasarMensaje("Muchas gracias por votar", "msj-exito");
             return RedirectToAction("Index");
         }
         //

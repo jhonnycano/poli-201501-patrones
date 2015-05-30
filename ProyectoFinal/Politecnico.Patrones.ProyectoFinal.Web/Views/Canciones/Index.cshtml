@@ -5,14 +5,15 @@
     ViewBag.Title = "Lista de canciones";
 }
 
+
 <h2>Listado de canciones</h2>
 
 <p>
     @Html.ActionLink("Crear canción", "Crear")
 </p>
-@Html.Hidden("votos", "[]", new {id="hidVotos"})
-@Html.ActionLink("Votar", "Votar", "Canciones", null, new {id="btnVotar"})
-@Html.ActionLink("Quitar votos", "Votar", "Canciones", null, new {id="btnQuitarVotos"})
+@Html.Hidden("votos", "[]", new {id = "hidVotos"})
+@Html.ActionLink("Votar", "Votar", "Canciones", null, new {id = "btnVotar", @class = "btn"})
+@Html.ActionLink("Quitar votos", "Votar", "Canciones", null, new {id = "btnQuitarVotos", @class = "btn"})
 <table>
     @foreach (var item in Model) {
         <tr>

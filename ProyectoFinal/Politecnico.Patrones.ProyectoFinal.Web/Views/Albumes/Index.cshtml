@@ -12,8 +12,8 @@
     @Html.ActionLink("Crear álbum", "Crear")
 </p>
 @Html.Hidden("votos", "[]", new {id="hidVotos"})
-@Html.ActionLink("Votar", "Votar", "Albumes", null, new {id="btnVotar"})
-@Html.ActionLink("Quitar votos", "Votar", "Albumes", null, new {id="btnQuitarVotos"})
+@Html.ActionLink("Votar", "Votar", "Albumes", null, new {id="btnVotar", @class="btn"})
+@Html.ActionLink("Quitar votos", "Votar", "Albumes", null, new {id="btnQuitarVotos", @class="btn"})
 <table>
     <tr>
         <th>

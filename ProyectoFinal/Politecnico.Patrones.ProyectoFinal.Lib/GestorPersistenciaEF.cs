@@ -310,15 +310,26 @@ namespace Politecnico.Patrones.ProyectoFinal.Lib {
             return lista;
         }
         private IList<MVCancion> TraerInterpretesCanciones(IList<MVCancion> canciones) {
-            var grupo = (from c in canciones
+            // interpretes de cancion
+            var grupoCancion = (from c in canciones
                 join ci in _ctx.DbSetCancionInterprete on c.Id equals ci.CancionId
                 join i in _ctx.DbSetInterprete on ci.InterpreteId equals i.Id
                 select new {Cancion = c, Interprete = i}).ToList();
-
-            foreach (var itm in grupo) {
+            foreach (var itm in grupoCancion) {
                 if (itm.Cancion.Interpretes == null) itm.Cancion.Interpretes = new List<MVInterprete>();
                 itm.Cancion.Interpretes.Add(new MVInterprete(itm.Interprete));
             }
+
+            // interpretes de album
+            var grupoAlbum = (from c in canciones
+                join ai in _ctx.DbSetAlbumInterprete on c.AlbumId equals ai.AlbumId
+                join i in _ctx.DbSetInterprete on ai.InterpreteId equals i.Id
+                select new {Cancion = c, Interprete = i}).ToList();
+            foreach (var itm in grupoAlbum) {
+                if (itm.Cancion.InterpretesAlbum == null) itm.Cancion.InterpretesAlbum = new List<MVInterprete>();
+                itm.Cancion.InterpretesAlbum.Add(new MVInterprete(itm.Interprete));
+            }
+
             return canciones;
         }
         private IList<MVCancion> TraerAlbumesCanciones(IList<MVCancion> canciones) {

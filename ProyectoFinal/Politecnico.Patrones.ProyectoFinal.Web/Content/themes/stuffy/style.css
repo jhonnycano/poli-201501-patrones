@@ -584,6 +584,15 @@ table.t1 tfoot th em {
 span.votos {
     margin-left: 50px;
 }
+span.lanzamiento {
+    color: #2f6bcf;
+}
+span.lanzamiento:before {
+    content: '(';
+}
+span.lanzamiento:after {
+    content: ')';
+}
 
 .emphasis {
     font-size: 2.2em;
@@ -599,8 +608,24 @@ span.votos {
     font-size: 0.8em;
 }
 
+.album a {
+    color: #CD853F;
+    font-weight: 100;
+    font-size: 1.1em;
+}
+
 ul .no-bullet {
     list-style-type: none !important;
     padding:0;
     margin:0;
+}
+
+
+.msj-exito {
+    color: #228b22;
+    font-size: 1.6em;
+}
+.msj-error {
+    color: #f03b58;
+    font-size: 1.6em;
 }

@@ -16,6 +16,8 @@ function capturarVotos() {
 
 $(function () {
     $(".fch").datepicker({ "dateFormat": "yy-mm-dd" });
+    $(".btn").button();
+    
     $("input.chk-votar").on('click', function () {
         capturarVotos();
     });

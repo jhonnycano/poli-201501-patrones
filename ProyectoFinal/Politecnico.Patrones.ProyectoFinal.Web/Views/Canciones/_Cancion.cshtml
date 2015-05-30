@@ -2,6 +2,7 @@
 @model Politecnico.Patrones.ProyectoFinal.Contratos.MV.MVCancion
 @{
     var interpretes = Utiles.ResumenInterpretes(Model.Interpretes);
+    var interpretesAlbum = Utiles.ResumenInterpretes(Model.InterpretesAlbum);
 }
 
 <div>
@@ -12,6 +13,11 @@
         <span class="interprete">@interpretes</span>
     }
     @if (Model.AlbumId != null) {
-        <span class="album">@Html.ActionLink(Model.Album, "Detalle", "Albumes", new {id = Model.AlbumId}, null)</span>
+        <span class="album">
+            @Html.ActionLink(Model.Album, "Detalle", "Albumes", new {id = Model.AlbumId}, null) 
+            @if (!string.IsNullOrEmpty(interpretesAlbum)) {
+                <span class="interprete">@interpretesAlbum</span>
+            }
+        </span>
     } 
 </div>

@@ -1,0 +1,8 @@
+﻿@{
+    var mensaje = ViewData.ContainsKey("mensaje") ? ViewData["mensaje"].ToString(): "";
+    var clase = ViewData.ContainsKey("claseMensaje") ? ViewData["claseMensaje"].ToString(): "";
+    if (string.IsNullOrEmpty(mensaje)) {
+        return;
+    }
+}
+<span class ="@clase">@mensaje</span>

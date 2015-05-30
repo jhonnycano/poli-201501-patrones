@@ -1,8 +1,8 @@
 ﻿@model Politecnico.Patrones.ProyectoFinal.Web.Models.Paginador
 
 @{
-    var rvdAnterior = new RouteValueDictionary {{"pagina", Model.PaginaAnterior }};
-    var rvdSiguiente = new RouteValueDictionary {{"pagina", Model.PaginaSiguiente }};
+    var rvdAnterior = new RouteValueDictionary {{"pagina", Model.PaginaAnterior}};
+    var rvdSiguiente = new RouteValueDictionary {{"pagina", Model.PaginaSiguiente}};
     if (Model.Parametros != null) {
         foreach (var itm in Model.Parametros) {
             rvdAnterior.Add(itm.Key, itm.Value);
@@ -10,9 +10,21 @@
         }
     }
 }
-@if (Model.PaginaAnteriorActiva) {
-    @Html.ActionLink("Anterior", Model.Accion, Model.Controlador, rvdAnterior, null)
-}
-@if (Model.PaginaSiguienteActiva) {
-    @Html.ActionLink("Siguiente", Model.Accion, Model.Controlador, rvdSiguiente, null)
-}
+<table>
+    <tr>
+        @if (Model.PaginaAnteriorActiva) {
+            <td>
+                <a href="@Url.Action(Model.Accion, Model.Controlador, rvdAnterior)">
+                    <p class="ui-icon ui-icon-seek-prev">Anterior</p>
+                </a>
+            </td>
+        }
+        @if (Model.PaginaSiguienteActiva) {
+            <td>
+                <a href="@Url.Action(Model.Accion, Model.Controlador, rvdSiguiente)">
+                    <p class="ui-icon ui-icon-seek-next">Siguiente</p>
+                </a>
+            </td>
+        }
+    </tr>
+</table>

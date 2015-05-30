@@ -28,6 +28,7 @@ namespace Politecnico.Patrones.ProyectoFinal.Contratos.MV {
         public string Album { get; set; }
         public int? AlbumId { get; set; }
         public IList<MVInterprete> Interpretes { get; set; }
+        public IList<MVInterprete> InterpretesAlbum { get; set; }
         [DisplayName("Votos")]
         public int TotalVotos { get; set; }
     }

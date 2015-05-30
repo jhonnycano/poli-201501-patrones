@@ -159,6 +159,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Code\FlixNetController.cs" />
     <Compile Include="Code\IdentityUsuario.cs" />
     <Compile Include="Code\PrincipalUsuario.cs" />
     <Compile Include="Code\SecurityExtensions.cs" />
@@ -191,6 +192,7 @@
     <Content Include="Content\css\style-mobile.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\images\banner.jpg" />
+    <Content Include="Content\images\cover.jpg" />
     <Content Include="Content\images\pics02.jpg" />
     <Content Include="Content\themes\stuffy\appstyles.css" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
@@ -346,6 +348,7 @@
     <Content Include="Views\Inicio\Registrar.cshtml" />
     <Content Include="Views\Shared\_PanelUsuario.cshtml" />
     <Content Include="Views\Shared\_Paginador.cshtml" />
+    <Content Include="Views\Shared\_Mensaje.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
